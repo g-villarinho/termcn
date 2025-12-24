@@ -189,6 +189,19 @@
     ]
   },
   {
+    "name": "tabs",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/tabs.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/tabs.tsx"
+      }
+    ]
+  },
+  {
     "name": "textarea",
     "type": "registry:ui",
     "dependencies": [],
