@@ -7,7 +7,7 @@ interface HeadingProps {
 	className?: string;
 }
 
-export function H1({ id, children, className }: HeadingProps) {
+function H1({ id, children, className }: HeadingProps) {
 	return (
 		<h1
 			id={id}
@@ -21,7 +21,7 @@ export function H1({ id, children, className }: HeadingProps) {
 	);
 }
 
-export function H2({ id, children, className }: HeadingProps) {
+function H2({ id, children, className }: HeadingProps) {
 	return (
 		<h2
 			id={id}
@@ -35,7 +35,7 @@ export function H2({ id, children, className }: HeadingProps) {
 	);
 }
 
-export function H3({ id, children, className }: HeadingProps) {
+function H3({ id, children, className }: HeadingProps) {
 	return (
 		<h3
 			id={id}
@@ -49,7 +49,7 @@ export function H3({ id, children, className }: HeadingProps) {
 	);
 }
 
-export function H4({ id, children, className }: HeadingProps) {
+function H4({ id, children, className }: HeadingProps) {
 	return (
 		<h4
 			id={id}
@@ -63,7 +63,7 @@ export function H4({ id, children, className }: HeadingProps) {
 	);
 }
 
-export function H5({ id, children, className }: HeadingProps) {
+function H5({ id, children, className }: HeadingProps) {
 	return (
 		<h5
 			id={id}
@@ -77,7 +77,7 @@ export function H5({ id, children, className }: HeadingProps) {
 	);
 }
 
-export function H6({ id, children, className }: HeadingProps) {
+function H6({ id, children, className }: HeadingProps) {
 	return (
 		<h6
 			id={id}
@@ -90,3 +90,5 @@ export function H6({ id, children, className }: HeadingProps) {
 		</h6>
 	);
 }
+
+export { H1, H2, H3, H4, H5, H6 };

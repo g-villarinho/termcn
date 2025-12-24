@@ -7,11 +7,9 @@ import { PropsTable } from "./props-table";
 
 /**
  * Custom component mappings for MDX
- * Similar to shadcn/ui's mdx-components.tsx
  */
 // biome-ignore lint/suspicious/noExplicitAny: MDX components need flexible typing
 export const mdxComponents: Record<string, ComponentType<any>> = {
-	// Headings with terminal aesthetic
 	h1: H1,
 	h2: H2,
 	h3: H3,
@@ -19,7 +17,6 @@ export const mdxComponents: Record<string, ComponentType<any>> = {
 	h5: H5,
 	h6: H6,
 
-	// Enhanced code blocks with Shiki
 	code: ({ className, children, ...props }) => {
 		const isInline = !className;
 
@@ -41,9 +38,8 @@ export const mdxComponents: Record<string, ComponentType<any>> = {
 		);
 	},
 
-	pre: ({ children }) => <>{children}</>, // Let code handle pre
+	pre: ({ children }) => <>{children}</>,
 
-	// Tables with terminal styling
 	table: ({ children }) => (
 		<div className="overflow-x-auto my-6">
 			<table className="w-full border-2 border-border">{children}</table>
@@ -64,15 +60,10 @@ export const mdxComponents: Record<string, ComponentType<any>> = {
 		</td>
 	),
 
-	tr: ({ children }) => (
-		<tr className="border-b border-border">{children}</tr>
-	),
+	tr: ({ children }) => <tr className="border-b border-border">{children}</tr>,
 
-	tbody: ({ children }) => (
-		<tbody className="bg-background">{children}</tbody>
-	),
+	tbody: ({ children }) => <tbody className="bg-background">{children}</tbody>,
 
-	// Links
 	a: ({ href, children }) => (
 		<a
 			href={href}
@@ -82,7 +73,6 @@ export const mdxComponents: Record<string, ComponentType<any>> = {
 		</a>
 	),
 
-	// Lists
 	ul: ({ children }) => (
 		<ul className="space-y-2 list-none ml-4 my-4">{children}</ul>
 	),
@@ -98,25 +88,20 @@ export const mdxComponents: Record<string, ComponentType<any>> = {
 		</li>
 	),
 
-	// Blockquotes
 	blockquote: ({ children }) => (
 		<blockquote className="border-l-4 border-primary pl-4 italic my-4 text-muted-foreground">
 			{children}
 		</blockquote>
 	),
 
-	// Paragraphs
 	p: ({ children }) => <p className="leading-relaxed my-4">{children}</p>,
 
-	// Horizontal rule
 	hr: () => <hr className="my-8 border-border" />,
 
-	// Strong and emphasis
 	strong: ({ children }) => <strong className="font-bold">{children}</strong>,
 
 	em: ({ children }) => <em className="italic">{children}</em>,
 
-	// Custom components (can be used in MDX)
 	Callout,
 	ComponentPreview,
 	PropsTable,

@@ -10,7 +10,6 @@ interface CodeBlockProps {
 export function CodeBlock({ children, className, language }: CodeBlockProps) {
 	const [html, setHtml] = useState<string>("");
 
-	// Extract language from className (format: language-tsx)
 	const lang = language || className?.replace("language-", "") || "tsx";
 	const code = children.trim();
 
