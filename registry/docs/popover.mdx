@@ -1,0 +1,1096 @@
+---
+title: Popover
+description: Display floating content and contextual information with terminal-inspired popover components featuring animated transitions.
+order: 16
+published: true
+---
+
+import { Popover, PopoverTrigger, PopoverContent, PopoverAnchor } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
+# Popover
+
+Display floating content and contextual information with terminal-inspired popover components featuring animated transitions.
+
+## Overview
+
+The Popover component is a floating overlay element designed to display contextual content, tooltips, menus, or additional information when triggered by user interaction. Built on Radix UI's accessible popover primitive, it features a distinctive terminal aesthetic with bold 2px borders, monospace typography, and smooth fade animations that evoke the feel of context menus from retro computing interfaces.
+
+## Features
+
+- **Flexible Positioning**: Supports all 12 placement positions (top, bottom, left, right with start/center/end alignment)
+- **Terminal-Inspired Design**: Bold 2px borders, monospace font, and sharp corners for retro computing aesthetic
+- **Smooth Animations**: Fade-in/out transitions with transform-origin-aware animation origins
+- **Portal Rendering**: Content renders in a portal to avoid z-index and overflow issues
+- **Customizable Offset**: Configurable distance between trigger and popover content
+- **Anchor Support**: Optional anchor element for advanced positioning scenarios
+- **Fully Accessible**: Built on Radix UI with proper ARIA attributes, focus management, and keyboard navigation
+- **TypeScript Support**: Fully typed with comprehensive prop definitions
+
+## Installation
+
+```bash
+npx termcn add popover
+```
+
+This will install the Popover component and its dependencies into your project.
+
+## Dependencies
+
+- `@radix-ui/react-popover` - Accessible popover primitive
+- `@/lib/utils` - For className merging utilities
+
+## Usage
+
+### Basic Usage
+
+<ComponentPreview>
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button variant="outline">Open Popover</Button>
+    </PopoverTrigger>
+    <PopoverContent>
+      <div className="p-4">
+        <p className="text-sm">This is a basic popover with some content.</p>
+      </div>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+
+```tsx
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+
+export default function Example() {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline">Open Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div className="p-4">
+          <p className="text-sm">This is a basic popover with some content.</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+}
+```
+
+### With Alignment
+
+Control horizontal alignment of the popover relative to the trigger:
+
+<ComponentPreview>
+  <div className="flex gap-4">
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">Start</Button>
+      </PopoverTrigger>
+      <PopoverContent align="start">
+        <div className="p-4">
+          <p className="text-sm">Aligned to start</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">Center</Button>
+      </PopoverTrigger>
+      <PopoverContent align="center">
+        <div className="p-4">
+          <p className="text-sm">Aligned to center</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">End</Button>
+      </PopoverTrigger>
+      <PopoverContent align="end">
+        <div className="p-4">
+          <p className="text-sm">Aligned to end</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+  </div>
+</ComponentPreview>
+
+```tsx
+<PopoverContent align="start">Aligned to start</PopoverContent>
+<PopoverContent align="center">Aligned to center (default)</PopoverContent>
+<PopoverContent align="end">Aligned to end</PopoverContent>
+```
+
+**Alignment Descriptions:**
+- `start`: Aligns popover to the start (left in LTR) of the trigger
+- `center`: Centers popover relative to the trigger (default)
+- `end`: Aligns popover to the end (right in LTR) of the trigger
+
+### With Side Positioning
+
+Position the popover on different sides of the trigger:
+
+<ComponentPreview>
+  <div className="flex gap-4 items-center">
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">Top</Button>
+      </PopoverTrigger>
+      <PopoverContent side="top">
+        <div className="p-4">
+          <p className="text-sm">Opens above</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">Bottom</Button>
+      </PopoverTrigger>
+      <PopoverContent side="bottom">
+        <div className="p-4">
+          <p className="text-sm">Opens below</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">Left</Button>
+      </PopoverTrigger>
+      <PopoverContent side="left">
+        <div className="p-4">
+          <p className="text-sm">Opens left</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">Right</Button>
+      </PopoverTrigger>
+      <PopoverContent side="right">
+        <div className="p-4">
+          <p className="text-sm">Opens right</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+  </div>
+</ComponentPreview>
+
+```tsx
+<PopoverContent side="top">Opens above the trigger</PopoverContent>
+<PopoverContent side="bottom">Opens below the trigger (default)</PopoverContent>
+<PopoverContent side="left">Opens to the left of the trigger</PopoverContent>
+<PopoverContent side="right">Opens to the right of the trigger</PopoverContent>
+```
+
+### With Custom Offset
+
+Adjust the distance between the trigger and popover content:
+
+<ComponentPreview>
+  <div className="flex gap-4">
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">Close (2px)</Button>
+      </PopoverTrigger>
+      <PopoverContent sideOffset={2}>
+        <div className="p-4">
+          <p className="text-sm">Very close offset</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">Default (4px)</Button>
+      </PopoverTrigger>
+      <PopoverContent sideOffset={4}>
+        <div className="p-4">
+          <p className="text-sm">Default offset</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">Far (12px)</Button>
+      </PopoverTrigger>
+      <PopoverContent sideOffset={12}>
+        <div className="p-4">
+          <p className="text-sm">Larger offset</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+  </div>
+</ComponentPreview>
+
+```tsx
+<PopoverContent sideOffset={2}>Very close</PopoverContent>
+<PopoverContent sideOffset={4}>Default offset (4px)</PopoverContent>
+<PopoverContent sideOffset={12}>Larger offset</PopoverContent>
+```
+
+### With Custom Width
+
+Override the default width for different content needs:
+
+<ComponentPreview>
+  <div className="flex gap-4">
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">Narrow</Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-48">
+        <div className="p-4">
+          <p className="text-sm">Narrow popover content</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">Wide</Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-96">
+        <div className="p-4">
+          <p className="text-sm">Wide popover with more space for content</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+  </div>
+</ComponentPreview>
+
+```tsx
+<PopoverContent className="w-48">Narrow (192px)</PopoverContent>
+<PopoverContent className="w-72">Default (288px)</PopoverContent>
+<PopoverContent className="w-96">Wide (384px)</PopoverContent>
+```
+
+## Common Use Cases
+
+### User Profile Card
+
+<ComponentPreview>
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button variant="ghost" size="sm">@username</Button>
+    </PopoverTrigger>
+    <PopoverContent className="w-80">
+      <div className="p-4 space-y-3">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded bg-surface0 flex items-center justify-center text-sm font-bold">JD</div>
+          <div>
+            <p className="font-semibold text-sm">John Doe</p>
+            <p className="text-xs text-subtext0">@johndoe</p>
+          </div>
+        </div>
+        <p className="text-sm text-subtext0">Software developer passionate about terminal aesthetics and retro computing.</p>
+        <div className="flex gap-4 text-xs">
+          <span><strong>127</strong> Following</span>
+          <span><strong>1.2k</strong> Followers</span>
+        </div>
+      </div>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="ghost" size="sm">@username</Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-80">
+    <div className="p-4 space-y-3">
+      <div className="flex items-center gap-3">
+        <Avatar />
+        <div>
+          <p className="font-semibold text-sm">John Doe</p>
+          <p className="text-xs text-subtext0">@johndoe</p>
+        </div>
+      </div>
+      <p className="text-sm text-subtext0">
+        Software developer passionate about terminal aesthetics.
+      </p>
+      <div className="flex gap-4 text-xs">
+        <span><strong>127</strong> Following</span>
+        <span><strong>1.2k</strong> Followers</span>
+      </div>
+    </div>
+  </PopoverContent>
+</Popover>
+```
+
+### Color Picker
+
+<ComponentPreview>
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button variant="outline" size="sm">
+        <div className="w-4 h-4 rounded bg-mauve mr-2" />
+        Pick Color
+      </Button>
+    </PopoverTrigger>
+    <PopoverContent className="w-64">
+      <div className="p-4 space-y-3">
+        <p className="text-sm font-medium">Choose a color</p>
+        <div className="grid grid-cols-6 gap-2">
+          <div className="w-6 h-6 bg-red cursor-pointer hover:scale-110 transition-transform" />
+          <div className="w-6 h-6 bg-peach cursor-pointer hover:scale-110 transition-transform" />
+          <div className="w-6 h-6 bg-yellow cursor-pointer hover:scale-110 transition-transform" />
+          <div className="w-6 h-6 bg-green cursor-pointer hover:scale-110 transition-transform" />
+          <div className="w-6 h-6 bg-blue cursor-pointer hover:scale-110 transition-transform" />
+          <div className="w-6 h-6 bg-mauve cursor-pointer hover:scale-110 transition-transform" />
+        </div>
+      </div>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline" size="sm">
+      <div className="w-4 h-4 rounded bg-mauve mr-2" />
+      Pick Color
+    </Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-64">
+    <div className="p-4 space-y-3">
+      <p className="text-sm font-medium">Choose a color</p>
+      <div className="grid grid-cols-6 gap-2">
+        {colors.map((color) => (
+          <div
+            key={color}
+            className={`w-6 h-6 bg-${color} cursor-pointer hover:scale-110`}
+            onClick={() => setSelectedColor(color)}
+          />
+        ))}
+      </div>
+    </div>
+  </PopoverContent>
+</Popover>
+```
+
+### Quick Actions Menu
+
+<ComponentPreview>
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button variant="outline" size="sm">Actions ▾</Button>
+    </PopoverTrigger>
+    <PopoverContent className="w-48" align="start">
+      <div className="py-1">
+        <button className="w-full px-4 py-2 text-left text-sm hover:bg-surface0 transition-colors">Edit</button>
+        <button className="w-full px-4 py-2 text-left text-sm hover:bg-surface0 transition-colors">Duplicate</button>
+        <button className="w-full px-4 py-2 text-left text-sm hover:bg-surface0 transition-colors">Archive</button>
+        <div className="border-t border-border my-1" />
+        <button className="w-full px-4 py-2 text-left text-sm text-red hover:bg-surface0 transition-colors">Delete</button>
+      </div>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline" size="sm">Actions ▾</Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-48" align="start">
+    <div className="py-1">
+      <button className="w-full px-4 py-2 text-left text-sm hover:bg-surface0">
+        Edit
+      </button>
+      <button className="w-full px-4 py-2 text-left text-sm hover:bg-surface0">
+        Duplicate
+      </button>
+      <button className="w-full px-4 py-2 text-left text-sm hover:bg-surface0">
+        Archive
+      </button>
+      <div className="border-t border-border my-1" />
+      <button className="w-full px-4 py-2 text-left text-sm text-red hover:bg-surface0">
+        Delete
+      </button>
+    </div>
+  </PopoverContent>
+</Popover>
+```
+
+### Form in Popover
+
+<ComponentPreview>
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button>Add Note</Button>
+    </PopoverTrigger>
+    <PopoverContent className="w-80">
+      <div className="p-4 space-y-4">
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Note Title</label>
+          <Input placeholder="Enter title..." />
+        </div>
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Description</label>
+          <Input placeholder="Enter description..." />
+        </div>
+        <div className="flex justify-end gap-2">
+          <Button variant="outline" size="sm">Cancel</Button>
+          <Button size="sm">Save</Button>
+        </div>
+      </div>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button>Add Note</Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-80">
+    <form onSubmit={handleSubmit} className="p-4 space-y-4">
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Note Title</label>
+        <Input placeholder="Enter title..." />
+      </div>
+      <div className="space-y-2">
+        <label className="text-sm font-medium">Description</label>
+        <Input placeholder="Enter description..." />
+      </div>
+      <div className="flex justify-end gap-2">
+        <Button variant="outline" size="sm" type="button">
+          Cancel
+        </Button>
+        <Button size="sm" type="submit">Save</Button>
+      </div>
+    </form>
+  </PopoverContent>
+</Popover>
+```
+
+### Tooltip-Style Information
+
+<ComponentPreview>
+  <div className="flex items-center gap-2">
+    <span className="text-sm">API Rate Limit</span>
+    <Popover>
+      <PopoverTrigger asChild>
+        <button className="w-4 h-4 rounded-full border border-border text-xs flex items-center justify-center hover:bg-surface0">?</button>
+      </PopoverTrigger>
+      <PopoverContent className="w-64" side="right">
+        <div className="p-3">
+          <p className="text-sm font-medium mb-1">Rate Limiting</p>
+          <p className="text-xs text-subtext0">API requests are limited to 1000 per minute. Exceeding this limit will result in a 429 error response.</p>
+        </div>
+      </PopoverContent>
+    </Popover>
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex items-center gap-2">
+  <span className="text-sm">API Rate Limit</span>
+  <Popover>
+    <PopoverTrigger asChild>
+      <button className="w-4 h-4 rounded-full border border-border text-xs">
+        ?
+      </button>
+    </PopoverTrigger>
+    <PopoverContent className="w-64" side="right">
+      <div className="p-3">
+        <p className="text-sm font-medium mb-1">Rate Limiting</p>
+        <p className="text-xs text-subtext0">
+          API requests are limited to 1000 per minute.
+        </p>
+      </div>
+    </PopoverContent>
+  </Popover>
+</div>
+```
+
+### Share Options
+
+<ComponentPreview>
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button variant="secondary" size="sm">Share</Button>
+    </PopoverTrigger>
+    <PopoverContent className="w-56">
+      <div className="p-2 space-y-1">
+        <p className="px-2 py-1 text-xs text-subtext0 font-medium">Share via</p>
+        <button className="w-full px-3 py-2 text-left text-sm rounded hover:bg-surface0 flex items-center gap-2">
+          <span>📋</span> Copy Link
+        </button>
+        <button className="w-full px-3 py-2 text-left text-sm rounded hover:bg-surface0 flex items-center gap-2">
+          <span>✉️</span> Email
+        </button>
+        <button className="w-full px-3 py-2 text-left text-sm rounded hover:bg-surface0 flex items-center gap-2">
+          <span>🐦</span> Twitter
+        </button>
+      </div>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="secondary" size="sm">Share</Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-56">
+    <div className="p-2 space-y-1">
+      <p className="px-2 py-1 text-xs text-subtext0 font-medium">Share via</p>
+      <button className="w-full px-3 py-2 text-left text-sm rounded hover:bg-surface0">
+        Copy Link
+      </button>
+      <button className="w-full px-3 py-2 text-left text-sm rounded hover:bg-surface0">
+        Email
+      </button>
+      <button className="w-full px-3 py-2 text-left text-sm rounded hover:bg-surface0">
+        Twitter
+      </button>
+    </div>
+  </PopoverContent>
+</Popover>
+```
+
+## API Reference
+
+### Popover Props
+
+The root Popover component from Radix UI:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | `undefined` | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Default open state for uncontrolled usage |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Callback when open state changes |
+| `modal` | `boolean` | `false` | Whether the popover is modal |
+
+### PopoverTrigger Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as child element using Slot |
+| ...rest | `PopoverPrimitive.Trigger` props | - | All Radix popover trigger props |
+
+### PopoverContent Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `align` | `"start" \| "center" \| "end"` | `"center"` | Horizontal alignment relative to trigger |
+| `side` | `"top" \| "bottom" \| "left" \| "right"` | `"bottom"` | Which side of the trigger to position on |
+| `sideOffset` | `number` | `4` | Distance in pixels from the trigger |
+| `alignOffset` | `number` | `0` | Offset from the aligned edge |
+| `avoidCollisions` | `boolean` | `true` | Whether to flip when hitting viewport edges |
+| `collisionPadding` | `number \| Padding` | `0` | Padding from viewport edges |
+| `className` | `string` | `undefined` | Additional CSS classes to apply |
+| ...rest | `PopoverPrimitive.Content` props | - | All Radix popover content props |
+
+### PopoverAnchor Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| ...rest | `PopoverPrimitive.Anchor` props | - | All Radix popover anchor props |
+
+### Type Definitions
+
+```typescript
+import * as PopoverPrimitive from "@radix-ui/react-popover";
+
+// Root component
+function Popover(props: React.ComponentProps<typeof PopoverPrimitive.Root>): JSX.Element;
+
+// Trigger component
+function PopoverTrigger(props: React.ComponentProps<typeof PopoverPrimitive.Trigger>): JSX.Element;
+
+// Content component with custom defaults
+function PopoverContent(props: React.ComponentProps<typeof PopoverPrimitive.Content>): JSX.Element;
+
+// Anchor component for advanced positioning
+function PopoverAnchor(props: React.ComponentProps<typeof PopoverPrimitive.Anchor>): JSX.Element;
+
+// Exports
+export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor };
+```
+
+## Styling and Customization
+
+### Custom Styles
+
+You can extend the popover with custom styles using the `className` prop:
+
+```tsx
+<PopoverContent className="w-96 bg-crust border-mauve">
+  Custom styled popover
+</PopoverContent>
+
+<PopoverContent className="p-0">
+  No padding for custom layouts
+</PopoverContent>
+
+<PopoverContent className="shadow-lg shadow-mauve/20">
+  With custom shadow
+</PopoverContent>
+```
+
+### Theme Integration
+
+The Popover component uses CSS variables from the TermCN theme system:
+
+- `--background1` - Popover background color
+- `--foreground` - Text color
+- `--border` - Border color (2px solid)
+- Font family inherits `font-mono` for terminal aesthetic
+
+### Visual Styling Details
+
+```css
+/* Base popover content styles */
+.popover-content {
+  /* Terminal aesthetic */
+  border: 2px solid var(--border);
+  background: var(--background1);
+  font-family: var(--font-mono);
+
+  /* Layout */
+  z-index: 50;
+  width: 18rem; /* 288px default */
+  overflow: hidden;
+
+  /* Animation origin */
+  transform-origin: var(--radix-popover-content-transform-origin);
+}
+```
+
+### Extending with Custom Components
+
+```typescript
+// Create a styled popover variant
+function StyledPopover({ children, ...props }) {
+  return (
+    <PopoverContent
+      className="bg-crust border-mauve shadow-[0.25rem_0.25rem_0_0_hsl(var(--mauve))]"
+      {...props}
+    >
+      {children}
+    </PopoverContent>
+  );
+}
+
+// With header pattern
+function PopoverWithHeader({ title, children }) {
+  return (
+    <PopoverContent>
+      <div className="border-b border-border px-4 py-2 bg-mantle">
+        <p className="text-sm font-semibold">{title}</p>
+      </div>
+      <div className="p-4">{children}</div>
+    </PopoverContent>
+  );
+}
+```
+
+## Accessibility
+
+### Keyboard Navigation
+
+- **Tab**: Move focus to/within the popover
+- **Shift + Tab**: Move focus backwards
+- **Escape**: Close the popover
+- **Enter/Space**: Open popover (when trigger is focused)
+
+### Focus Management
+
+The popover automatically:
+- Focuses the first focusable element when opened
+- Returns focus to the trigger when closed
+- Traps focus within the popover when `modal={true}`
+
+### ARIA Attributes
+
+```tsx
+{/* The popover automatically provides proper ARIA attributes */}
+<Popover>
+  <PopoverTrigger
+    aria-haspopup="dialog"
+    aria-expanded="false"
+    aria-controls="popover-content"
+  >
+    Open
+  </PopoverTrigger>
+  <PopoverContent
+    role="dialog"
+    aria-labelledby="popover-title"
+  >
+    <h3 id="popover-title">Popover Title</h3>
+    <p>Content here</p>
+  </PopoverContent>
+</Popover>
+
+{/* For menu-style popovers */}
+<PopoverContent role="menu" aria-label="Actions menu">
+  <button role="menuitem">Edit</button>
+  <button role="menuitem">Delete</button>
+</PopoverContent>
+```
+
+### Screen Reader Support
+
+- Trigger announces expanded/collapsed state
+- Content is read when popover opens
+- Use descriptive labels for trigger buttons
+- Consider adding `aria-describedby` for complex content
+
+```tsx
+{/* Good accessibility practices */}
+<Popover>
+  <PopoverTrigger aria-label="Open user profile card">
+    @username
+  </PopoverTrigger>
+  <PopoverContent aria-label="User profile">
+    {/* Profile content */}
+  </PopoverContent>
+</Popover>
+```
+
+## Best Practices
+
+### When to Use Popovers
+
+✅ **Good Use Cases:**
+- User profile cards and quick info
+- Color pickers and selectors
+- Quick action menus
+- Form inputs for supplementary data
+- Help tooltips with rich content
+- Share or export options
+- Filter and sort controls
+
+❌ **Avoid Using Popovers For:**
+- Critical confirmations (use Dialog instead)
+- Long-form content (use Modal or Page)
+- Navigation menus (use DropdownMenu)
+- Simple tooltips (use Tooltip component)
+- Content that needs to persist (use inline content)
+- Mobile primary interactions (consider sheets/drawers)
+
+### Design Guidelines
+
+1. **Keep content concise**: Popovers should contain focused, scannable content
+2. **Use consistent positioning**: Establish patterns for popover placement in your app
+3. **Provide visual hierarchy**: Use headers, separators, and spacing for clarity
+4. **Consider trigger context**: Position popovers where they won't obscure related content
+5. **Include close mechanisms**: Clicking outside or pressing Escape should close the popover
+6. **Mind the width**: Default 18rem (288px) works for most cases, adjust as needed
+7. **Handle overflow**: Use `overflow-y-auto` for content that might exceed viewport
+
+## Design Details
+
+### Terminal Aesthetic Breakdown
+
+The popover's terminal aesthetic is achieved through:
+
+**Border and Background:**
+- 2px solid border using `--border` color
+- Background uses `--background1` for slight contrast
+- Sharp corners (0px border-radius) for retro look
+- Monospace font throughout (`font-mono`)
+
+**Animation System:**
+```css
+/* Open animation */
+data-[state=open]:animate-in
+data-[state=open]:fade-in-0
+
+/* Close animation */
+data-[state=closed]:animate-out
+data-[state=closed]:fade-out-0
+
+/* Transform origin follows placement */
+transform-origin: var(--radix-popover-content-transform-origin)
+```
+
+**Z-Index Layering:**
+- Popover content: `z-50` (above most page content)
+- Renders in portal to escape stacking contexts
+
+### Implementation Details
+
+```typescript
+function PopoverContent({
+  className,
+  align = "center",
+  sideOffset = 4,
+  ...props
+}: React.ComponentProps<typeof PopoverPrimitive.Content>) {
+  return (
+    <PopoverPrimitive.Portal>
+      <PopoverPrimitive.Content
+        data-slot="popover-content"
+        align={align}
+        sideOffset={sideOffset}
+        className={cn(
+          // Layout
+          "z-50 w-72 overflow-hidden font-mono",
+          // Terminal styling
+          "border-2 border-border bg-background1 text-foreground",
+          // Animation origin
+          "origin-(--radix-popover-content-transform-origin)",
+          // Animations
+          "data-[state=open]:animate-in data-[state=closed]:animate-out",
+          "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+          // Focus
+          "outline-none",
+          className
+        )}
+        {...props}
+      />
+    </PopoverPrimitive.Portal>
+  )
+}
+```
+
+## Related Components
+
+- **Dialog**: For modal overlays that require user action
+- **DropdownMenu**: For navigation and action menus
+- **Tooltip**: For simple text hints on hover
+- **HoverCard**: For rich content on hover (similar to popover but hover-triggered)
+- **ContextMenu**: For right-click menus
+
+## Examples Gallery
+
+### Notification Settings
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="ghost" size="icon">
+      <BellIcon />
+    </Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-80">
+    <div className="p-4 space-y-4">
+      <div className="flex justify-between items-center">
+        <h4 className="font-semibold">Notifications</h4>
+        <Button variant="ghost" size="sm">Mark all read</Button>
+      </div>
+      <div className="space-y-2">
+        {notifications.map((notification) => (
+          <NotificationItem key={notification.id} {...notification} />
+        ))}
+      </div>
+    </div>
+  </PopoverContent>
+</Popover>
+```
+
+### Date Range Picker
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline">
+      <CalendarIcon className="mr-2 h-4 w-4" />
+      Select dates
+    </Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-auto p-0" align="start">
+    <Calendar
+      mode="range"
+      selected={dateRange}
+      onSelect={setDateRange}
+    />
+  </PopoverContent>
+</Popover>
+```
+
+### Command Palette Trigger
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline" className="w-64 justify-start text-subtext0">
+      <SearchIcon className="mr-2 h-4 w-4" />
+      Search commands...
+      <Kbd className="ml-auto">⌘K</Kbd>
+    </Button>
+  </PopoverTrigger>
+  <PopoverContent className="w-80 p-0">
+    <CommandList />
+  </PopoverContent>
+</Popover>
+```
+
+### Controlled Popover
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<Popover open={open} onOpenChange={setOpen}>
+  <PopoverTrigger asChild>
+    <Button>Controlled</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <div className="p-4">
+      <p className="text-sm mb-2">This popover is controlled.</p>
+      <Button size="sm" onClick={() => setOpen(false)}>
+        Close Programmatically
+      </Button>
+    </div>
+  </PopoverContent>
+</Popover>
+```
+
+### With Anchor Element
+
+```tsx
+<Popover>
+  <PopoverAnchor asChild>
+    <div className="relative">
+      <Input placeholder="Type something..." />
+      <PopoverTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-1 top-1"
+        >
+          <InfoIcon />
+        </Button>
+      </PopoverTrigger>
+    </div>
+  </PopoverAnchor>
+  <PopoverContent side="right" align="start">
+    <div className="p-4">
+      <p className="text-sm">
+        This popover is anchored to the input container.
+      </p>
+    </div>
+  </PopoverContent>
+</Popover>
+```
+
+## Performance
+
+The Popover component is optimized for performance:
+- Portal rendering avoids layout recalculations
+- Lazy mounting - content only renders when open
+- Minimal JavaScript footprint (~3KB including Radix)
+- CSS-based animations with hardware acceleration
+- Server-side rendering compatible
+- Collision detection is efficient and batched
+
+## Troubleshooting
+
+### Popover not appearing
+
+Ensure the trigger has proper event handling:
+
+```tsx
+{/* Make sure to use asChild with a valid interactive element */}
+<PopoverTrigger asChild>
+  <Button>Open</Button>
+</PopoverTrigger>
+
+{/* Or without asChild for a simple button */}
+<PopoverTrigger>Open</PopoverTrigger>
+```
+
+### Popover appears in wrong position
+
+Check for parent elements with `transform` or `overflow: hidden`:
+
+```tsx
+{/* Popover uses a portal, but transform parents can affect positioning */}
+<div className="transform translate-x-0">
+  <Popover>
+    {/* Content renders in portal outside this container */}
+  </Popover>
+</div>
+```
+
+### Content cut off by viewport
+
+Enable collision avoidance (default) and add padding:
+
+```tsx
+<PopoverContent
+  avoidCollisions={true}
+  collisionPadding={16}
+>
+  Content will flip to stay in viewport
+</PopoverContent>
+```
+
+### Z-index conflicts
+
+The popover uses `z-50` by default. Adjust if needed:
+
+```tsx
+<PopoverContent className="z-[100]">
+  Higher z-index content
+</PopoverContent>
+```
+
+## Migration Guide
+
+### From shadcn/ui Popover
+
+The TermCN Popover is compatible with shadcn/ui with minimal differences:
+
+```diff
+  import {
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
++   PopoverAnchor,
+  } from "@/components/ui/popover";
+
+  // Basic usage remains the same
+  <Popover>
+    <PopoverTrigger>Open</PopoverTrigger>
+    <PopoverContent>Content</PopoverContent>
+  </Popover>
+
+  // Visual differences in TermCN:
+  // - 2px border instead of 1px
+  // - Sharp corners (0px border-radius)
+  // - Monospace font throughout
+  // - Different default width (w-72 vs w-80)
+
+  // All Radix props work the same
+  <PopoverContent
+    side="right"
+    align="start"
+    sideOffset={8}
+  >
+    Positioned content
+  </PopoverContent>
+```
+
+## Changelog
+
+### Version 1.0.0
+- Initial release
+- Built on Radix UI Popover primitive
+- Terminal aesthetic with 2px borders and monospace font
+- Full positioning control (side, align, offset)
+- Portal rendering for proper z-index handling
+- Fade animations with transform-origin awareness
+- PopoverAnchor support for advanced positioning
+- Full TypeScript support
+- Comprehensive accessibility features
+
+## License
+
+MIT License - Part of the TermCN component library.
+
+## Contributing
+
+Contributions are welcome! Please read the contributing guidelines before submitting PRs.
+
+---
+
+**Keywords**: popover, dropdown, floating, overlay, menu, tooltip, context, trigger, portal, accessible, keyboard navigation, TypeScript, React, Tailwind CSS, Radix UI, component, UI, TermCN, terminal, monospace

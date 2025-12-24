@@ -108,4 +108,3 @@ After creating the documentation:
 2. Run `pnpm generate-registry` to update registry JSON
 3. Run `pnpm add-component <component-name>` to copy the component to `src/components/ui/` (required for MDX imports to work)
 4. Inform user the docs are available at `/docs/<component-name>`
-5. Use playwright mcp do test application in link http://localhost:3000/docs/$component_name

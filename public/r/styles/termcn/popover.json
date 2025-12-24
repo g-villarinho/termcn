@@ -1,0 +1,14 @@
+{
+  "name": "popover",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "ui/popover.tsx",
+      "content": "import * as React from \"react\"\nimport * as PopoverPrimitive from \"@radix-ui/react-popover\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Popover({\n\t...props\n}: React.ComponentProps<typeof PopoverPrimitive.Root>) {\n\treturn <PopoverPrimitive.Root data-slot=\"popover\" {...props} />\n}\n\nfunction PopoverTrigger({\n\t...props\n}: React.ComponentProps<typeof PopoverPrimitive.Trigger>) {\n\treturn <PopoverPrimitive.Trigger data-slot=\"popover-trigger\" {...props} />\n}\n\nfunction PopoverContent({\n\tclassName,\n\talign = \"center\",\n\tsideOffset = 4,\n\t...props\n}: React.ComponentProps<typeof PopoverPrimitive.Content>) {\n\treturn (\n\t\t<PopoverPrimitive.Portal>\n\t\t\t<PopoverPrimitive.Content\n\t\t\t\tdata-slot=\"popover-content\"\n\t\t\t\talign={align}\n\t\t\t\tsideOffset={sideOffset}\n\t\t\t\tclassName={cn(\n\t\t\t\t\t\"z-50 w-72 overflow-hidden font-mono\",\n\t\t\t\t\t\"bg-background1 text-foreground\",\n\t\t\t\t\t\"origin-(--radix-popover-content-transform-origin)\",\n\t\t\t\t\t\"data-[state=open]:animate-in data-[state=closed]:animate-out\",\n\t\t\t\t\t\"data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\",\n\t\t\t\t\t\"outline-none\",\n\t\t\t\t\tclassName\n\t\t\t\t)}\n\t\t\t\t{...props}\n\t\t\t/>\n\t\t</PopoverPrimitive.Portal>\n\t)\n}\n\nfunction PopoverAnchor({\n\t...props\n}: React.ComponentProps<typeof PopoverPrimitive.Anchor>) {\n\treturn <PopoverPrimitive.Anchor data-slot=\"popover-anchor\" {...props} />\n}\n\nexport { Popover, PopoverTrigger, PopoverContent, PopoverAnchor }\n",
+      "type": "registry:ui",
+      "target": "components/ui/popover.tsx"
+    }
+  ]
+}

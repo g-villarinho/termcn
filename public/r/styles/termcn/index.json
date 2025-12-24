@@ -150,6 +150,19 @@
     ]
   },
   {
+    "name": "popover",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/popover.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/popover.tsx"
+      }
+    ]
+  },
+  {
     "name": "separator",
     "type": "registry:ui",
     "dependencies": [],
@@ -185,6 +198,19 @@
         "path": "ui/switch.tsx",
         "type": "registry:ui",
         "target": "components/ui/switch.tsx"
+      }
+    ]
+  },
+  {
+    "name": "table",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/table.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/table.tsx"
       }
     ]
   },
