@@ -4,12 +4,12 @@ Terminal-inspired components built on shadcn/ui. Catppuccin Mocha, JetBrains Mon
 
 ## Documentation
 
-Visit https://termcn.dev/docs to view the documentation.
+Visit https://termcn.com/docs to view the documentation.
 
 ## Installation
 
 ```bash
-npx shadcn@latest add https://termcn.dev/r/styles/termcn/button.json
+npx shadcn@latest add https://termcn.com/r/styles/termcn/button.json
 ```
 
 ## Contributing
