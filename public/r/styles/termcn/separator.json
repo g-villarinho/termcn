@@ -1,0 +1,14 @@
+{
+  "name": "separator",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "ui/separator.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as SeparatorPrimitive from \"@radix-ui/react-separator\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Separator({\n  className,\n  orientation = \"horizontal\",\n  decorative = true,\n  ...props\n}: React.ComponentProps<typeof SeparatorPrimitive.Root>) {\n  return (\n    <SeparatorPrimitive.Root\n      data-slot=\"separator\"\n      decorative={decorative}\n      orientation={orientation}\n      className={cn(\n        \"relative inline-flex shrink-0\",\n        \"data-[orientation=horizontal]:h-lh data-[orientation=horizontal]:w-full\",\n        \"data-[orientation=horizontal]:bg-[linear-gradient(0deg,transparent_0,transparent_calc(0.5lh-1px),var(--color-border)_calc(0.5lh-1px),var(--color-border)_calc(0.5lh+1px),transparent_calc(0.5lh+1px),transparent)]\",\n        \"data-[orientation=vertical]:w-[1ch] data-[orientation=vertical]:h-full\",\n        \"data-[orientation=vertical]:bg-[linear-gradient(to_right,transparent_0,transparent_calc(0.5ch-1px),var(--color-border)_calc(0.5ch-1px),var(--color-border)_calc(0.5ch+1px),transparent_calc(0.5ch+1px),transparent)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Separator }\n",
+      "type": "registry:ui",
+      "target": "components/ui/separator.tsx"
+    }
+  ]
+}

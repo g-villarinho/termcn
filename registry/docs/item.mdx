@@ -1,0 +1,972 @@
+---
+title: Item
+description: Versatile list item component with composable structure for building navigation menus, file lists, settings panels, and data displays.
+order: 14
+published: true
+---
+
+import { Item, ItemGroup, ItemMedia, ItemContent, ItemTitle, ItemDescription, ItemActions, ItemSeparator } from "@/components/ui/item";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Kbd } from "@/components/ui/kbd";
+
+# Item
+
+Versatile list item component with composable structure for building navigation menus, file lists, settings panels, and data displays.
+
+## Overview
+
+The Item component is a flexible, composable building block designed for creating structured lists and navigation interfaces. Built with terminal aesthetics in mind, it features monospace typography, clean borders, and thoughtful hover states that feel native to command-line interfaces.
+
+## Installation
+
+```bash
+npx termcn add item
+```
+
+This will install the Item component and its dependencies into your project.
+
+## Dependencies
+
+- `@radix-ui/react-slot` - For polymorphic component rendering
+- `class-variance-authority` - For type-safe variant management
+- `@/lib/utils` - For className merging utilities
+
+## Structure
+
+The Item component is composed of several sub-components that work together:
+
+| Component | Description |
+|-----------|-------------|
+| `Item` | The main container for a single list item |
+| `ItemGroup` | Wrapper that groups items with proper list semantics |
+| `ItemMedia` | Container for icons, avatars, or other media |
+| `ItemContent` | Main content area with title and description |
+| `ItemTitle` | Primary text/heading for the item |
+| `ItemDescription` | Secondary descriptive text |
+| `ItemActions` | Right-aligned container for actions, badges, or shortcuts |
+| `ItemSeparator` | Visual divider between items |
+
+## Usage
+
+### Basic Usage
+
+<ComponentPreview>
+  <ItemGroup className="w-80">
+    <Item>
+      <ItemContent>
+        <ItemTitle>Simple Item</ItemTitle>
+      </ItemContent>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+import { Item, ItemGroup, ItemContent, ItemTitle } from "@/components/ui/item";
+
+export default function Example() {
+  return (
+    <ItemGroup>
+      <Item>
+        <ItemContent>
+          <ItemTitle>Simple Item</ItemTitle>
+        </ItemContent>
+      </Item>
+    </ItemGroup>
+  );
+}
+```
+
+### With Media and Description
+
+<ComponentPreview>
+  <ItemGroup className="w-96">
+    <Item>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>config.json</ItemTitle>
+        <ItemDescription>Project configuration file</ItemDescription>
+      </ItemContent>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+import { FileIcon } from "lucide-react";
+
+<ItemGroup>
+  <Item>
+    <ItemMedia>
+      <FileIcon />
+    </ItemMedia>
+    <ItemContent>
+      <ItemTitle>config.json</ItemTitle>
+      <ItemDescription>Project configuration file</ItemDescription>
+    </ItemContent>
+  </Item>
+</ItemGroup>
+```
+
+### With Actions
+
+<ComponentPreview>
+  <ItemGroup className="w-96">
+    <Item>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>New File</ItemTitle>
+        <ItemDescription>Create a new file</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <Kbd>⌘N</Kbd>
+      </ItemActions>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+import { Kbd } from "@/components/ui/kbd";
+
+<ItemGroup>
+  <Item>
+    <ItemMedia>
+      <PlusIcon />
+    </ItemMedia>
+    <ItemContent>
+      <ItemTitle>New File</ItemTitle>
+      <ItemDescription>Create a new file</ItemDescription>
+    </ItemContent>
+    <ItemActions>
+      <Kbd>⌘N</Kbd>
+    </ItemActions>
+  </Item>
+</ItemGroup>
+```
+
+### Variants
+
+The Item component supports 3 visual variants:
+
+<ComponentPreview>
+  <ItemGroup className="w-80">
+    <Item variant="default">
+      <ItemContent>
+        <ItemTitle>Default Variant</ItemTitle>
+        <ItemDescription>Transparent background</ItemDescription>
+      </ItemContent>
+    </Item>
+    <ItemSeparator />
+    <Item variant="muted">
+      <ItemContent>
+        <ItemTitle>Muted Variant</ItemTitle>
+        <ItemDescription>Subtle background</ItemDescription>
+      </ItemContent>
+    </Item>
+    <ItemSeparator />
+    <Item variant="active">
+      <ItemContent>
+        <ItemTitle>Active Variant</ItemTitle>
+        <ItemDescription>Highlighted with accent color</ItemDescription>
+      </ItemContent>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+<ItemGroup>
+  <Item variant="default">Default</Item>
+  <Item variant="muted">Muted</Item>
+  <Item variant="active">Active</Item>
+</ItemGroup>
+```
+
+**Variant Descriptions:**
+- `default`: Transparent background - clean and minimal
+- `muted`: Subtle background color - useful for zebra striping or sections
+- `active`: Highlighted with blue accent text - indicates current selection
+
+### Sizes
+
+Choose from three different sizes to match your content density:
+
+<ComponentPreview>
+  <ItemGroup className="w-80">
+    <Item size="sm">
+      <ItemContent>
+        <ItemTitle>Small Size</ItemTitle>
+        <ItemDescription>Compact padding</ItemDescription>
+      </ItemContent>
+    </Item>
+    <ItemSeparator />
+    <Item size="default">
+      <ItemContent>
+        <ItemTitle>Default Size</ItemTitle>
+        <ItemDescription>Standard padding</ItemDescription>
+      </ItemContent>
+    </Item>
+    <ItemSeparator />
+    <Item size="lg">
+      <ItemContent>
+        <ItemTitle>Large Size</ItemTitle>
+        <ItemDescription>Spacious padding</ItemDescription>
+      </ItemContent>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+<Item size="sm">Small</Item>
+<Item size="default">Default</Item>
+<Item size="lg">Large</Item>
+```
+
+**Size Specifications:**
+- `sm`: `px-2 py-1.5 gap-2` - Compact for dense lists
+- `default`: `px-3 py-2.5 gap-3` - Balanced for most use cases
+- `lg`: `px-4 py-3 gap-4` - Spacious for touch targets
+
+### Interactive Items
+
+Enable hover and focus states for clickable items:
+
+<ComponentPreview>
+  <ItemGroup className="w-80">
+    <Item interactive>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Home</ItemTitle>
+        <ItemDescription>Go to dashboard</ItemDescription>
+      </ItemContent>
+    </Item>
+    <ItemSeparator />
+    <Item interactive>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Settings</ItemTitle>
+        <ItemDescription>Configure preferences</ItemDescription>
+      </ItemContent>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+<ItemGroup>
+  <Item interactive>
+    <ItemMedia><HomeIcon /></ItemMedia>
+    <ItemContent>
+      <ItemTitle>Home</ItemTitle>
+    </ItemContent>
+  </Item>
+  <Item interactive>
+    <ItemMedia><SettingsIcon /></ItemMedia>
+    <ItemContent>
+      <ItemTitle>Settings</ItemTitle>
+    </ItemContent>
+  </Item>
+</ItemGroup>
+```
+
+### As Link (Using asChild)
+
+Use the `asChild` prop to render the Item as a link or other element:
+
+<ComponentPreview>
+  <ItemGroup className="w-80">
+    <Item interactive asChild>
+      <a href="#documentation">
+        <ItemMedia>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Documentation</ItemTitle>
+          <ItemDescription>Read the docs</ItemDescription>
+        </ItemContent>
+      </a>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+<Item interactive asChild>
+  <a href="/docs">
+    <ItemMedia><BookIcon /></ItemMedia>
+    <ItemContent>
+      <ItemTitle>Documentation</ItemTitle>
+    </ItemContent>
+  </a>
+</Item>
+```
+
+### Grouped Items with Separators
+
+<ComponentPreview>
+  <ItemGroup className="w-96">
+    <Item>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>README.md</ItemTitle>
+        <ItemDescription>Project documentation</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <Badge variant="outline">2.3 KB</Badge>
+      </ItemActions>
+    </Item>
+    <ItemSeparator />
+    <Item>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>package.json</ItemTitle>
+        <ItemDescription>Dependencies and scripts</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <Badge variant="outline">1.8 KB</Badge>
+      </ItemActions>
+    </Item>
+    <ItemSeparator />
+    <Item>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>tsconfig.json</ItemTitle>
+        <ItemDescription>TypeScript configuration</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <Badge variant="outline">0.9 KB</Badge>
+      </ItemActions>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+<ItemGroup>
+  <Item>
+    <ItemMedia><FileIcon /></ItemMedia>
+    <ItemContent>
+      <ItemTitle>README.md</ItemTitle>
+      <ItemDescription>Project documentation</ItemDescription>
+    </ItemContent>
+    <ItemActions>
+      <Badge variant="outline">2.3 KB</Badge>
+    </ItemActions>
+  </Item>
+  <ItemSeparator />
+  <Item>
+    <ItemMedia><FileIcon /></ItemMedia>
+    <ItemContent>
+      <ItemTitle>package.json</ItemTitle>
+    </ItemContent>
+  </Item>
+</ItemGroup>
+```
+
+## Common Use Cases
+
+### Navigation Menu
+
+<ComponentPreview>
+  <ItemGroup className="w-64">
+    <Item interactive variant="active">
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Dashboard</ItemTitle>
+      </ItemContent>
+    </Item>
+    <Item interactive>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Team</ItemTitle>
+      </ItemContent>
+      <ItemActions>
+        <Badge variant="emphasis" cap="round">3</Badge>
+      </ItemActions>
+    </Item>
+    <Item interactive>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Messages</ItemTitle>
+      </ItemContent>
+    </Item>
+    <ItemSeparator />
+    <Item interactive>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Settings</ItemTitle>
+      </ItemContent>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+<ItemGroup>
+  <Item interactive variant="active">
+    <ItemMedia><HomeIcon /></ItemMedia>
+    <ItemContent><ItemTitle>Dashboard</ItemTitle></ItemContent>
+  </Item>
+  <Item interactive>
+    <ItemMedia><UsersIcon /></ItemMedia>
+    <ItemContent><ItemTitle>Team</ItemTitle></ItemContent>
+    <ItemActions>
+      <Badge variant="emphasis" cap="round">3</Badge>
+    </ItemActions>
+  </Item>
+  <ItemSeparator />
+  <Item interactive>
+    <ItemMedia><SettingsIcon /></ItemMedia>
+    <ItemContent><ItemTitle>Settings</ItemTitle></ItemContent>
+  </Item>
+</ItemGroup>
+```
+
+### File Explorer
+
+<ComponentPreview>
+  <ItemGroup className="w-80">
+    <Item interactive size="sm">
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ansi-yellow"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>src</ItemTitle>
+      </ItemContent>
+    </Item>
+    <Item interactive size="sm">
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ansi-yellow"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>public</ItemTitle>
+      </ItemContent>
+    </Item>
+    <Item interactive size="sm" variant="active">
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ansi-cyan"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>index.tsx</ItemTitle>
+      </ItemContent>
+      <ItemActions>
+        <span className="text-ansi-green">M</span>
+      </ItemActions>
+    </Item>
+    <Item interactive size="sm">
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>package.json</ItemTitle>
+      </ItemContent>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+<ItemGroup>
+  <Item interactive size="sm">
+    <ItemMedia><FolderIcon className="text-ansi-yellow" /></ItemMedia>
+    <ItemContent><ItemTitle>src</ItemTitle></ItemContent>
+  </Item>
+  <Item interactive size="sm" variant="active">
+    <ItemMedia><FileIcon className="text-ansi-cyan" /></ItemMedia>
+    <ItemContent><ItemTitle>index.tsx</ItemTitle></ItemContent>
+    <ItemActions>
+      <span className="text-ansi-green">M</span>
+    </ItemActions>
+  </Item>
+</ItemGroup>
+```
+
+### Command Palette
+
+<ComponentPreview>
+  <ItemGroup className="w-96">
+    <Item interactive>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="12" x2="12" y1="18" y2="12"/><line x1="9" x2="15" y1="15" y2="15"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>New File</ItemTitle>
+        <ItemDescription>Create a new file in the workspace</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <Kbd>⌘N</Kbd>
+      </ItemActions>
+    </Item>
+    <ItemSeparator />
+    <Item interactive>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Find in Files</ItemTitle>
+        <ItemDescription>Search across all files</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <Kbd>⌘⇧F</Kbd>
+      </ItemActions>
+    </Item>
+    <ItemSeparator />
+    <Item interactive>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Open Terminal</ItemTitle>
+        <ItemDescription>Toggle integrated terminal</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <Kbd>⌘`</Kbd>
+      </ItemActions>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+<ItemGroup>
+  <Item interactive>
+    <ItemMedia><FilePlusIcon /></ItemMedia>
+    <ItemContent>
+      <ItemTitle>New File</ItemTitle>
+      <ItemDescription>Create a new file</ItemDescription>
+    </ItemContent>
+    <ItemActions>
+      <Kbd>⌘N</Kbd>
+    </ItemActions>
+  </Item>
+</ItemGroup>
+```
+
+### Settings Panel
+
+<ComponentPreview>
+  <ItemGroup className="w-96">
+    <Item>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Appearance</ItemTitle>
+        <ItemDescription>Theme, font size, and display settings</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </ItemActions>
+    </Item>
+    <ItemSeparator />
+    <Item>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Privacy & Security</ItemTitle>
+        <ItemDescription>Manage your data and permissions</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </ItemActions>
+    </Item>
+    <ItemSeparator />
+    <Item>
+      <ItemMedia>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Notifications</ItemTitle>
+        <ItemDescription>Configure alerts and reminders</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <Badge variant="muted">On</Badge>
+      </ItemActions>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+<ItemGroup>
+  <Item>
+    <ItemMedia><SunIcon /></ItemMedia>
+    <ItemContent>
+      <ItemTitle>Appearance</ItemTitle>
+      <ItemDescription>Theme and display settings</ItemDescription>
+    </ItemContent>
+    <ItemActions>
+      <ChevronRightIcon />
+    </ItemActions>
+  </Item>
+</ItemGroup>
+```
+
+### Notification List
+
+<ComponentPreview>
+  <ItemGroup className="w-96">
+    <Item variant="muted">
+      <ItemMedia>
+        <div className="w-8 h-8 bg-ansi-blue flex items-center justify-center text-xs font-bold text-background">
+          JD
+        </div>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>John Doe commented on your PR</ItemTitle>
+        <ItemDescription>Looks good! Just one small suggestion...</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <span className="text-xs">2m</span>
+      </ItemActions>
+    </Item>
+    <ItemSeparator />
+    <Item>
+      <ItemMedia>
+        <div className="w-8 h-8 bg-ansi-green flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-background"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Build succeeded</ItemTitle>
+        <ItemDescription>All tests passed on main branch</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <span className="text-xs">1h</span>
+      </ItemActions>
+    </Item>
+    <ItemSeparator />
+    <Item>
+      <ItemMedia>
+        <div className="w-8 h-8 bg-ansi-red flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-background"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+        </div>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Deployment failed</ItemTitle>
+        <ItemDescription>Error in production build</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <span className="text-xs">3h</span>
+      </ItemActions>
+    </Item>
+  </ItemGroup>
+</ComponentPreview>
+
+```tsx
+<ItemGroup>
+  <Item variant="muted">
+    <ItemMedia>
+      <Avatar>JD</Avatar>
+    </ItemMedia>
+    <ItemContent>
+      <ItemTitle>John Doe commented</ItemTitle>
+      <ItemDescription>Looks good!</ItemDescription>
+    </ItemContent>
+    <ItemActions>
+      <span className="text-xs">2m</span>
+    </ItemActions>
+  </Item>
+</ItemGroup>
+```
+
+## API Reference
+
+### Item
+
+The main container component for a single list item.
+
+<PropsTable
+  props={[
+    { name: "variant", type: '"default" | "muted" | "active"', default: '"default"', description: "Visual style variant" },
+    { name: "size", type: '"sm" | "default" | "lg"', default: '"default"', description: "Padding and gap size" },
+    { name: "interactive", type: "boolean", default: "false", description: "Enable hover and focus states" },
+    { name: "asChild", type: "boolean", default: "false", description: "Render as child element (uses Radix Slot)" },
+    { name: "className", type: "string", default: "undefined", description: "Additional CSS classes" },
+    { name: "children", type: "React.ReactNode", default: "undefined", description: "Item content" }
+  ]}
+/>
+
+### ItemGroup
+
+Wrapper component that groups items with proper list semantics.
+
+<PropsTable
+  props={[
+    { name: "className", type: "string", default: "undefined", description: "Additional CSS classes" },
+    { name: "children", type: "React.ReactNode", default: "undefined", description: "Item components" }
+  ]}
+/>
+
+### ItemMedia
+
+Container for icons, avatars, or other visual media.
+
+<PropsTable
+  props={[
+    { name: "className", type: "string", default: "undefined", description: "Additional CSS classes" },
+    { name: "children", type: "React.ReactNode", default: "undefined", description: "Icon or media element" }
+  ]}
+/>
+
+### ItemContent
+
+Main content area containing title and description.
+
+<PropsTable
+  props={[
+    { name: "className", type: "string", default: "undefined", description: "Additional CSS classes" },
+    { name: "children", type: "React.ReactNode", default: "undefined", description: "Title and description components" }
+  ]}
+/>
+
+### ItemTitle
+
+Primary text heading for the item.
+
+<PropsTable
+  props={[
+    { name: "className", type: "string", default: "undefined", description: "Additional CSS classes" },
+    { name: "children", type: "React.ReactNode", default: "undefined", description: "Title text" }
+  ]}
+/>
+
+### ItemDescription
+
+Secondary descriptive text.
+
+<PropsTable
+  props={[
+    { name: "className", type: "string", default: "undefined", description: "Additional CSS classes" },
+    { name: "children", type: "React.ReactNode", default: "undefined", description: "Description text" }
+  ]}
+/>
+
+### ItemActions
+
+Right-aligned container for actions, badges, or keyboard shortcuts.
+
+<PropsTable
+  props={[
+    { name: "className", type: "string", default: "undefined", description: "Additional CSS classes" },
+    { name: "children", type: "React.ReactNode", default: "undefined", description: "Action elements" }
+  ]}
+/>
+
+### ItemSeparator
+
+Visual divider between items.
+
+<PropsTable
+  props={[
+    { name: "className", type: "string", default: "undefined", description: "Additional CSS classes" }
+  ]}
+/>
+
+### TypeScript Definitions
+
+```tsx
+import { VariantProps } from "class-variance-authority";
+
+const itemVariants = cva(
+  [
+    "group/item flex items-center font-mono text-sm",
+    "outline-none select-none",
+    "text-foreground",
+  ],
+  {
+    variants: {
+      variant: {
+        default: "bg-transparent",
+        muted: "bg-background2",
+        active: "bg-background2 text-ansi-blue",
+      },
+      size: {
+        default: "px-3 py-2.5 gap-3",
+        sm: "px-2 py-1.5 gap-2",
+        lg: "px-4 py-3 gap-4",
+      },
+      interactive: {
+        true: "cursor-pointer focus:bg-background2 hover:bg-background2",
+        false: "",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+      interactive: false,
+    },
+  }
+);
+
+type ItemProps = React.ComponentProps<"div"> &
+  VariantProps<typeof itemVariants> & {
+    asChild?: boolean;
+  };
+```
+
+## Styling and Customization
+
+### Custom Styles
+
+Extend components with custom styles using the `className` prop:
+
+```tsx
+{/* Custom width */}
+<ItemGroup className="w-full max-w-md" />
+
+{/* Custom background */}
+<Item className="bg-ansi-blue/10 border-l-2 border-ansi-blue" />
+
+{/* Custom hover effect */}
+<Item interactive className="hover:border-l-2 hover:border-primary" />
+```
+
+### Theme Integration
+
+The Item component uses CSS variables from the TermCN theme system:
+
+- `--background1` / `--background2` - Layer backgrounds
+- `--border` - Border color
+- `--foreground` / `--foreground2` - Text colors
+- `--ansi-blue` - Active state accent
+
+### Styling Icons in ItemMedia
+
+ItemMedia automatically styles nested SVG icons:
+
+```tsx
+{/* Default icon styling */}
+<ItemMedia>
+  <Icon /> {/* Gets size-4 and text-foreground2 */}
+</ItemMedia>
+
+{/* Override with custom classes */}
+<ItemMedia>
+  <Icon className="size-5 text-ansi-cyan" />
+</ItemMedia>
+```
+
+## Accessibility
+
+### Semantic HTML
+
+ItemGroup renders with `role="list"` for proper list semantics:
+
+```tsx
+<ItemGroup> {/* role="list" */}
+  <Item>...</Item> {/* Consider adding role="listitem" for complex items */}
+</ItemGroup>
+```
+
+### Keyboard Navigation
+
+For interactive items, ensure proper keyboard support:
+
+```tsx
+{/* Interactive items are focusable */}
+<Item interactive tabIndex={0} onKeyDown={handleKeyDown}>
+  <ItemContent>Focusable Item</ItemContent>
+</Item>
+
+{/* As link with native keyboard support */}
+<Item interactive asChild>
+  <a href="/page">
+    <ItemContent>Link Item</ItemContent>
+  </a>
+</Item>
+```
+
+### Screen Reader Support
+
+```tsx
+{/* Add aria-current for active items */}
+<Item variant="active" aria-current="page">
+  <ItemContent><ItemTitle>Current Page</ItemTitle></ItemContent>
+</Item>
+
+{/* Add aria-label for icon-only actions */}
+<ItemActions>
+  <button aria-label="Delete item">
+    <TrashIcon />
+  </button>
+</ItemActions>
+```
+
+## Best Practices
+
+### When to Use Item
+
+**Good Use Cases:**
+- Navigation menus and sidebars
+- File explorers and tree views
+- Command palettes and search results
+- Settings panels and preference lists
+- Notification and activity feeds
+- Data lists with actions
+
+**Avoid Using Item For:**
+- Grid layouts (use CSS Grid or Card)
+- Table data (use Table component)
+- Single standalone elements
+- Complex multi-column layouts
+
+### Composition Guidelines
+
+```tsx
+{/* Good - clear structure */}
+<Item>
+  <ItemMedia><Icon /></ItemMedia>
+  <ItemContent>
+    <ItemTitle>Title</ItemTitle>
+    <ItemDescription>Description</ItemDescription>
+  </ItemContent>
+  <ItemActions><Badge>Label</Badge></ItemActions>
+</Item>
+
+{/* Avoid - missing semantic structure */}
+<Item>
+  <Icon />
+  <span>Title</span>
+  <span>Description</span>
+</Item>
+```
+
+### Interactive Items
+
+```tsx
+{/* Good - clear interaction pattern */}
+<Item interactive asChild>
+  <Link to="/page">
+    <ItemContent><ItemTitle>Navigate</ItemTitle></ItemContent>
+  </Link>
+</Item>
+
+{/* Good - button with click handler */}
+<Item interactive onClick={handleClick}>
+  <ItemContent><ItemTitle>Action</ItemTitle></ItemContent>
+</Item>
+```
+
+## Related Components
+
+- **Card**: For containing grouped content with headers and footers
+- **DropdownMenu**: For action menus triggered by items
+- **Button**: For standalone actions within ItemActions
+- **Badge**: For status indicators and counts
+- **Kbd**: For keyboard shortcut hints
+- **Separator**: Similar divider for other contexts

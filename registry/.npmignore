@@ -1,0 +1,25 @@
+# Development files
+examples/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Documentation
+CHANGELOG.md
+
+# Build artifacts
+dist/
+build/
+.turbo/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

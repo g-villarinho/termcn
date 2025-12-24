@@ -1,0 +1,752 @@
+---
+title: Textarea
+description: Multi-line text input with terminal aesthetics for capturing longer content like comments, descriptions, and messages.
+order: 10
+published: true
+---
+
+import { Textarea } from "@/components/ui/textarea";
+
+# Textarea
+
+Multi-line text input with terminal aesthetics for capturing longer content like comments, descriptions, and messages.
+
+## Overview
+
+The Textarea component is a multi-line text input designed for capturing longer form content such as comments, descriptions, messages, and code snippets. Built with a terminal-inspired aesthetic, it features a monospace font, minimal styling, and clean vertical resize functionality that evokes the feel of classic terminal text editors.
+
+## Features
+
+- **2 Visual Variants**: Default (minimal) and Bordered for different visual contexts
+- **3 Size Options**: Small, Default, and Large for various content needs
+- **Terminal Aesthetics**: Monospace font family for code-like appearance
+- **Vertical Resizing**: Native resize handle for user-controlled height adjustment
+- **Custom Selection**: Themed text selection with primary color highlighting
+- **Fully Accessible**: Proper form integration and disabled states
+- **TypeScript Support**: Fully typed with comprehensive prop definitions
+- **Lightweight**: Minimal styling that extends native textarea behavior
+
+## Installation
+
+```bash
+npx termcn add textarea
+```
+
+This will install the Textarea component and its dependencies into your project.
+
+## Dependencies
+
+- `class-variance-authority` - For type-safe variant management
+- `@/lib/utils` - For className merging utilities
+
+## Usage
+
+### Basic Usage
+
+<ComponentPreview>
+  <Textarea placeholder="Enter your message..." />
+</ComponentPreview>
+
+```tsx
+import { Textarea } from "@/components/ui/textarea";
+
+export default function Example() {
+  return <Textarea placeholder="Enter your message..." />;
+}
+```
+
+### With Variants
+
+The Textarea component supports 2 visual variants:
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4 w-full max-w-md">
+    <Textarea variant="default" placeholder="Default variant - minimal styling" />
+    <Textarea variant="bordered" placeholder="Bordered variant - with visible border" />
+  </div>
+</ComponentPreview>
+
+```tsx
+<Textarea variant="default" placeholder="Default variant - minimal styling" />
+<Textarea variant="bordered" placeholder="Bordered variant - with visible border" />
+```
+
+**Variant Descriptions:**
+- `default`: Minimal styling with no visible border - blends seamlessly into layouts
+- `bordered`: Visible border that highlights on focus - clearer form field indication
+
+### With Sizes
+
+Choose from three different sizes to match your design needs:
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4 w-full max-w-md">
+    <Textarea textareaSize="sm" placeholder="Small textarea" />
+    <Textarea textareaSize="default" placeholder="Default textarea" />
+    <Textarea textareaSize="lg" placeholder="Large textarea with more padding" />
+  </div>
+</ComponentPreview>
+
+```tsx
+<Textarea textareaSize="sm" placeholder="Small textarea" />
+<Textarea textareaSize="default" placeholder="Default textarea" />
+<Textarea textareaSize="lg" placeholder="Large textarea with more padding" />
+```
+
+**Size Descriptions:**
+- `sm`: Minimal padding, 2 line minimum height, extra-small text (12px)
+- `default`: Standard padding (1ch horizontal, 0.25rem vertical), 2 line minimum, small text (14px)
+- `lg`: Generous padding (2ch horizontal, 1 line-height vertical), 4 line minimum, base text (16px)
+
+### With Default Value
+
+<ComponentPreview>
+  <Textarea
+    defaultValue="This textarea has a default value that demonstrates how content appears within the monospace styling."
+    className="max-w-md"
+  />
+</ComponentPreview>
+
+```tsx
+<Textarea
+  defaultValue="This textarea has a default value that demonstrates how content appears within the monospace styling."
+/>
+```
+
+### Controlled Textarea
+
+```tsx
+import { useState } from "react";
+import { Textarea } from "@/components/ui/textarea";
+
+export default function ControlledExample() {
+  const [value, setValue] = useState("");
+
+  return (
+    <div>
+      <Textarea
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="Controlled textarea..."
+      />
+      <p>Character count: {value.length}</p>
+    </div>
+  );
+}
+```
+
+### Disabled State
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4 w-full max-w-md">
+    <Textarea disabled placeholder="Disabled textarea" />
+    <Textarea disabled defaultValue="This textarea is disabled and contains read-only content." />
+  </div>
+</ComponentPreview>
+
+```tsx
+<Textarea disabled placeholder="Disabled textarea" />
+<Textarea disabled defaultValue="Read-only content" />
+```
+
+### With Rows
+
+Control the visible height with the native `rows` attribute:
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4 w-full max-w-md">
+    <Textarea rows={3} placeholder="3 rows" />
+    <Textarea rows={6} placeholder="6 rows" />
+  </div>
+</ComponentPreview>
+
+```tsx
+<Textarea rows={3} placeholder="3 rows" />
+<Textarea rows={6} placeholder="6 rows" />
+```
+
+## Common Use Cases
+
+### Comment Form
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3 w-full max-w-md">
+    <label htmlFor="comment" className="text-sm font-mono text-foreground">
+      Leave a comment
+    </label>
+    <Textarea
+      id="comment"
+      variant="bordered"
+      placeholder="Share your thoughts..."
+      rows={4}
+    />
+    <div className="flex justify-end">
+      <button className="px-4 py-2 bg-primary text-primary-foreground text-sm font-mono">
+        Submit
+      </button>
+    </div>
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex flex-col gap-3">
+  <label htmlFor="comment" className="text-sm font-mono">
+    Leave a comment
+  </label>
+  <Textarea
+    id="comment"
+    variant="bordered"
+    placeholder="Share your thoughts..."
+    rows={4}
+  />
+  <Button type="submit">Submit</Button>
+</div>
+```
+
+### Code Input
+
+<ComponentPreview>
+  <div className="flex flex-col gap-2 w-full max-w-lg">
+    <label className="text-sm font-mono text-muted-foreground">
+      $ paste your code here
+    </label>
+    <Textarea
+      className="bg-card"
+      textareaSize="lg"
+      placeholder="// Enter code snippet..."
+      rows={8}
+    />
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex flex-col gap-2">
+  <label className="text-sm font-mono text-muted-foreground">
+    $ paste your code here
+  </label>
+  <Textarea
+    className="bg-card"
+    textareaSize="lg"
+    placeholder="// Enter code snippet..."
+    rows={8}
+  />
+</div>
+```
+
+### Feedback Form
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4 w-full max-w-md p-4 border border-border">
+    <h3 className="font-mono text-sm text-foreground">Send Feedback</h3>
+    <Textarea
+      variant="bordered"
+      placeholder="Tell us what you think..."
+      rows={5}
+    />
+    <p className="text-xs text-muted-foreground font-mono">
+      Your feedback helps us improve.
+    </p>
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex flex-col gap-4 p-4 border border-border">
+  <h3 className="font-mono text-sm">Send Feedback</h3>
+  <Textarea
+    variant="bordered"
+    placeholder="Tell us what you think..."
+    rows={5}
+  />
+  <p className="text-xs text-muted-foreground font-mono">
+    Your feedback helps us improve.
+  </p>
+</div>
+```
+
+### Bio / Description Field
+
+<ComponentPreview>
+  <div className="flex flex-col gap-2 w-full max-w-md">
+    <label className="text-sm font-mono text-foreground">Bio</label>
+    <Textarea
+      variant="bordered"
+      textareaSize="default"
+      placeholder="Write a short bio about yourself..."
+      maxLength={280}
+    />
+    <span className="text-xs text-muted-foreground font-mono text-right">
+      Max 280 characters
+    </span>
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex flex-col gap-2">
+  <label className="text-sm font-mono">Bio</label>
+  <Textarea
+    variant="bordered"
+    placeholder="Write a short bio about yourself..."
+    maxLength={280}
+  />
+  <span className="text-xs text-muted-foreground font-mono text-right">
+    Max 280 characters
+  </span>
+</div>
+```
+
+### Chat Message Input
+
+<ComponentPreview>
+  <div className="flex gap-2 w-full max-w-lg items-end">
+    <Textarea
+      textareaSize="sm"
+      placeholder="Type a message..."
+      rows={1}
+      className="flex-1"
+    />
+    <button className="px-3 py-1 bg-primary text-primary-foreground text-sm font-mono h-fit">
+      Send
+    </button>
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex gap-2 items-end">
+  <Textarea
+    textareaSize="sm"
+    placeholder="Type a message..."
+    rows={1}
+    className="flex-1"
+  />
+  <Button size="sm">Send</Button>
+</div>
+```
+
+## API Reference
+
+### Textarea Props
+
+The Textarea component extends `React.ComponentProps<"textarea">` and accepts the following props:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "bordered"` | `"default"` | The visual style variant |
+| `textareaSize` | `"sm" \| "default" \| "lg"` | `"default"` | The size of the textarea |
+| `className` | `string` | `undefined` | Additional CSS classes to apply |
+| `placeholder` | `string` | `undefined` | Placeholder text when empty |
+| `disabled` | `boolean` | `false` | Disable the textarea |
+| `rows` | `number` | `undefined` | Number of visible text lines |
+| `maxLength` | `number` | `undefined` | Maximum character limit |
+| ...rest | `TextareaHTMLAttributes` | - | All standard textarea attributes are supported |
+
+### Type Definitions
+
+```typescript
+import { VariantProps } from "class-variance-authority";
+
+export interface TextareaProps
+  extends React.ComponentProps<"textarea">,
+    VariantProps<typeof textareaVariants> {}
+```
+
+## Styling and Customization
+
+### Custom Styles
+
+You can extend the textarea with custom styles using the `className` prop:
+
+```tsx
+<Textarea className="bg-card" placeholder="Custom background" />
+<Textarea className="border-2 border-primary" placeholder="Custom border" />
+<Textarea className="resize-none" placeholder="No resize" />
+<Textarea className="min-h-[200px]" placeholder="Fixed minimum height" />
+```
+
+### Theme Integration
+
+The Textarea component uses CSS variables from the TermCN theme system:
+
+- `--background` - Textarea background color
+- `--foreground` - Text color
+- `--muted-foreground` - Placeholder text color
+- `--border` - Border color (bordered variant)
+- `--primary` - Focus border color and text selection
+- `--primary-foreground` - Selected text color
+
+### Extending Variants
+
+To add custom variants, modify the `textareaVariants` CVA definition:
+
+```typescript
+const textareaVariants = cva(
+  [
+    "w-full bg-background text-foreground placeholder:text-muted-foreground",
+    "border-0 outline-none resize-vertical",
+    "font-mono transition-colors",
+    "selection:bg-primary selection:text-primary-foreground",
+    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+  ],
+  {
+    variants: {
+      variant: {
+        // ... existing variants
+        custom: "border-2 border-accent focus:border-accent-foreground",
+      },
+      textareaSize: {
+        // ... existing sizes
+      },
+    },
+  }
+);
+```
+
+## Accessibility
+
+### Form Labels
+
+Always associate textareas with labels for screen reader support:
+
+```tsx
+{/* Using htmlFor */}
+<label htmlFor="description">Description</label>
+<Textarea id="description" />
+
+{/* Using aria-label for icon-only contexts */}
+<Textarea aria-label="Message content" placeholder="Type here..." />
+
+{/* Using aria-labelledby for complex labels */}
+<h3 id="feedback-title">Feedback</h3>
+<Textarea aria-labelledby="feedback-title" />
+```
+
+### Keyboard Navigation
+
+- **Tab**: Focus the textarea
+- **Shift + Tab**: Move focus to previous element
+- **Standard text editing**: All native keyboard shortcuts work (Ctrl+A, Ctrl+C, etc.)
+
+### Screen Reader Support
+
+```tsx
+{/* Provide context with aria-describedby */}
+<Textarea
+  id="message"
+  aria-describedby="message-hint"
+  placeholder="Enter message..."
+/>
+<p id="message-hint" className="text-xs text-muted-foreground">
+  Maximum 500 characters
+</p>
+
+{/* Required field indication */}
+<Textarea
+  required
+  aria-required="true"
+  placeholder="Required field"
+/>
+
+{/* Invalid state */}
+<Textarea
+  aria-invalid="true"
+  aria-errormessage="error-msg"
+/>
+<p id="error-msg" className="text-destructive">
+  This field is required
+</p>
+```
+
+## Best Practices
+
+### When to Use Textarea
+
+✅ **Good Use Cases:**
+- Comments and feedback forms
+- Message composition (email, chat)
+- Code or text snippet input
+- Bio and description fields
+- Notes and multi-paragraph content
+- JSON or configuration input
+
+❌ **Avoid Using Textarea For:**
+- Single-line input (use Input instead)
+- Password fields (use Input with type="password")
+- Numeric input (use Input with type="number")
+- Date/time selection (use dedicated date pickers)
+- Rich text editing (use a rich text editor)
+
+### Design Guidelines
+
+1. **Set appropriate rows**: Match visible rows to expected content length
+2. **Use placeholder wisely**: Provide helpful examples, not instructions
+3. **Consider character limits**: Show limits when applicable
+4. **Label clearly**: Always pair with visible or accessible labels
+5. **Size appropriately**: Use size variants to match form hierarchy
+6. **Allow resizing**: Don't disable resize unless necessary
+
+## Design Details
+
+### Typography
+
+The Textarea uses monospace font (`font-mono`) to evoke terminal aesthetics and ensure consistent character width, making it ideal for code-like content.
+
+### Sizing Implementation
+
+Sizes use line-height units (`lh`) for minimum height, ensuring consistent vertical rhythm:
+
+```typescript
+textareaSize: {
+  sm: "min-h-[2lh] px-0 py-0 text-xs",        // 2 lines, no padding, 12px text
+  default: "min-h-[2lh] px-[1ch] py-1 text-sm", // 2 lines, 1ch padding, 14px text
+  lg: "min-h-[4lh] px-[2ch] py-[1lh] text-base", // 4 lines, 2ch padding, 16px text
+}
+```
+
+### Character-Based Padding
+
+Horizontal padding uses character width units (`ch`) to align with the monospace aesthetic:
+- Small: No horizontal padding
+- Default: 1 character width padding
+- Large: 2 character width padding
+
+## Related Components
+
+- **Input**: For single-line text input
+- **InputGroup**: For combining inputs with addons
+- **Label**: For form field labels
+- **Card**: For containing form sections
+- **Button**: For form submission
+
+## Examples Gallery
+
+### Terminal Log Entry
+
+<ComponentPreview>
+  <div className="flex flex-col gap-2 w-full max-w-lg bg-card p-4 border border-border">
+    <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground">
+      <span className="text-success">●</span>
+      <span>LOG ENTRY</span>
+      <span className="ml-auto">2024-01-15 14:32:01</span>
+    </div>
+    <Textarea
+      className="bg-background"
+      textareaSize="default"
+      placeholder="[INFO] Enter log message..."
+      rows={4}
+    />
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex flex-col gap-2 bg-card p-4 border border-border">
+  <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground">
+    <span className="text-success">●</span>
+    <span>LOG ENTRY</span>
+    <span className="ml-auto">2024-01-15 14:32:01</span>
+  </div>
+  <Textarea
+    className="bg-background"
+    placeholder="[INFO] Enter log message..."
+    rows={4}
+  />
+</div>
+```
+
+### Configuration Editor
+
+<ComponentPreview>
+  <div className="flex flex-col gap-2 w-full max-w-lg">
+    <div className="flex items-center justify-between">
+      <label className="text-sm font-mono text-foreground">config.json</label>
+      <span className="text-xs text-muted-foreground font-mono">JSON</span>
+    </div>
+    <Textarea
+      variant="bordered"
+      className="bg-card"
+      textareaSize="lg"
+      defaultValue={`{
+  "name": "termcn",
+  "version": "1.0.0",
+  "terminal": true
+}`}
+      rows={6}
+    />
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex flex-col gap-2">
+  <div className="flex items-center justify-between">
+    <label className="text-sm font-mono">config.json</label>
+    <span className="text-xs text-muted-foreground font-mono">JSON</span>
+  </div>
+  <Textarea
+    variant="bordered"
+    className="bg-card"
+    textareaSize="lg"
+    defaultValue={`{
+  "name": "termcn",
+  "version": "1.0.0"
+}`}
+    rows={6}
+  />
+</div>
+```
+
+### Issue Report
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4 w-full max-w-md p-4 border border-border">
+    <h4 className="font-mono text-sm text-foreground">Report Issue</h4>
+    <div className="flex flex-col gap-2">
+      <label className="text-xs font-mono text-muted-foreground">Steps to reproduce</label>
+      <Textarea
+        variant="bordered"
+        textareaSize="sm"
+        placeholder="1. Go to...&#10;2. Click on...&#10;3. See error"
+        rows={4}
+      />
+    </div>
+    <div className="flex flex-col gap-2">
+      <label className="text-xs font-mono text-muted-foreground">Expected behavior</label>
+      <Textarea
+        variant="bordered"
+        textareaSize="sm"
+        placeholder="Describe what should happen..."
+        rows={2}
+      />
+    </div>
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex flex-col gap-4 p-4 border border-border">
+  <h4 className="font-mono text-sm">Report Issue</h4>
+  <div className="flex flex-col gap-2">
+    <label className="text-xs font-mono text-muted-foreground">
+      Steps to reproduce
+    </label>
+    <Textarea
+      variant="bordered"
+      textareaSize="sm"
+      placeholder="1. Go to...&#10;2. Click on...&#10;3. See error"
+      rows={4}
+    />
+  </div>
+  <div className="flex flex-col gap-2">
+    <label className="text-xs font-mono text-muted-foreground">
+      Expected behavior
+    </label>
+    <Textarea
+      variant="bordered"
+      textareaSize="sm"
+      placeholder="Describe what should happen..."
+      rows={2}
+    />
+  </div>
+</div>
+```
+
+## Performance
+
+The Textarea component is lightweight and performant:
+- No JavaScript required for basic rendering
+- CSS-only styling with minimal runtime overhead
+- Small bundle size impact (~1KB)
+- Server-side rendering compatible
+- Native browser textarea behavior
+
+## Troubleshooting
+
+### Textarea not resizing
+
+Ensure resize is not disabled:
+
+```tsx
+{/* Default - resizable */}
+<Textarea placeholder="Can resize vertically" />
+
+{/* If resize was disabled, re-enable it */}
+<Textarea className="resize-vertical" placeholder="Resizable" />
+```
+
+### Placeholder text not visible
+
+Check that placeholder color has sufficient contrast:
+
+```tsx
+{/* Use the muted-foreground color from theme */}
+<Textarea
+  className="placeholder:text-muted-foreground"
+  placeholder="Should be visible"
+/>
+```
+
+### Theme colors not applying
+
+Verify your CSS variables are properly defined:
+
+```css
+:root {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted-foreground: 240 5% 64.9%;
+  --primary: 262.1 83.3% 57.8%;
+  --primary-foreground: 0 0% 98%;
+  /* ... other variables */
+}
+```
+
+### Text selection not themed
+
+Ensure selection pseudo-element styles are supported:
+
+```tsx
+<Textarea
+  className="selection:bg-primary selection:text-primary-foreground"
+  placeholder="Select text to see themed selection"
+/>
+```
+
+## Migration Guide
+
+### From shadcn/ui Textarea
+
+The TermCN Textarea is compatible with shadcn/ui with enhanced terminal styling:
+
+```diff
+  import { Textarea } from "@/components/ui/textarea";
+
+  // Basic usage remains the same
+  <Textarea placeholder="Enter text..." />
+
+  // New features in TermCN
++ <Textarea variant="bordered" placeholder="With border" />
++ <Textarea textareaSize="sm" placeholder="Small size" />
++ <Textarea textareaSize="lg" placeholder="Large size" />
+
+  // Monospace font is automatic
+  // No changes needed for terminal aesthetic
+```
+
+## Changelog
+
+### Version 1.0.0
+- Initial release
+- 2 visual variants (default, bordered)
+- 3 size options (sm, default, lg)
+- Monospace typography for terminal aesthetic
+- Custom text selection styling
+- Full TypeScript support
+- Comprehensive accessibility features
+
+## License
+
+MIT License - Part of the TermCN component library.
+
+## Contributing
+
+Contributions are welcome! Please read the contributing guidelines before submitting PRs.
+
+---
+
+**Keywords**: textarea, input, multi-line, text, form, comment, message, code, terminal, monospace, resize, accessible, TypeScript, React, Tailwind CSS, component, UI, TermCN

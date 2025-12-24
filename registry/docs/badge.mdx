@@ -1,0 +1,522 @@
+---
+title: Badge
+description: Display status, labels, and metadata with terminal-inspired badge components.
+order: 1
+published: true
+---
+
+import { Badge } from "@/components/ui/badge";
+
+# Badge
+
+Display status, labels, and metadata with terminal-inspired badge components.
+
+## Overview
+
+The Badge component is a versatile UI element designed to display short pieces of information such as status indicators, labels, tags, or metadata. Built with a terminal aesthetic in mind, it offers multiple visual variants and unique geometric cap styles that set it apart from traditional badge components.
+
+## Features
+
+- **7 Semantic Variants**: Minimal, Subtle, Muted, Elevated, Solid, Bold, and Emphasis
+- **6 Geometric Cap Styles**: Square, Round, Triangle, Ribbon, Slant-Top, and Slant-Bottom
+- **Terminal-Inspired Design**: Monospace font and theme-aware colors
+- **Fully Accessible**: Proper semantic HTML and keyboard navigation support
+- **Customizable**: Extend with custom className props
+- **TypeScript Support**: Fully typed with discriminated union types
+
+## Installation
+
+```bash
+npx termcn add badge
+```
+
+This will install the Badge component and its dependencies into your project.
+
+## Dependencies
+
+- `class-variance-authority` - For type-safe variant management
+- `@/lib/utils` - For className merging utilities
+
+## Usage
+
+### Basic Usage
+
+<ComponentPreview>
+  <Badge>Default</Badge>
+</ComponentPreview>
+
+```tsx
+import { Badge } from "@/components/ui/badge";
+
+export default function Example() {
+  return <Badge>Default</Badge>;
+}
+```
+
+### With Variants
+
+The Badge component supports 7 semantic color variants that integrate with the TermCN theme system:
+
+<ComponentPreview>
+  <div className="flex flex-wrap gap-2">
+    <Badge variant="minimal">Minimal</Badge>
+    <Badge variant="subtle">Subtle</Badge>
+    <Badge variant="muted">Muted</Badge>
+    <Badge variant="elevated">Elevated</Badge>
+    <Badge variant="solid">Solid</Badge>
+    <Badge variant="bold">Bold</Badge>
+    <Badge variant="emphasis">Emphasis</Badge>
+  </div>
+</ComponentPreview>
+
+```tsx
+<Badge variant="minimal">Minimal</Badge>
+<Badge variant="subtle">Subtle</Badge>
+<Badge variant="muted">Muted</Badge>
+<Badge variant="elevated">Elevated</Badge>
+<Badge variant="solid">Solid</Badge>
+<Badge variant="bold">Bold</Badge>
+<Badge variant="emphasis">Emphasis</Badge>
+```
+
+**Variant Descriptions:**
+- `minimal`: Transparent background with foreground text - least visual weight
+- `subtle`: Muted background with muted foreground - subtle emphasis
+- `muted`: Accent colors for secondary information
+- `elevated`: Card-based styling with subtle elevation
+- `solid`: High contrast with inverted colors
+- `bold`: Primary brand colors - default variant
+- `emphasis`: Secondary brand colors for highlighted content
+
+### With Cap Styles
+
+Cap styles modify the geometric shape of the badge ends:
+
+<ComponentPreview>
+  <div className="flex flex-wrap gap-2">
+    <Badge cap="square">Square</Badge>
+    <Badge cap="round">Round</Badge>
+    <Badge cap="triangle">Triangle</Badge>
+    <Badge cap="ribbon">Ribbon</Badge>
+    <Badge cap="slant-top">Slant Top</Badge>
+    <Badge cap="slant-bottom">Slant Bottom</Badge>
+  </div>
+</ComponentPreview>
+
+```tsx
+<Badge cap="square">Square</Badge>
+<Badge cap="round">Round</Badge>
+<Badge cap="triangle">Triangle</Badge>
+<Badge cap="ribbon">Ribbon</Badge>
+<Badge cap="slant-top">Slant Top</Badge>
+<Badge cap="slant-bottom">Slant Bottom</Badge>
+```
+
+**Cap Style Descriptions:**
+- `square`: Default sharp corners - clean and minimal
+- `round`: Fully rounded ends - friendly and modern
+- `triangle`: Pointed arrow-like ends - directional emphasis
+- `ribbon`: Arrow-right shape - indicates progression or selection
+- `slant-top`: Diagonal cut on top edges - dynamic feel
+- `slant-bottom`: Diagonal cut on bottom edges - dynamic feel
+
+### Combining Variants and Caps
+
+Mix and match for endless combinations:
+
+<ComponentPreview>
+  <div className="flex flex-wrap gap-2">
+    <Badge variant="bold" cap="round">Active</Badge>
+    <Badge variant="emphasis" cap="slant-top">New</Badge>
+    <Badge variant="subtle" cap="ribbon">Next</Badge>
+    <Badge variant="solid" cap="triangle">Alert</Badge>
+  </div>
+</ComponentPreview>
+
+```tsx
+<Badge variant="bold" cap="round">Active</Badge>
+<Badge variant="emphasis" cap="slant-top">New</Badge>
+<Badge variant="subtle" cap="ribbon">Next</Badge>
+<Badge variant="solid" cap="triangle">Alert</Badge>
+```
+
+## Common Use Cases
+
+### Status Indicators
+
+<ComponentPreview>
+  <div className="flex flex-wrap gap-2">
+    <Badge variant="bold" cap="round">Active</Badge>
+    <Badge variant="muted" cap="round">Pending</Badge>
+    <Badge variant="subtle" cap="round">Inactive</Badge>
+    <Badge variant="emphasis" cap="round">Critical</Badge>
+  </div>
+</ComponentPreview>
+
+```tsx
+<Badge variant="bold" cap="round">Active</Badge>
+<Badge variant="muted" cap="round">Pending</Badge>
+<Badge variant="subtle" cap="round">Inactive</Badge>
+<Badge variant="emphasis" cap="round">Critical</Badge>
+```
+
+### Tags and Labels
+
+<ComponentPreview>
+  <div className="flex gap-2">
+    <Badge variant="muted">react</Badge>
+    <Badge variant="muted">typescript</Badge>
+    <Badge variant="muted">tailwind</Badge>
+    <Badge variant="emphasis">featured</Badge>
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex gap-2">
+  <Badge variant="muted">react</Badge>
+  <Badge variant="muted">typescript</Badge>
+  <Badge variant="muted">tailwind</Badge>
+  <Badge variant="emphasis">featured</Badge>
+</div>
+```
+
+### Version Badges
+
+<ComponentPreview>
+  <div className="flex flex-wrap gap-2">
+    <Badge variant="bold" cap="slant-top">v2.0</Badge>
+    <Badge variant="emphasis" cap="ribbon">Beta</Badge>
+    <Badge variant="subtle">Deprecated</Badge>
+  </div>
+</ComponentPreview>
+
+```tsx
+<Badge variant="bold" cap="slant-top">v2.0</Badge>
+<Badge variant="emphasis" cap="ribbon">Beta</Badge>
+<Badge variant="subtle">Deprecated</Badge>
+```
+
+### Count Indicators
+
+<ComponentPreview>
+  <div className="flex items-center gap-2">
+    <span>Notifications</span>
+    <Badge variant="emphasis" cap="round">5</Badge>
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex items-center gap-2">
+  <span>Notifications</span>
+  <Badge variant="emphasis" cap="round">5</Badge>
+</div>
+```
+
+### Process Steps
+
+<ComponentPreview>
+  <div className="flex gap-1">
+    <Badge variant="bold" cap="ribbon">Step 1</Badge>
+    <Badge variant="muted" cap="ribbon">Step 2</Badge>
+    <Badge variant="subtle" cap="ribbon">Step 3</Badge>
+  </div>
+</ComponentPreview>
+
+```tsx
+<div className="flex gap-1">
+  <Badge variant="bold" cap="ribbon">Step 1</Badge>
+  <Badge variant="muted" cap="ribbon">Step 2</Badge>
+  <Badge variant="subtle" cap="ribbon">Step 3</Badge>
+</div>
+```
+
+## API Reference
+
+### Badge Props
+
+The Badge component extends `React.HTMLAttributes<HTMLDivElement>` and accepts the following props:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"minimal" \| "subtle" \| "muted" \| "elevated" \| "solid" \| "bold" \| "emphasis"` | `"bold"` | The color variant of the badge |
+| `cap` | `"square" \| "round" \| "triangle" \| "ribbon" \| "slant-top" \| "slant-bottom"` | `"square"` | The geometric end-cap style |
+| `className` | `string` | `undefined` | Additional CSS classes to apply |
+| `children` | `React.ReactNode` | `undefined` | The content to display inside the badge |
+| ...rest | `HTMLDivElement` attributes | - | All standard div attributes are supported |
+
+### Type Definitions
+
+```typescript
+import { VariantProps } from "class-variance-authority";
+
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof badgeVariants> {}
+```
+
+## Styling and Customization
+
+### Custom Styles
+
+You can extend the badge with custom styles using the `className` prop:
+
+```tsx
+<Badge className="text-lg px-4 py-1">Large Badge</Badge>
+<Badge className="uppercase tracking-wider">Uppercase</Badge>
+<Badge className="animate-pulse">Animated</Badge>
+```
+
+### Theme Integration
+
+The Badge component uses CSS variables from the TermCN theme system:
+
+- `--background` - Minimal variant background
+- `--foreground` - Minimal variant text
+- `--muted` - Subtle variant background
+- `--muted-foreground` - Subtle variant text
+- `--accent` - Muted variant background
+- `--accent-foreground` - Muted variant text
+- `--card` - Elevated variant background
+- `--card-foreground` - Elevated variant text
+- `--primary` - Bold variant background
+- `--primary-foreground` - Bold variant text
+- `--secondary` - Emphasis variant background
+- `--secondary-foreground` - Emphasis variant text
+
+### Extending Variants
+
+To add custom variants, modify the `badgeVariants` CVA definition:
+
+```typescript
+const badgeVariants = cva(
+  "inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold font-mono focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  {
+    variants: {
+      variant: {
+        // ... existing variants
+        custom: "border-purple-500 bg-purple-500 text-white",
+      },
+      cap: {
+        // ... existing caps
+      },
+    },
+  }
+);
+```
+
+## Accessibility
+
+### Semantic HTML
+
+The Badge component renders as a `<div>` element. For better semantics, consider:
+
+```tsx
+{/* For status indicators */}
+<Badge role="status" aria-label="Active status">Active</Badge>
+
+{/* For count badges */}
+<Badge role="status" aria-label="5 unread notifications">5</Badge>
+
+{/* For labels */}
+<Badge aria-label="React technology tag">React</Badge>
+```
+
+### Screen Reader Support
+
+Ensure badge content is meaningful to screen readers:
+
+```tsx
+{/* Good */}
+<Badge variant="emphasis">New Feature</Badge>
+
+{/* Better - if badge is purely decorative */}
+<Badge aria-hidden="true">★</Badge>
+```
+
+## Implementation Details
+
+### Component Structure
+
+```typescript
+function Badge({ className, variant, cap, ...props }: BadgeProps) {
+  return (
+    <div className={cn(badgeVariants({ variant, cap }), className)} {...props} />
+  );
+}
+```
+
+### Variant Implementation
+
+Variants are implemented using `class-variance-authority` for type-safe, composable styles:
+
+```typescript
+const badgeVariants = cva(
+  // Base styles
+  "inline-flex items-center border px-2.5 py-0.5 text-xs font-semibold font-mono focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  {
+    variants: {
+      variant: { /* ... */ },
+      cap: { /* ... */ },
+    },
+    defaultVariants: {
+      variant: "bold",
+      cap: "square",
+    },
+  }
+);
+```
+
+### Cap Styles Implementation
+
+Geometric caps use CSS `clip-path` for precise shape control:
+
+- `triangle`: Creates arrow-pointed ends using polygon clipping
+- `ribbon`: Creates arrow-right shape with left indent
+- `slant-top`: Diagonal cuts on top corners
+- `slant-bottom`: Diagonal cuts on bottom corners
+
+## Best Practices
+
+### When to Use Badges
+
+✅ **Good Use Cases:**
+- Status indicators (active, pending, error)
+- Category labels and tags
+- Count indicators (unread messages, notifications)
+- Version numbers or release stages
+- Feature highlights ("New", "Beta", "Pro")
+
+❌ **Avoid Using Badges For:**
+- Long text content (use labels or paragraphs instead)
+- Interactive elements (use buttons instead)
+- Primary navigation (use proper navigation components)
+- Critical information that requires immediate action (use alerts)
+
+### Design Guidelines
+
+1. **Keep text short**: 1-3 words maximum
+2. **Use consistent variants**: Establish meaning for each variant (e.g., "emphasis" always means "important")
+3. **Don't overuse**: Too many badges create visual noise
+4. **Consider context**: Choose cap styles that match your design language
+5. **Maintain contrast**: Ensure text is readable against background
+
+### Performance
+
+The Badge component is lightweight and performant:
+- No JavaScript required for rendering
+- CSS-only styling with no runtime overhead
+- Minimal bundle size impact (~1KB)
+- Server-side rendering compatible
+
+## Examples Gallery
+
+### E-commerce Product Badge
+
+```tsx
+<div className="relative">
+  <img src="/product.jpg" alt="Product" />
+  <Badge
+    variant="emphasis"
+    cap="ribbon"
+    className="absolute top-2 left-0"
+  >
+    Sale
+  </Badge>
+</div>
+```
+
+### User Role Badges
+
+```tsx
+<div className="flex items-center gap-2">
+  <span>John Doe</span>
+  <Badge variant="bold" cap="round">Admin</Badge>
+  <Badge variant="muted" cap="round">Verified</Badge>
+</div>
+```
+
+### File Type Indicators
+
+```tsx
+<div className="flex gap-2">
+  <Badge variant="muted">.tsx</Badge>
+  <Badge variant="subtle">.json</Badge>
+  <Badge variant="minimal">.md</Badge>
+</div>
+```
+
+### Build Status
+
+```tsx
+<div className="flex gap-2">
+  <Badge variant="bold" cap="round">✓ Passing</Badge>
+  <Badge variant="emphasis">Built: 2m ago</Badge>
+  <Badge variant="subtle">v1.2.3</Badge>
+</div>
+```
+
+## Troubleshooting
+
+### Badge not displaying correctly
+
+Ensure Tailwind CSS is properly configured to include the badge component styles.
+
+### Clip-path not working
+
+Some older browsers don't support `clip-path`. Consider providing fallbacks:
+
+```tsx
+<Badge cap="square" className="supports-[clip-path]:cap-triangle">
+  Text
+</Badge>
+```
+
+### Theme colors not applying
+
+Verify your CSS variables are properly defined in your global styles.
+
+## Related Components
+
+- **Button**: For interactive elements
+- **Tag**: For removable or interactive labels
+- **Label**: For form field labels
+- **Chip**: For input-style selections
+
+## Migration Guide
+
+### From shadcn/ui Badge
+
+The TermCN Badge is compatible with shadcn/ui but adds cap styles:
+
+```diff
+- <Badge variant="default">Text</Badge>
++ <Badge variant="bold">Text</Badge>
+
+  <Badge variant="secondary">Text</Badge>
+  <Badge variant="destructive">Text</Badge>
+  <Badge variant="outline">Text</Badge>
+
++ <Badge cap="round">Text</Badge>
++ <Badge variant="bold" cap="ribbon">Text</Badge>
+```
+
+## Changelog
+
+### Version 1.0.0
+- Initial release
+- 7 semantic variants
+- 6 geometric cap styles
+- Full TypeScript support
+- Accessibility improvements
+
+## License
+
+MIT License - Part of the TermCN component library.
+
+## Contributing
+
+Contributions are welcome! Please read the contributing guidelines before submitting PRs.
+
+---
+
+**Keywords**: badge, label, tag, status, indicator, chip, pill, terminal, monospace, variant, cap, geometric, TypeScript, React, Tailwind CSS, component, UI, TermCN

@@ -1,0 +1,1147 @@
+---
+title: Dialog
+description: Display modal content and interactive overlays with terminal-inspired dialog components featuring 3D shadow effects and position variants.
+order: 6
+published: true
+---
+
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
+# Dialog
+
+Display modal content and interactive overlays with terminal-inspired dialog components featuring 3D shadow effects and position variants.
+
+## Overview
+
+The Dialog component is a modal overlay element designed to capture user attention and present focused content, forms, or confirmations. Built on Radix UI's accessible dialog primitive, it features a distinctive terminal aesthetic with bold borders, 3D shadow effects, and a frosted glass overlay that evokes the feel of pop-up windows from retro computing interfaces.
+
+## Features
+
+- **9 Position Variants**: Center, top-left, top-center, top-right, center-left, center-right, bottom-left, bottom-center, and bottom-right
+- **5 Size Options**: Small, default, large, extra-large, and full-screen for different content needs
+- **2 Elevation Styles**: Flat (default) or raised with 3D shadow effect
+- **3D Terminal Aesthetics**: Bold borders with optional offset shadow effects creating depth and dimension
+- **Frosted Glass Overlay**: Semi-transparent backdrop with blur effect for modern depth
+- **Smooth Animations**: Fade and zoom transitions for open/close states
+- **Flexible Composition**: Modular sub-components for header, footer, title, and description
+- **Accessible Close Button**: Optional X button with proper focus states and screen reader support
+- **Fully Accessible**: Built on Radix UI with proper ARIA attributes, focus trapping, and keyboard navigation
+- **TypeScript Support**: Fully typed with comprehensive prop definitions
+
+## Installation
+
+```bash
+npx termcn add dialog
+```
+
+This will install the Dialog component and its dependencies into your project.
+
+## Dependencies
+
+- `@radix-ui/react-dialog` - Accessible dialog primitive
+- `lucide-react` - For the close icon
+- `class-variance-authority` - For type-safe variant management
+- `@/lib/utils` - For className merging utilities
+
+## Usage
+
+### Basic Usage
+
+<ComponentPreview>
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button>Open Dialog</Button>
+    </DialogTrigger>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Dialog Title</DialogTitle>
+        <DialogDescription>
+          This is a basic dialog with a title and description.
+        </DialogDescription>
+      </DialogHeader>
+      <p className="text-sm text-subtext0">Dialog content goes here.</p>
+    </DialogContent>
+  </Dialog>
+</ComponentPreview>
+
+```tsx
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+
+export default function Example() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogDescription>
+            This is a basic dialog with a title and description.
+          </DialogDescription>
+        </DialogHeader>
+        <p className="text-sm text-subtext0">Dialog content goes here.</p>
+      </DialogContent>
+    </Dialog>
+  );
+}
+```
+
+### With Position Variants
+
+The Dialog component supports 9 position variants for different use cases:
+
+<ComponentPreview>
+  <div className="flex flex-wrap gap-3">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm">Center</Button>
+      </DialogTrigger>
+      <DialogContent position="center" size="sm">
+        <DialogHeader>
+          <DialogTitle>Centered Dialog</DialogTitle>
+          <DialogDescription>Default centered position.</DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm">Top Center</Button>
+      </DialogTrigger>
+      <DialogContent position="top-center" size="sm">
+        <DialogHeader>
+          <DialogTitle>Top Center Dialog</DialogTitle>
+          <DialogDescription>Positioned at the top center.</DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm">Bottom Right</Button>
+      </DialogTrigger>
+      <DialogContent position="bottom-right" size="sm">
+        <DialogHeader>
+          <DialogTitle>Bottom Right Dialog</DialogTitle>
+          <DialogDescription>Positioned at the bottom right.</DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  </div>
+</ComponentPreview>
+
+```tsx
+<DialogContent position="center">Centered (default)</DialogContent>
+<DialogContent position="top-left">Top Left</DialogContent>
+<DialogContent position="top-center">Top Center</DialogContent>
+<DialogContent position="top-right">Top Right</DialogContent>
+<DialogContent position="center-left">Center Left</DialogContent>
+<DialogContent position="center-right">Center Right</DialogContent>
+<DialogContent position="bottom-left">Bottom Left</DialogContent>
+<DialogContent position="bottom-center">Bottom Center</DialogContent>
+<DialogContent position="bottom-right">Bottom Right</DialogContent>
+```
+
+**Position Descriptions:**
+- `center`: Default centered position with translate transforms
+- `top-left`: Fixed to top-left corner with 1rem offset
+- `top-center`: Centered horizontally at top with 1rem offset
+- `top-right`: Fixed to top-right corner with 1rem offset
+- `center-left`: Centered vertically on left side with 1rem offset
+- `center-right`: Centered vertically on right side with 1rem offset
+- `bottom-left`: Fixed to bottom-left corner with 1rem offset
+- `bottom-center`: Centered horizontally at bottom with 1rem offset
+- `bottom-right`: Fixed to bottom-right corner with 1rem offset
+
+### With Sizes
+
+Choose from five different sizes to match your content needs:
+
+<ComponentPreview>
+  <div className="flex flex-wrap gap-3">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm">Small</Button>
+      </DialogTrigger>
+      <DialogContent size="sm">
+        <DialogHeader>
+          <DialogTitle>Small Dialog</DialogTitle>
+          <DialogDescription>Max width of 24rem (384px).</DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm">Default</Button>
+      </DialogTrigger>
+      <DialogContent size="default">
+        <DialogHeader>
+          <DialogTitle>Default Dialog</DialogTitle>
+          <DialogDescription>Max width of 32rem (512px).</DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm">Large</Button>
+      </DialogTrigger>
+      <DialogContent size="lg">
+        <DialogHeader>
+          <DialogTitle>Large Dialog</DialogTitle>
+          <DialogDescription>Max width of 42rem (672px).</DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  </div>
+</ComponentPreview>
+
+```tsx
+<DialogContent size="sm">Small - max-w-sm (384px)</DialogContent>
+<DialogContent size="default">Default - max-w-lg (512px)</DialogContent>
+<DialogContent size="lg">Large - max-w-2xl (672px)</DialogContent>
+<DialogContent size="xl">Extra Large - max-w-4xl (896px)</DialogContent>
+<DialogContent size="full">Full Screen - calc(100% - 2rem)</DialogContent>
+```
+
+### With Elevation
+
+Add a 3D shadow effect to give the dialog more visual depth:
+
+<ComponentPreview>
+  <div className="flex flex-wrap gap-3">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm">Flat (Default)</Button>
+      </DialogTrigger>
+      <DialogContent elevation="flat" size="sm">
+        <DialogHeader>
+          <DialogTitle>Flat Dialog</DialogTitle>
+          <DialogDescription>Default style without 3D shadow.</DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm">Raised</Button>
+      </DialogTrigger>
+      <DialogContent elevation="raised" size="sm">
+        <DialogHeader>
+          <DialogTitle>Raised Dialog</DialogTitle>
+          <DialogDescription>With 3D shadow effect for more depth.</DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  </div>
+</ComponentPreview>
+
+```tsx
+{/* Default flat style */}
+<DialogContent elevation="flat">Flat dialog</DialogContent>
+
+{/* With 3D shadow effect */}
+<DialogContent elevation="raised">Raised dialog with shadow</DialogContent>
+```
+
+**Elevation Options:**
+- `flat`: Default style with no shadow
+- `raised`: 3D offset shadow effect (0.5rem offset) for a retro terminal look
+
+### Without Close Button
+
+Hide the built-in close button for custom implementations:
+
+<ComponentPreview>
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button variant="outline">No Close Button</Button>
+    </DialogTrigger>
+    <DialogContent showCloseButton={false}>
+      <DialogHeader>
+        <DialogTitle>Custom Close</DialogTitle>
+        <DialogDescription>
+          This dialog has no built-in close button. Use the footer button to close.
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button>Close Dialog</Button>
+        </DialogClose>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</ComponentPreview>
+
+```tsx
+<DialogContent showCloseButton={false}>
+  <DialogHeader>
+    <DialogTitle>Custom Close</DialogTitle>
+    <DialogDescription>
+      This dialog has no built-in close button.
+    </DialogDescription>
+  </DialogHeader>
+  <DialogFooter>
+    <DialogClose asChild>
+      <Button>Close Dialog</Button>
+    </DialogClose>
+  </DialogFooter>
+</DialogContent>
+```
+
+### With Header and Footer
+
+Use the structured header and footer components for organized layouts:
+
+<ComponentPreview>
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button>With Header & Footer</Button>
+    </DialogTrigger>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Complete Dialog</DialogTitle>
+        <DialogDescription>
+          A dialog with header, content, and footer sections.
+        </DialogDescription>
+      </DialogHeader>
+      <div className="py-4">
+        <p className="text-sm text-subtext0">
+          Main content area with proper spacing and layout structure.
+        </p>
+      </div>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="outline">Cancel</Button>
+        </DialogClose>
+        <Button>Confirm</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</ComponentPreview>
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Open</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Complete Dialog</DialogTitle>
+      <DialogDescription>
+        A dialog with header, content, and footer sections.
+      </DialogDescription>
+    </DialogHeader>
+    <div className="py-4">
+      <p className="text-sm">Main content area.</p>
+    </div>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="outline">Cancel</Button>
+      </DialogClose>
+      <Button>Confirm</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+## Common Use Cases
+
+### Confirmation Dialog
+
+<ComponentPreview>
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button variant="destructive">Delete Item</Button>
+    </DialogTrigger>
+    <DialogContent size="sm">
+      <DialogHeader>
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogDescription>
+          Are you sure you want to delete this item? This action cannot be undone.
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="outline">Cancel</Button>
+        </DialogClose>
+        <Button variant="destructive">Delete</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</ComponentPreview>
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button variant="destructive">Delete Item</Button>
+  </DialogTrigger>
+  <DialogContent size="sm">
+    <DialogHeader>
+      <DialogTitle>Confirm Deletion</DialogTitle>
+      <DialogDescription>
+        Are you sure you want to delete this item? This action cannot be undone.
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="outline">Cancel</Button>
+      </DialogClose>
+      <Button variant="destructive" onClick={handleDelete}>
+        Delete
+      </Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+### Form Dialog
+
+<ComponentPreview>
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button>Edit Profile</Button>
+    </DialogTrigger>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Edit Profile</DialogTitle>
+        <DialogDescription>
+          Make changes to your profile information below.
+        </DialogDescription>
+      </DialogHeader>
+      <div className="grid gap-4 py-4">
+        <div className="grid gap-2">
+          <label htmlFor="name" className="text-sm font-medium">Name</label>
+          <Input id="name" placeholder="Enter your name" />
+        </div>
+        <div className="grid gap-2">
+          <label htmlFor="email" className="text-sm font-medium">Email</label>
+          <Input id="email" type="email" placeholder="Enter your email" />
+        </div>
+      </div>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="outline">Cancel</Button>
+        </DialogClose>
+        <Button>Save Changes</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</ComponentPreview>
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Edit Profile</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Edit Profile</DialogTitle>
+      <DialogDescription>
+        Make changes to your profile information below.
+      </DialogDescription>
+    </DialogHeader>
+    <form onSubmit={handleSubmit}>
+      <div className="grid gap-4 py-4">
+        <div className="grid gap-2">
+          <label htmlFor="name">Name</label>
+          <Input id="name" placeholder="Enter your name" />
+        </div>
+        <div className="grid gap-2">
+          <label htmlFor="email">Email</label>
+          <Input id="email" type="email" placeholder="Enter your email" />
+        </div>
+      </div>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="outline" type="button">Cancel</Button>
+        </DialogClose>
+        <Button type="submit">Save Changes</Button>
+      </DialogFooter>
+    </form>
+  </DialogContent>
+</Dialog>
+```
+
+### Alert Dialog
+
+<ComponentPreview>
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button variant="warning">Session Warning</Button>
+    </DialogTrigger>
+    <DialogContent position="top-center" size="sm">
+      <DialogHeader>
+        <DialogTitle>Session Expiring</DialogTitle>
+        <DialogDescription>
+          Your session will expire in 5 minutes. Would you like to extend it?
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="ghost">Logout</Button>
+        </DialogClose>
+        <Button variant="warning">Extend Session</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</ComponentPreview>
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button variant="warning">Session Warning</Button>
+  </DialogTrigger>
+  <DialogContent position="top-center" size="sm">
+    <DialogHeader>
+      <DialogTitle>Session Expiring</DialogTitle>
+      <DialogDescription>
+        Your session will expire in 5 minutes.
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="ghost">Logout</Button>
+      </DialogClose>
+      <Button variant="warning" onClick={handleExtend}>
+        Extend Session
+      </Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+### Information Dialog
+
+<ComponentPreview>
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button variant="info">View Details</Button>
+    </DialogTrigger>
+    <DialogContent size="lg">
+      <DialogHeader>
+        <DialogTitle>System Information</DialogTitle>
+        <DialogDescription>
+          Current system status and configuration details.
+        </DialogDescription>
+      </DialogHeader>
+      <div className="grid gap-2 py-4 text-sm font-mono">
+        <div className="flex justify-between border-b border-border pb-2">
+          <span className="text-subtext0">Version</span>
+          <span className="text-text">1.0.0</span>
+        </div>
+        <div className="flex justify-between border-b border-border pb-2">
+          <span className="text-subtext0">Status</span>
+          <span className="text-green">Online</span>
+        </div>
+        <div className="flex justify-between border-b border-border pb-2">
+          <span className="text-subtext0">Uptime</span>
+          <span className="text-text">12h 34m</span>
+        </div>
+      </div>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button>Close</Button>
+        </DialogClose>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</ComponentPreview>
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button variant="info">View Details</Button>
+  </DialogTrigger>
+  <DialogContent size="lg">
+    <DialogHeader>
+      <DialogTitle>System Information</DialogTitle>
+      <DialogDescription>
+        Current system status and configuration details.
+      </DialogDescription>
+    </DialogHeader>
+    <div className="grid gap-2 py-4 text-sm font-mono">
+      <div className="flex justify-between">
+        <span>Version</span>
+        <span>1.0.0</span>
+      </div>
+      <div className="flex justify-between">
+        <span>Status</span>
+        <span className="text-green">Online</span>
+      </div>
+    </div>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button>Close</Button>
+      </DialogClose>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+### Full Screen Dialog
+
+<ComponentPreview>
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button variant="secondary">Full Screen</Button>
+    </DialogTrigger>
+    <DialogContent size="full">
+      <DialogHeader>
+        <DialogTitle>Full Screen Editor</DialogTitle>
+        <DialogDescription>
+          A full-screen dialog for immersive editing experiences.
+        </DialogDescription>
+      </DialogHeader>
+      <div className="flex-1 min-h-[300px] bg-mantle rounded border border-border p-4">
+        <p className="text-sm text-subtext0 font-mono">// Your content here...</p>
+      </div>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="outline">Cancel</Button>
+        </DialogClose>
+        <Button>Save</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</ComponentPreview>
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button variant="secondary">Full Screen</Button>
+  </DialogTrigger>
+  <DialogContent size="full">
+    <DialogHeader>
+      <DialogTitle>Full Screen Editor</DialogTitle>
+      <DialogDescription>
+        A full-screen dialog for immersive editing experiences.
+      </DialogDescription>
+    </DialogHeader>
+    <div className="flex-1 min-h-[300px]">
+      {/* Full screen content */}
+    </div>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="outline">Cancel</Button>
+      </DialogClose>
+      <Button>Save</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+## API Reference
+
+### Dialog Props
+
+The root Dialog component from Radix UI:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | `undefined` | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Default open state for uncontrolled usage |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Callback when open state changes |
+| `modal` | `boolean` | `true` | Whether to render as a modal |
+
+### DialogContent Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `position` | `"center" \| "top-left" \| "top-center" \| "top-right" \| "center-left" \| "center-right" \| "bottom-left" \| "bottom-center" \| "bottom-right"` | `"center"` | Position of the dialog on screen |
+| `size` | `"sm" \| "default" \| "lg" \| "xl" \| "full"` | `"default"` | Size of the dialog |
+| `elevation` | `"flat" \| "raised"` | `"flat"` | Shadow style - flat (no shadow) or raised (3D shadow effect) |
+| `showCloseButton` | `boolean` | `true` | Whether to show the close button |
+| `className` | `string` | `undefined` | Additional CSS classes to apply |
+| ...rest | `DialogPrimitive.Content` props | - | All Radix dialog content props |
+
+### DialogHeader Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `undefined` | Additional CSS classes to apply |
+| ...rest | `HTMLDivElement` attributes | - | All standard div attributes |
+
+### DialogFooter Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `undefined` | Additional CSS classes to apply |
+| ...rest | `HTMLDivElement` attributes | - | All standard div attributes |
+
+### DialogTitle Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `undefined` | Additional CSS classes to apply |
+| ...rest | `DialogPrimitive.Title` props | - | All Radix dialog title props |
+
+### DialogDescription Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `undefined` | Additional CSS classes to apply |
+| ...rest | `DialogPrimitive.Description` props | - | All Radix dialog description props |
+
+### Type Definitions
+
+```typescript
+import { VariantProps } from "class-variance-authority";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+
+export interface DialogContentProps
+  extends React.ComponentProps<typeof DialogPrimitive.Content>,
+    VariantProps<typeof dialogContentVariants> {
+  showCloseButton?: boolean;
+}
+
+// Exported sub-components
+export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+  dialogContentVariants,
+};
+```
+
+## Styling and Customization
+
+### Custom Styles
+
+You can extend the dialog with custom styles using the `className` prop:
+
+```tsx
+<DialogContent className="bg-crust border-mauve">
+  Custom styled dialog
+</DialogContent>
+
+<DialogHeader className="bg-surface0">
+  Custom header background
+</DialogHeader>
+
+<DialogFooter className="justify-center">
+  Centered footer actions
+</DialogFooter>
+```
+
+### Theme Integration
+
+The Dialog component uses CSS variables from the TermCN theme system:
+
+- `--crust` - Overlay background with 80% opacity
+- `--base` - Dialog content background
+- `--text` - Primary text color
+- `--subtext0` - Secondary text color
+- `--border` - Border color
+- `--surface0` - Shadow color for 3D effect
+- `--mantle` - Header and footer background
+- `--mauve` - Focus ring color
+
+### Extending Variants
+
+To add custom position, size, or elevation variants, modify the `dialogContentVariants` CVA definition:
+
+```typescript
+const dialogContentVariants = cva(
+  // Base styles
+  [...],
+  {
+    variants: {
+      position: {
+        // ... existing positions
+        custom: "top-20 left-20",
+      },
+      size: {
+        // ... existing sizes
+        custom: "w-[500px] max-w-none p-8",
+      },
+      elevation: {
+        // ... existing elevations
+        floating: "shadow-lg shadow-primary/20",
+      },
+    },
+  }
+);
+```
+
+## Accessibility
+
+### Keyboard Navigation
+
+- **Tab**: Move focus between focusable elements within the dialog
+- **Shift + Tab**: Move focus backwards
+- **Escape**: Close the dialog
+- **Enter**: Activate focused button
+
+### Focus Management
+
+The dialog automatically:
+- Traps focus within the dialog when open
+- Returns focus to the trigger element when closed
+- Focuses the first focusable element on open
+
+### ARIA Attributes
+
+```tsx
+{/* The dialog automatically provides proper ARIA attributes */}
+<Dialog>
+  <DialogTrigger aria-haspopup="dialog">
+    Open
+  </DialogTrigger>
+  <DialogContent role="dialog" aria-modal="true">
+    <DialogTitle id="dialog-title">Title</DialogTitle>
+    <DialogDescription id="dialog-description">
+      Description
+    </DialogDescription>
+  </DialogContent>
+</Dialog>
+
+{/* For alert dialogs */}
+<DialogContent role="alertdialog">
+  <DialogTitle>Warning</DialogTitle>
+</DialogContent>
+```
+
+### Screen Reader Support
+
+- `DialogTitle` is announced as the dialog's accessible name
+- `DialogDescription` is announced as the dialog's accessible description
+- Close button includes `sr-only` text for screen readers
+
+## Best Practices
+
+### When to Use Dialogs
+
+**Good Use Cases:**
+- Confirmation prompts for destructive actions
+- Form inputs that require focused attention
+- Important alerts or warnings
+- Multi-step wizards or flows
+- Media viewers or lightboxes
+- Settings panels
+
+**Avoid Using Dialogs For:**
+- Simple notifications (use toasts instead)
+- Non-critical information (use inline content)
+- Frequent actions that interrupt workflow
+- Content that should be bookmarkable/shareable
+- Mobile navigation (use sheets/drawers instead)
+
+### Design Guidelines
+
+1. **Keep dialogs focused**: One primary action per dialog
+2. **Provide clear actions**: Use descriptive button labels ("Save Changes" not "OK")
+3. **Use appropriate sizes**: Match dialog size to content complexity
+4. **Consider position**: Use corner positions for non-blocking alerts
+5. **Include escape routes**: Always provide a way to dismiss the dialog
+6. **Maintain hierarchy**: Primary action should be visually prominent
+
+## Design Details
+
+### 3D Shadow Effect Breakdown
+
+The terminal aesthetic is achieved through a combination of bold borders and optional offset shadows:
+
+**Default State (flat):**
+- 2px solid border
+- No shadow
+- Sharp corners (0px border-radius)
+- Monospace font throughout
+
+**Raised State:**
+- 2px solid border
+- 0.5rem offset shadow (8px right, 8px down) using background2 color
+- Sharp corners (0px border-radius)
+- Monospace font throughout
+
+**Visual Structure:**
+```css
+/* Flat (default) */
+border: 2px solid var(--border);
+background: var(--background);
+
+/* Raised */
+border: 2px solid var(--border);
+background: var(--background);
+box-shadow: 0.5rem 0.5rem 0 0 var(--background2);
+```
+
+### Overlay Design
+
+The overlay uses a frosted glass effect:
+- Background: `crust` color at 80% opacity
+- Backdrop blur: `backdrop-blur-sm`
+- Smooth fade animation on open/close
+
+### Animation Details
+
+```css
+/* Open state */
+data-[state=open]:animate-in
+data-[state=open]:fade-in-0
+data-[state=open]:zoom-in-95
+
+/* Close state */
+data-[state=closed]:animate-out
+data-[state=closed]:fade-out-0
+data-[state=closed]:zoom-out-95
+
+/* Duration */
+duration-200
+```
+
+## Related Components
+
+- **AlertDialog**: For blocking confirmations that require user response
+- **Sheet**: For slide-out panels from screen edges
+- **Drawer**: For mobile-friendly bottom sheets
+- **Popover**: For non-modal floating content
+- **Modal**: Alternative naming for dialog pattern
+
+## Examples Gallery
+
+### Multi-Step Wizard
+
+```tsx
+const [step, setStep] = useState(1);
+
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Start Wizard</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Step {step} of 3</DialogTitle>
+      <DialogDescription>
+        {step === 1 && "Enter your basic information"}
+        {step === 2 && "Configure your preferences"}
+        {step === 3 && "Review and confirm"}
+      </DialogDescription>
+    </DialogHeader>
+    <div className="py-4">
+      {/* Step content */}
+    </div>
+    <DialogFooter>
+      {step > 1 && (
+        <Button variant="outline" onClick={() => setStep(s => s - 1)}>
+          Previous
+        </Button>
+      )}
+      {step < 3 ? (
+        <Button onClick={() => setStep(s => s + 1)}>Next</Button>
+      ) : (
+        <Button onClick={handleComplete}>Complete</Button>
+      )}
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+### Controlled Dialog
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<Dialog open={open} onOpenChange={setOpen}>
+  <DialogTrigger asChild>
+    <Button>Controlled Dialog</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Controlled State</DialogTitle>
+    </DialogHeader>
+    <Button onClick={() => setOpen(false)}>
+      Close Programmatically
+    </Button>
+  </DialogContent>
+</Dialog>
+```
+
+### Notification Style Dialog
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button variant="info" size="sm">Show Notification</Button>
+  </DialogTrigger>
+  <DialogContent position="bottom-right" size="sm" showCloseButton={false}>
+    <DialogHeader>
+      <DialogTitle>New Message</DialogTitle>
+      <DialogDescription>
+        You have a new message from the system.
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button size="sm">Dismiss</Button>
+      </DialogClose>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+### Image Preview Dialog
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <img
+      src="/thumbnail.jpg"
+      alt="Preview"
+      className="cursor-pointer hover:opacity-80"
+    />
+  </DialogTrigger>
+  <DialogContent size="xl" className="p-0">
+    <img
+      src="/full-image.jpg"
+      alt="Full size"
+      className="w-full h-auto"
+    />
+  </DialogContent>
+</Dialog>
+```
+
+## Performance
+
+The Dialog component is optimized for performance:
+- Portal rendering prevents layout thrashing
+- Lazy mounting - content only renders when open
+- Minimal JavaScript footprint (~5KB including Radix)
+- CSS-based animations with hardware acceleration
+- Server-side rendering compatible
+
+## Troubleshooting
+
+### Dialog not opening
+
+Ensure the trigger has proper event handling:
+
+```tsx
+{/* Make sure to use asChild with a valid button element */}
+<DialogTrigger asChild>
+  <Button>Open</Button>
+</DialogTrigger>
+```
+
+### Focus not being trapped
+
+Check if there are focusable elements outside the dialog that might interfere:
+
+```tsx
+{/* Ensure modal prop is true (default) */}
+<Dialog modal={true}>
+  {/* ... */}
+</Dialog>
+```
+
+### Animation not working
+
+Verify Tailwind CSS animate utilities are configured:
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      animation: {
+        "fade-in": "fade-in 0.2s ease-out",
+        "zoom-in": "zoom-in 0.2s ease-out",
+      },
+    },
+  },
+}
+```
+
+### Z-index conflicts
+
+The dialog uses `z-50` by default. Adjust if needed:
+
+```tsx
+<DialogContent className="z-[100]">
+  Higher z-index content
+</DialogContent>
+```
+
+## Migration Guide
+
+### From shadcn/ui Dialog
+
+The TermCN Dialog is compatible with shadcn/ui but adds position and size variants:
+
+```diff
+  import {
+    Dialog,
+    DialogTrigger,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
++   DialogFooter,
+  } from "@/components/ui/dialog";
+
+  // Basic usage remains the same
+  <Dialog>
+    <DialogTrigger>Open</DialogTrigger>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Title</DialogTitle>
+      </DialogHeader>
+    </DialogContent>
+  </Dialog>
+
+  // New features in TermCN
++ <DialogContent position="top-center">Positioned dialog</DialogContent>
++ <DialogContent size="lg">Large dialog</DialogContent>
++ <DialogContent elevation="raised">With 3D shadow</DialogContent>
++ <DialogContent showCloseButton={false}>No close button</DialogContent>
++ <DialogFooter>Footer with actions</DialogFooter>
+
+  // Visual differences
+  // - Optional 3D shadow effect with elevation="raised"
+  // - Monospace font throughout
+  // - Sharp corners instead of rounded
+  // - Header/footer with distinct background
+```
+
+## Changelog
+
+### Version 1.1.0
+- Added `elevation` variant with `flat` (default) and `raised` options
+- 3D shadow effect is now opt-in via `elevation="raised"`
+
+### Version 1.0.0
+- Initial release
+- 9 position variants for flexible placement
+- 5 size options (sm, default, lg, xl, full)
+- Frosted glass overlay effect
+- DialogHeader and DialogFooter sub-components
+- Optional close button with showCloseButton prop
+- Full TypeScript support
+- Built on Radix UI Dialog primitive
+- Comprehensive accessibility features
+
+## License
+
+MIT License - Part of the TermCN component library.
+
+## Contributing
+
+Contributions are welcome! Please read the contributing guidelines before submitting PRs.
+
+---
+
+**Keywords**: dialog, modal, overlay, popup, window, alert, confirm, form, terminal, retro, 3d, shadow, accessible, focus trap, keyboard navigation, TypeScript, React, Tailwind CSS, Radix UI, component, UI, TermCN

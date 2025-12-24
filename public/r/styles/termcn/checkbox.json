@@ -1,0 +1,14 @@
+{
+  "name": "checkbox",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "ui/checkbox.tsx",
+      "content": "import * as React from \"react\"\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Checkbox({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof CheckboxPrimitive.Root>) {\n\treturn (\n\t\t<CheckboxPrimitive.Root\n\t\t\tdata-slot=\"checkbox\"\n\t\t\tclassName={cn(\n\t\t\t\t\"peer group relative inline-flex items-center justify-center\",\n\t\t\t\t\"w-[3ch] h-lh min-w-0\",\n\t\t\t\t\"appearance-none outline-none\",\n\t\t\t\t\"font-mono text-sm leading-normal\",\n\t\t\t\t\"text-foreground/60 bg-background\",\n\t\t\t\t\"focus-visible:text-foreground focus-visible:font-bold\",\n\t\t\t\t\"disabled:text-foreground/40 disabled:pointer-events-none\",\n\t\t\t\tclassName\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t<span className=\"select-none\">[</span>\n\t\t\t<span className=\"inline-flex w-[1ch] items-center justify-center\">\n\t\t\t\t<CheckboxPrimitive.Indicator\n\t\t\t\t\tdata-slot=\"checkbox-indicator\"\n\t\t\t\t\tclassName=\"inline-flex items-center justify-center text-current\"\n\t\t\t\t>\n\t\t\t\t\t<span className=\"select-none\">X</span>\n\t\t\t\t</CheckboxPrimitive.Indicator>\n\t\t\t</span>\n\t\t\t<span className=\"select-none\">]</span>\n\t\t</CheckboxPrimitive.Root>\n\t)\n}\n\nexport { Checkbox }\n",
+      "type": "registry:ui",
+      "target": "components/ui/checkbox.tsx"
+    }
+  ]
+}

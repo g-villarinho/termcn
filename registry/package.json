@@ -1,0 +1,39 @@
+{
+  "name": "termcn-registry",
+  "version": "1.0.0",
+  "description": "Terminal-inspired shadcn/ui component registry",
+  "author": "Gabriel Villarinho",
+  "license": "MIT",
+  "type": "module",
+  "keywords": [
+    "shadcn",
+    "shadcn-ui",
+    "registry",
+    "terminal",
+    "ui",
+    "components",
+    "react",
+    "tailwind",
+    "tailwindcss",
+    "ansi",
+    "terminal-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/termcn"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "tailwindcss": ">=4.0.0"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "lucide-react": "^0.545.0"
+  }
+}

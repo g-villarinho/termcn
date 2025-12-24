@@ -1,0 +1,204 @@
+[
+  {
+    "name": "alert",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority"
+    ],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/alert.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/alert.tsx"
+      }
+    ]
+  },
+  {
+    "name": "badge",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority"
+    ],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/badge.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/badge.tsx"
+      }
+    ]
+  },
+  {
+    "name": "button",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority",
+      "@radix-ui/react-slot"
+    ],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/button.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/button.tsx"
+      }
+    ]
+  },
+  {
+    "name": "card",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/card.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/card.tsx"
+      }
+    ]
+  },
+  {
+    "name": "checkbox",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/checkbox.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/checkbox.tsx"
+      }
+    ]
+  },
+  {
+    "name": "dialog",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/dialog.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/dialog.tsx"
+      }
+    ]
+  },
+  {
+    "name": "dropdown-menu",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/dropdown-menu.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/dropdown-menu.tsx"
+      }
+    ]
+  },
+  {
+    "name": "input-group",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/input-group.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/input-group.tsx"
+      }
+    ]
+  },
+  {
+    "name": "input",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/input.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/input.tsx"
+      }
+    ]
+  },
+  {
+    "name": "item",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/item.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/item.tsx"
+      }
+    ]
+  },
+  {
+    "name": "kbd",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/kbd.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/kbd.tsx"
+      }
+    ]
+  },
+  {
+    "name": "separator",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/separator.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/separator.tsx"
+      }
+    ]
+  },
+  {
+    "name": "spinner",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/spinner.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/spinner.tsx"
+      }
+    ]
+  },
+  {
+    "name": "switch",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/switch.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/switch.tsx"
+      }
+    ]
+  },
+  {
+    "name": "textarea",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/textarea.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/textarea.tsx"
+      }
+    ]
+  }
+]

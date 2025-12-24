@@ -1,0 +1,14 @@
+{
+  "name": "input",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "ui/input.tsx",
+      "content": "import * as React from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst inputVariants = cva(\n  [\n    \"w-full bg-background text-foreground placeholder:text-muted-foreground\",\n    \"border-0 outline-none\",\n    \"font-mono transition-colors\",\n    \"selection:bg-primary selection:text-primary-foreground\",\n    \"disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50\",\n    \"file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground\",\n  ],\n  {\n    variants: {\n      variant: {\n        default: \"\",\n        bordered: \"border border-border focus:border-primary\",\n      },\n      inputSize: {\n        sm: \"h-6 px-2 text-xs\",\n        default: \"h-8 px-3 text-sm\",\n        lg: \"h-10 px-4 text-base\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      inputSize: \"default\",\n    },\n  }\n)\n\nfunction Input({\n  className,\n  type,\n  variant,\n  inputSize,\n  ...props\n}: Omit<React.ComponentProps<\"input\">, \"size\"> &\n  VariantProps<typeof inputVariants>) {\n  return (\n    <input\n      type={type}\n      data-slot=\"input\"\n      className={cn(inputVariants({ variant, inputSize, className }))}\n      {...props}\n    />\n  )\n}\n\nexport { Input, inputVariants }\n",
+      "type": "registry:ui",
+      "target": "components/ui/input.tsx"
+    }
+  ]
+}

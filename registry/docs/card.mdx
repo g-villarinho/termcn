@@ -1,0 +1,873 @@
+---
+title: Card
+description: Container component with vim-inspired window decorations and terminal-style status line for organizing content.
+order: 8
+published: true
+---
+
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction, CardWindowBar, CardMode, CardBufferName, CardFileType, CardLinePosition, CardWindowControls, CardStatusLine, CardStatusSection } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+
+# Card
+
+Container component with vim-inspired window decorations and terminal-style status line for organizing content.
+
+## Overview
+
+The Card component is a versatile container designed to group and display related content in a structured format. Built with a distinctive terminal aesthetic in mind, it features composable vim-inspired window decorations, mode indicators, buffer names, and a fully-featured status line that emulates the classic vim editor interface.
+
+## Features
+
+- **Composable Architecture**: Build complex UIs by combining simple, focused components
+- **3 Visual Variants**: Default, Elevated, and Floating with progressive shadow depths
+- **3 Size Options**: Small, Default, and Large text sizing for different content densities
+- **Window Decoration Components**: CardWindowBar, CardMode, CardBufferName, CardFileType, CardLinePosition, CardWindowControls
+- **Status Line Components**: CardStatusLine and CardStatusSection for building custom status bars
+- **Terminal Aesthetics**: Monospace font, sharp borders, and theme-aware ANSI colors
+- **Fully Accessible**: Proper semantic HTML and screen reader support
+- **TypeScript Support**: Fully typed with comprehensive prop definitions
+
+## Installation
+
+```bash
+npx termcn add card
+```
+
+This will install the Card component and its dependencies into your project.
+
+## Dependencies
+
+- `class-variance-authority` - For type-safe variant management
+- `@/lib/utils` - For className merging utilities
+
+## Usage
+
+### Basic Usage
+
+<ComponentPreview>
+  <Card className="w-80">
+    <CardHeader>
+      <CardTitle>Terminal Card</CardTitle>
+      <CardDescription>A simple card with header and content.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      This is the card content area where you can place any elements.
+    </CardContent>
+  </Card>
+</ComponentPreview>
+
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+
+export default function Example() {
+  return (
+    <Card className="w-80">
+      <CardHeader>
+        <CardTitle>Terminal Card</CardTitle>
+        <CardDescription>A simple card with header and content.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        This is the card content area where you can place any elements.
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+### With Variants
+
+The Card component supports 3 visual variants that create different levels of depth:
+
+<ComponentPreview>
+  <div className="flex flex-wrap gap-4">
+    <Card variant="default" className="w-48">
+      <CardContent>Default</CardContent>
+    </Card>
+    <Card variant="elevated" className="w-48">
+      <CardContent>Elevated</CardContent>
+    </Card>
+    <Card variant="floating" className="w-48">
+      <CardContent>Floating</CardContent>
+    </Card>
+  </div>
+</ComponentPreview>
+
+```tsx
+<Card variant="default">Default</Card>
+<Card variant="elevated">Elevated</Card>
+<Card variant="floating">Floating</Card>
+```
+
+**Variant Descriptions:**
+- `default`: Flat card with no shadow - clean and minimal
+- `elevated`: Subtle 0.25rem offset shadow - slight depth perception
+- `floating`: Bold 0.5rem offset shadow - appears to hover above the surface
+
+### With Sizes
+
+Choose from three different text sizes to match your content density:
+
+<ComponentPreview>
+  <div className="flex flex-wrap gap-4">
+    <Card size="sm" className="w-48">
+      <CardContent>Small text size</CardContent>
+    </Card>
+    <Card size="default" className="w-48">
+      <CardContent>Default text size</CardContent>
+    </Card>
+    <Card size="lg" className="w-48">
+      <CardContent>Large text size</CardContent>
+    </Card>
+  </div>
+</ComponentPreview>
+
+```tsx
+<Card size="sm">Small text size</Card>
+<Card size="default">Default text size</Card>
+<Card size="lg">Large text size</Card>
+```
+
+### With Window Bar
+
+Use composable window decoration components to create vim-style title bars:
+
+<ComponentPreview>
+  <Card className="w-96">
+    <CardWindowBar>
+      <div className="flex items-center gap-2">
+        <CardMode mode="NORMAL" />
+        <CardBufferName>README.md</CardBufferName>
+      </div>
+      <div className="flex items-center gap-3">
+        <CardFileType>md</CardFileType>
+        <CardLinePosition>42,7</CardLinePosition>
+        <CardWindowControls />
+      </div>
+    </CardWindowBar>
+    <CardContent>
+      Content with vim-style title bar showing mode, buffer, and file info.
+    </CardContent>
+  </Card>
+</ComponentPreview>
+
+```tsx
+import {
+  Card,
+  CardWindowBar,
+  CardMode,
+  CardBufferName,
+  CardFileType,
+  CardLinePosition,
+  CardWindowControls,
+  CardContent
+} from "@/components/ui/card";
+
+<Card>
+  <CardWindowBar>
+    <div className="flex items-center gap-2">
+      <CardMode mode="NORMAL" />
+      <CardBufferName>README.md</CardBufferName>
+    </div>
+    <div className="flex items-center gap-3">
+      <CardFileType>md</CardFileType>
+      <CardLinePosition>42,7</CardLinePosition>
+      <CardWindowControls />
+    </div>
+  </CardWindowBar>
+  <CardContent>
+    Content with vim-style title bar.
+  </CardContent>
+</Card>
+```
+
+### Mode Variants
+
+The CardMode component supports different vim modes with color-coded indicators:
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4">
+    <Card className="w-80">
+      <CardWindowBar>
+        <CardMode mode="NORMAL" />
+        <CardBufferName>app.tsx</CardBufferName>
+      </CardWindowBar>
+      <CardContent>NORMAL mode - Blue indicator</CardContent>
+    </Card>
+    <Card className="w-80">
+      <CardWindowBar>
+        <CardMode mode="INSERT" />
+        <CardBufferName>app.tsx</CardBufferName>
+      </CardWindowBar>
+      <CardContent>INSERT mode - Green indicator</CardContent>
+    </Card>
+    <Card className="w-80">
+      <CardWindowBar>
+        <CardMode mode="VISUAL" />
+        <CardBufferName>app.tsx</CardBufferName>
+      </CardWindowBar>
+      <CardContent>VISUAL mode - Magenta indicator</CardContent>
+    </Card>
+    <Card className="w-80">
+      <CardWindowBar>
+        <CardMode mode="COMMAND" />
+        <CardBufferName>app.tsx</CardBufferName>
+      </CardWindowBar>
+      <CardContent>COMMAND mode - Yellow indicator</CardContent>
+    </Card>
+  </div>
+</ComponentPreview>
+
+```tsx
+<Card>
+  <CardWindowBar>
+    <CardMode mode="NORMAL" />
+  </CardWindowBar>
+</Card>
+
+<Card>
+  <CardWindowBar>
+    <CardMode mode="INSERT" />
+  </CardWindowBar>
+</Card>
+
+<Card>
+  <CardWindowBar>
+    <CardMode mode="VISUAL" />
+  </CardWindowBar>
+</Card>
+
+<Card>
+  <CardWindowBar>
+    <CardMode mode="COMMAND" />
+  </CardWindowBar>
+</Card>
+```
+
+### With Status Line
+
+Use CardStatusLine with CardStatusSection for a composable vim-style status bar:
+
+<ComponentPreview>
+  <Card className="w-96">
+    <CardContent className="h-24">
+      File content goes here...
+    </CardContent>
+    <CardStatusLine>
+      <CardStatusSection variant="mode" modeColor="blue">NORMAL</CardStatusSection>
+      <CardStatusSection variant="buffer">
+        <CardBufferName>config.lua</CardBufferName>
+      </CardStatusSection>
+      <CardStatusSection variant="spacer" />
+      <CardStatusSection variant="info">
+        <CardFileType>lua</CardFileType>
+      </CardStatusSection>
+      <CardStatusSection variant="mode" modeColor="blue">127,15</CardStatusSection>
+      <CardStatusSection variant="position">45%</CardStatusSection>
+    </CardStatusLine>
+  </Card>
+</ComponentPreview>
+
+```tsx
+import {
+  Card,
+  CardContent,
+  CardStatusLine,
+  CardStatusSection,
+  CardBufferName,
+  CardFileType
+} from "@/components/ui/card";
+
+<Card>
+  <CardContent className="h-24">
+    File content goes here...
+  </CardContent>
+  <CardStatusLine>
+    <CardStatusSection variant="mode" modeColor="blue">NORMAL</CardStatusSection>
+    <CardStatusSection variant="buffer">
+      <CardBufferName>config.lua</CardBufferName>
+    </CardStatusSection>
+    <CardStatusSection variant="spacer" />
+    <CardStatusSection variant="info">
+      <CardFileType>lua</CardFileType>
+    </CardStatusSection>
+    <CardStatusSection variant="mode" modeColor="blue">127,15</CardStatusSection>
+    <CardStatusSection variant="position">45%</CardStatusSection>
+  </CardStatusLine>
+</Card>
+```
+
+### Status Line with Modified/Readonly Indicators
+
+<ComponentPreview>
+  <div className="flex flex-col gap-4">
+    <Card className="w-96">
+      <CardContent>Modified file content...</CardContent>
+      <CardStatusLine>
+        <CardStatusSection variant="mode" modeColor="green">INSERT</CardStatusSection>
+        <CardStatusSection variant="buffer">
+          <CardBufferName modified>document.md</CardBufferName>
+        </CardStatusSection>
+        <CardStatusSection variant="spacer" />
+        <CardStatusSection variant="info">
+          <CardFileType>md</CardFileType>
+        </CardStatusSection>
+        <CardStatusSection variant="mode" modeColor="green">1,1</CardStatusSection>
+        <CardStatusSection variant="position">Top</CardStatusSection>
+      </CardStatusLine>
+    </Card>
+    <Card className="w-96">
+      <CardContent>Readonly file content...</CardContent>
+      <CardStatusLine>
+        <CardStatusSection variant="mode" modeColor="blue">NORMAL</CardStatusSection>
+        <CardStatusSection variant="buffer">
+          <CardBufferName readonly>/etc/passwd</CardBufferName>
+        </CardStatusSection>
+        <CardStatusSection variant="spacer" />
+        <CardStatusSection variant="info">
+          <CardFileType>conf</CardFileType>
+        </CardStatusSection>
+        <CardStatusSection variant="mode" modeColor="blue">1,1</CardStatusSection>
+        <CardStatusSection variant="position">All</CardStatusSection>
+      </CardStatusLine>
+    </Card>
+  </div>
+</ComponentPreview>
+
+```tsx
+<Card>
+  <CardStatusLine>
+    <CardStatusSection variant="mode" modeColor="green">INSERT</CardStatusSection>
+    <CardStatusSection variant="buffer">
+      <CardBufferName modified>document.md</CardBufferName>
+    </CardStatusSection>
+    <CardStatusSection variant="spacer" />
+  </CardStatusLine>
+</Card>
+
+<Card>
+  <CardStatusLine>
+    <CardStatusSection variant="mode" modeColor="blue">NORMAL</CardStatusSection>
+    <CardStatusSection variant="buffer">
+      <CardBufferName readonly>/etc/passwd</CardBufferName>
+    </CardStatusSection>
+    <CardStatusSection variant="spacer" />
+  </CardStatusLine>
+</Card>
+```
+
+### With Header, Footer, and Actions
+
+<ComponentPreview>
+  <Card className="w-80">
+    <CardHeader>
+      <div className="flex items-center justify-between">
+        <CardTitle>Project Settings</CardTitle>
+        <CardAction>
+          <Badge variant="muted">Beta</Badge>
+        </CardAction>
+      </div>
+      <CardDescription>Configure your project preferences.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <p>Adjust settings for build output, linting, and formatting.</p>
+    </CardContent>
+    <CardFooter>
+      <Button variant="outline" size="sm">Cancel</Button>
+      <Button size="sm">Save</Button>
+    </CardFooter>
+  </Card>
+</ComponentPreview>
+
+```tsx
+<Card>
+  <CardHeader>
+    <div className="flex items-center justify-between">
+      <CardTitle>Project Settings</CardTitle>
+      <CardAction>
+        <Badge variant="muted">Beta</Badge>
+      </CardAction>
+    </div>
+    <CardDescription>Configure your project preferences.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <p>Adjust settings for build output, linting, and formatting.</p>
+  </CardContent>
+  <CardFooter>
+    <Button variant="outline" size="sm">Cancel</Button>
+    <Button size="sm">Save</Button>
+  </CardFooter>
+</Card>
+```
+
+## Common Use Cases
+
+### Code Editor Window
+
+<ComponentPreview>
+  <Card variant="elevated" className="w-full max-w-lg">
+    <CardWindowBar>
+      <div className="flex items-center gap-2">
+        <CardMode mode="NORMAL" />
+        <CardBufferName>index.tsx</CardBufferName>
+      </div>
+      <div className="flex items-center gap-3">
+        <CardFileType>tsx</CardFileType>
+        <CardLinePosition>1,1</CardLinePosition>
+        <CardWindowControls />
+      </div>
+    </CardWindowBar>
+    <CardContent className="font-mono text-xs bg-background p-0">
+      <pre className="p-4 text-foreground">
+{`import React from 'react'
+
+export function App() {
+  return <div>Hello World</div>
+}`}
+      </pre>
+    </CardContent>
+    <CardStatusLine>
+      <CardStatusSection variant="mode" modeColor="blue">NORMAL</CardStatusSection>
+      <CardStatusSection variant="buffer">
+        <CardBufferName>index.tsx</CardBufferName>
+      </CardStatusSection>
+      <CardStatusSection variant="spacer" />
+      <CardStatusSection variant="info">
+        <CardFileType>tsx</CardFileType>
+      </CardStatusSection>
+      <CardStatusSection variant="mode" modeColor="blue">1,1</CardStatusSection>
+      <CardStatusSection variant="position">Top</CardStatusSection>
+    </CardStatusLine>
+  </Card>
+</ComponentPreview>
+
+```tsx
+<Card variant="elevated">
+  <CardWindowBar>
+    <div className="flex items-center gap-2">
+      <CardMode mode="NORMAL" />
+      <CardBufferName>index.tsx</CardBufferName>
+    </div>
+    <div className="flex items-center gap-3">
+      <CardFileType>tsx</CardFileType>
+      <CardLinePosition>1,1</CardLinePosition>
+      <CardWindowControls />
+    </div>
+  </CardWindowBar>
+  <CardContent className="font-mono text-xs bg-background p-0">
+    <pre className="p-4">{code}</pre>
+  </CardContent>
+  <CardStatusLine>
+    <CardStatusSection variant="mode" modeColor="blue">NORMAL</CardStatusSection>
+    <CardStatusSection variant="buffer">
+      <CardBufferName>index.tsx</CardBufferName>
+    </CardStatusSection>
+    <CardStatusSection variant="spacer" />
+    <CardStatusSection variant="info">
+      <CardFileType>tsx</CardFileType>
+    </CardStatusSection>
+    <CardStatusSection variant="mode" modeColor="blue">1,1</CardStatusSection>
+    <CardStatusSection variant="position">Top</CardStatusSection>
+  </CardStatusLine>
+</Card>
+```
+
+### Dashboard Widget
+
+<ComponentPreview>
+  <Card variant="elevated" className="w-64">
+    <CardHeader>
+      <CardTitle>System Status</CardTitle>
+      <CardDescription>Current resource usage</CardDescription>
+    </CardHeader>
+    <CardContent className="space-y-2">
+      <div className="flex justify-between">
+        <span>CPU</span>
+        <span className="text-ansi-green">23%</span>
+      </div>
+      <div className="flex justify-between">
+        <span>Memory</span>
+        <span className="text-ansi-yellow">67%</span>
+      </div>
+      <div className="flex justify-between">
+        <span>Disk</span>
+        <span className="text-ansi-red">89%</span>
+      </div>
+    </CardContent>
+  </Card>
+</ComponentPreview>
+
+```tsx
+<Card variant="elevated">
+  <CardHeader>
+    <CardTitle>System Status</CardTitle>
+    <CardDescription>Current resource usage</CardDescription>
+  </CardHeader>
+  <CardContent className="space-y-2">
+    <div className="flex justify-between">
+      <span>CPU</span>
+      <span className="text-ansi-green">23%</span>
+    </div>
+    <div className="flex justify-between">
+      <span>Memory</span>
+      <span className="text-ansi-yellow">67%</span>
+    </div>
+    <div className="flex justify-between">
+      <span>Disk</span>
+      <span className="text-ansi-red">89%</span>
+    </div>
+  </CardContent>
+</Card>
+```
+
+### Terminal Output
+
+<ComponentPreview>
+  <Card variant="floating" className="w-full max-w-md">
+    <CardHeader className="py-2">
+      <CardTitle className="text-sm">~/projects/termcn</CardTitle>
+    </CardHeader>
+    <CardContent className="font-mono text-xs space-y-1 bg-background">
+      <p><span className="text-ansi-green">$</span> pnpm build</p>
+      <p className="text-muted-foreground">Building for production...</p>
+      <p className="text-ansi-cyan">127 modules transformed</p>
+      <p className="text-ansi-green">Built in 2.34s</p>
+    </CardContent>
+  </Card>
+</ComponentPreview>
+
+```tsx
+<Card variant="floating">
+  <CardHeader className="py-2">
+    <CardTitle className="text-sm">~/projects/termcn</CardTitle>
+  </CardHeader>
+  <CardContent className="font-mono text-xs space-y-1 bg-background">
+    <p><span className="text-ansi-green">$</span> pnpm build</p>
+    <p className="text-muted-foreground">Building for production...</p>
+    <p className="text-ansi-cyan">127 modules transformed</p>
+    <p className="text-ansi-green">Built in 2.34s</p>
+  </CardContent>
+</Card>
+```
+
+### Notification Card
+
+<ComponentPreview>
+  <Card variant="elevated" className="w-80">
+    <CardHeader className="pb-2">
+      <div className="flex items-center justify-between">
+        <CardTitle className="text-sm">New Message</CardTitle>
+        <Badge variant="emphasis" cap="round">1</Badge>
+      </div>
+    </CardHeader>
+    <CardContent className="pt-0">
+      <p className="text-sm text-muted-foreground">
+        You have a new pull request waiting for review.
+      </p>
+    </CardContent>
+    <CardFooter className="pt-2">
+      <Button variant="ghost" size="sm">Dismiss</Button>
+      <Button size="sm">View</Button>
+    </CardFooter>
+  </Card>
+</ComponentPreview>
+
+```tsx
+<Card variant="elevated">
+  <CardHeader className="pb-2">
+    <div className="flex items-center justify-between">
+      <CardTitle className="text-sm">New Message</CardTitle>
+      <Badge variant="emphasis" cap="round">1</Badge>
+    </div>
+  </CardHeader>
+  <CardContent className="pt-0">
+    <p className="text-sm text-muted-foreground">
+      You have a new pull request waiting for review.
+    </p>
+  </CardContent>
+  <CardFooter className="pt-2">
+    <Button variant="ghost" size="sm">Dismiss</Button>
+    <Button size="sm">View</Button>
+  </CardFooter>
+</Card>
+```
+
+### Profile Card
+
+<ComponentPreview>
+  <Card className="w-72">
+    <CardHeader>
+      <div className="flex items-center gap-3">
+        <div className="w-12 h-12 rounded-none bg-ansi-blue flex items-center justify-center text-background font-bold">
+          JD
+        </div>
+        <div>
+          <CardTitle>John Doe</CardTitle>
+          <CardDescription>@johndoe</CardDescription>
+        </div>
+      </div>
+    </CardHeader>
+    <CardContent>
+      <p className="text-sm">Full-stack developer. Terminal enthusiast. Vim user.</p>
+    </CardContent>
+    <CardFooter>
+      <Button variant="outline" size="sm" className="flex-1">Message</Button>
+      <Button size="sm" className="flex-1">Follow</Button>
+    </CardFooter>
+  </Card>
+</ComponentPreview>
+
+```tsx
+<Card>
+  <CardHeader>
+    <div className="flex items-center gap-3">
+      <div className="w-12 h-12 bg-ansi-blue flex items-center justify-center text-background font-bold">
+        JD
+      </div>
+      <div>
+        <CardTitle>John Doe</CardTitle>
+        <CardDescription>@johndoe</CardDescription>
+      </div>
+    </div>
+  </CardHeader>
+  <CardContent>
+    <p className="text-sm">Full-stack developer. Terminal enthusiast.</p>
+  </CardContent>
+  <CardFooter>
+    <Button variant="outline" size="sm" className="flex-1">Message</Button>
+    <Button size="sm" className="flex-1">Follow</Button>
+  </CardFooter>
+</Card>
+```
+
+## API Reference
+
+### Card Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "elevated" \| "floating"` | `"default"` | The shadow depth variant |
+| `size` | `"sm" \| "default" \| "lg"` | `"default"` | The text size variant |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `children` | `React.ReactNode` | `undefined` | Card content |
+
+### CardWindowBar Props
+
+Container for window decorations. Extends `React.ComponentProps<"div">`.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `children` | `React.ReactNode` | `undefined` | Window bar content |
+
+### CardMode Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `mode` | `"NORMAL" \| "INSERT" \| "VISUAL" \| "COMMAND"` | `"NORMAL"` | Vim mode |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `children` | `React.ReactNode` | `undefined` | Custom content (overrides mode text) |
+
+### CardBufferName Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `modified` | `boolean` | `false` | Show [+] indicator |
+| `readonly` | `boolean` | `false` | Show [RO] indicator |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `children` | `React.ReactNode` | `undefined` | Buffer/file name |
+
+### CardFileType Props
+
+Extends `React.ComponentProps<"span">`. Renders file type in cyan.
+
+### CardLinePosition Props
+
+Extends `React.ComponentProps<"span">`. Renders line position in muted color.
+
+### CardWindowControls Props
+
+Extends `React.ComponentProps<"div">`. Renders macOS-style colored dots.
+
+### CardStatusLine Props
+
+Container for status line sections. Extends `React.ComponentProps<"div">`.
+
+### CardStatusSection Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"mode" \| "buffer" \| "spacer" \| "info" \| "position"` | `"info"` | Section variant |
+| `modeColor` | `"default" \| "blue" \| "green" \| "magenta" \| "yellow" \| "cyan"` | `"default"` | Background color |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `children` | `React.ReactNode` | `undefined` | Section content |
+
+### Core Sub-components
+
+| Component | Description |
+|-----------|-------------|
+| `CardHeader` | Header section with bottom border and background |
+| `CardTitle` | Title text with semibold styling |
+| `CardDescription` | Description text in muted color |
+| `CardContent` | Main content area with padding |
+| `CardFooter` | Footer section with top border and background |
+| `CardAction` | Container for header actions (auto-aligns right) |
+
+## Styling and Customization
+
+### Custom Styles
+
+You can extend the card with custom styles using the `className` prop:
+
+```tsx
+<Card className="w-full max-w-md">Full Width Card</Card>
+<Card className="bg-ansi-blue/10 border-ansi-blue">Colored Card</Card>
+<Card className="hover:border-primary transition-colors">Interactive Card</Card>
+```
+
+### Theme Integration
+
+The Card component uses CSS variables from the TermCN theme system:
+
+- `--card` / `--card-foreground` - Card background and text
+- `--background` / `--background1` / `--background2` / `--background3` - Layer backgrounds
+- `--border` - Border color
+- `--foreground` / `--foreground2` - Text colors
+- `--muted-foreground` - Subdued text
+- `--ansi-blue`, `--ansi-green`, `--ansi-magenta`, `--ansi-yellow`, `--ansi-cyan`, `--ansi-red` - Mode colors
+
+### Mode Color Mapping
+
+| Mode | Background Color | Purpose |
+|------|-----------------|---------|
+| NORMAL | `bg-ansi-blue` | Default editing mode |
+| INSERT | `bg-ansi-green` | Active text input |
+| VISUAL | `bg-ansi-magenta` | Selection mode |
+| COMMAND | `bg-ansi-yellow` | Command entry |
+
+### Status Line Layout
+
+The composable status line follows the classic vim statusline structure:
+
+```
+[MODE] [buffer_name] [+/-RO] -------- [filetype] [line,col] [percentage]
+```
+
+## Accessibility
+
+### Semantic HTML
+
+The Card component renders as a `<div>` element. For better semantics, consider:
+
+```tsx
+{/* For article-like content */}
+<Card role="article">
+  <CardContent>...</CardContent>
+</Card>
+
+{/* For grouped content */}
+<Card role="group" aria-labelledby="card-title">
+  <CardHeader>
+    <CardTitle id="card-title">Title</CardTitle>
+  </CardHeader>
+</Card>
+
+{/* For widget regions */}
+<Card role="region" aria-label="System status">
+  <CardContent>...</CardContent>
+</Card>
+```
+
+### Screen Reader Support
+
+Ensure card content is accessible:
+
+```tsx
+{/* Good - meaningful structure */}
+<Card>
+  <CardHeader>
+    <CardTitle>Notifications</CardTitle>
+    <CardDescription>You have 3 unread messages</CardDescription>
+  </CardHeader>
+  <CardContent aria-live="polite">
+    {messages.map(msg => <p key={msg.id}>{msg.text}</p>)}
+  </CardContent>
+</Card>
+
+{/* For decorative status line elements */}
+<CardStatusLine aria-hidden="true" />
+```
+
+## Best Practices
+
+### Composition Pattern
+
+The Card uses a composition pattern - build complex UIs by combining simple components:
+
+```tsx
+// Simple card
+<Card>
+  <CardContent>Hello</CardContent>
+</Card>
+
+// Complex card with all features
+<Card variant="elevated">
+  <CardWindowBar>
+    <CardMode mode="NORMAL" />
+    <CardBufferName>file.tsx</CardBufferName>
+  </CardWindowBar>
+  <CardHeader>
+    <CardTitle>Title</CardTitle>
+  </CardHeader>
+  <CardContent>Content</CardContent>
+  <CardFooter>
+    <Button>Action</Button>
+  </CardFooter>
+  <CardStatusLine>
+    <CardStatusSection variant="mode" modeColor="blue">NORMAL</CardStatusSection>
+    <CardStatusSection variant="spacer" />
+    <CardStatusSection variant="position">Top</CardStatusSection>
+  </CardStatusLine>
+</Card>
+```
+
+### When to Use Cards
+
+**Good Use Cases:**
+- Grouping related content (profile info, settings)
+- Dashboard widgets and metrics
+- Code snippets and terminal output
+- Notification or alert containers
+- Form sections and wizards
+- Preview panels and modals
+
+**Avoid Using Cards For:**
+- Single pieces of unrelated content
+- Wrapping entire pages (use layout components)
+- Navigation menus (use nav components)
+- Inline content that doesn't need grouping
+
+## Related Components
+
+- **Badge**: For status indicators within cards
+- **Button**: For actions in card headers and footers
+- **Dialog**: For modal card-like overlays
+- **Alert**: For status messages with similar structure
+- **Separator**: For dividing card content sections
+
+## Changelog
+
+### Version 2.0.0
+- **Breaking Change**: Refactored to composition pattern
+- Removed props from Card: `showWindowDecorations`, `bufferName`, `mode`, `showLineIndicator`, `linePosition`, `fileType`
+- Added new components: `CardWindowBar`, `CardMode`, `CardBufferName`, `CardFileType`, `CardLinePosition`, `CardWindowControls`
+- Refactored `CardStatusLine` to container-only component
+- Added `CardStatusSection` for building custom status lines
+- Exported `modeVariants` and `statusSectionVariants` for extending
+
+### Version 1.0.0
+- Initial release
+
+## License
+
+MIT License - Part of the TermCN component library.

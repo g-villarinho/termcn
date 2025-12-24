@@ -1,0 +1,1342 @@
+---
+title: DropdownMenu
+description: Display a menu of actions and options with terminal-inspired dropdown components featuring keyboard navigation and nested submenus.
+order: 12
+published: true
+---
+
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuGroup,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+
+# DropdownMenu
+
+Display a menu of actions and options with terminal-inspired dropdown components featuring keyboard navigation and nested submenus.
+
+## Overview
+
+The DropdownMenu component is a versatile UI element for displaying a list of actions, options, or navigation items in a floating panel. Built with Radix UI primitives and styled with a terminal aesthetic, it features bold 2px borders, monospace typography, and smooth animations that evoke command-line interfaces and retro computing menus. The component supports checkbox items, radio groups, nested submenus, keyboard shortcuts display, and full accessibility out of the box.
+
+## Features
+
+- **Terminal Aesthetic**: Bold 2px borders, monospace font, and dark theme integration
+- **Multiple Item Types**: Standard items, checkbox items, radio items, labels, and separators
+- **Nested Submenus**: Full support for multi-level menu hierarchies with animated transitions
+- **Keyboard Navigation**: Complete arrow key navigation, type-ahead search, and shortcut display
+- **Variant Support**: Default and destructive variants for different action types
+- **Fully Accessible**: ARIA-compliant with proper roles, states, and keyboard interactions
+- **Animation System**: Smooth open/close animations with zoom and slide effects
+- **TypeScript Support**: Fully typed with comprehensive prop definitions
+
+## Installation
+
+```bash
+npx termcn add dropdown-menu
+```
+
+This will install the DropdownMenu component and its dependencies into your project.
+
+## Dependencies
+
+- `@radix-ui/react-dropdown-menu` - Headless dropdown menu primitives
+- `lucide-react` - Icon library for check, chevron, and circle icons
+- `@/lib/utils` - For className merging utilities
+
+## Usage
+
+### Basic Usage
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">Open Menu</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem>New File</DropdownMenuItem>
+      <DropdownMenuItem>Open</DropdownMenuItem>
+      <DropdownMenuItem>Save</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>Exit</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+
+export default function Example() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Open Menu</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem>New File</DropdownMenuItem>
+        <DropdownMenuItem>Open</DropdownMenuItem>
+        <DropdownMenuItem>Save</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Exit</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+```
+
+### With Labels and Groups
+
+Organize menu items with labels and logical groups:
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">Account</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-56">
+      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuGroup>
+        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem>Settings</DropdownMenuItem>
+        <DropdownMenuItem>Billing</DropdownMenuItem>
+      </DropdownMenuGroup>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>Log out</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Account</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-56">
+    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuGroup>
+      <DropdownMenuItem>Profile</DropdownMenuItem>
+      <DropdownMenuItem>Settings</DropdownMenuItem>
+      <DropdownMenuItem>Billing</DropdownMenuItem>
+    </DropdownMenuGroup>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Log out</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With Keyboard Shortcuts
+
+Display keyboard shortcuts alongside menu items:
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">Edit</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-56">
+      <DropdownMenuItem>
+        Undo
+        <DropdownMenuShortcut>Ctrl+Z</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        Redo
+        <DropdownMenuShortcut>Ctrl+Y</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>
+        Cut
+        <DropdownMenuShortcut>Ctrl+X</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        Copy
+        <DropdownMenuShortcut>Ctrl+C</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        Paste
+        <DropdownMenuShortcut>Ctrl+V</DropdownMenuShortcut>
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Edit</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-56">
+    <DropdownMenuItem>
+      Undo
+      <DropdownMenuShortcut>Ctrl+Z</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      Redo
+      <DropdownMenuShortcut>Ctrl+Y</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+      Cut
+      <DropdownMenuShortcut>Ctrl+X</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      Copy
+      <DropdownMenuShortcut>Ctrl+C</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      Paste
+      <DropdownMenuShortcut>Ctrl+V</DropdownMenuShortcut>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With Checkbox Items
+
+Use checkbox items for toggleable options:
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">View Options</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-56">
+      <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuCheckboxItem checked>
+        Show Toolbar
+      </DropdownMenuCheckboxItem>
+      <DropdownMenuCheckboxItem checked>
+        Show Sidebar
+      </DropdownMenuCheckboxItem>
+      <DropdownMenuCheckboxItem>
+        Show Line Numbers
+      </DropdownMenuCheckboxItem>
+      <DropdownMenuCheckboxItem>
+        Word Wrap
+      </DropdownMenuCheckboxItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+import { useState } from "react";
+
+export default function Example() {
+  const [showToolbar, setShowToolbar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(true);
+  const [showLineNumbers, setShowLineNumbers] = useState(false);
+  const [wordWrap, setWordWrap] = useState(false);
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">View Options</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuCheckboxItem
+          checked={showToolbar}
+          onCheckedChange={setShowToolbar}
+        >
+          Show Toolbar
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={showSidebar}
+          onCheckedChange={setShowSidebar}
+        >
+          Show Sidebar
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={showLineNumbers}
+          onCheckedChange={setShowLineNumbers}
+        >
+          Show Line Numbers
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={wordWrap}
+          onCheckedChange={setWordWrap}
+        >
+          Word Wrap
+        </DropdownMenuCheckboxItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+```
+
+### With Radio Items
+
+Use radio groups for mutually exclusive options:
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">Sort By</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-56">
+      <DropdownMenuLabel>Sort Order</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuRadioGroup value="name">
+        <DropdownMenuRadioItem value="name">Name</DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="date">Date Modified</DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="size">Size</DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="type">Type</DropdownMenuRadioItem>
+      </DropdownMenuRadioGroup>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+import { useState } from "react";
+
+export default function Example() {
+  const [sortBy, setSortBy] = useState("name");
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Sort By</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>Sort Order</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuRadioGroup value={sortBy} onValueChange={setSortBy}>
+          <DropdownMenuRadioItem value="name">Name</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="date">Date Modified</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="size">Size</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="type">Type</DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+```
+
+### With Nested Submenus
+
+Create hierarchical menus with nested submenus:
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">More Options</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-56">
+      <DropdownMenuItem>New Tab</DropdownMenuItem>
+      <DropdownMenuItem>New Window</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuSub>
+        <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>
+        <DropdownMenuSubContent>
+          <DropdownMenuItem>Email</DropdownMenuItem>
+          <DropdownMenuItem>Messages</DropdownMenuItem>
+          <DropdownMenuItem>Twitter</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Copy Link</DropdownMenuItem>
+        </DropdownMenuSubContent>
+      </DropdownMenuSub>
+      <DropdownMenuSub>
+        <DropdownMenuSubTrigger>Export As</DropdownMenuSubTrigger>
+        <DropdownMenuSubContent>
+          <DropdownMenuItem>PDF</DropdownMenuItem>
+          <DropdownMenuItem>PNG</DropdownMenuItem>
+          <DropdownMenuItem>SVG</DropdownMenuItem>
+          <DropdownMenuItem>JSON</DropdownMenuItem>
+        </DropdownMenuSubContent>
+      </DropdownMenuSub>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>Print</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">More Options</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-56">
+    <DropdownMenuItem>New Tab</DropdownMenuItem>
+    <DropdownMenuItem>New Window</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuSub>
+      <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>
+      <DropdownMenuSubContent>
+        <DropdownMenuItem>Email</DropdownMenuItem>
+        <DropdownMenuItem>Messages</DropdownMenuItem>
+        <DropdownMenuItem>Twitter</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Copy Link</DropdownMenuItem>
+      </DropdownMenuSubContent>
+    </DropdownMenuSub>
+    <DropdownMenuSub>
+      <DropdownMenuSubTrigger>Export As</DropdownMenuSubTrigger>
+      <DropdownMenuSubContent>
+        <DropdownMenuItem>PDF</DropdownMenuItem>
+        <DropdownMenuItem>PNG</DropdownMenuItem>
+        <DropdownMenuItem>SVG</DropdownMenuItem>
+        <DropdownMenuItem>JSON</DropdownMenuItem>
+      </DropdownMenuSubContent>
+    </DropdownMenuSub>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Print</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With Destructive Items
+
+Use the destructive variant for dangerous actions:
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">Actions</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-56">
+      <DropdownMenuItem>Edit</DropdownMenuItem>
+      <DropdownMenuItem>Duplicate</DropdownMenuItem>
+      <DropdownMenuItem>Archive</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Actions</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-56">
+    <DropdownMenuItem>Edit</DropdownMenuItem>
+    <DropdownMenuItem>Duplicate</DropdownMenuItem>
+    <DropdownMenuItem>Archive</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With Inset Items
+
+Align items with inset padding for consistency with checkbox/radio items:
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">Options</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-56">
+      <DropdownMenuLabel inset>Actions</DropdownMenuLabel>
+      <DropdownMenuItem inset>Edit Profile</DropdownMenuItem>
+      <DropdownMenuItem inset>Change Password</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuCheckboxItem checked>
+        Email Notifications
+      </DropdownMenuCheckboxItem>
+      <DropdownMenuCheckboxItem>
+        Push Notifications
+      </DropdownMenuCheckboxItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Options</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-56">
+    <DropdownMenuLabel inset>Actions</DropdownMenuLabel>
+    <DropdownMenuItem inset>Edit Profile</DropdownMenuItem>
+    <DropdownMenuItem inset>Change Password</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuCheckboxItem checked>
+      Email Notifications
+    </DropdownMenuCheckboxItem>
+    <DropdownMenuCheckboxItem>
+      Push Notifications
+    </DropdownMenuCheckboxItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Disabled Items
+
+Items can be disabled to prevent interaction:
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">File</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-56">
+      <DropdownMenuItem>New</DropdownMenuItem>
+      <DropdownMenuItem>Open</DropdownMenuItem>
+      <DropdownMenuItem disabled>Open Recent</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>Save</DropdownMenuItem>
+      <DropdownMenuItem disabled>Save As...</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">File</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-56">
+    <DropdownMenuItem>New</DropdownMenuItem>
+    <DropdownMenuItem>Open</DropdownMenuItem>
+    <DropdownMenuItem disabled>Open Recent</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Save</DropdownMenuItem>
+    <DropdownMenuItem disabled>Save As...</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## Common Use Cases
+
+### User Profile Menu
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline" size="icon" className="rounded-full">
+        <span className="text-xs">JD</span>
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-56" align="end">
+      <DropdownMenuLabel>
+        <div className="flex flex-col space-y-1">
+          <p className="text-sm font-medium">John Doe</p>
+          <p className="text-xs text-foreground2">john@example.com</p>
+        </div>
+      </DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuGroup>
+        <DropdownMenuItem>Profile</DropdownMenuItem>
+        <DropdownMenuItem>Settings</DropdownMenuItem>
+        <DropdownMenuItem>Billing</DropdownMenuItem>
+      </DropdownMenuGroup>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem variant="destructive">Log out</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline" size="icon" className="rounded-full">
+      <span className="text-xs">JD</span>
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-56" align="end">
+    <DropdownMenuLabel>
+      <div className="flex flex-col space-y-1">
+        <p className="text-sm font-medium">John Doe</p>
+        <p className="text-xs text-foreground2">john@example.com</p>
+      </div>
+    </DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuGroup>
+      <DropdownMenuItem>Profile</DropdownMenuItem>
+      <DropdownMenuItem>Settings</DropdownMenuItem>
+      <DropdownMenuItem>Billing</DropdownMenuItem>
+    </DropdownMenuGroup>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem variant="destructive">Log out</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Table Row Actions
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="ghost" size="icon">
+        <span className="text-lg">⋯</span>
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="end">
+      <DropdownMenuItem>View Details</DropdownMenuItem>
+      <DropdownMenuItem>Edit</DropdownMenuItem>
+      <DropdownMenuItem>Duplicate</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="ghost" size="icon">
+      <MoreHorizontalIcon className="w-4 h-4" />
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent align="end">
+    <DropdownMenuItem>View Details</DropdownMenuItem>
+    <DropdownMenuItem>Edit</DropdownMenuItem>
+    <DropdownMenuItem>Duplicate</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Context Menu Alternative
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="secondary">Right-click alternative</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent className="w-64">
+      <DropdownMenuItem>
+        Back
+        <DropdownMenuShortcut>Alt+←</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem disabled>
+        Forward
+        <DropdownMenuShortcut>Alt+→</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        Reload
+        <DropdownMenuShortcut>Ctrl+R</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuCheckboxItem checked>
+        Show Bookmarks Bar
+      </DropdownMenuCheckboxItem>
+      <DropdownMenuCheckboxItem>
+        Show Full URLs
+      </DropdownMenuCheckboxItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>
+        View Page Source
+        <DropdownMenuShortcut>Ctrl+U</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        Inspect
+        <DropdownMenuShortcut>Ctrl+Shift+I</DropdownMenuShortcut>
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="secondary">Right-click alternative</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-64">
+    <DropdownMenuItem>
+      Back
+      <DropdownMenuShortcut>Alt+←</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem disabled>
+      Forward
+      <DropdownMenuShortcut>Alt+→</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      Reload
+      <DropdownMenuShortcut>Ctrl+R</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuCheckboxItem checked>
+      Show Bookmarks Bar
+    </DropdownMenuCheckboxItem>
+    <DropdownMenuCheckboxItem>Show Full URLs</DropdownMenuCheckboxItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+      View Page Source
+      <DropdownMenuShortcut>Ctrl+U</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      Inspect
+      <DropdownMenuShortcut>Ctrl+Shift+I</DropdownMenuShortcut>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Theme Selector
+
+<ComponentPreview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline">Theme</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuLabel>Select Theme</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuRadioGroup value="dark">
+        <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
+      </DropdownMenuRadioGroup>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ComponentPreview>
+
+```tsx
+import { useState } from "react";
+
+export default function ThemeSelector() {
+  const [theme, setTheme] = useState("dark");
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">
+          <SunMoonIcon className="w-4 h-4 mr-2" />
+          Theme
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>Select Theme</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
+          <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+```
+
+## API Reference
+
+### DropdownMenu
+
+The root component that wraps all dropdown menu elements.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | `undefined` | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Default open state (uncontrolled) |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Callback when open state changes |
+| `modal` | `boolean` | `true` | Whether the menu is modal |
+| `dir` | `"ltr" \| "rtl"` | `"ltr"` | Reading direction |
+
+### DropdownMenuTrigger
+
+The button that toggles the dropdown menu.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `asChild` | `boolean` | `false` | Render as child element using Slot |
+
+### DropdownMenuContent
+
+The container for the dropdown menu items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `sideOffset` | `number` | `4` | Distance from trigger in pixels |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | Preferred side to render |
+| `align` | `"start" \| "center" \| "end"` | `"start"` | Alignment relative to trigger |
+| `alignOffset` | `number` | `0` | Offset from alignment |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### DropdownMenuItem
+
+A single menu item.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "destructive"` | `"default"` | Visual style variant |
+| `inset` | `boolean` | `false` | Add left padding for alignment |
+| `disabled` | `boolean` | `false` | Disable the item |
+| `onSelect` | `(event: Event) => void` | `undefined` | Callback when selected |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### DropdownMenuCheckboxItem
+
+A menu item with a checkbox.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | `false` | Checked state |
+| `onCheckedChange` | `(checked: boolean) => void` | `undefined` | Callback when state changes |
+| `disabled` | `boolean` | `false` | Disable the item |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### DropdownMenuRadioGroup
+
+A group of radio items where only one can be selected.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | `undefined` | Selected value |
+| `onValueChange` | `(value: string) => void` | `undefined` | Callback when selection changes |
+
+### DropdownMenuRadioItem
+
+A radio item within a radio group.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | **required** | The value of the item |
+| `disabled` | `boolean` | `false` | Disable the item |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### DropdownMenuLabel
+
+A label for a group of items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `inset` | `boolean` | `false` | Add left padding for alignment |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### DropdownMenuSeparator
+
+A visual separator between items.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### DropdownMenuShortcut
+
+A span for displaying keyboard shortcuts.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### DropdownMenuSub
+
+A container for a submenu.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | `undefined` | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Default open state |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Callback when state changes |
+
+### DropdownMenuSubTrigger
+
+The item that opens a submenu.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `inset` | `boolean` | `false` | Add left padding for alignment |
+| `disabled` | `boolean` | `false` | Disable the trigger |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### DropdownMenuSubContent
+
+The content container for a submenu.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### Type Definitions
+
+```typescript
+import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
+
+// DropdownMenuItem extended props
+type DropdownMenuItemProps = React.ComponentProps<
+  typeof DropdownMenuPrimitive.Item
+> & {
+  inset?: boolean;
+  variant?: "default" | "destructive";
+};
+
+// DropdownMenuLabel extended props
+type DropdownMenuLabelProps = React.ComponentProps<
+  typeof DropdownMenuPrimitive.Label
+> & {
+  inset?: boolean;
+};
+
+// DropdownMenuSubTrigger extended props
+type DropdownMenuSubTriggerProps = React.ComponentProps<
+  typeof DropdownMenuPrimitive.SubTrigger
+> & {
+  inset?: boolean;
+};
+```
+
+## Styling and Customization
+
+### Custom Styles
+
+You can extend the dropdown menu with custom styles using the `className` prop:
+
+```tsx
+<DropdownMenuContent className="w-80 p-2">
+  <DropdownMenuItem className="text-lg py-3">
+    Large Item
+  </DropdownMenuItem>
+</DropdownMenuContent>
+```
+
+### Theme Integration
+
+The DropdownMenu component uses CSS variables from the TermCN theme system:
+
+- `--background1` - Menu background color
+- `--foreground` - Text color
+- `--foreground2` - Secondary text color (labels, shortcuts, icons)
+- `--background2` - Hover/focus background color
+- `--border` - Border color (2px solid)
+- `--ansi-red` - Destructive variant color
+- `--ansi-green` - Checkbox indicator color
+- `--ansi-blue` - Radio indicator color
+
+### Custom Content Width
+
+```tsx
+<DropdownMenuContent className="w-56">
+  {/* Items will have consistent width */}
+</DropdownMenuContent>
+
+<DropdownMenuContent className="min-w-[200px] max-w-[400px]">
+  {/* Flexible width with constraints */}
+</DropdownMenuContent>
+```
+
+### Custom Positioning
+
+```tsx
+<DropdownMenuContent
+  side="right"
+  align="start"
+  sideOffset={8}
+  alignOffset={-4}
+>
+  {/* Menu appears to the right, aligned to top */}
+</DropdownMenuContent>
+```
+
+## Accessibility
+
+### Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| **Enter / Space** | Open menu or select focused item |
+| **Arrow Down** | Move focus to next item |
+| **Arrow Up** | Move focus to previous item |
+| **Arrow Right** | Open submenu (when on sub trigger) |
+| **Arrow Left** | Close submenu (when in submenu) |
+| **Escape** | Close the menu |
+| **Home** | Move focus to first item |
+| **End** | Move focus to last item |
+| **Type characters** | Focus item starting with typed characters |
+
+### ARIA Attributes
+
+The component automatically applies proper ARIA attributes:
+
+```tsx
+{/* Trigger button gets these attributes */}
+<button
+  aria-haspopup="menu"
+  aria-expanded="true|false"
+  aria-controls="menu-id"
+/>
+
+{/* Menu content gets these attributes */}
+<div
+  role="menu"
+  aria-orientation="vertical"
+  aria-labelledby="trigger-id"
+/>
+
+{/* Menu items get these attributes */}
+<div role="menuitem" tabindex="-1" />
+
+{/* Checkbox items get these attributes */}
+<div role="menuitemcheckbox" aria-checked="true|false" />
+
+{/* Radio items get these attributes */}
+<div role="menuitemradio" aria-checked="true|false" />
+```
+
+### Screen Reader Support
+
+```tsx
+{/* Add descriptive labels for icon-only triggers */}
+<DropdownMenuTrigger asChild>
+  <Button variant="ghost" size="icon" aria-label="Open user menu">
+    <UserIcon />
+  </Button>
+</DropdownMenuTrigger>
+
+{/* Use labels to group related items */}
+<DropdownMenuLabel>Account Options</DropdownMenuLabel>
+<DropdownMenuGroup>
+  <DropdownMenuItem>Profile</DropdownMenuItem>
+  <DropdownMenuItem>Settings</DropdownMenuItem>
+</DropdownMenuGroup>
+```
+
+## Best Practices
+
+### When to Use DropdownMenu
+
+✅ **Good Use Cases:**
+- User profile menus with account actions
+- Table row action menus (edit, delete, duplicate)
+- Filter or sort options
+- Context-sensitive actions
+- Settings toggles and preferences
+- Navigation with submenus
+
+❌ **Avoid Using DropdownMenu For:**
+- Primary navigation (use proper nav components)
+- Single actions (use a button instead)
+- Form inputs (use Select component)
+- Content that needs to persist (use Popover)
+- Critical actions without confirmation (use Dialog)
+
+### Design Guidelines
+
+1. **Keep menus concise**: Limit to 7±2 items per level to avoid overwhelming users
+2. **Use logical grouping**: Separate related items with labels and separators
+3. **Indicate shortcuts**: Always display keyboard shortcuts when available
+4. **Destructive actions last**: Place dangerous actions at the bottom with a separator
+5. **Use appropriate variants**: Apply destructive variant only for irreversible actions
+6. **Consider mobile**: Menus work well on mobile but test touch interactions
+7. **Avoid deep nesting**: Limit submenus to 2 levels maximum
+
+### Performance Considerations
+
+1. **Lazy content**: Menu content is rendered only when open
+2. **Portal rendering**: Content renders in a portal to avoid z-index issues
+3. **Animation optimization**: Uses CSS transforms for smooth 60fps animations
+4. **Event delegation**: Radix handles events efficiently at the root level
+
+## Design Details
+
+### Terminal Aesthetic Breakdown
+
+The dropdown menu achieves its terminal aesthetic through several design choices:
+
+**Border Treatment:**
+- 2px solid border using `--border` color
+- Sharp corners (0px border-radius) for that terminal feel
+- Clean separation from surrounding content
+
+**Typography:**
+- Monospace font (`font-mono`) throughout
+- Uppercase tracking on labels (`tracking-wider`)
+- Consistent text sizing (14px/text-sm for items, 12px/text-xs for labels)
+
+**Color System:**
+- Dark background (`--background1`) creates depth
+- Subtle hover states (`--background2`) for feedback
+- ANSI colors for semantic indicators:
+  - Green (`--ansi-green`) for checkbox checks
+  - Blue (`--ansi-blue`) for radio selections
+  - Red (`--ansi-red`) for destructive actions
+
+**Animation System:**
+```css
+/* Open animation */
+data-[state=open]:animate-in
+data-[state=open]:fade-in-0
+data-[state=open]:zoom-in-95
+
+/* Close animation */
+data-[state=closed]:animate-out
+data-[state=closed]:fade-out-0
+data-[state=closed]:zoom-out-95
+
+/* Directional slide */
+data-[side=bottom]:slide-in-from-top-2
+data-[side=left]:slide-in-from-right-2
+data-[side=right]:slide-in-from-left-2
+data-[side=top]:slide-in-from-bottom-2
+```
+
+## Related Components
+
+- **ContextMenu**: For right-click context menus
+- **Menubar**: For application menu bars
+- **Select**: For form select inputs
+- **Popover**: For non-menu floating content
+- **Dialog**: For modal confirmations
+
+## Examples Gallery
+
+### Complete Application Menu
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">File</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-56">
+    <DropdownMenuGroup>
+      <DropdownMenuItem>
+        New File
+        <DropdownMenuShortcut>Ctrl+N</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        New Window
+        <DropdownMenuShortcut>Ctrl+Shift+N</DropdownMenuShortcut>
+      </DropdownMenuItem>
+    </DropdownMenuGroup>
+    <DropdownMenuSeparator />
+    <DropdownMenuSub>
+      <DropdownMenuSubTrigger>Open Recent</DropdownMenuSubTrigger>
+      <DropdownMenuSubContent>
+        <DropdownMenuItem>project-1.tsx</DropdownMenuItem>
+        <DropdownMenuItem>project-2.tsx</DropdownMenuItem>
+        <DropdownMenuItem>project-3.tsx</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Clear Recent</DropdownMenuItem>
+      </DropdownMenuSubContent>
+    </DropdownMenuSub>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+      Save
+      <DropdownMenuShortcut>Ctrl+S</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      Save As...
+      <DropdownMenuShortcut>Ctrl+Shift+S</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+      Exit
+      <DropdownMenuShortcut>Alt+F4</DropdownMenuShortcut>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Settings Panel Menu
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="ghost" size="icon">
+      <SettingsIcon className="w-5 h-5" />
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-64" align="end">
+    <DropdownMenuLabel>Preferences</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuCheckboxItem checked={darkMode} onCheckedChange={setDarkMode}>
+      Dark Mode
+    </DropdownMenuCheckboxItem>
+    <DropdownMenuCheckboxItem checked={sounds} onCheckedChange={setSounds}>
+      Sound Effects
+    </DropdownMenuCheckboxItem>
+    <DropdownMenuCheckboxItem checked={notifications} onCheckedChange={setNotifications}>
+      Notifications
+    </DropdownMenuCheckboxItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuLabel>Language</DropdownMenuLabel>
+    <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
+      <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
+      <DropdownMenuRadioItem value="es">Español</DropdownMenuRadioItem>
+      <DropdownMenuRadioItem value="fr">Français</DropdownMenuRadioItem>
+    </DropdownMenuRadioGroup>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Multi-Select Filter
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">
+      Filter
+      {activeFilters.length > 0 && (
+        <Badge variant="emphasis" className="ml-2">
+          {activeFilters.length}
+        </Badge>
+      )}
+    </Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-48">
+    <DropdownMenuLabel>Status</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuCheckboxItem
+      checked={filters.includes("active")}
+      onCheckedChange={(c) => toggleFilter("active", c)}
+    >
+      Active
+    </DropdownMenuCheckboxItem>
+    <DropdownMenuCheckboxItem
+      checked={filters.includes("pending")}
+      onCheckedChange={(c) => toggleFilter("pending", c)}
+    >
+      Pending
+    </DropdownMenuCheckboxItem>
+    <DropdownMenuCheckboxItem
+      checked={filters.includes("completed")}
+      onCheckedChange={(c) => toggleFilter("completed", c)}
+    >
+      Completed
+    </DropdownMenuCheckboxItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem onClick={clearFilters}>
+      Clear All Filters
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## Performance
+
+The DropdownMenu component is optimized for performance:
+
+- **Lazy Rendering**: Content only renders when the menu opens
+- **Portal Mounting**: Uses React portals to avoid layout thrashing
+- **CSS Animations**: Hardware-accelerated transforms for smooth 60fps animations
+- **Event Optimization**: Efficient event handling through Radix primitives
+- **Bundle Size**: ~5KB including Radix dependencies (tree-shakeable)
+- **SSR Compatible**: Works with server-side rendering frameworks
+
+## Troubleshooting
+
+### Menu appears behind other elements
+
+Ensure proper z-index stacking. The menu uses `z-50` by default:
+
+```tsx
+<DropdownMenuContent className="z-[100]">
+  {/* Higher z-index if needed */}
+</DropdownMenuContent>
+```
+
+### Menu closes immediately after opening
+
+Check for click handlers on parent elements that might be calling `stopPropagation()`:
+
+```tsx
+{/* Avoid this pattern */}
+<div onClick={(e) => e.stopPropagation()}>
+  <DropdownMenu>...</DropdownMenu>
+</div>
+```
+
+### Keyboard shortcuts not working
+
+Ensure shortcuts are properly connected to your event handlers:
+
+```tsx
+useEffect(() => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.ctrlKey && e.key === "n") {
+      e.preventDefault();
+      handleNewFile();
+    }
+  };
+  document.addEventListener("keydown", handleKeyDown);
+  return () => document.removeEventListener("keydown", handleKeyDown);
+}, []);
+```
+
+### Submenu not opening
+
+Verify the submenu structure is correct:
+
+```tsx
+<DropdownMenuSub>
+  <DropdownMenuSubTrigger>Submenu</DropdownMenuSubTrigger>
+  <DropdownMenuSubContent>
+    {/* Content must be inside SubContent */}
+    <DropdownMenuItem>Item</DropdownMenuItem>
+  </DropdownMenuSubContent>
+</DropdownMenuSub>
+```
+
+## Migration Guide
+
+### From shadcn/ui DropdownMenu
+
+The TermCN DropdownMenu is highly compatible with shadcn/ui:
+
+```diff
+  import {
+    DropdownMenu,
+    DropdownMenuTrigger,
+    DropdownMenuContent,
+    DropdownMenuItem,
+  } from "@/components/ui/dropdown-menu";
+
+  // Basic usage remains identical
+  <DropdownMenu>
+    <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem>Item</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+
+  // New variant prop in TermCN
++ <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+
+  // Visual differences (automatic):
+  // - 2px borders instead of 1px
+  // - Monospace font
+  // - ANSI colors for indicators
+  // - Terminal-inspired hover states
+```
+
+## Changelog
+
+### Version 1.0.0
+- Initial release
+- 14 sub-components for complete menu composition
+- Full Radix UI integration for accessibility
+- Terminal aesthetic with 2px borders and monospace font
+- Default and destructive item variants
+- Checkbox and radio item support
+- Nested submenu support
+- Keyboard shortcut display component
+- Smooth open/close animations
+- Full TypeScript support
+
+## License
+
+MIT License - Part of the TermCN component library.
+
+## Contributing
+
+Contributions are welcome! Please read the contributing guidelines before submitting PRs.
+
+---
+
+**Keywords**: dropdown, menu, context menu, actions, options, navigation, submenu, checkbox, radio, keyboard shortcuts, accessible, terminal, monospace, Radix UI, TypeScript, React, Tailwind CSS, component, UI, TermCN
