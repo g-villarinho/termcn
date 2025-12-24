@@ -1,0 +1,14 @@
+{
+  "name": "button-group",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "ui/button-group.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\n\nimport { cn } from \"@/lib/utils\";\n\nconst buttonGroupVariants = cva(\n\t\"inline-flex w-fit items-stretch font-mono\",\n\t{\n\t\tvariants: {\n\t\t\torientation: {\n\t\t\t\thorizontal: \"flex-row\",\n\t\t\t\tvertical: \"flex-col\",\n\t\t\t},\n\t\t},\n\t\tdefaultVariants: {\n\t\t\torientation: \"horizontal\",\n\t\t},\n\t}\n);\n\ninterface ButtonGroupProps\n\textends React.ComponentProps<\"div\">,\n\t\tVariantProps<typeof buttonGroupVariants> {}\n\nfunction ButtonGroup({\n\tclassName,\n\torientation,\n\t...props\n}: ButtonGroupProps) {\n\treturn (\n\t\t<div\n\t\t\trole=\"group\"\n\t\t\tdata-slot=\"button-group\"\n\t\t\tdata-orientation={orientation}\n\t\t\tclassName={cn(buttonGroupVariants({ orientation }), className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction ButtonGroupText({\n\tclassName,\n\tasChild = false,\n\t...props\n}: React.ComponentProps<\"div\"> & {\n\tasChild?: boolean;\n}) {\n\tconst Comp = asChild ? Slot : \"div\";\n\n\treturn (\n\t\t<Comp\n\t\t\tdata-slot=\"button-group-text\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex items-center gap-2 border border-border bg-background px-3 font-mono text-sm text-muted-foreground\",\n\t\t\t\t\"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n\t\t\t\tclassName\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction ButtonGroupSeparator({\n\tclassName,\n\t...props\n}: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\trole=\"separator\"\n\t\t\tdata-slot=\"button-group-separator\"\n\t\t\tclassName={cn(\n\t\t\t\t\"self-stretch bg-border\",\n\t\t\t\t\"data-[orientation=horizontal]:w-px\",\n\t\t\t\t\"data-[orientation=vertical]:h-px\",\n\t\t\t\tclassName\n\t\t\t)}\n\t\t\tdata-orientation={\n\t\t\t\t(props as { \"data-orientation\"?: string })[\"data-orientation\"] ??\n\t\t\t\t\"vertical\"\n\t\t\t}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport {\n\tButtonGroup,\n\tButtonGroupSeparator,\n\tButtonGroupText,\n\tbuttonGroupVariants,\n};\n",
+      "type": "registry:ui",
+      "target": "components/ui/button-group.tsx"
+    }
+  ]
+}

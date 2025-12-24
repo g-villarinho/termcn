@@ -8,6 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const componentName = process.argv[2];
+const forceOverwrite = process.argv.includes("--force") || process.argv.includes("-f");
 
 if (!componentName) {
 	console.error("❌ Usage: pnpm add-component <component-name>");
@@ -37,9 +38,9 @@ if (!existsSync(source)) {
 	process.exit(1);
 }
 
-if (existsSync(dest)) {
+if (existsSync(dest) && !forceOverwrite) {
 	console.warn(`⚠️  Component "${componentName}" already exists in src/components/ui/`);
-	console.warn("   Skipping to avoid overwriting.");
+	console.warn("   Use --force or -f to overwrite.");
 	process.exit(0);
 }
 

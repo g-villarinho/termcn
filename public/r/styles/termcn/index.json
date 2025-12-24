@@ -30,6 +30,19 @@
     ]
   },
   {
+    "name": "button-group",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/button-group.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/button-group.tsx"
+      }
+    ]
+  },
+  {
     "name": "button",
     "type": "registry:ui",
     "dependencies": [
