@@ -80,15 +80,10 @@ interface ProgressProps
 		VariantProps<typeof progressVariants> {
 	value?: number;
 	max?: number;
-	/** Display mode: "char" for ASCII characters, "bar" for visual bar */
 	mode?: "char" | "bar";
-	/** Character(s) to fill the progress bar (only for mode="char") */
 	fillChar?: FillCharPreset | string;
-	/** Show percentage text at the end */
 	showPercent?: boolean;
-	/** Show brackets around the progress bar (only for mode="char") */
 	showBrackets?: boolean;
-	/** Number of characters for the progress bar width (only for mode="char") */
 	charWidth?: number;
 }
 
