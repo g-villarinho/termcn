@@ -72,6 +72,19 @@
     ]
   },
   {
+    "name": "calendar",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/calendar.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/calendar.tsx"
+      }
+    ]
+  },
+  {
     "name": "card",
     "type": "registry:ui",
     "dependencies": [],

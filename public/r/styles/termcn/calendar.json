@@ -1,0 +1,14 @@
+{
+  "name": "calendar",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "ui/calendar.tsx",
+      "content": "\"use client\"\n\nimport { ChevronLeftIcon, ChevronRightIcon } from \"lucide-react\"\nimport { DayPicker, type DayPickerProps } from \"react-day-picker\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Calendar({\n\tclassName,\n\tclassNames,\n\tshowOutsideDays = true,\n\t...props\n}: DayPickerProps) {\n\treturn (\n\t\t<DayPicker\n\t\t\tshowOutsideDays={showOutsideDays}\n\t\t\tclassName={cn(\"font-mono text-sm\", className)}\n\t\t\tclassNames={{\n\t\t\t\tmonths: \"flex flex-col gap-2\",\n\t\t\t\tmonth: \"flex flex-col gap-2\",\n\t\t\t\tmonth_caption: \"flex items-center justify-center h-8 relative\",\n\t\t\t\tcaption_label: \"text-foreground font-medium\",\n\t\t\t\tnav: \"flex items-center gap-1 absolute inset-x-0 justify-between\",\n\t\t\t\tbutton_previous: cn(\n\t\t\t\t\t\"size-7 flex items-center justify-center\",\n\t\t\t\t\t\"text-muted-foreground hover:text-foreground\"\n\t\t\t\t),\n\t\t\t\tbutton_next: cn(\n\t\t\t\t\t\"size-7 flex items-center justify-center\",\n\t\t\t\t\t\"text-muted-foreground hover:text-foreground\"\n\t\t\t\t),\n\t\t\t\tmonth_grid: \"border border-border\",\n\t\t\t\tweekdays: \"flex border-b border-border bg-background1\",\n\t\t\t\tweekday:\n\t\t\t\t\t\"w-8 h-6 flex items-center justify-center text-ansi-cyan text-xs font-normal\",\n\t\t\t\tweek: \"flex\",\n\t\t\t\tday: cn(\n\t\t\t\t\t\"w-8 h-8 flex items-center justify-center text-center\",\n\t\t\t\t\t\"border-r border-b border-border last:border-r-0\",\n\t\t\t\t\t\"[&:nth-child(7)]:border-r-0\"\n\t\t\t\t),\n\t\t\t\tday_button: cn(\n\t\t\t\t\t\"w-full h-full flex items-center justify-center\",\n\t\t\t\t\t\"text-foreground hover:bg-background2 hover:text-foreground\",\n\t\t\t\t\t\"focus:outline-none focus:bg-background2\"\n\t\t\t\t),\n\t\t\t\ttoday: \"text-ansi-yellow font-bold\",\n\t\t\t\tselected:\n\t\t\t\t\t\"bg-ansi-blue text-background font-bold hover:bg-ansi-blue hover:text-background\",\n\t\t\t\toutside: \"text-foreground2 opacity-50\",\n\t\t\t\tdisabled: \"text-muted-foreground opacity-30\",\n\t\t\t\trange_start: \"bg-ansi-blue text-background\",\n\t\t\t\trange_end: \"bg-ansi-blue text-background\",\n\t\t\t\trange_middle: \"bg-background2 text-foreground\",\n\t\t\t\thidden: \"invisible\",\n\t\t\t\t...classNames,\n\t\t\t}}\n\t\t\tcomponents={{\n\t\t\t\tChevron: ({ orientation }) => {\n\t\t\t\t\tif (orientation === \"left\") {\n\t\t\t\t\t\treturn <ChevronLeftIcon className=\"size-4\" />\n\t\t\t\t\t}\n\t\t\t\t\treturn <ChevronRightIcon className=\"size-4\" />\n\t\t\t\t},\n\t\t\t\t...props.components,\n\t\t\t}}\n\t\t\t{...props}\n\t\t/>\n\t)\n}\n\nexport { Calendar }\n",
+      "type": "registry:ui",
+      "target": "components/ui/calendar.tsx"
+    }
+  ]
+}
