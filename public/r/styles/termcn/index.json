@@ -189,6 +189,19 @@
     ]
   },
   {
+    "name": "sheet",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/sheet.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/sheet.tsx"
+      }
+    ]
+  },
+  {
     "name": "spinner",
     "type": "registry:ui",
     "dependencies": [],
