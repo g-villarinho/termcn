@@ -1,0 +1,912 @@
+---
+title: Accordion
+description: Expandable content sections with terminal-inspired tree navigation and collapsible panels.
+order: 20
+published: true
+---
+
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+
+# Accordion
+
+Expandable content sections with terminal-inspired tree navigation and collapsible panels.
+
+## Overview
+
+The Accordion component is a vertically stacked set of interactive headings that reveal or hide associated content sections. Built with a distinctive terminal aesthetic, it features tree-style navigation indicators (▸/▾) in ANSI blue that evoke directory expansion in command-line file browsers and text-based user interfaces.
+
+## Features
+
+- **Tree-Style Navigation**: ANSI blue triangle indicators (▸/▾) mimicking terminal directory trees
+- **Single or Multiple Expansion**: Control whether one or multiple items can be open simultaneously
+- **Smooth Transitions**: Content reveals with clean state-based visibility
+- **Terminal Aesthetics**: Monospace typography and border styling consistent with CLI interfaces
+- **Fully Accessible**: Built on Radix UI primitives with complete keyboard navigation and ARIA support
+- **Composition Pattern**: Flexible compound component API for maximum customization
+- **TypeScript Support**: Fully typed with comprehensive prop definitions
+- **Collapsible Mode**: Optional ability to close all items when clicking an open item
+
+## Installation
+
+```bash
+npx termcn add accordion
+```
+
+This will install the Accordion component and its dependencies into your project.
+
+## Dependencies
+
+- `@radix-ui/react-accordion` - For accessible accordion primitives
+- `@/lib/utils` - For className merging utilities
+
+## Usage
+
+### Basic Usage
+
+<ComponentPreview>
+  <Accordion type="single" collapsible className="w-full">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Is it accessible?</AccordionTrigger>
+      <AccordionContent>
+        Yes. It adheres to the WAI-ARIA design pattern.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+```tsx
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
+
+export default function Example() {
+  return (
+    <Accordion type="single" collapsible>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionContent>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  );
+}
+```
+
+### Single Expansion Mode
+
+Only one item can be open at a time:
+
+<ComponentPreview>
+  <Accordion type="single" collapsible className="w-full">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>What is TermCN?</AccordionTrigger>
+      <AccordionContent>
+        TermCN is a terminal-inspired shadcn/ui component registry with Catppuccin Mocha theme.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>How do I install it?</AccordionTrigger>
+      <AccordionContent>
+        Use npx termcn add followed by the component name.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-3">
+      <AccordionTrigger>Is it customizable?</AccordionTrigger>
+      <AccordionContent>
+        Yes, all components support className overrides and theme integration.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>What is TermCN?</AccordionTrigger>
+    <AccordionContent>
+      TermCN is a terminal-inspired shadcn/ui component registry.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>How do I install it?</AccordionTrigger>
+    <AccordionContent>
+      Use npx termcn add followed by the component name.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-3">
+    <AccordionTrigger>Is it customizable?</AccordionTrigger>
+    <AccordionContent>
+      Yes, all components support className overrides.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Multiple Expansion Mode
+
+Allow multiple items to be open simultaneously:
+
+<ComponentPreview>
+  <Accordion type="multiple" className="w-full">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>~/projects</AccordionTrigger>
+      <AccordionContent>
+        Contains all your development projects and repositories.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>~/documents</AccordionTrigger>
+      <AccordionContent>
+        Personal documents and configuration files.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-3">
+      <AccordionTrigger>~/downloads</AccordionTrigger>
+      <AccordionContent>
+        Downloaded files and temporary storage.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+```tsx
+<Accordion type="multiple">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>~/projects</AccordionTrigger>
+    <AccordionContent>
+      Contains all your development projects.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>~/documents</AccordionTrigger>
+    <AccordionContent>
+      Personal documents and configuration files.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-3">
+    <AccordionTrigger>~/downloads</AccordionTrigger>
+    <AccordionContent>
+      Downloaded files and temporary storage.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Default Open Item
+
+Set an item to be open by default:
+
+<ComponentPreview>
+  <Accordion type="single" collapsible defaultValue="item-2" className="w-full">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>First Section</AccordionTrigger>
+      <AccordionContent>
+        Content for the first section.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>Second Section (Default Open)</AccordionTrigger>
+      <AccordionContent>
+        This section is open by default.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-3">
+      <AccordionTrigger>Third Section</AccordionTrigger>
+      <AccordionContent>
+        Content for the third section.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+```tsx
+<Accordion type="single" collapsible defaultValue="item-2">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>First Section</AccordionTrigger>
+    <AccordionContent>Content for the first section.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Second Section (Default Open)</AccordionTrigger>
+    <AccordionContent>This section is open by default.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-3">
+    <AccordionTrigger>Third Section</AccordionTrigger>
+    <AccordionContent>Content for the third section.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Disabled State
+
+Disable individual accordion items:
+
+<ComponentPreview>
+  <Accordion type="single" collapsible className="w-full">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Available</AccordionTrigger>
+      <AccordionContent>
+        This item can be expanded and collapsed.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2" disabled>
+      <AccordionTrigger>Disabled</AccordionTrigger>
+      <AccordionContent>
+        This content cannot be accessed.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-3">
+      <AccordionTrigger>Also Available</AccordionTrigger>
+      <AccordionContent>
+        This item works normally.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Available</AccordionTrigger>
+    <AccordionContent>This item can be expanded.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2" disabled>
+    <AccordionTrigger>Disabled</AccordionTrigger>
+    <AccordionContent>This content cannot be accessed.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## Common Use Cases
+
+### FAQ Section
+
+<ComponentPreview>
+  <Accordion type="single" collapsible className="w-full">
+    <AccordionItem value="faq-1">
+      <AccordionTrigger>What payment methods do you accept?</AccordionTrigger>
+      <AccordionContent>
+        We accept all major credit cards, PayPal, and cryptocurrency payments including Bitcoin and Ethereum.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="faq-2">
+      <AccordionTrigger>How long does shipping take?</AccordionTrigger>
+      <AccordionContent>
+        Standard shipping takes 5-7 business days. Express shipping is available for 2-3 day delivery.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="faq-3">
+      <AccordionTrigger>What is your return policy?</AccordionTrigger>
+      <AccordionContent>
+        We offer a 30-day money-back guarantee on all products. Items must be unused and in original packaging.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="faq-1">
+    <AccordionTrigger>What payment methods do you accept?</AccordionTrigger>
+    <AccordionContent>
+      We accept all major credit cards, PayPal, and cryptocurrency.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="faq-2">
+    <AccordionTrigger>How long does shipping take?</AccordionTrigger>
+    <AccordionContent>
+      Standard shipping takes 5-7 business days.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Settings Panel
+
+<ComponentPreview>
+  <Accordion type="multiple" className="w-full">
+    <AccordionItem value="general">
+      <AccordionTrigger>General Settings</AccordionTrigger>
+      <AccordionContent>
+        <div className="space-y-2 text-sm">
+          <p>Language: English</p>
+          <p>Timezone: UTC-5</p>
+          <p>Theme: Dark Mode</p>
+        </div>
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="notifications">
+      <AccordionTrigger>Notifications</AccordionTrigger>
+      <AccordionContent>
+        <div className="space-y-2 text-sm">
+          <p>Email notifications: Enabled</p>
+          <p>Push notifications: Disabled</p>
+          <p>SMS alerts: Disabled</p>
+        </div>
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="privacy">
+      <AccordionTrigger>Privacy & Security</AccordionTrigger>
+      <AccordionContent>
+        <div className="space-y-2 text-sm">
+          <p>Two-factor auth: Enabled</p>
+          <p>Profile visibility: Public</p>
+          <p>Data sharing: Limited</p>
+        </div>
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+```tsx
+<Accordion type="multiple">
+  <AccordionItem value="general">
+    <AccordionTrigger>General Settings</AccordionTrigger>
+    <AccordionContent>
+      <div className="space-y-2">
+        <p>Language: English</p>
+        <p>Timezone: UTC-5</p>
+      </div>
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="notifications">
+    <AccordionTrigger>Notifications</AccordionTrigger>
+    <AccordionContent>
+      <div className="space-y-2">
+        <p>Email: Enabled</p>
+        <p>Push: Disabled</p>
+      </div>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### File Tree Navigation
+
+<ComponentPreview>
+  <Accordion type="multiple" className="w-full">
+    <AccordionItem value="src">
+      <AccordionTrigger>src/</AccordionTrigger>
+      <AccordionContent>
+        <div className="space-y-1 text-sm font-mono">
+          <p className="text-ansi-green">├── components/</p>
+          <p className="text-ansi-green">├── hooks/</p>
+          <p className="text-ansi-green">├── lib/</p>
+          <p className="text-ansi-blue">├── index.ts</p>
+          <p className="text-ansi-blue">└── main.tsx</p>
+        </div>
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="public">
+      <AccordionTrigger>public/</AccordionTrigger>
+      <AccordionContent>
+        <div className="space-y-1 text-sm font-mono">
+          <p className="text-ansi-cyan">├── favicon.ico</p>
+          <p className="text-ansi-cyan">└── robots.txt</p>
+        </div>
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="config">
+      <AccordionTrigger>Config Files</AccordionTrigger>
+      <AccordionContent>
+        <div className="space-y-1 text-sm font-mono">
+          <p className="text-ansi-yellow">├── package.json</p>
+          <p className="text-ansi-yellow">├── tsconfig.json</p>
+          <p className="text-ansi-yellow">└── vite.config.ts</p>
+        </div>
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+```tsx
+<Accordion type="multiple">
+  <AccordionItem value="src">
+    <AccordionTrigger>src/</AccordionTrigger>
+    <AccordionContent>
+      <div className="space-y-1 font-mono">
+        <p className="text-ansi-green">├── components/</p>
+        <p className="text-ansi-blue">└── main.tsx</p>
+      </div>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Documentation Sections
+
+<ComponentPreview>
+  <Accordion type="single" collapsible className="w-full">
+    <AccordionItem value="getting-started">
+      <AccordionTrigger>Getting Started</AccordionTrigger>
+      <AccordionContent>
+        Learn how to install and configure TermCN in your project. Follow the quick start guide to get up and running in minutes.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="components">
+      <AccordionTrigger>Components</AccordionTrigger>
+      <AccordionContent>
+        Browse our collection of terminal-inspired components including buttons, inputs, cards, and more.
+      </AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="theming">
+      <AccordionTrigger>Theming</AccordionTrigger>
+      <AccordionContent>
+        Customize colors, typography, and spacing using CSS variables and the Catppuccin Mocha palette.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="getting-started">
+    <AccordionTrigger>Getting Started</AccordionTrigger>
+    <AccordionContent>
+      Learn how to install and configure TermCN.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="components">
+    <AccordionTrigger>Components</AccordionTrigger>
+    <AccordionContent>
+      Browse our terminal-inspired components.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## API Reference
+
+### Accordion Props
+
+The Accordion component wraps `@radix-ui/react-accordion` Root and accepts the following props:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"single" \| "multiple"` | Required | Whether one or multiple items can be open |
+| `collapsible` | `boolean` | `false` | When `type="single"`, allows closing all items |
+| `defaultValue` | `string \| string[]` | `undefined` | Default open item(s) |
+| `value` | `string \| string[]` | `undefined` | Controlled open item(s) |
+| `onValueChange` | `(value: string \| string[]) => void` | `undefined` | Called when open items change |
+| `disabled` | `boolean` | `false` | Disable all items |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### AccordionItem Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | Required | Unique identifier for the item |
+| `disabled` | `boolean` | `false` | Disable this specific item |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+### AccordionTrigger Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `children` | `React.ReactNode` | Required | The trigger content |
+
+### AccordionContent Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `children` | `React.ReactNode` | Required | The expandable content |
+
+### Type Definitions
+
+```typescript
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
+
+// Accordion root props
+type AccordionProps = React.ComponentProps<typeof AccordionPrimitive.Root>;
+
+// AccordionItem props
+type AccordionItemProps = React.ComponentProps<typeof AccordionPrimitive.Item>;
+
+// AccordionTrigger props
+type AccordionTriggerProps = React.ComponentProps<typeof AccordionPrimitive.Trigger>;
+
+// AccordionContent props
+type AccordionContentProps = React.ComponentProps<typeof AccordionPrimitive.Content>;
+```
+
+## Styling and Customization
+
+### Custom Styles
+
+You can extend the accordion with custom styles using the `className` prop:
+
+```tsx
+<Accordion type="single" collapsible className="border rounded-none">
+  <AccordionItem value="item-1" className="border-ansi-green">
+    <AccordionTrigger className="text-ansi-green">
+      Custom Green Section
+    </AccordionTrigger>
+    <AccordionContent className="bg-ansi-green/10">
+      Content with green tint.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Theme Integration
+
+The Accordion component uses CSS variables from the TermCN theme system:
+
+- `--border` - Item separator borders
+- `--foreground` - Trigger text color
+- `--muted-foreground` - Content text color
+- `--ansi-blue` - Expansion indicator color (▸/▾)
+
+### Custom Indicators
+
+To use different expansion indicators, override the trigger styles:
+
+```tsx
+<AccordionTrigger className="[&>span]:hidden">
+  <span className="mr-2">[+]</span>
+  Custom Indicator
+</AccordionTrigger>
+```
+
+### Extending Variants
+
+Modify the component to add custom variants:
+
+```typescript
+function AccordionTrigger({
+  className,
+  children,
+  variant = "default",
+  ...props
+}) {
+  return (
+    <AccordionPrimitive.Trigger
+      className={cn(
+        // Base styles
+        "group flex flex-1 items-center gap-2 py-2",
+        // Variant styles
+        variant === "compact" && "py-1 text-xs",
+        variant === "large" && "py-4 text-lg",
+        className
+      )}
+      {...props}
+    >
+      {/* ... */}
+    </AccordionPrimitive.Trigger>
+  );
+}
+```
+
+## Accessibility
+
+### Keyboard Navigation
+
+- **Tab**: Move focus between accordion triggers
+- **Enter/Space**: Toggle the focused accordion item
+- **Arrow Down**: Move focus to the next trigger
+- **Arrow Up**: Move focus to the previous trigger
+- **Home**: Move focus to the first trigger
+- **End**: Move focus to the last trigger
+
+### ARIA Attributes
+
+The component automatically handles ARIA attributes:
+
+```tsx
+{/* Rendered HTML structure */}
+<div data-slot="accordion" role="region">
+  <h3>
+    <button
+      aria-expanded="true"
+      aria-controls="content-1"
+      id="trigger-1"
+    >
+      Trigger Text
+    </button>
+  </h3>
+  <div
+    role="region"
+    aria-labelledby="trigger-1"
+    id="content-1"
+  >
+    Content
+  </div>
+</div>
+```
+
+### Screen Reader Support
+
+Ensure meaningful labels for screen readers:
+
+```tsx
+<Accordion type="single" collapsible aria-label="Frequently Asked Questions">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Question about pricing</AccordionTrigger>
+    <AccordionContent>
+      Detailed answer about pricing...
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## Best Practices
+
+### When to Use Accordions
+
+✅ **Good Use Cases:**
+- FAQ sections with question/answer pairs
+- Settings panels with categorized options
+- Documentation with expandable sections
+- File trees and nested navigation
+- Progressive disclosure of complex content
+- Mobile-friendly content organization
+
+❌ **Avoid Using Accordions For:**
+- Critical information that users must see (use alerts)
+- Primary navigation (use proper nav components)
+- Content that users need to compare side-by-side
+- Very short content (just show it directly)
+- Single-item collapsibles (use a disclosure component)
+
+### Design Guidelines
+
+1. **Use descriptive triggers**: Labels should clearly indicate what content will be revealed
+2. **Keep content focused**: Each section should cover one topic or category
+3. **Consider default state**: Open important sections by default if users need them immediately
+4. **Maintain consistency**: Use consistent trigger formatting and content structure
+5. **Group related items**: Organize accordion items logically for easy scanning
+6. **Limit nesting**: Avoid deeply nested accordions; use other patterns for complex hierarchies
+
+## Design Details
+
+### Terminal Tree Indicators
+
+The tree-style indicators are implemented using ANSI blue colored triangles:
+
+**Collapsed State:**
+- Right-pointing triangle (▸) indicates expandable content
+- Displayed in `text-ansi-blue` color
+
+**Expanded State:**
+- Down-pointing triangle (▾) indicates collapsible content
+- Smooth state transition using `data-[state=open/closed]` selectors
+
+### Implementation Details
+
+```tsx
+// Trigger indicator implementation
+<span className="text-ansi-blue shrink-0 group-data-[state=open]:hidden">
+  ▸
+</span>
+<span className="text-ansi-blue shrink-0 hidden group-data-[state=open]:inline">
+  ▾
+</span>
+```
+
+### Border Styling
+
+Items are separated by bottom borders with the last item having no border:
+
+```tsx
+className="border-b border-border last:border-b-0"
+```
+
+## Related Components
+
+- **Tabs**: For switching between content panels without collapsing
+- **Dialog**: For modal content that requires user attention
+- **Collapsible**: For single expandable sections
+- **Card**: For grouping related content without expansion
+- **NavigationMenu**: For complex navigation hierarchies
+
+## Examples Gallery
+
+### Controlled Accordion
+
+```tsx
+import { useState } from "react";
+
+function ControlledAccordion() {
+  const [value, setValue] = useState<string | undefined>("item-1");
+
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        <Button onClick={() => setValue("item-1")}>Open First</Button>
+        <Button onClick={() => setValue("item-2")}>Open Second</Button>
+        <Button onClick={() => setValue(undefined)}>Close All</Button>
+      </div>
+      <Accordion
+        type="single"
+        collapsible
+        value={value}
+        onValueChange={setValue}
+      >
+        <AccordionItem value="item-1">
+          <AccordionTrigger>First Item</AccordionTrigger>
+          <AccordionContent>First content.</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-2">
+          <AccordionTrigger>Second Item</AccordionTrigger>
+          <AccordionContent>Second content.</AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  );
+}
+```
+
+### Nested Content with Forms
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="profile">
+    <AccordionTrigger>Edit Profile</AccordionTrigger>
+    <AccordionContent>
+      <form className="space-y-4">
+        <Input placeholder="Name" />
+        <Input placeholder="Email" />
+        <Button type="submit">Save</Button>
+      </form>
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### With Icons
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="users">
+    <AccordionTrigger>
+      <UsersIcon className="w-4 h-4" />
+      User Management
+    </AccordionTrigger>
+    <AccordionContent>
+      Manage user accounts and permissions.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="settings">
+    <AccordionTrigger>
+      <SettingsIcon className="w-4 h-4" />
+      System Settings
+    </AccordionTrigger>
+    <AccordionContent>
+      Configure system-wide settings.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Dynamic Accordion
+
+```tsx
+const items = [
+  { id: "1", title: "First", content: "Content 1" },
+  { id: "2", title: "Second", content: "Content 2" },
+  { id: "3", title: "Third", content: "Content 3" },
+];
+
+function DynamicAccordion() {
+  return (
+    <Accordion type="single" collapsible>
+      {items.map((item) => (
+        <AccordionItem key={item.id} value={item.id}>
+          <AccordionTrigger>{item.title}</AccordionTrigger>
+          <AccordionContent>{item.content}</AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
+  );
+}
+```
+
+## Performance
+
+The Accordion component is lightweight and performant:
+
+- **Lazy rendering**: Content is hidden via CSS, not unmounted
+- **Minimal JavaScript**: Built on Radix UI primitives with optimized state management
+- **Small bundle size**: ~3KB including Radix dependency
+- **Server-side rendering**: Fully compatible with SSR frameworks
+- **No layout shift**: Content containers maintain size during transitions
+
+## Troubleshooting
+
+### Content not expanding
+
+Ensure each `AccordionItem` has a unique `value` prop:
+
+```tsx
+{/* Each item needs a unique value */}
+<AccordionItem value="unique-id-1">...</AccordionItem>
+<AccordionItem value="unique-id-2">...</AccordionItem>
+```
+
+### Collapsible not working
+
+The `collapsible` prop only works with `type="single"`:
+
+```tsx
+{/* Correct - collapsible with single type */}
+<Accordion type="single" collapsible>
+
+{/* Incorrect - collapsible ignored with multiple type */}
+<Accordion type="multiple" collapsible>
+```
+
+### Indicators not showing
+
+Verify the ANSI color CSS variables are defined in your theme:
+
+```css
+:root {
+  --ansi-blue: 210 100% 60%;
+}
+```
+
+### Focus styles not visible
+
+Ensure your global styles include focus-visible utilities:
+
+```tsx
+<AccordionTrigger className="focus-visible:ring-2 focus-visible:ring-ring">
+  Trigger
+</AccordionTrigger>
+```
+
+## Migration Guide
+
+### From shadcn/ui Accordion
+
+The TermCN Accordion is compatible with shadcn/ui with terminal styling:
+
+```diff
+  import {
+    Accordion,
+    AccordionItem,
+    AccordionTrigger,
+    AccordionContent,
+  } from "@/components/ui/accordion";
+
+  // Basic usage remains the same
+  <Accordion type="single" collapsible>
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Title</AccordionTrigger>
+      <AccordionContent>Content</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+
+- // shadcn/ui uses ChevronDown icon with rotation animation
++ // TermCN uses ANSI blue triangle indicators (▸/▾)
++ // Terminal-inspired styling is automatic
+```
+
+## Changelog
+
+### Version 1.0.0
+- Initial release
+- Tree-style ANSI blue indicators (▸/▾)
+- Single and multiple expansion modes
+- Collapsible support for single mode
+- Full Radix UI accessibility integration
+- Monospace typography styling
+- Border-separated items
+- TypeScript support
+
+## License
+
+MIT License - Part of the TermCN component library.
+
+## Contributing
+
+Contributions are welcome! Please read the contributing guidelines before submitting PRs.
+
+---
+
+**Keywords**: accordion, collapsible, expandable, faq, tree, disclosure, panel, section, terminal, cli, monospace, radix, accessible, keyboard navigation, TypeScript, React, Tailwind CSS, component, UI, TermCN

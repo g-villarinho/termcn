@@ -1,0 +1,14 @@
+{
+  "name": "accordion",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "ui/accordion.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as AccordionPrimitive from \"@radix-ui/react-accordion\"\n\nimport { cn } from \"@/lib/utils\"\n\nfunction Accordion({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof AccordionPrimitive.Root>) {\n\treturn (\n\t\t<AccordionPrimitive.Root\n\t\t\tdata-slot=\"accordion\"\n\t\t\tclassName={cn(\"font-mono\", className)}\n\t\t\t{...props}\n\t\t/>\n\t)\n}\n\nfunction AccordionItem({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof AccordionPrimitive.Item>) {\n\treturn (\n\t\t<AccordionPrimitive.Item\n\t\t\tdata-slot=\"accordion-item\"\n\t\t\tclassName={cn(\"border-b border-border last:border-b-0\", className)}\n\t\t\t{...props}\n\t\t/>\n\t)\n}\n\nfunction AccordionTrigger({\n\tclassName,\n\tchildren,\n\t...props\n}: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {\n\treturn (\n\t\t<AccordionPrimitive.Header className=\"flex\">\n\t\t\t<AccordionPrimitive.Trigger\n\t\t\t\tdata-slot=\"accordion-trigger\"\n\t\t\t\tclassName={cn(\n\t\t\t\t\t\"group flex flex-1 items-center gap-2 py-2 text-left text-sm\",\n\t\t\t\t\t\"text-foreground\",\n\t\t\t\t\t\"outline-none\",\n\t\t\t\t\t\"disabled:pointer-events-none disabled:opacity-50\",\n\t\t\t\t\tclassName\n\t\t\t\t)}\n\t\t\t\t{...props}\n\t\t\t>\n\t\t\t\t<span className=\"text-ansi-blue shrink-0 group-data-[state=open]:hidden\">▸</span>\n\t\t\t\t<span className=\"text-ansi-blue shrink-0 hidden group-data-[state=open]:inline\">▾</span>\n\t\t\t\t{children}\n\t\t\t</AccordionPrimitive.Trigger>\n\t\t</AccordionPrimitive.Header>\n\t)\n}\n\nfunction AccordionContent({\n\tclassName,\n\tchildren,\n\t...props\n}: React.ComponentProps<typeof AccordionPrimitive.Content>) {\n\treturn (\n\t\t<AccordionPrimitive.Content\n\t\t\tdata-slot=\"accordion-content\"\n\t\t\tclassName=\"overflow-hidden text-sm data-[state=closed]:hidden\"\n\t\t\t{...props}\n\t\t>\n\t\t\t<div className={cn(\"pl-4 pb-2 text-muted-foreground\", className)}>\n\t\t\t\t{children}\n\t\t\t</div>\n\t\t</AccordionPrimitive.Content>\n\t)\n}\n\nexport { Accordion, AccordionItem, AccordionTrigger, AccordionContent }\n",
+      "type": "registry:ui",
+      "target": "components/ui/accordion.tsx"
+    }
+  ]
+}

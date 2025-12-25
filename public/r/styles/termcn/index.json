@@ -1,5 +1,18 @@
 [
   {
+    "name": "accordion",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "ui/accordion.tsx",
+        "type": "registry:ui",
+        "target": "components/ui/accordion.tsx"
+      }
+    ]
+  },
+  {
     "name": "alert",
     "type": "registry:ui",
     "dependencies": [
