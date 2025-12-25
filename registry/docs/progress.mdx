@@ -1,0 +1,253 @@
+---
+title: Progress
+description: Terminal-style progress bars with ASCII characters.
+order: 22
+published: true
+---
+
+import { Progress } from "@/components/ui/progress";
+
+# Progress
+
+Terminal-style progress bars with ASCII characters or visual bar mode.
+
+## Installation
+
+```bash
+npx termcn add progress
+```
+
+## Usage
+
+### Basic
+
+<ComponentPreview>
+  <Progress value={60} />
+</ComponentPreview>
+
+```tsx
+import { Progress } from "@/components/ui/progress";
+
+<Progress value={60} />
+```
+
+### With Percentage
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3 w-80">
+    <Progress value={25} showPercent />
+    <Progress value={75} showPercent />
+    <Progress value={100} showPercent variant="success" />
+  </div>
+</ComponentPreview>
+
+```tsx
+<Progress value={25} showPercent />
+<Progress value={75} showPercent />
+<Progress value={100} showPercent variant="success" />
+```
+
+### Fill Characters
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3 w-72">
+    <div className="flex items-center gap-3">
+      <span className="text-xs text-muted-foreground w-12">block</span>
+      <Progress fillChar="block" value={60} />
+    </div>
+    <div className="flex items-center gap-3">
+      <span className="text-xs text-muted-foreground w-12">hash</span>
+      <Progress fillChar="hash" value={60} />
+    </div>
+    <div className="flex items-center gap-3">
+      <span className="text-xs text-muted-foreground w-12">arrow</span>
+      <Progress fillChar="arrow" value={60} />
+    </div>
+    <div className="flex items-center gap-3">
+      <span className="text-xs text-muted-foreground w-12">equals</span>
+      <Progress fillChar="equals" value={60} />
+    </div>
+    <div className="flex items-center gap-3">
+      <span className="text-xs text-muted-foreground w-12">dot</span>
+      <Progress fillChar="dot" value={60} />
+    </div>
+    <div className="flex items-center gap-3">
+      <span className="text-xs text-muted-foreground w-12">pipe</span>
+      <Progress fillChar="pipe" value={60} />
+    </div>
+    <div className="flex items-center gap-3">
+      <span className="text-xs text-muted-foreground w-12">shade</span>
+      <Progress fillChar="shade" value={60} />
+    </div>
+    <div className="flex items-center gap-3">
+      <span className="text-xs text-muted-foreground w-12">line</span>
+      <Progress fillChar="line" value={60} />
+    </div>
+  </div>
+</ComponentPreview>
+
+```tsx
+<Progress fillChar="block" value={60} />  {/* <████████████░░░░░░░░> */}
+<Progress fillChar="hash" value={60} />   {/* <############--------> */}
+<Progress fillChar="arrow" value={60} />  {/* <>>>>>>>>>>>>        > */}
+<Progress fillChar="equals" value={60} /> {/* <============        > */}
+<Progress fillChar="dot" value={60} />    {/* <●●●●●●●●●●●●○○○○○○○○> */}
+<Progress fillChar="pipe" value={60} />   {/* <||||||||||||        > */}
+<Progress fillChar="shade" value={60} />  {/* <▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░> */}
+<Progress fillChar="line" value={60} />   {/* <━━━━━━━━━━━━────────> */}
+```
+
+### Variants
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3 w-72">
+    <Progress variant="default" value={75} showPercent />
+    <Progress variant="success" value={100} showPercent />
+    <Progress variant="warning" value={65} showPercent />
+    <Progress variant="destructive" value={25} showPercent />
+    <Progress variant="muted" value={50} showPercent />
+  </div>
+</ComponentPreview>
+
+```tsx
+<Progress variant="default" value={75} />
+<Progress variant="success" value={100} />
+<Progress variant="warning" value={65} />
+<Progress variant="destructive" value={25} />
+<Progress variant="muted" value={50} />
+```
+
+### Sizes
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3 w-72">
+    <Progress size="sm" value={60} showPercent />
+    <Progress size="md" value={60} showPercent />
+    <Progress size="lg" value={60} showPercent />
+  </div>
+</ComponentPreview>
+
+```tsx
+<Progress size="sm" value={60} />
+<Progress size="md" value={60} />
+<Progress size="lg" value={60} />
+```
+
+### Without Brackets
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3 w-64">
+    <Progress value={60} showBrackets={false} />
+    <Progress value={60} showBrackets={false} fillChar="equals" />
+  </div>
+</ComponentPreview>
+
+```tsx
+<Progress value={60} showBrackets={false} />
+```
+
+### Custom Width
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3 w-96">
+    <Progress value={50} charWidth={10} showPercent />
+    <Progress value={50} charWidth={20} showPercent />
+    <Progress value={50} charWidth={30} showPercent />
+  </div>
+</ComponentPreview>
+
+```tsx
+<Progress value={50} charWidth={10} />
+<Progress value={50} charWidth={30} />
+```
+
+### Bar Mode
+
+Use `mode="bar"` for a visual progress bar with Radix UI:
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3 w-64">
+    <Progress mode="bar" value={75} />
+    <Progress mode="bar" value={100} variant="success" />
+    <Progress mode="bar" value={50} variant="warning" />
+    <Progress mode="bar" value={25} variant="destructive" />
+  </div>
+</ComponentPreview>
+
+```tsx
+<Progress mode="bar" value={75} />
+<Progress mode="bar" value={100} variant="success" />
+```
+
+### Bar Mode with Percentage
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3 w-80">
+    <Progress mode="bar" value={75} showPercent />
+    <Progress mode="bar" value={100} variant="success" showPercent />
+  </div>
+</ComponentPreview>
+
+```tsx
+<Progress mode="bar" value={75} showPercent />
+```
+
+## Examples
+
+### System Resources
+
+<ComponentPreview>
+  <div className="flex flex-col gap-3 w-80 font-mono text-xs">
+    <div className="flex items-center gap-2">
+      <span className="w-12 text-muted-foreground">CPU</span>
+      <Progress value={45} charWidth={15} size="sm" className="flex-1" />
+      <span className="w-10 text-right">45%</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <span className="w-12 text-muted-foreground">MEM</span>
+      <Progress value={72} charWidth={15} size="sm" variant="warning" className="flex-1" />
+      <span className="w-10 text-right">72%</span>
+    </div>
+    <div className="flex items-center gap-2">
+      <span className="w-12 text-muted-foreground">DISK</span>
+      <Progress value={23} charWidth={15} size="sm" variant="success" className="flex-1" />
+      <span className="w-10 text-right">23%</span>
+    </div>
+  </div>
+</ComponentPreview>
+
+### Download
+
+<ComponentPreview>
+  <div className="flex flex-col gap-2 w-80">
+    <div className="flex justify-between text-sm text-muted-foreground">
+      <span>package.tar.gz</span>
+      <span>2.4 MB / 3.2 MB</span>
+    </div>
+    <Progress value={75} showPercent fillChar="arrow" />
+  </div>
+</ComponentPreview>
+
+### Installation
+
+<ComponentPreview>
+  <div className="flex flex-col gap-2 w-80 font-mono text-sm">
+    <span className="text-muted-foreground">$ npm install</span>
+    <Progress value={100} variant="success" fillChar="hash" showPercent />
+    <span className="text-success">✓ Done</span>
+  </div>
+</ComponentPreview>
+
+## API
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | `0` | Progress value (0 to max) |
+| `max` | `number` | `100` | Maximum value |
+| `mode` | `"char" \| "bar"` | `"char"` | Display mode |
+| `fillChar` | `"block" \| "hash" \| "arrow" \| "equals" \| "dot" \| "pipe" \| "shade" \| "line" \| string` | `"block"` | Fill character |
+| `showPercent` | `boolean` | `false` | Show percentage |
+| `showBrackets` | `boolean` | `true` | Show `< >` brackets |
+| `charWidth` | `number` | `20` | Character width |
+| `variant` | `"default" \| "success" \| "warning" \| "destructive" \| "muted"` | `"default"` | Color variant |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Size |
