@@ -16,18 +16,18 @@ function Calendar({
 			showOutsideDays={showOutsideDays}
 			className={cn("font-mono text-sm", className)}
 			classNames={{
-				months: "flex flex-col gap-2",
+				months: "relative flex flex-col gap-2",
 				month: "flex flex-col gap-2",
-				month_caption: "flex items-center justify-center h-8 relative",
+				month_caption: "flex items-center justify-center h-8",
 				caption_label: "text-foreground font-medium",
-				nav: "flex items-center gap-1 absolute inset-x-0 justify-between",
+				nav: "absolute top-0 flex items-center justify-between w-full px-1",
 				button_previous: cn(
 					"size-7 flex items-center justify-center",
-					"text-muted-foreground hover:text-foreground"
+					"text-muted-foreground hover:text-foreground hover:bg-background2"
 				),
 				button_next: cn(
 					"size-7 flex items-center justify-center",
-					"text-muted-foreground hover:text-foreground"
+					"text-muted-foreground hover:text-foreground hover:bg-background2"
 				),
 				month_grid: "border border-border",
 				weekdays: "flex border-b border-border bg-background1",
