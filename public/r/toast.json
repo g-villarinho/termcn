@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toast",
+  "title": "Toast",
+  "description": "Terminal-style notification built on Radix Toast: box-drawing border, semantic variants, bracket close [x], discrete opacity fade. Variants: default, info, success, warning, destructive.",
+  "dependencies": [
+    "@radix-ui/react-toast",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/toast.tsx",
+      "content": "import * as React from \"react\";\nimport * as ToastPrimitive from \"@radix-ui/react-toast\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst ToastProvider = ToastPrimitive.Provider;\n\nfunction ToastViewport({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof ToastPrimitive.Viewport>) {\n\treturn (\n\t\t<ToastPrimitive.Viewport\n\t\t\tdata-slot=\"toast-viewport\"\n\t\t\tclassName={cn(\n\t\t\t\t\"fixed bottom-0 right-0 z-50 flex max-h-screen w-full flex-col gap-2 p-4 sm:max-w-sm\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nconst toastVariants = cva(\n\t\"group relative flex w-full items-start gap-2 border bg-card px-3 py-2 font-mono text-sm data-[state=open]:animate-[termcn-fade_150ms_ease-out] data-[state=closed]:animate-[termcn-fade-out_150ms_ease-out]\",\n\t{\n\t\tvariants: {\n\t\t\tvariant: {\n\t\t\t\tdefault: \"border-border text-foreground before:text-foreground1\",\n\t\t\t\tinfo: \"border-info text-info before:text-info\",\n\t\t\t\tsuccess: \"border-success text-success before:text-success\",\n\t\t\t\twarning: \"border-warning text-warning before:text-warning\",\n\t\t\t\tdestructive:\n\t\t\t\t\t\"border-destructive text-destructive before:text-destructive\",\n\t\t\t},\n\t\t},\n\t\tdefaultVariants: { variant: \"default\" },\n\t},\n);\n\nfunction Toast({\n\tclassName,\n\tvariant,\n\t...props\n}: React.ComponentProps<typeof ToastPrimitive.Root> &\n\tVariantProps<typeof toastVariants>) {\n\treturn (\n\t\t<ToastPrimitive.Root\n\t\t\tdata-slot=\"toast\"\n\t\t\tclassName={cn(toastVariants({ variant }), className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction ToastTitle({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof ToastPrimitive.Title>) {\n\treturn (\n\t\t<ToastPrimitive.Title\n\t\t\tdata-slot=\"toast-title\"\n\t\t\tclassName={cn(\n\t\t\t\t\"font-medium before:text-primary before:content-['▍']\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction ToastDescription({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof ToastPrimitive.Description>) {\n\treturn (\n\t\t<ToastPrimitive.Description\n\t\t\tdata-slot=\"toast-description\"\n\t\t\tclassName={cn(\"pl-4 text-foreground1\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction ToastAction({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof ToastPrimitive.Action>) {\n\treturn (\n\t\t<ToastPrimitive.Action\n\t\t\tdata-slot=\"toast-action\"\n\t\t\tclassName={cn(\n\t\t\t\t\"ml-auto shrink-0 select-none border border-border px-2 py-0.5 text-xs text-foreground1 outline-none focus-visible:bg-foreground focus-visible:text-background\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction ToastClose({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof ToastPrimitive.Close>) {\n\treturn (\n\t\t<ToastPrimitive.Close\n\t\t\tdata-slot=\"toast-close\"\n\t\t\tclassName={cn(\n\t\t\t\t\"absolute top-2 right-2 select-none text-xs text-foreground1 outline-none before:content-['['] after:content-[']'] focus-visible:bg-foreground focus-visible:text-background\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\ttoast-close=\"\"\n\t\t\t{...props}\n\t\t>\n\t\t\tx<span className=\"sr-only\">Close</span>\n\t\t</ToastPrimitive.Close>\n\t);\n}\n\nexport {\n\tToastProvider,\n\tToastViewport,\n\tToast,\n\tToastTitle,\n\tToastDescription,\n\tToastAction,\n\tToastClose,\n\ttoastVariants,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

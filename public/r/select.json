@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "select",
+  "title": "Select",
+  "description": "Menu-picker select built on Popover + Command (no search input). Reuses the floating container, arrow-key navigation and inversion. Trigger uses ▾ glyph.",
+  "registryDependencies": [
+    "utils",
+    "popover",
+    "command",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/select.tsx",
+      "content": "import * as React from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport {\n\tCommand,\n\tCommandEmpty,\n\tCommandGroup,\n\tCommandItem,\n\tCommandList,\n} from \"@/components/ui/command\";\nimport {\n\tPopover,\n\tPopoverContent,\n\tPopoverTrigger,\n} from \"@/components/ui/popover\";\nimport { cn } from \"@/lib/utils\";\n\ninterface SelectOption {\n\tvalue: string;\n\tlabel: string;\n\tdisabled?: boolean;\n}\n\ninterface SelectProps {\n\toptions: SelectOption[];\n\tvalue?: string;\n\tonValueChange?: (value: string) => void;\n\tplaceholder?: string;\n\temptyText?: string;\n\tclassName?: string;\n\tdisabled?: boolean;\n}\n\n/**\n * Menu-picker select (tmux choose-tree / ranger style) built on Popover +\n * Command. It reuses the same floating container as Combobox but omits the\n * search input — selection is by arrow keys with Vim-style inversion.\n */\nfunction Select({\n\toptions,\n\tvalue,\n\tonValueChange,\n\tplaceholder = \"select...\",\n\temptyText = \"-- empty --\",\n\tclassName,\n\tdisabled,\n}: SelectProps) {\n\tconst [open, setOpen] = React.useState(false);\n\tconst selected = options.find((option) => option.value === value);\n\n\treturn (\n\t\t<Popover open={open} onOpenChange={setOpen}>\n\t\t\t<PopoverTrigger asChild>\n\t\t\t\t<Button\n\t\t\t\t\ttype=\"button\"\n\t\t\t\t\tvariant=\"default\"\n\t\t\t\t\tbracket={false}\n\t\t\t\t\tdisabled={disabled}\n\t\t\t\t\trole=\"combobox\"\n\t\t\t\t\taria-expanded={open}\n\t\t\t\t\tclassName={cn(\"w-56 justify-between gap-2\", className)}\n\t\t\t\t>\n\t\t\t\t\t<span\n\t\t\t\t\t\tclassName={cn(\n\t\t\t\t\t\t\t\"truncate\",\n\t\t\t\t\t\t\t!selected && \"text-foreground2\",\n\t\t\t\t\t\t)}\n\t\t\t\t\t>\n\t\t\t\t\t\t{selected ? selected.label : placeholder}\n\t\t\t\t\t</span>\n\t\t\t\t\t<span aria-hidden className=\"select-none text-foreground2\">\n\t\t\t\t\t\t▾\n\t\t\t\t\t</span>\n\t\t\t\t</Button>\n\t\t\t</PopoverTrigger>\n\t\t\t<PopoverContent align=\"start\" className=\"w-56 p-0\">\n\t\t\t\t<Command>\n\t\t\t\t\t<CommandList>\n\t\t\t\t\t\t<CommandEmpty>{emptyText}</CommandEmpty>\n\t\t\t\t\t\t<CommandGroup>\n\t\t\t\t\t\t\t{options.map((option) => {\n\t\t\t\t\t\t\t\tconst isSelected = option.value === value;\n\t\t\t\t\t\t\t\treturn (\n\t\t\t\t\t\t\t\t\t<CommandItem\n\t\t\t\t\t\t\t\t\t\tkey={option.value}\n\t\t\t\t\t\t\t\t\t\tvalue={option.value}\n\t\t\t\t\t\t\t\t\t\tdisabled={option.disabled}\n\t\t\t\t\t\t\t\t\t\tonSelect={(current: string) => {\n\t\t\t\t\t\t\t\t\t\t\tonValueChange?.(current);\n\t\t\t\t\t\t\t\t\t\t\tsetOpen(false);\n\t\t\t\t\t\t\t\t\t\t}}\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\t<span\n\t\t\t\t\t\t\t\t\t\t\taria-hidden\n\t\t\t\t\t\t\t\t\t\t\tclassName={cn(\n\t\t\t\t\t\t\t\t\t\t\t\t\"w-4 select-none text-primary\",\n\t\t\t\t\t\t\t\t\t\t\t\t!isSelected && \"opacity-0\",\n\t\t\t\t\t\t\t\t\t\t\t)}\n\t\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\t\t✓\n\t\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t\t<span className=\"truncate\">\n\t\t\t\t\t\t\t\t\t\t\t{option.label}\n\t\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t</CommandItem>\n\t\t\t\t\t\t\t\t);\n\t\t\t\t\t\t\t})}\n\t\t\t\t\t\t</CommandGroup>\n\t\t\t\t\t</CommandList>\n\t\t\t\t</Command>\n\t\t\t</PopoverContent>\n\t\t</Popover>\n\t);\n}\n\nexport { Select };\nexport type { SelectOption, SelectProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
