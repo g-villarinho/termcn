@@ -1,0 +1,103 @@
+---
+title: Progress
+description: Terminal-style horizontal progress bar with safe value clamping.
+---
+
+import { Progress } from "registry/ui/progress"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Progress
+
+Terminal-style progress bar built on Radix Progress. Primary-colored fill indicator with a 150ms ease-out transition. Values are clamped to `[0, max]` with safe handling of missing or invalid `value`. Horizontal bar with a border and no border-radius.
+
+## Installation
+
+<InstallTabs pkg="@termcn/progress" />
+
+## Usage
+
+```tsx
+import { Progress } from "@/components/ui/progress"
+
+export default function ProgressDemo() {
+  return <Progress value={60} />
+}
+```
+
+## Examples
+
+### 0%
+
+<Preview>
+  <Progress value={0} />
+</Preview>
+
+```tsx
+<Progress value={0} />
+```
+
+### 50%
+
+<Preview>
+  <Progress value={50} />
+</Preview>
+
+```tsx
+<Progress value={50} />
+```
+
+### 100%
+
+<Preview>
+  <Progress value={100} />
+</Preview>
+
+```tsx
+<Progress value={100} />
+```
+
+### Indeterminate
+
+Omit `value` to render an indeterminate state. The indicator collapses to 0% width — use a custom animation class to indicate loading.
+
+<Preview>
+  <Progress />
+</Preview>
+
+```tsx
+<Progress />
+```
+
+### Custom Max
+
+Use `max` to change the scale. The fill percentage is calculated as `value / max`.
+
+<Preview>
+  <div className="flex flex-col gap-3 w-full">
+    <Progress value={75} max={200} />
+    <Progress value={150} max={200} />
+    <Progress value={200} max={200} />
+  </div>
+</Preview>
+
+```tsx
+<Progress value={75} max={200} />   {/* 37.5% */}
+<Progress value={150} max={200} />  {/* 75% */}
+<Progress value={200} max={200} />  {/* 100% */}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | — | Current progress value. Clamped to `[0, max]`. Omit for indeterminate. |
+| `max` | `number` | `100` | Maximum value. Falls back to `100` if `≤ 0`. |
+| `className` | `string` | — | Additional Tailwind classes applied to the root element |
+| ...rest | Radix `Progress` props | — | All Radix ProgressRoot props |
+
+## Notes
+
+- Value clamping is handled internally — passing `value={-10}` renders as `0%` and `value={150}` with default `max` renders as `100%`.
+- The indicator uses `transform: translateX(-(100 - percentage)%)` for smooth GPU-accelerated transitions.
+- `motion-reduce:transition-none` is applied to respect `prefers-reduced-motion`.

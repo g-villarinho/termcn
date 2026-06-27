@@ -1,0 +1,252 @@
+---
+title: Toast
+description: Terminal-style toast notification system with Radix primitives and 5 semantic variants.
+---
+
+import {
+  ToastProvider,
+  ToastViewport,
+  Toast,
+  ToastTitle,
+  ToastDescription,
+  ToastAction,
+  ToastClose,
+} from "registry/ui/toast"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Toast
+
+Terminal-style toast notification system built on Radix Toast. Five semantic variants (default, info, success, warning, destructive). `ToastTitle` renders a `▍` block-cursor prefix. `ToastClose` renders a bracket-style `[x]` button. Fade in/out animation at 150ms. Fixed bottom-right viewport.
+
+## Installation
+
+<InstallTabs pkg="@termcn/toast" />
+
+## Usage
+
+Wrap your app root in `<ToastProvider>` and place `<ToastViewport />` at the end of the tree. Then render `<Toast>` imperatively or via state.
+
+```tsx
+import {
+  ToastProvider,
+  ToastViewport,
+  Toast,
+  ToastTitle,
+  ToastDescription,
+  ToastAction,
+  ToastClose,
+} from "@/components/ui/toast"
+
+export function App() {
+  return (
+    <ToastProvider>
+      {/* ...app content... */}
+      <ToastViewport />
+    </ToastProvider>
+  )
+}
+
+// Render a toast
+function MyComponent() {
+  return (
+    <Toast open>
+      <ToastTitle>Build complete</ToastTitle>
+      <ToastDescription>Compiled 42 modules in 1.2s.</ToastDescription>
+      <ToastClose />
+    </Toast>
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<Preview>
+  <ToastProvider>
+    <Toast open>
+      <ToastTitle>Notification</ToastTitle>
+      <ToastDescription>This is a default toast message.</ToastDescription>
+      <ToastClose />
+    </Toast>
+  </ToastProvider>
+</Preview>
+
+```tsx
+<Toast open>
+  <ToastTitle>Notification</ToastTitle>
+  <ToastDescription>This is a default toast message.</ToastDescription>
+  <ToastClose />
+</Toast>
+```
+
+### Variants
+
+<Preview>
+  <ToastProvider>
+    <div className="flex flex-col gap-2 w-full">
+      <Toast open variant="default">
+        <ToastTitle>Default</ToastTitle>
+      </Toast>
+      <Toast open variant="info">
+        <ToastTitle>Info</ToastTitle>
+      </Toast>
+      <Toast open variant="success">
+        <ToastTitle>Success</ToastTitle>
+      </Toast>
+      <Toast open variant="warning">
+        <ToastTitle>Warning</ToastTitle>
+      </Toast>
+      <Toast open variant="destructive">
+        <ToastTitle>Destructive</ToastTitle>
+      </Toast>
+    </div>
+  </ToastProvider>
+</Preview>
+
+```tsx
+<Toast open variant="default"><ToastTitle>Default</ToastTitle></Toast>
+<Toast open variant="info"><ToastTitle>Info</ToastTitle></Toast>
+<Toast open variant="success"><ToastTitle>Success</ToastTitle></Toast>
+<Toast open variant="warning"><ToastTitle>Warning</ToastTitle></Toast>
+<Toast open variant="destructive"><ToastTitle>Destructive</ToastTitle></Toast>
+```
+
+### With Title and Description
+
+<Preview>
+  <ToastProvider>
+    <Toast open variant="success">
+      <ToastTitle>Deploy succeeded</ToastTitle>
+      <ToastDescription>termcn@1.2.0 is live at termcn.com</ToastDescription>
+      <ToastClose />
+    </Toast>
+  </ToastProvider>
+</Preview>
+
+```tsx
+<Toast open variant="success">
+  <ToastTitle>Deploy succeeded</ToastTitle>
+  <ToastDescription>termcn@1.2.0 is live at termcn.com</ToastDescription>
+  <ToastClose />
+</Toast>
+```
+
+### With Action Button
+
+<Preview>
+  <ToastProvider>
+    <Toast open variant="warning">
+      <ToastTitle>Unsaved changes</ToastTitle>
+      <ToastDescription>You have unsaved changes that will be lost.</ToastDescription>
+      <ToastAction altText="Save changes">save</ToastAction>
+      <ToastClose />
+    </Toast>
+  </ToastProvider>
+</Preview>
+
+```tsx
+<Toast open variant="warning">
+  <ToastTitle>Unsaved changes</ToastTitle>
+  <ToastDescription>You have unsaved changes that will be lost.</ToastDescription>
+  <ToastAction altText="Save changes">save</ToastAction>
+  <ToastClose />
+</Toast>
+```
+
+### Destructive with Close
+
+<Preview>
+  <ToastProvider>
+    <Toast open variant="destructive">
+      <ToastTitle>Connection lost</ToastTitle>
+      <ToastDescription>Unable to reach the server. Retrying in 5s.</ToastDescription>
+      <ToastClose />
+    </Toast>
+  </ToastProvider>
+</Preview>
+
+```tsx
+<Toast open variant="destructive">
+  <ToastTitle>Connection lost</ToastTitle>
+  <ToastDescription>Unable to reach the server. Retrying in 5s.</ToastDescription>
+  <ToastClose />
+</Toast>
+```
+
+### Viewport Positioning
+
+`ToastViewport` is fixed to the bottom-right corner. Place it once at the app root, outside any overflow-hidden containers.
+
+```tsx
+// App root
+<ToastProvider>
+  <main>{children}</main>
+  <ToastViewport />   {/* bottom-right, z-50 */}
+</ToastProvider>
+```
+
+## Props
+
+### ToastProvider
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `duration` | `number` | `5000` | Auto-dismiss delay in milliseconds |
+| `swipeDirection` | `"right"` \| `"left"` \| `"up"` \| `"down"` | `"right"` | Swipe-to-dismiss direction |
+| ...rest | Radix `ToastProvider` props | — | All Radix ToastProvider props |
+
+### ToastViewport
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | Radix `ToastViewport` props | — | All Radix ToastViewport props |
+
+### Toast
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `default` \| `info` \| `success` \| `warning` \| `destructive` | `default` | Semantic color scheme |
+| `open` | `boolean` | — | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | — | Called when open state changes |
+| `duration` | `number` | — | Override provider duration for this toast |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | Radix `ToastRoot` props | — | All Radix Toast.Root props |
+
+### ToastTitle
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | Radix `ToastTitle` props | — | `▍` prefix is always rendered via CSS `::before` |
+
+### ToastDescription
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | Radix `ToastDescription` props | — | All Radix ToastDescription props |
+
+### ToastAction
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `altText` | `string` | **required** | Accessible label for screen readers |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | Radix `ToastAction` props | — | All Radix ToastAction props |
+
+### ToastClose
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | Radix `ToastClose` props | — | Renders `[x]` via CSS `::before`/`::after` |
+
+## Notes
+
+- `ToastAction` requires `altText` for accessibility — Radix enforces this at the type level.
+- The `▍` prefix on `ToastTitle` is rendered via CSS `::before` content, not a DOM node.
+- The `[x]` close button is positioned absolute at `top-2 right-2` inside the toast container.
+- Animations use custom keyframes `termcn-fade` and `termcn-fade-out` (150ms, ease-out) — ensure these are defined in `src/index.css`.

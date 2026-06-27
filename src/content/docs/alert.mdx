@@ -1,0 +1,180 @@
+---
+title: Alert
+description: Terminal-style alert banner with semantic color variants.
+---
+
+import { Alert, AlertTitle, AlertDescription } from "registry/ui/alert"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Alert
+
+Terminal-style alert banner composed of a container, title, and description. Five semantic variants (default, info, success, warning, destructive). Optional SVG icon slot via CSS grid layout — when an `<svg>` is present as a direct child, the grid switches to a two-column layout with the icon in the left slot.
+
+## Installation
+
+<InstallTabs pkg="@termcn/alert" />
+
+## Usage
+
+```tsx
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+
+export default function AlertDemo() {
+  return (
+    <Alert>
+      <AlertTitle>Heads up</AlertTitle>
+      <AlertDescription>Something happened that you should know about.</AlertDescription>
+    </Alert>
+  )
+}
+```
+
+## Examples
+
+### Default
+
+<Preview>
+  <Alert>
+    <AlertTitle>Default alert</AlertTitle>
+    <AlertDescription>This is a default alert — no semantic color applied.</AlertDescription>
+  </Alert>
+</Preview>
+
+```tsx
+<Alert>
+  <AlertTitle>Default alert</AlertTitle>
+  <AlertDescription>This is a default alert — no semantic color applied.</AlertDescription>
+</Alert>
+```
+
+### Variants
+
+<Preview>
+  <div className="flex flex-col gap-3 w-full">
+    <Alert variant="info">
+      <AlertTitle>Info</AlertTitle>
+      <AlertDescription>This is an informational message.</AlertDescription>
+    </Alert>
+    <Alert variant="success">
+      <AlertTitle>Success</AlertTitle>
+      <AlertDescription>Operation completed successfully.</AlertDescription>
+    </Alert>
+    <Alert variant="warning">
+      <AlertTitle>Warning</AlertTitle>
+      <AlertDescription>Proceed with caution — this action is irreversible.</AlertDescription>
+    </Alert>
+    <Alert variant="destructive">
+      <AlertTitle>Destructive</AlertTitle>
+      <AlertDescription>This action cannot be undone.</AlertDescription>
+    </Alert>
+  </div>
+</Preview>
+
+```tsx
+<Alert variant="info">
+  <AlertTitle>Info</AlertTitle>
+  <AlertDescription>This is an informational message.</AlertDescription>
+</Alert>
+
+<Alert variant="success">
+  <AlertTitle>Success</AlertTitle>
+  <AlertDescription>Operation completed successfully.</AlertDescription>
+</Alert>
+
+<Alert variant="warning">
+  <AlertTitle>Warning</AlertTitle>
+  <AlertDescription>Proceed with caution — this action is irreversible.</AlertDescription>
+</Alert>
+
+<Alert variant="destructive">
+  <AlertTitle>Destructive</AlertTitle>
+  <AlertDescription>This action cannot be undone.</AlertDescription>
+</Alert>
+```
+
+### With Icon
+
+Place an `<svg>` as a direct child of `<Alert>` to activate the two-column grid layout.
+
+<Preview>
+  <Alert variant="warning">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+      <path d="M12 9v4" />
+      <path d="M12 17h.01" />
+    </svg>
+    <AlertTitle>Low disk space</AlertTitle>
+    <AlertDescription>Your disk is at 90% capacity. Free up space to avoid interruptions.</AlertDescription>
+  </Alert>
+</Preview>
+
+```tsx
+<Alert variant="warning">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+    <path d="M12 9v4" />
+    <path d="M12 17h.01" />
+  </svg>
+  <AlertTitle>Low disk space</AlertTitle>
+  <AlertDescription>Your disk is at 90% capacity. Free up space to avoid interruptions.</AlertDescription>
+</Alert>
+```
+
+### Title Only
+
+<Preview>
+  <Alert variant="info">
+    <AlertTitle>Session expires in 5 minutes</AlertTitle>
+  </Alert>
+</Preview>
+
+```tsx
+<Alert variant="info">
+  <AlertTitle>Session expires in 5 minutes</AlertTitle>
+</Alert>
+```
+
+### Description Only
+
+<Preview>
+  <Alert variant="destructive">
+    <AlertDescription>Authentication failed. Check your credentials and try again.</AlertDescription>
+  </Alert>
+</Preview>
+
+```tsx
+<Alert variant="destructive">
+  <AlertDescription>Authentication failed. Check your credentials and try again.</AlertDescription>
+</Alert>
+```
+
+## Props
+
+### Alert
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `default` \| `info` \| `success` \| `warning` \| `destructive` | `default` | Semantic color scheme |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+### AlertTitle
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+### AlertDescription
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+## Notes
+
+- The grid switches automatically between single-column and two-column layout based on whether an SVG is a direct child — no extra prop needed.
+- `role="alert"` is set on the container for screen reader announcements.
+- `AlertTitle` and `AlertDescription` each use `col-start-2` to always align to the content column, regardless of whether an icon is present.
