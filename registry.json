@@ -13,6 +13,27 @@
 			"files": [
 				{ "path": "registry/ui/button.tsx", "type": "registry:ui" }
 			]
+		},
+		{
+			"name": "dialog",
+			"type": "registry:ui",
+			"title": "Dialog",
+			"description": "Terminal-style modal dialog: box border, background-level elevation (no shadow), bracket close [x], discrete opacity fade only. No radius/hover/scale.",
+			"dependencies": ["@radix-ui/react-dialog"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/dialog.tsx", "type": "registry:ui" }
+			]
 		}
 	]
 }
