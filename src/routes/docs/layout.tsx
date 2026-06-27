@@ -1,6 +1,7 @@
 import { MDXProvider } from "@mdx-js/react";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { mdxComponents } from "@/components/docs/mdx-components";
+import { Header } from "@/components/docs/header";
 import {
 	Sidebar,
 	SidebarContent,
@@ -67,7 +68,8 @@ function DocsLayout() {
 					</SidebarContent>
 					<SidebarFooter />
 				</Sidebar>
-				<SidebarInset>
+				<SidebarInset className="flex flex-col">
+					<Header />
 					<main className="flex-1 flex flex-col items-center p-8">
 						<div className="w-full max-w-3xl">
 							<Outlet />
