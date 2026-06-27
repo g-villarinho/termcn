@@ -1,0 +1,170 @@
+---
+title: Scroll Area
+description: Terminal-style scrollable container with custom blocky scrollbar.
+---
+
+import { ScrollArea, ScrollBar } from "registry/ui/scroll-area"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Scroll Area
+
+Terminal-style scrollable container with custom scrollbar. Radix ScrollArea wrapper with a focus-visible viewport ring and a blocky, borderless-thumb scrollbar — no rounded corners, no shadows.
+
+The scrollbar uses `bg-border/80` for the thumb with an inset border overlay, matching the terminal aesthetic of visible structure without softness.
+
+## Installation
+
+<InstallTabs pkg="@termcn/scroll-area" />
+
+## Usage
+
+```tsx
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+
+export default function ScrollAreaDemo() {
+  return (
+    <ScrollArea className="h-48 w-full">
+      <div className="p-4">Long content here...</div>
+    </ScrollArea>
+  )
+}
+```
+
+## Examples
+
+### Vertical Scroll
+
+<Preview>
+  <ScrollArea className="h-48 w-full border border-border">
+    <div className="p-4 font-mono text-sm text-foreground">
+      {Array.from({ length: 20 }, (_, i) => (
+        <div key={i} className="py-0.5 text-muted-foreground">
+          {String(i + 1).padStart(2, "0")}  line content
+        </div>
+      ))}
+    </div>
+  </ScrollArea>
+</Preview>
+
+```tsx
+<ScrollArea className="h-48 w-full border border-border">
+  <div className="p-4 font-mono text-sm">
+    {Array.from({ length: 20 }, (_, i) => (
+      <div key={i} className="py-0.5 text-muted-foreground">
+        {String(i + 1).padStart(2, "0")}  line content
+      </div>
+    ))}
+  </div>
+</ScrollArea>
+```
+
+### Horizontal Scroll
+
+<Preview>
+  <ScrollArea className="w-full border border-border">
+    <div className="flex gap-4 p-4">
+      {Array.from({ length: 12 }, (_, i) => (
+        <div
+          key={i}
+          className="w-32 shrink-0 border border-border p-3 font-mono text-sm text-muted-foreground"
+        >
+          item {i + 1}
+        </div>
+      ))}
+    </div>
+    <ScrollBar orientation="horizontal" />
+  </ScrollArea>
+</Preview>
+
+```tsx
+<ScrollArea className="w-full border border-border">
+  <div className="flex gap-4 p-4">
+    {items.map((item) => (
+      <div key={item.id} className="w-32 shrink-0 border border-border p-3">
+        {item.label}
+      </div>
+    ))}
+  </div>
+  <ScrollBar orientation="horizontal" />
+</ScrollArea>
+```
+
+### Both Scrollbars
+
+<Preview>
+  <ScrollArea className="h-48 w-full border border-border">
+    <div className="w-[600px] p-4">
+      {Array.from({ length: 20 }, (_, i) => (
+        <div key={i} className="py-0.5 font-mono text-sm text-muted-foreground whitespace-nowrap">
+          {String(i + 1).padStart(2, "0")}  {"lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod"}
+        </div>
+      ))}
+    </div>
+    <ScrollBar orientation="horizontal" />
+  </ScrollArea>
+</Preview>
+
+```tsx
+<ScrollArea className="h-48 w-full border border-border">
+  <div className="w-[600px] p-4">
+    {lines.map((line, i) => (
+      <div key={i} className="whitespace-nowrap py-0.5 font-mono text-sm">
+        {line}
+      </div>
+    ))}
+  </div>
+  <ScrollBar orientation="horizontal" />
+</ScrollArea>
+```
+
+### Custom Height
+
+<Preview>
+  <ScrollArea className="h-32 w-64 border border-border">
+    <div className="p-3 font-mono text-sm">
+      {Array.from({ length: 15 }, (_, i) => (
+        <div key={i} className="py-0.5 text-muted-foreground">
+          entry {i + 1}
+        </div>
+      ))}
+    </div>
+  </ScrollArea>
+</Preview>
+
+```tsx
+<ScrollArea className="h-32 w-64 border border-border">
+  <div className="p-3 font-mono text-sm">
+    {entries.map((entry) => (
+      <div key={entry.id} className="py-0.5 text-muted-foreground">
+        {entry.label}
+      </div>
+    ))}
+  </div>
+</ScrollArea>
+```
+
+## Props
+
+### ScrollArea
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| `children` | `ReactNode` | — | Scrollable content |
+| ...rest | `ComponentProps<ScrollArea.Root>` | — | All Radix ScrollArea root props |
+
+### ScrollBar
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `"vertical"` \| `"horizontal"` | `"vertical"` | Scrollbar axis |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<ScrollArea.Scrollbar>` | — | All Radix ScrollAreaScrollbar props |
+
+## Notes
+
+- `ScrollArea` always renders a vertical `ScrollBar` by default. Add `<ScrollBar orientation="horizontal" />` as a child for horizontal scrolling.
+- The viewport has a `focus-visible:ring-1 focus-visible:ring-ring` outline for keyboard navigation.
+- Scrollbar thumb is square (no border-radius) with a semi-transparent border overlay — no `hover:` state per design constraints.
+- Corner between both scrollbars renders as `bg-background1`.

@@ -1,0 +1,123 @@
+---
+title: Slider
+description: Terminal-style range slider with square thumb and primary-fill track.
+---
+
+import { Slider } from "registry/ui/slider"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Slider
+
+Terminal-style range slider. Horizontal track with `bg-primary` fill range, square thumb with focus-visible inversion, bordered track on `bg-background1`. Supports single value, range (multiple thumbs), custom min/max/step, disabled state, and vertical orientation.
+
+## Installation
+
+<InstallTabs pkg="@termcn/slider" />
+
+## Usage
+
+```tsx
+import { Slider } from "@/components/ui/slider"
+
+export default function SliderDemo() {
+  return <Slider defaultValue={[40]} max={100} step={1} />
+}
+```
+
+## Examples
+
+### Single Value
+
+<Preview>
+  <div className="w-full max-w-sm px-4">
+    <Slider defaultValue={[40]} max={100} step={1} />
+  </div>
+</Preview>
+
+```tsx
+<Slider defaultValue={[40]} max={100} step={1} />
+```
+
+### Range (Two Thumbs)
+
+<Preview>
+  <div className="w-full max-w-sm px-4">
+    <Slider defaultValue={[20, 70]} max={100} step={1} />
+  </div>
+</Preview>
+
+```tsx
+<Slider defaultValue={[20, 70]} max={100} step={1} />
+```
+
+### Custom Min / Max
+
+<Preview>
+  <div className="w-full max-w-sm px-4">
+    <Slider defaultValue={[500]} min={0} max={1000} step={1} />
+  </div>
+</Preview>
+
+```tsx
+<Slider defaultValue={[500]} min={0} max={1000} step={1} />
+```
+
+### Step Slider
+
+<Preview>
+  <div className="w-full max-w-sm px-4">
+    <Slider defaultValue={[0]} min={0} max={100} step={25} />
+  </div>
+</Preview>
+
+```tsx
+<Slider defaultValue={[0]} min={0} max={100} step={25} />
+```
+
+### Disabled
+
+<Preview>
+  <div className="w-full max-w-sm px-4">
+    <Slider defaultValue={[60]} max={100} disabled />
+  </div>
+</Preview>
+
+```tsx
+<Slider defaultValue={[60]} max={100} disabled />
+```
+
+### Vertical
+
+<Preview>
+  <div className="flex justify-center py-4">
+    <Slider defaultValue={[50]} max={100} orientation="vertical" />
+  </div>
+</Preview>
+
+```tsx
+<Slider defaultValue={[50]} max={100} orientation="vertical" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultValue` | `number[]` | `[min]` | Uncontrolled initial value(s) |
+| `value` | `number[]` | — | Controlled value(s) |
+| `min` | `number` | `0` | Minimum value |
+| `max` | `number` | `100` | Maximum value |
+| `step` | `number` | `1` | Increment between values |
+| `onValueChange` | `(value: number[]) => void` | — | Callback on value change |
+| `orientation` | `"horizontal"` \| `"vertical"` | `"horizontal"` | Slider axis |
+| `disabled` | `boolean` | `false` | Disable interaction; mutes thumb to `foreground2`/`background2` |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<Slider.Root>` | — | All Radix Slider root props |
+
+## Notes
+
+- `value` and `defaultValue` are both `number[]` — pass a single-element array for a single thumb, two elements for a range.
+- The range fill (`bg-primary`) starts from the track origin for single thumbs; for ranges, it spans between the two thumb positions.
+- The vertical slider has a fixed height of `h-32` (`data-[orientation=vertical]:h-32`) by default; override with a `className` height utility.
+- Disabled state uses `border-foreground2 bg-background2` on the thumb (not `opacity`) — consistent with the terminal dim-text convention.
+- Focus state inverts the thumb: `bg-primary border-primary` with `ring-1 ring-ring`.

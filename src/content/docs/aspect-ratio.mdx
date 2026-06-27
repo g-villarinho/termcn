@@ -1,0 +1,133 @@
+---
+title: Aspect Ratio
+description: Terminal-style aspect ratio container that maintains a fixed width-to-height ratio.
+---
+
+import { AspectRatio } from "registry/ui/aspect-ratio"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Aspect Ratio
+
+Terminal-style aspect ratio container. Radix-based wrapper that enforces a fixed width-to-height ratio. Renders a bordered box with background level 1, content stretched to fill.
+
+Useful for media placeholders, image frames, and any layout that must maintain proportions regardless of container width.
+
+## Installation
+
+<InstallTabs pkg="@termcn/aspect-ratio" />
+
+## Usage
+
+```tsx
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+
+export default function AspectRatioDemo() {
+  return (
+    <AspectRatio ratio={16 / 9}>
+      <img src="/image.png" alt="Demo" className="size-full object-cover" />
+    </AspectRatio>
+  )
+}
+```
+
+## Examples
+
+### 16:9 Video Placeholder
+
+<Preview>
+  <div className="w-full max-w-md">
+    <AspectRatio ratio={16 / 9}>
+      <div className="flex size-full items-center justify-center font-mono text-sm text-muted-foreground">
+        16:9 — video
+      </div>
+    </AspectRatio>
+  </div>
+</Preview>
+
+```tsx
+<AspectRatio ratio={16 / 9}>
+  <div className="flex size-full items-center justify-center text-sm text-muted-foreground">
+    16:9 — video
+  </div>
+</AspectRatio>
+```
+
+### 4:3 Image Placeholder
+
+<Preview>
+  <div className="w-full max-w-sm">
+    <AspectRatio ratio={4 / 3}>
+      <div className="flex size-full items-center justify-center font-mono text-sm text-muted-foreground">
+        4:3 — image
+      </div>
+    </AspectRatio>
+  </div>
+</Preview>
+
+```tsx
+<AspectRatio ratio={4 / 3}>
+  <div className="flex size-full items-center justify-center text-sm text-muted-foreground">
+    4:3 — image
+  </div>
+</AspectRatio>
+```
+
+### 1:1 Square
+
+<Preview>
+  <div className="w-48">
+    <AspectRatio ratio={1}>
+      <div className="flex size-full items-center justify-center font-mono text-sm text-muted-foreground">
+        1:1
+      </div>
+    </AspectRatio>
+  </div>
+</Preview>
+
+```tsx
+<AspectRatio ratio={1}>
+  <div className="flex size-full items-center justify-center text-sm text-muted-foreground">
+    1:1
+  </div>
+</AspectRatio>
+```
+
+### With Image
+
+<Preview>
+  <div className="w-full max-w-md">
+    <AspectRatio ratio={16 / 9}>
+      <img
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
+        alt="Mountain landscape"
+        className="size-full object-cover"
+      />
+    </AspectRatio>
+  </div>
+</Preview>
+
+```tsx
+<AspectRatio ratio={16 / 9}>
+  <img
+    src="/mountain.jpg"
+    alt="Mountain landscape"
+    className="size-full object-cover"
+  />
+</AspectRatio>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `ratio` | `number` | `1` | Width-to-height ratio (e.g. `16/9`, `4/3`, `1`) |
+| `className` | `string` | — | Additional Tailwind classes |
+| `children` | `ReactNode` | — | Content to render inside the container |
+| ...rest | `ComponentProps<AspectRatio.Root>` | — | All Radix AspectRatio root props |
+
+## Notes
+
+- The container applies `overflow-hidden`, `border border-border`, and `bg-background1` — consistent with the terminal depth system.
+- Content inside fills the box via `size-full`. Use `object-cover` on images for cropped fills.
+- The `ratio` prop accepts any number: `16/9`, `4/3`, `2.35` (cinemascope), `1` (square).
