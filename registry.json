@@ -243,6 +243,28 @@
 			"files": [
 				{ "path": "registry/ui/menubar.tsx", "type": "registry:ui" }
 			]
+		},
+		{
+			"name": "resizable",
+			"type": "registry:ui",
+			"title": "Resizable",
+			"description": "Terminal-style resizable panels built on react-resizable-panels: subtle divider lines, keyboard focus ring, optional ASCII grip handle. No hover/radius/shadow.",
+			"dependencies": ["react-resizable-panels"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/resizable.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "scroll-area",
+			"type": "registry:ui",
+			"title": "Scroll Area",
+			"description": "Terminal-style custom scroll area built on Radix Scroll Area: consistent cross-platform scrollbar, muted track, subtle border thumb. No hover/radius/shadow.",
+			"dependencies": ["@radix-ui/react-scroll-area"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/scroll-area.tsx", "type": "registry:ui" }
+			]
 		}
 	]
 }

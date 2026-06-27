@@ -180,6 +180,91 @@
 			"files": [
 				{ "path": "registry/ui/sonner.tsx", "type": "registry:ui" }
 			]
+		},
+		{
+			"name": "dropdown-menu",
+			"type": "registry:ui",
+			"title": "Dropdown Menu",
+			"description": "Terminal-style dropdown menu: selection inversion, ✓/● indicators, ▸ submenu glyph, no hover/radius/shadow. Includes checkbox, radio, sub-menu, shortcut, separator.",
+			"dependencies": ["@radix-ui/react-dropdown-menu"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/dropdown-menu.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "context-menu",
+			"type": "registry:ui",
+			"title": "Context Menu",
+			"description": "Terminal-style right-click context menu: selection inversion, ✓/● indicators, ▸ submenu glyph, no hover/radius/shadow. Includes checkbox, radio, sub-menu, shortcut, separator.",
+			"dependencies": ["@radix-ui/react-context-menu"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/context-menu.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "menubar",
+			"type": "registry:ui",
+			"title": "Menubar",
+			"description": "Terminal-style application menubar: border-b strip, open-state inversion on triggers, ✓/● indicators, ▸ submenu glyph, no hover/radius/shadow. Includes checkbox, radio, sub-menu, shortcut, separator.",
+			"dependencies": ["@radix-ui/react-menubar"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/menubar.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "resizable",
+			"type": "registry:ui",
+			"title": "Resizable",
+			"description": "Terminal-style resizable panels built on react-resizable-panels: subtle divider lines, keyboard focus ring, optional ASCII grip handle. No hover/radius/shadow.",
+			"dependencies": ["react-resizable-panels"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/resizable.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "scroll-area",
+			"type": "registry:ui",
+			"title": "Scroll Area",
+			"description": "Terminal-style custom scroll area built on Radix Scroll Area: consistent cross-platform scrollbar, muted track, subtle border thumb. No hover/radius/shadow.",
+			"dependencies": ["@radix-ui/react-scroll-area"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/scroll-area.tsx", "type": "registry:ui" }
+			]
 		}
 	]
 }
