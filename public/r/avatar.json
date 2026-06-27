@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "title": "Avatar",
+  "description": "Terminal-style avatar with sharp border, Catppuccin fallback surface and initials-first fallback state.",
+  "dependencies": [
+    "@radix-ui/react-avatar",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/avatar.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport * as AvatarPrimitive from \"@radix-ui/react-avatar\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst avatarVariants = cva(\n\t\"relative inline-flex shrink-0 select-none items-center justify-center overflow-hidden border border-border bg-background2 font-mono text-foreground\",\n\t{\n\t\tvariants: {\n\t\t\tsize: {\n\t\t\t\tsm: \"size-8 text-xs\",\n\t\t\t\tdefault: \"size-10 text-sm\",\n\t\t\t\tlg: \"size-12 text-base\",\n\t\t\t},\n\t\t},\n\t\tdefaultVariants: {\n\t\t\tsize: \"default\",\n\t\t},\n\t},\n);\n\ntype AvatarProps = React.ComponentProps<typeof AvatarPrimitive.Root> &\n\tVariantProps<typeof avatarVariants>;\n\nfunction Avatar({\n\tclassName,\n\tsize,\n\t...props\n}: AvatarProps) {\n\treturn (\n\t\t<AvatarPrimitive.Root\n\t\t\tdata-slot=\"avatar\"\n\t\t\tclassName={cn(avatarVariants({ size }), className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction AvatarImage({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof AvatarPrimitive.Image>) {\n\treturn (\n\t\t<AvatarPrimitive.Image\n\t\t\tdata-slot=\"avatar-image\"\n\t\t\tclassName={cn(\"aspect-square size-full object-cover\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction AvatarFallback({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {\n\treturn (\n\t\t<AvatarPrimitive.Fallback\n\t\t\tdata-slot=\"avatar-fallback\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex size-full items-center justify-center bg-secondary text-secondary-foreground\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Avatar, AvatarImage, AvatarFallback };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
