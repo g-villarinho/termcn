@@ -110,6 +110,7 @@ const mdxComponents = {
         "mb-4 border border-border bg-background2 overflow-x-auto",
         "text-sm font-mono leading-5 p-4",
         "border-l-4 border-l-primary",
+        "[&_code]:bg-transparent [&_code]:text-inherit [&_code]:p-0 [&_code]:m-0",
         className,
       )}
       {...props}
