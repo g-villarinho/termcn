@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert",
+  "title": "Alert",
+  "description": "Terminal-style callout: box-drawing border, semantic variants, optional lucide icon. Variants: default, info, success, warning, destructive.",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/alert.tsx",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst alertVariants = cva(\n\t\"relative grid w-full grid-cols-[0_1fr] items-start gap-y-0.5 border px-3 py-2 font-mono text-sm has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 [&>svg]:size-4 [&>svg]:translate-y-0.5\",\n\t{\n\t\tvariants: {\n\t\t\tvariant: {\n\t\t\t\tdefault: \"border-border bg-card text-foreground [&>svg]:text-foreground1\",\n\t\t\t\tinfo: \"border-info bg-info/10 text-info [&>svg]:text-info\",\n\t\t\t\tsuccess: \"border-success bg-success/10 text-success [&>svg]:text-success\",\n\t\t\t\twarning: \"border-warning bg-warning/10 text-warning [&>svg]:text-warning\",\n\t\t\t\tdestructive:\n\t\t\t\t\t\"border-destructive bg-destructive/10 text-destructive [&>svg]:text-destructive\",\n\t\t\t},\n\t\t},\n\t\tdefaultVariants: { variant: \"default\" },\n\t},\n);\n\ninterface AlertProps\n\textends React.ComponentProps<\"div\">,\n\t\tVariantProps<typeof alertVariants> {}\n\nfunction Alert({ className, variant, ...props }: AlertProps) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"alert\"\n\t\t\trole=\"alert\"\n\t\t\tclassName={cn(alertVariants({ variant }), className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction AlertTitle({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"alert-title\"\n\t\t\tclassName={cn(\"col-start-2 font-medium tracking-tight\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction AlertDescription({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"alert-description\"\n\t\t\tclassName={cn(\n\t\t\t\t\"col-start-2 text-sm text-foreground1 [&_p]:leading-relaxed\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Alert, AlertTitle, AlertDescription, alertVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
