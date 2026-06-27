@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "title": "Badge",
+  "description": "Terminal-style status badge: outlined semantic variants with optional [square] or (paren) bracket conventions. No hover/radius/shadow.",
+  "dependencies": [
+    "class-variance-authority",
+    "@radix-ui/react-slot"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/badge.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst badgeVariants = cva(\n\t\"inline-flex items-center gap-1 whitespace-nowrap select-none border px-1.5 py-0 font-mono text-xs font-medium outline-none focus-visible:ring-1 focus-visible:ring-ring [&_svg]:pointer-events-none [&_svg]:size-3 [&_svg]:shrink-0\",\n\t{\n\t\tvariants: {\n\t\t\tvariant: {\n\t\t\t\tdefault: \"border-border bg-background text-foreground\",\n\t\t\t\tprimary: \"border-primary bg-primary/10 text-primary\",\n\t\t\t\tsecondary: \"border-secondary bg-secondary/10 text-secondary\",\n\t\t\t\tsuccess: \"border-success bg-success/10 text-success\",\n\t\t\t\twarning: \"border-warning bg-warning/10 text-warning\",\n\t\t\t\tdestructive: \"border-destructive bg-destructive/10 text-destructive\",\n\t\t\t\tinfo: \"border-info bg-info/10 text-info\",\n\t\t\t\tghost: \"border-transparent bg-muted text-muted-foreground\",\n\t\t\t},\n\t\t\tbracket: {\n\t\t\t\tsquare: \"before:content-['['] after:content-[']']\",\n\t\t\t\tparen: \"before:content-['('] after:content-[')']\",\n\t\t\t\tnone: \"\",\n\t\t\t},\n\t\t},\n\t\tdefaultVariants: { variant: \"default\", bracket: \"none\" },\n\t},\n);\n\ninterface BadgeProps\n\textends React.ComponentProps<\"span\">,\n\t\tVariantProps<typeof badgeVariants> {\n\tasChild?: boolean;\n}\n\nfunction Badge({ className, variant, bracket, asChild = false, ...props }: BadgeProps) {\n\tconst Comp = asChild ? Slot : \"span\";\n\treturn (\n\t\t<Comp\n\t\t\tdata-slot=\"badge\"\n\t\t\tclassName={cn(badgeVariants({ variant, bracket }), className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Badge, badgeVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
