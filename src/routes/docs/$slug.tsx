@@ -1,7 +1,31 @@
 import { createFileRoute } from "@tanstack/react-router"
 import * as React from "react"
 
+function formatSlug(slug: string): string {
+  return slug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
+}
+
 export const Route = createFileRoute("/docs/$slug")({
+  head: ({ params }) => {
+    const title = `${formatSlug(params.slug)} | termcn`
+    const description = `termcn docs — ${formatSlug(params.slug)} component with terminal/Neovim aesthetic and Catppuccin Mocha theme.`
+
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+      ],
+    }
+  },
   component: DocsSlugPage,
 })
 
