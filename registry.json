@@ -147,6 +147,39 @@
 			"files": [
 				{ "path": "registry/ui/select.tsx", "type": "registry:ui" }
 			]
+		},
+		{
+			"name": "tooltip",
+			"type": "registry:ui",
+			"title": "Tooltip",
+			"description": "Terminal-style floating hint built on Radix Tooltip: box border, prompt-glyph prefix, discrete opacity fade. No radius/shadow/slide.",
+			"dependencies": ["@radix-ui/react-tooltip"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/tooltip.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "toast",
+			"type": "registry:ui",
+			"title": "Toast",
+			"description": "Terminal-style notification built on Radix Toast: box-drawing border, semantic variants, bracket close [x], discrete opacity fade. Variants: default, info, success, warning, destructive.",
+			"dependencies": ["@radix-ui/react-toast", "class-variance-authority"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/toast.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "sonner",
+			"type": "registry:ui",
+			"title": "Sonner",
+			"description": "Terminal-style toaster wrapping the Sonner library: monospace, box border, no radius/shadow, semantic success/error/warning/info colors.",
+			"dependencies": ["sonner"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/sonner.tsx", "type": "registry:ui" }
+			]
 		}
 	]
 }

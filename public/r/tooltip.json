@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "title": "Tooltip",
+  "description": "Terminal-style floating hint built on Radix Tooltip: box border, prompt-glyph prefix, discrete opacity fade. No radius/shadow/slide.",
+  "dependencies": [
+    "@radix-ui/react-tooltip"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/tooltip.tsx",
+      "content": "import * as React from \"react\";\nimport * as TooltipPrimitive from \"@radix-ui/react-tooltip\";\nimport { cn } from \"@/lib/utils\";\n\nfunction TooltipProvider({\n\tdelayDuration = 0,\n\t...props\n}: React.ComponentProps<typeof TooltipPrimitive.Provider>) {\n\treturn (\n\t\t<TooltipPrimitive.Provider\n\t\t\tdata-slot=\"tooltip-provider\"\n\t\t\tdelayDuration={delayDuration}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction Tooltip({\n\t...props\n}: React.ComponentProps<typeof TooltipPrimitive.Root>) {\n\treturn (\n\t\t<TooltipProvider>\n\t\t\t<TooltipPrimitive.Root data-slot=\"tooltip\" {...props} />\n\t\t</TooltipProvider>\n\t);\n}\n\nfunction TooltipTrigger({\n\t...props\n}: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {\n\treturn <TooltipPrimitive.Trigger data-slot=\"tooltip-trigger\" {...props} />;\n}\n\nfunction TooltipContent({\n\tclassName,\n\tsideOffset = 4,\n\tchildren,\n\t...props\n}: React.ComponentProps<typeof TooltipPrimitive.Content>) {\n\treturn (\n\t\t<TooltipPrimitive.Portal>\n\t\t\t<TooltipPrimitive.Content\n\t\t\t\tdata-slot=\"tooltip-content\"\n\t\t\t\tsideOffset={sideOffset}\n\t\t\t\tclassName={cn(\n\t\t\t\t\t\"z-50 w-fit border border-border bg-card px-2 py-1 font-mono text-xs text-foreground\",\n\t\t\t\t\t\"data-[state=delayed-open]:animate-[termcn-fade_150ms_ease-out] data-[state=instant-open]:animate-[termcn-fade_150ms_ease-out] data-[state=closed]:animate-[termcn-fade-out_150ms_ease-out]\",\n\t\t\t\t\tclassName,\n\t\t\t\t)}\n\t\t\t\t{...props}\n\t\t\t>\n\t\t\t\t<span className=\"text-primary\">{\"> \"}</span>\n\t\t\t\t{children}\n\t\t\t</TooltipPrimitive.Content>\n\t\t</TooltipPrimitive.Portal>\n\t);\n}\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
