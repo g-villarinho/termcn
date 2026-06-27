@@ -1,0 +1,157 @@
+---
+title: Sonner
+description: Terminal-style toast notification provider with Catppuccin Mocha colors and monospace font.
+---
+
+import { Toaster } from "registry/ui/sonner"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Sonner
+
+Terminal-style toast notification provider wrapping the [sonner](https://sonner.emilkowal.ski/) library. Applies dark theme, Catppuccin Mocha color tokens, JetBrains Mono font, sharp edges (`border-radius: 0`), and no shadows. Semantic color mappings for success, error, warning, and info states.
+
+## Installation
+
+<InstallTabs pkg="@termcn/sonner" />
+
+## Notes
+
+This component wraps the `sonner` package. Install it separately:
+
+```bash
+npm install sonner
+```
+
+The `<Toaster />` component is the styled config provider. The `toast()` function is imported directly from `sonner`.
+
+## Usage
+
+**Step 1** — Add `<Toaster />` once to your app root (e.g. `App.tsx` or root layout):
+
+```tsx
+import { Toaster } from "@/components/ui/sonner"
+
+export default function App() {
+  return (
+    <>
+      <Toaster />
+      {/* rest of app */}
+    </>
+  )
+}
+```
+
+**Step 2** — Call `toast()` from anywhere in your app:
+
+```tsx
+import { toast } from "sonner"
+
+toast("file saved")
+```
+
+## Examples
+
+### Basic toast
+
+<Preview>
+  <div className="flex gap-2 flex-wrap justify-center">
+    <button
+      className="border border-border bg-background text-foreground font-mono px-3 h-9 text-sm focus-visible:border-primary focus-visible:ring-1 focus-visible:ring-ring outline-none"
+      onClick={() => {
+        if (typeof window !== "undefined") {
+          import("sonner").then(({ toast }) => toast("file saved"))
+        }
+      }}
+    >
+      show toast
+    </button>
+  </div>
+</Preview>
+
+```tsx
+import { toast } from "sonner"
+
+toast("file saved")
+```
+
+### Success / Error
+
+<Preview>
+  <div className="flex gap-2 flex-wrap justify-center">
+    <button
+      className="border border-border bg-background text-foreground font-mono px-3 h-9 text-sm focus-visible:border-primary focus-visible:ring-1 focus-visible:ring-ring outline-none"
+      onClick={() => {
+        if (typeof window !== "undefined") {
+          import("sonner").then(({ toast }) => toast.success("build succeeded"))
+        }
+      }}
+    >
+      success
+    </button>
+    <button
+      className="border border-border bg-background text-foreground font-mono px-3 h-9 text-sm focus-visible:border-primary focus-visible:ring-1 focus-visible:ring-ring outline-none"
+      onClick={() => {
+        if (typeof window !== "undefined") {
+          import("sonner").then(({ toast }) => toast.error("build failed"))
+        }
+      }}
+    >
+      error
+    </button>
+  </div>
+</Preview>
+
+```tsx
+toast.success("build succeeded")
+toast.error("build failed")
+toast.warning("deprecated api used")
+toast.info("3 files changed")
+```
+
+### With description
+
+```tsx
+toast("deployment complete", {
+  description: "pushed to production in 2.3s",
+})
+```
+
+### With action button
+
+```tsx
+toast("file deleted", {
+  action: {
+    label: "undo",
+    onClick: () => restoreFile(),
+  },
+})
+```
+
+### Promise toast
+
+Automatically transitions between loading → success/error states.
+
+```tsx
+toast.promise(deployToProduction(), {
+  loading: "deploying...",
+  success: "deployed successfully",
+  error: "deployment failed",
+})
+```
+
+## Props
+
+`<Toaster />` accepts all `ToasterProps` from `sonner`. The following defaults are pre-applied and can be overridden:
+
+| Prop | Default | Description |
+|------|---------|-------------|
+| `theme` | `"dark"` | Forces dark theme |
+| `className` | `"toaster group font-mono"` | Applies monospace font to the container |
+| `toastOptions.classNames.toast` | See source | Border, background, font, no radius, no shadow |
+| `toastOptions.classNames.success` | `text-success border-success` | Catppuccin green |
+| `toastOptions.classNames.error` | `text-destructive border-destructive` | Catppuccin red |
+| `toastOptions.classNames.warning` | `text-warning border-warning` | Catppuccin yellow |
+| `toastOptions.classNames.info` | `text-info border-info` | Catppuccin sky |
+
+All other `ToasterProps` (e.g. `position`, `expand`, `richColors`, `duration`, `closeButton`) are forwarded to `sonner`'s `Toaster` unchanged.
