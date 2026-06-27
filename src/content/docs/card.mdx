@@ -1,0 +1,206 @@
+---
+title: Card
+description: Terminal-style bordered content card with header, body, and footer sections.
+---
+
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "registry/ui/card"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Card
+
+Terminal-style content container. Bordered box with optional header (bottom-border separator), content body, and footer (top-border separator). Title uses `▍` prefix in primary color. All sections are monospace throughout.
+
+## Installation
+
+<InstallTabs pkg="@termcn/card" />
+
+## Usage
+
+```tsx
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card"
+
+export default function CardDemo() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Title</CardTitle>
+        <CardDescription>A short description.</CardDescription>
+      </CardHeader>
+      <CardContent>Content goes here.</CardContent>
+      <CardFooter>Footer</CardFooter>
+    </Card>
+  )
+}
+```
+
+## Examples
+
+### Basic card
+
+<Preview>
+  <Card className="w-64">
+    <CardContent>Minimal card with content only.</CardContent>
+  </Card>
+</Preview>
+
+```tsx
+<Card>
+  <CardContent>Minimal card with content only.</CardContent>
+</Card>
+```
+
+### Header and content
+
+<Preview>
+  <Card className="w-64">
+    <CardHeader>
+      <CardTitle>system.log</CardTitle>
+    </CardHeader>
+    <CardContent>Process started at 00:00:00.</CardContent>
+  </Card>
+</Preview>
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>system.log</CardTitle>
+  </CardHeader>
+  <CardContent>Process started at 00:00:00.</CardContent>
+</Card>
+```
+
+### Header with description
+
+<Preview>
+  <Card className="w-64">
+    <CardHeader>
+      <CardTitle>config.toml</CardTitle>
+      <CardDescription>Application configuration file.</CardDescription>
+    </CardHeader>
+    <CardContent>theme = "catppuccin-mocha"</CardContent>
+  </Card>
+</Preview>
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>config.toml</CardTitle>
+    <CardDescription>Application configuration file.</CardDescription>
+  </CardHeader>
+  <CardContent>theme = "catppuccin-mocha"</CardContent>
+</Card>
+```
+
+### Header, content, and footer
+
+<Preview>
+  <Card className="w-64">
+    <CardHeader>
+      <CardTitle>session</CardTitle>
+    </CardHeader>
+    <CardContent>Connected to tmux session #3.</CardContent>
+    <CardFooter>uptime: 4h 22m</CardFooter>
+  </Card>
+</Preview>
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>session</CardTitle>
+  </CardHeader>
+  <CardContent>Connected to tmux session #3.</CardContent>
+  <CardFooter>uptime: 4h 22m</CardFooter>
+</Card>
+```
+
+### Composed with badge and button
+
+<Preview>
+  <Card className="w-72">
+    <CardHeader>
+      <CardTitle>deployment</CardTitle>
+      <CardDescription>Production environment</CardDescription>
+    </CardHeader>
+    <CardContent>Last deploy: 2026-06-27 03:14 UTC</CardContent>
+    <CardFooter className="gap-2">
+      <span className="border border-success px-1.5 py-0.5 text-xs text-success">healthy</span>
+      <button className="ml-auto border border-border px-2 py-0.5 text-xs text-foreground focus-visible:bg-foreground focus-visible:text-background outline-none">[ rollback ]</button>
+    </CardFooter>
+  </Card>
+</Preview>
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>deployment</CardTitle>
+    <CardDescription>Production environment</CardDescription>
+  </CardHeader>
+  <CardContent>Last deploy: 2026-06-27 03:14 UTC</CardContent>
+  <CardFooter>
+    <Badge variant="success">healthy</Badge>
+    <Button variant="ghost" size="sm" className="ml-auto">[ rollback ]</Button>
+  </CardFooter>
+</Card>
+```
+
+## Props
+
+All sub-components accept `className` and standard `<div>` props.
+
+### Card
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+### CardHeader
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+### CardTitle
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| `children` | `ReactNode` | — | Title text |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+### CardDescription
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+### CardContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+### CardFooter
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+## Notes
+
+- `CardTitle` renders a `▍` block-cursor prefix via CSS `before:content-['▍']` in `text-primary`.
+- `CardHeader` and `CardFooter` use `border-b` / `border-t` to create TUI box-separator lines.
+- `CardDescription` is indented with `pl-4` to align under the title text past the `▍` prefix.
+- No Radix primitives — pure React with `cn()` class merging.
