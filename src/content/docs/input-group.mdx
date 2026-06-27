@@ -1,0 +1,253 @@
+---
+title: Input Group
+description: Composable input group with addons, buttons, and embedded inputs.
+---
+
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupText, InputGroupInput, InputGroupTextarea, inputGroupAddonVariants, inputGroupButtonVariants } from "registry/ui/input-group"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Input Group
+
+Composable input group with addons, embedded buttons, and text labels. Supports inline and block addon placement.
+
+Follows TUI aesthetic: focus ring propagates from the group container, clicking any addon focuses the control, no hover states.
+
+## Installation
+
+<InstallTabs pkg="@termcn/input-group" />
+
+## Usage
+
+```tsx
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupText,
+  InputGroupInput,
+  InputGroupTextarea,
+} from "@/components/ui/input-group"
+
+export default function InputGroupDemo() {
+  return (
+    <InputGroup>
+      <InputGroupAddon>$</InputGroupAddon>
+      <InputGroupInput placeholder="0.00" />
+    </InputGroup>
+  )
+}
+```
+
+## Examples
+
+### With prefix
+
+Inline-start addon with a text symbol prefix.
+
+<Preview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <InputGroup>
+      <InputGroupAddon align="inline-start">
+        <InputGroupText>$</InputGroupText>
+      </InputGroupAddon>
+      <InputGroupInput placeholder="0.00" />
+    </InputGroup>
+  </div>
+</Preview>
+
+```tsx
+<InputGroup>
+  <InputGroupAddon align="inline-start">
+    <InputGroupText>$</InputGroupText>
+  </InputGroupAddon>
+  <InputGroupInput placeholder="0.00" />
+</InputGroup>
+```
+
+### With suffix button
+
+Inline-end addon with an action button.
+
+<Preview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <InputGroup>
+      <InputGroupInput placeholder="Search..." />
+      <InputGroupAddon align="inline-end">
+        <InputGroupButton size="xs" variant="ghost">Search</InputGroupButton>
+      </InputGroupAddon>
+    </InputGroup>
+  </div>
+</Preview>
+
+```tsx
+<InputGroup>
+  <InputGroupInput placeholder="Search..." />
+  <InputGroupAddon align="inline-end">
+    <InputGroupButton size="xs" variant="ghost">Search</InputGroupButton>
+  </InputGroupAddon>
+</InputGroup>
+```
+
+### Block addons
+
+Block-start and block-end addons stack above and below the input. Add `flex-col items-stretch` to the `InputGroup` to switch the axis.
+
+<Preview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <InputGroup className="flex-col items-stretch">
+      <InputGroupAddon align="block-start">
+        <InputGroupText>Label</InputGroupText>
+      </InputGroupAddon>
+      <InputGroupInput placeholder="Enter value..." />
+      <InputGroupAddon align="block-end">
+        <InputGroupText>Hint text</InputGroupText>
+      </InputGroupAddon>
+    </InputGroup>
+  </div>
+</Preview>
+
+```tsx
+<InputGroup className="flex-col items-stretch">
+  <InputGroupAddon align="block-start">
+    <InputGroupText>Label</InputGroupText>
+  </InputGroupAddon>
+  <InputGroupInput placeholder="Enter value..." />
+  <InputGroupAddon align="block-end">
+    <InputGroupText>Hint text</InputGroupText>
+  </InputGroupAddon>
+</InputGroup>
+```
+
+### With textarea
+
+Use `InputGroupTextarea` for multiline input inside a group.
+
+<Preview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <InputGroup>
+      <InputGroupAddon align="inline-start">
+        <InputGroupText>#</InputGroupText>
+      </InputGroupAddon>
+      <InputGroupTextarea placeholder="Write your notes..." />
+    </InputGroup>
+  </div>
+</Preview>
+
+```tsx
+<InputGroup>
+  <InputGroupAddon align="inline-start">
+    <InputGroupText>#</InputGroupText>
+  </InputGroupAddon>
+  <InputGroupTextarea placeholder="Write your notes..." />
+</InputGroup>
+```
+
+### Disabled
+
+Disable the embedded input to dim the control. The group retains its border styling.
+
+<Preview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <InputGroup>
+      <InputGroupAddon align="inline-start">
+        <InputGroupText>$</InputGroupText>
+      </InputGroupAddon>
+      <InputGroupInput placeholder="0.00" disabled />
+    </InputGroup>
+  </div>
+</Preview>
+
+```tsx
+<InputGroup>
+  <InputGroupAddon align="inline-start">
+    <InputGroupText>$</InputGroupText>
+  </InputGroupAddon>
+  <InputGroupInput placeholder="0.00" disabled />
+</InputGroup>
+```
+
+### Error state
+
+Apply `aria-invalid="true"` to the `InputGroupInput` to signal a validation error.
+
+<Preview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <InputGroup>
+      <InputGroupAddon align="inline-start">
+        <InputGroupText>@</InputGroupText>
+      </InputGroupAddon>
+      <InputGroupInput placeholder="username" aria-invalid="true" />
+    </InputGroup>
+  </div>
+</Preview>
+
+```tsx
+<InputGroup>
+  <InputGroupAddon align="inline-start">
+    <InputGroupText>@</InputGroupText>
+  </InputGroupAddon>
+  <InputGroupInput placeholder="username" aria-invalid="true" />
+</InputGroup>
+```
+
+## Notes
+
+- Clicking any `InputGroupAddon` focuses the nearest `[data-slot=input-group-control]` within the group.
+- The `data-slot="input-group-control"` attribute marks the focusable element — both `InputGroupInput` and `InputGroupTextarea` carry it.
+- For `block-start` / `block-end` addons, add `flex-col items-stretch` to the `InputGroup` to switch layout direction.
+- The focus ring (`focus-within:ring-1`) is applied at the `InputGroup` level, not per child.
+
+## Props
+
+### InputGroup
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes (use `flex-col items-stretch` for block addons) |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+### InputGroupAddon
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `align` | `"inline-start"` \| `"inline-end"` \| `"block-start"` \| `"block-end"` | `"inline-start"` | Addon placement relative to the control |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+### InputGroupButton
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `"xs"` \| `"icon-xs"` \| `"sm"` \| `"icon-sm"` | `"xs"` | Button size |
+| `variant` | `"default"` \| `"ghost"` | `"ghost"` | Button style |
+| `disabled` | `boolean` | `false` | Disable button |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"button">` | — | All standard `<button>` props |
+
+### InputGroupText
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"span">` | — | All standard `<span>` props |
+
+### InputGroupInput
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placeholder` | `string` | — | Placeholder text |
+| `disabled` | `boolean` | `false` | Disable the input |
+| `aria-invalid` | `"true"` \| `"false"` | — | Mark field as invalid (text switches to destructive) |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"input">` | — | All standard `<input>` props |
+
+### InputGroupTextarea
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placeholder` | `string` | — | Placeholder text |
+| `disabled` | `boolean` | `false` | Disable the textarea |
+| `aria-invalid` | `"true"` \| `"false"` | — | Mark field as invalid (text switches to destructive) |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"textarea">` | — | All standard `<textarea>` props |
