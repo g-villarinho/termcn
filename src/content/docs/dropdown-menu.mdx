@@ -1,0 +1,443 @@
+---
+title: Dropdown Menu
+description: Terminal-style dropdown menu with keyboard navigation, sub-menus, checkbox and radio items.
+---
+
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuGroup,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+  DropdownMenuPortal,
+} from "registry/ui/dropdown-menu"
+import { Button } from "registry/ui/button"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Dropdown Menu
+
+Terminal-style dropdown menu. Content appears below the trigger with a 150ms fade animation. Items highlight via foreground inversion (`bg-foreground text-background`) — no hover, keyboard navigation only via Radix.
+
+Supports checkbox items (`✓` indicator), radio groups (`●` indicator), sub-menus, keyboard shortcuts, labels, separators, and inset items.
+
+## Installation
+
+<InstallTabs pkg="@termcn/dropdown-menu" />
+
+## Usage
+
+```tsx
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu"
+
+export default function Demo() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button>Open</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem>Item</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>Another item</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+```
+
+## Examples
+
+### Basic
+
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="default">Open menu</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem>New file</DropdownMenuItem>
+      <DropdownMenuItem>Open file</DropdownMenuItem>
+      <DropdownMenuItem>Save</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button>Open menu</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem>New file</DropdownMenuItem>
+    <DropdownMenuItem>Open file</DropdownMenuItem>
+    <DropdownMenuItem>Save</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With Shortcuts
+
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button>File</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem>
+        New file
+        <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        Open file
+        <DropdownMenuShortcut>⌘O</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>
+        Save
+        <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        Save as…
+        <DropdownMenuShortcut>⇧⌘S</DropdownMenuShortcut>
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button>File</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem>
+      New file
+      <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      Open file
+      <DropdownMenuShortcut>⌘O</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>
+      Save
+      <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      Save as…
+      <DropdownMenuShortcut>⇧⌘S</DropdownMenuShortcut>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Label and Separator
+
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button>Account</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>Profile</DropdownMenuItem>
+      <DropdownMenuItem>Settings</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem>Log out</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button>Account</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Profile</DropdownMenuItem>
+    <DropdownMenuItem>Settings</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Log out</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Checkbox Items
+
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button>View</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuLabel>Panels</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuCheckboxItem checked>Status bar</DropdownMenuCheckboxItem>
+      <DropdownMenuCheckboxItem>Activity bar</DropdownMenuCheckboxItem>
+      <DropdownMenuCheckboxItem checked>Panel</DropdownMenuCheckboxItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
+
+```tsx
+const [statusBar, setStatusBar] = React.useState(true)
+const [activityBar, setActivityBar] = React.useState(false)
+const [panel, setPanel] = React.useState(true)
+
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button>View</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>Panels</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuCheckboxItem
+      checked={statusBar}
+      onCheckedChange={setStatusBar}
+    >
+      Status bar
+    </DropdownMenuCheckboxItem>
+    <DropdownMenuCheckboxItem
+      checked={activityBar}
+      onCheckedChange={setActivityBar}
+    >
+      Activity bar
+    </DropdownMenuCheckboxItem>
+    <DropdownMenuCheckboxItem
+      checked={panel}
+      onCheckedChange={setPanel}
+    >
+      Panel
+    </DropdownMenuCheckboxItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Radio Group
+
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button>Theme</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuLabel>Color theme</DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuRadioGroup value="mocha">
+        <DropdownMenuRadioItem value="mocha">Catppuccin Mocha</DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="macchiato">Catppuccin Macchiato</DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="latte">Catppuccin Latte</DropdownMenuRadioItem>
+      </DropdownMenuRadioGroup>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
+
+```tsx
+const [theme, setTheme] = React.useState("mocha")
+
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button>Theme</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>Color theme</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
+      <DropdownMenuRadioItem value="mocha">Catppuccin Mocha</DropdownMenuRadioItem>
+      <DropdownMenuRadioItem value="macchiato">Catppuccin Macchiato</DropdownMenuRadioItem>
+      <DropdownMenuRadioItem value="latte">Catppuccin Latte</DropdownMenuRadioItem>
+    </DropdownMenuRadioGroup>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Sub-menu
+
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button>Edit</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem>
+        Undo
+        <DropdownMenuShortcut>⌘Z</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        Redo
+        <DropdownMenuShortcut>⇧⌘Z</DropdownMenuShortcut>
+      </DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuSub>
+        <DropdownMenuSubTrigger>Find</DropdownMenuSubTrigger>
+        <DropdownMenuSubContent>
+          <DropdownMenuItem>Find…<DropdownMenuShortcut>⌘F</DropdownMenuShortcut></DropdownMenuItem>
+          <DropdownMenuItem>Find next<DropdownMenuShortcut>⌘G</DropdownMenuShortcut></DropdownMenuItem>
+          <DropdownMenuItem>Find previous<DropdownMenuShortcut>⇧⌘G</DropdownMenuShortcut></DropdownMenuItem>
+        </DropdownMenuSubContent>
+      </DropdownMenuSub>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button>Edit</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem>
+      Undo
+      <DropdownMenuShortcut>⌘Z</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      Redo
+      <DropdownMenuShortcut>⇧⌘Z</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuSub>
+      <DropdownMenuSubTrigger>Find</DropdownMenuSubTrigger>
+      <DropdownMenuSubContent>
+        <DropdownMenuItem>
+          Find…
+          <DropdownMenuShortcut>⌘F</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          Find next
+          <DropdownMenuShortcut>⌘G</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          Find previous
+          <DropdownMenuShortcut>⇧⌘G</DropdownMenuShortcut>
+        </DropdownMenuItem>
+      </DropdownMenuSubContent>
+    </DropdownMenuSub>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Disabled Items
+
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button>Actions</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem>Cut<DropdownMenuShortcut>⌘X</DropdownMenuShortcut></DropdownMenuItem>
+      <DropdownMenuItem>Copy<DropdownMenuShortcut>⌘C</DropdownMenuShortcut></DropdownMenuItem>
+      <DropdownMenuItem disabled>Paste<DropdownMenuShortcut>⌘V</DropdownMenuShortcut></DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button>Actions</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem>
+      Cut
+      <DropdownMenuShortcut>⌘X</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      Copy
+      <DropdownMenuShortcut>⌘C</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem disabled>
+      Paste
+      <DropdownMenuShortcut>⌘V</DropdownMenuShortcut>
+    </DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### Inset Items
+
+Inset items add extra left padding to align with items that have indicators (checkbox/radio).
+
+<Preview>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button>Mixed</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuCheckboxItem checked>Word wrap</DropdownMenuCheckboxItem>
+      <DropdownMenuItem inset>Format document</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuLabel inset>Indentation</DropdownMenuLabel>
+      <DropdownMenuRadioGroup value="2">
+        <DropdownMenuRadioItem value="2">2 spaces</DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="4">4 spaces</DropdownMenuRadioItem>
+        <DropdownMenuItem inset disabled>Tabs (disabled)</DropdownMenuItem>
+      </DropdownMenuRadioGroup>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Preview>
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button>Mixed</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuCheckboxItem checked>Word wrap</DropdownMenuCheckboxItem>
+    <DropdownMenuItem inset>Format document</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuLabel inset>Indentation</DropdownMenuLabel>
+    <DropdownMenuRadioGroup value="2" onValueChange={setIndent}>
+      <DropdownMenuRadioItem value="2">2 spaces</DropdownMenuRadioItem>
+      <DropdownMenuRadioItem value="4">4 spaces</DropdownMenuRadioItem>
+      <DropdownMenuItem inset disabled>Tabs (disabled)</DropdownMenuItem>
+    </DropdownMenuRadioGroup>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## Props
+
+| Sub-component | Purpose | Key props |
+|---|---|---|
+| `DropdownMenu` | Root state provider | `open`, `onOpenChange`, `defaultOpen`, `modal` |
+| `DropdownMenuTrigger` | Button that opens the menu | `asChild` |
+| `DropdownMenuPortal` | Renders content in a portal | `container` |
+| `DropdownMenuContent` | Floating menu panel | `sideOffset` (default: `4`), `side`, `align`, `className` |
+| `DropdownMenuItem` | Clickable menu item | `inset`, `disabled`, `onSelect`, `className` |
+| `DropdownMenuCheckboxItem` | Item with `✓` indicator | `checked`, `onCheckedChange`, `disabled`, `className` |
+| `DropdownMenuRadioGroup` | Radio group container | `value`, `onValueChange` |
+| `DropdownMenuRadioItem` | Item with `●` indicator | `value`, `disabled`, `className` |
+| `DropdownMenuLabel` | Non-interactive section label | `inset`, `className` |
+| `DropdownMenuSeparator` | Horizontal rule between sections | `className` |
+| `DropdownMenuShortcut` | Right-aligned shortcut hint | `className` |
+| `DropdownMenuGroup` | Groups items for accessibility | — |
+| `DropdownMenuSub` | Sub-menu root | `open`, `onOpenChange`, `defaultOpen` |
+| `DropdownMenuSubTrigger` | Item that opens a sub-menu | `inset`, `className` |
+| `DropdownMenuSubContent` | Sub-menu floating panel | `className` |
+
+## Notes
+
+Built on [Radix UI Dropdown Menu](https://www.radix-ui.com/primitives/docs/components/dropdown-menu). All keyboard navigation (arrow keys, Enter, Escape, Tab) is handled by Radix — no custom event handlers needed.
+
+Items highlight via `data-[highlighted]:bg-foreground data-[highlighted]:text-background` (foreground inversion), matching Vim's visual mode selection. No `hover:` variants are used.
+
+Content and sub-content fade in/out via `termcn-fade` / `termcn-fade-out` keyframes (≤150ms). No scale or slide animations.
