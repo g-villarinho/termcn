@@ -1,0 +1,227 @@
+---
+title: Accordion
+description: Terminal-style collapsible accordion with chevron prefix and left-border content indent.
+---
+
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "registry/ui/accordion"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Accordion
+
+Terminal-style collapsible accordion built on Radix UI. Items separated by `border-b`. Trigger shows `▸` (closed) or `▾` (open) in primary color. Content indented with a left border. Focus inverts foreground/background — no hover.
+
+## Installation
+
+<InstallTabs pkg="@termcn/accordion" />
+
+## Usage
+
+```tsx
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion"
+
+export default function AccordionDemo() {
+  return (
+    <Accordion type="single" collapsible>
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Section one</AccordionTrigger>
+        <AccordionContent>Content for section one.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  )
+}
+```
+
+## Examples
+
+### Single item
+
+<Preview>
+  <Accordion type="single" collapsible className="w-72">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>What is termcn?</AccordionTrigger>
+      <AccordionContent>
+        A shadcn/ui registry with a terminal aesthetic inspired by Neovim.
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Preview>
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>What is termcn?</AccordionTrigger>
+    <AccordionContent>
+      A shadcn/ui registry with a terminal aesthetic inspired by Neovim.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Multiple items (single open)
+
+<Preview>
+  <Accordion type="single" collapsible className="w-72">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Installation</AccordionTrigger>
+      <AccordionContent>Run npx shadcn@latest add @termcn/accordion.</AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>Configuration</AccordionTrigger>
+      <AccordionContent>No configuration required. Works out of the box.</AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-3">
+      <AccordionTrigger>Theming</AccordionTrigger>
+      <AccordionContent>Uses Catppuccin Mocha tokens from src/index.css.</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Preview>
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Installation</AccordionTrigger>
+    <AccordionContent>Run npx shadcn@latest add @termcn/accordion.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Configuration</AccordionTrigger>
+    <AccordionContent>No configuration required. Works out of the box.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-3">
+    <AccordionTrigger>Theming</AccordionTrigger>
+    <AccordionContent>Uses Catppuccin Mocha tokens from src/index.css.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Multiple open simultaneously
+
+<Preview>
+  <Accordion type="multiple" className="w-72">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Errors</AccordionTrigger>
+      <AccordionContent>No errors found in the last 24h.</AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>Warnings</AccordionTrigger>
+      <AccordionContent>3 deprecation warnings in deps.</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Preview>
+
+```tsx
+<Accordion type="multiple">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Errors</AccordionTrigger>
+    <AccordionContent>No errors found in the last 24h.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Warnings</AccordionTrigger>
+    <AccordionContent>3 deprecation warnings in deps.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Disabled item
+
+<Preview>
+  <Accordion type="single" collapsible className="w-72">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Available</AccordionTrigger>
+      <AccordionContent>This item can be opened.</AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2" disabled>
+      <AccordionTrigger>Locked</AccordionTrigger>
+      <AccordionContent>This content is inaccessible.</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Preview>
+
+```tsx
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Available</AccordionTrigger>
+    <AccordionContent>This item can be opened.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2" disabled>
+    <AccordionTrigger>Locked</AccordionTrigger>
+    <AccordionContent>This content is inaccessible.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+### Default open value
+
+<Preview>
+  <Accordion type="single" defaultValue="item-1" collapsible className="w-72">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Open by default</AccordionTrigger>
+      <AccordionContent>This section is expanded on initial render.</AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>Closed by default</AccordionTrigger>
+      <AccordionContent>This section starts collapsed.</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Preview>
+
+```tsx
+<Accordion type="single" defaultValue="item-1" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Open by default</AccordionTrigger>
+    <AccordionContent>This section is expanded on initial render.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Closed by default</AccordionTrigger>
+    <AccordionContent>This section starts collapsed.</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## Props
+
+### Accordion
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `"single"` \| `"multiple"` | — | Whether one or multiple items can be open |
+| `defaultValue` | `string` \| `string[]` | — | Initially open item(s) (uncontrolled) |
+| `value` | `string` \| `string[]` | — | Controlled open item(s) |
+| `onValueChange` | `(value: string \| string[]) => void` | — | Callback when open state changes |
+| `collapsible` | `boolean` | `false` | Allow closing the open item (type="single" only) |
+| `className` | `string` | — | Additional Tailwind classes |
+
+### AccordionItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | **Required.** Unique identifier for this item |
+| `disabled` | `boolean` | `false` | Prevent the item from being opened |
+| `className` | `string` | — | Additional Tailwind classes |
+
+### AccordionTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| `children` | `ReactNode` | — | Trigger label content |
+
+### AccordionContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| `children` | `ReactNode` | — | Expanded panel content |
+
+## Notes
+
+- Built on [`@radix-ui/react-accordion`](https://www.radix-ui.com/primitives/docs/components/accordion) — inherits full keyboard navigation and ARIA attributes.
+- Trigger chevron (`▸` / `▾`) is rendered via CSS `content-['▸']` / `data-[state=open]:content-['▾']` — no icon dependency.
+- Focus uses full foreground/background inversion (`focus-visible:bg-foreground focus-visible:text-background`) — no hover states.
+- Disabled trigger renders in `text-foreground2` (Overlay 0) to match terminal dim-text convention.
+- Content uses `ml-4 border-l border-border` for the left-indent TUI tree-structure aesthetic.

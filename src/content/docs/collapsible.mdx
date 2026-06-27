@@ -1,0 +1,201 @@
+---
+title: Collapsible
+description: Terminal-style expandable section with chevron trigger and opacity fade animation.
+---
+
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "registry/ui/collapsible"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Collapsible
+
+Terminal-style expandable panel built on Radix UI. Single collapsible section with a trigger button that shows `▸` (closed) or `▾` (open). Open state adds a border-bottom to the trigger and shifts to `background1`. Content fades in/out at 150ms. Focus inverts foreground/background — no hover.
+
+## Installation
+
+<InstallTabs pkg="@termcn/collapsible" />
+
+## Usage
+
+```tsx
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@/components/ui/collapsible"
+
+export default function CollapsibleDemo() {
+  return (
+    <Collapsible>
+      <CollapsibleTrigger>Toggle section</CollapsibleTrigger>
+      <CollapsibleContent>Hidden content revealed on expand.</CollapsibleContent>
+    </Collapsible>
+  )
+}
+```
+
+## Examples
+
+### Basic collapsible
+
+<Preview>
+  <Collapsible className="w-72">
+    <CollapsibleTrigger>Show details</CollapsibleTrigger>
+    <CollapsibleContent>
+      Additional details are revealed when the section is expanded.
+    </CollapsibleContent>
+  </Collapsible>
+</Preview>
+
+```tsx
+<Collapsible>
+  <CollapsibleTrigger>Show details</CollapsibleTrigger>
+  <CollapsibleContent>
+    Additional details are revealed when the section is expanded.
+  </CollapsibleContent>
+</Collapsible>
+```
+
+### Open by default
+
+<Preview>
+  <Collapsible defaultOpen className="w-72">
+    <CollapsibleTrigger>output.log</CollapsibleTrigger>
+    <CollapsibleContent>
+      [INFO] Server started on port 3000
+      [INFO] Watching for file changes...
+    </CollapsibleContent>
+  </Collapsible>
+</Preview>
+
+```tsx
+<Collapsible defaultOpen>
+  <CollapsibleTrigger>output.log</CollapsibleTrigger>
+  <CollapsibleContent>
+    [INFO] Server started on port 3000
+    [INFO] Watching for file changes...
+  </CollapsibleContent>
+</Collapsible>
+```
+
+### Disabled trigger
+
+<Preview>
+  <Collapsible disabled className="w-72">
+    <CollapsibleTrigger>Restricted section</CollapsibleTrigger>
+    <CollapsibleContent>
+      This content cannot be accessed.
+    </CollapsibleContent>
+  </Collapsible>
+</Preview>
+
+```tsx
+<Collapsible disabled>
+  <CollapsibleTrigger>Restricted section</CollapsibleTrigger>
+  <CollapsibleContent>
+    This content cannot be accessed.
+  </CollapsibleContent>
+</Collapsible>
+```
+
+### Controlled open state
+
+<Preview>
+  {(() => {
+    const [open, setOpen] = React.useState(false)
+    return (
+      <div className="flex flex-col gap-2 w-72">
+        <Collapsible open={open} onOpenChange={setOpen}>
+          <CollapsibleTrigger>env variables</CollapsibleTrigger>
+          <CollapsibleContent>
+            NODE_ENV=production
+            PORT=3000
+          </CollapsibleContent>
+        </Collapsible>
+        <button
+          onClick={() => setOpen((v) => !v)}
+          className="border border-border px-2 py-1 text-xs text-foreground focus-visible:bg-foreground focus-visible:text-background outline-none"
+        >
+          {open ? "[ collapse ]" : "[ expand ]"}
+        </button>
+      </div>
+    )
+  })()}
+</Preview>
+
+```tsx
+const [open, setOpen] = React.useState(false)
+
+<Collapsible open={open} onOpenChange={setOpen}>
+  <CollapsibleTrigger>env variables</CollapsibleTrigger>
+  <CollapsibleContent>
+    NODE_ENV=production
+    PORT=3000
+  </CollapsibleContent>
+</Collapsible>
+
+<Button variant="ghost" size="sm" onClick={() => setOpen((v) => !v)}>
+  {open ? "[ collapse ]" : "[ expand ]"}
+</Button>
+```
+
+### Custom trigger content
+
+<Preview>
+  <Collapsible className="w-72">
+    <CollapsibleTrigger>
+      <span className="text-primary">›</span> dependencies
+      <span className="ml-auto text-xs text-foreground1">12 packages</span>
+    </CollapsibleTrigger>
+    <CollapsibleContent>
+      react, react-dom, @radix-ui/react-collapsible, ...
+    </CollapsibleContent>
+  </Collapsible>
+</Preview>
+
+```tsx
+<Collapsible>
+  <CollapsibleTrigger>
+    <span className="text-primary">›</span> dependencies
+    <span className="ml-auto text-xs text-foreground1">12 packages</span>
+  </CollapsibleTrigger>
+  <CollapsibleContent>
+    react, react-dom, @radix-ui/react-collapsible, ...
+  </CollapsibleContent>
+</Collapsible>
+```
+
+## Props
+
+### Collapsible
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `defaultOpen` | `boolean` | `false` | Initial open state (uncontrolled) |
+| `onOpenChange` | `(open: boolean) => void` | — | Callback when open state changes |
+| `disabled` | `boolean` | `false` | Prevent trigger interaction |
+| `className` | `string` | — | Additional Tailwind classes |
+
+### CollapsibleTrigger
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| `children` | `ReactNode` | — | Trigger label content |
+
+### CollapsibleContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional Tailwind classes |
+| `children` | `ReactNode` | — | Panel content shown when open |
+
+## Notes
+
+- Built on [`@radix-ui/react-collapsible`](https://www.radix-ui.com/primitives/docs/components/collapsible) — inherits keyboard accessibility and ARIA attributes.
+- Chevron (`▸` / `▾`) is rendered by the component using `group-data-[state=open]` class toggling — no extra icon library needed.
+- Open trigger gains `border-b border-border bg-background1` to visually separate from content.
+- Content animates with `termcn-fade` / `termcn-fade-out` keyframes at 150ms — defined in `src/index.css`.
+- Focus uses full foreground/background inversion (`focus-visible:bg-foreground focus-visible:text-background`) — no hover states.
+- Unlike `Accordion`, `Collapsible` manages a single panel. Use `Accordion` for multi-section patterns.
