@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card",
+  "title": "Card",
+  "description": "Terminal-style container with box-drawing border and background-level elevation. Composable header, title, description, content and footer. No radius/shadow.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/card.tsx",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Card({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"card\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex flex-col border border-border bg-card font-mono text-foreground\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction CardHeader({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"card-header\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex flex-col gap-1 border-b border-border px-4 py-2\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction CardTitle({ className, children, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"card-title\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex items-center gap-2 text-sm font-medium text-foreground before:text-primary before:content-['▍']\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t{children}\n\t\t</div>\n\t);\n}\n\nfunction CardDescription({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"card-description\"\n\t\t\tclassName={cn(\"pl-4 text-sm text-foreground1\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction CardContent({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"card-content\"\n\t\t\tclassName={cn(\"px-4 py-3 text-sm text-foreground1\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction CardFooter({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"card-footer\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex items-center gap-2 border-t border-border px-4 py-2\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport {\n\tCard,\n\tCardHeader,\n\tCardTitle,\n\tCardDescription,\n\tCardContent,\n\tCardFooter,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
