@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "navigation-menu",
+  "title": "Navigation Menu",
+  "description": "Terminal-style structured header navigation built on Radix Navigation Menu: floating link panels, focus/open inversion, viewport fade only. No hover/radius/shadow/slide.",
+  "dependencies": [
+    "@radix-ui/react-navigation-menu"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/navigation-menu.tsx",
+      "content": "import * as React from \"react\";\nimport * as NavigationMenuPrimitive from \"@radix-ui/react-navigation-menu\";\nimport { cn } from \"@/lib/utils\";\n\nfunction NavigationMenu({\n\tclassName,\n\tchildren,\n\tviewport = true,\n\t...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & {\n\tviewport?: boolean;\n}) {\n\treturn (\n\t\t<NavigationMenuPrimitive.Root\n\t\t\tdata-slot=\"navigation-menu\"\n\t\t\tclassName={cn(\n\t\t\t\t\"relative flex max-w-max flex-1 items-center justify-center font-mono\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t{children}\n\t\t\t{viewport ? <NavigationMenuViewport /> : null}\n\t\t</NavigationMenuPrimitive.Root>\n\t);\n}\n\nfunction NavigationMenuList({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.List>) {\n\treturn (\n\t\t<NavigationMenuPrimitive.List\n\t\t\tdata-slot=\"navigation-menu-list\"\n\t\t\tclassName={cn(\n\t\t\t\t\"group flex flex-1 list-none items-center border-b border-border bg-background1 text-foreground1\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction NavigationMenuItem({\n\t...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Item>) {\n\treturn <NavigationMenuPrimitive.Item data-slot=\"navigation-menu-item\" {...props} />;\n}\n\nfunction NavigationMenuTrigger({\n\tclassName,\n\tchildren,\n\t...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>) {\n\treturn (\n\t\t<NavigationMenuPrimitive.Trigger\n\t\t\tdata-slot=\"navigation-menu-trigger\"\n\t\t\tclassName={cn(\n\t\t\t\t\"group inline-flex min-w-0 items-center justify-center gap-2 border-r border-border px-3 py-1 text-sm outline-none\",\n\t\t\t\t\"last:border-r-0\",\n\t\t\t\t\"data-[state=open]:bg-foreground data-[state=open]:text-background\",\n\t\t\t\t\"focus-visible:bg-foreground focus-visible:text-background\",\n\t\t\t\t\"disabled:pointer-events-none disabled:text-foreground2\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t{children}\n\t\t\t<span\n\t\t\t\taria-hidden=\"true\"\n\t\t\t\tclassName={cn(\n\t\t\t\t\t\"text-xs text-foreground2\",\n\t\t\t\t\t\"group-data-[state=open]:text-background\",\n\t\t\t\t)}\n\t\t\t>\n\t\t\t\t▾\n\t\t\t</span>\n\t\t</NavigationMenuPrimitive.Trigger>\n\t);\n}\n\nfunction NavigationMenuContent({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Content>) {\n\treturn (\n\t\t<NavigationMenuPrimitive.Content\n\t\t\tdata-slot=\"navigation-menu-content\"\n\t\t\tclassName={cn(\n\t\t\t\t\"left-0 top-0 w-full font-mono md:absolute md:w-auto\",\n\t\t\t\t\"data-[motion=from-start]:animate-[termcn-fade_150ms_ease-out]\",\n\t\t\t\t\"data-[motion=from-end]:animate-[termcn-fade_150ms_ease-out]\",\n\t\t\t\t\"data-[motion=to-start]:animate-[termcn-fade-out_150ms_ease-out]\",\n\t\t\t\t\"data-[motion=to-end]:animate-[termcn-fade-out_150ms_ease-out]\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction NavigationMenuLink({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Link>) {\n\treturn (\n\t\t<NavigationMenuPrimitive.Link\n\t\t\tdata-slot=\"navigation-menu-link\"\n\t\t\tclassName={cn(\n\t\t\t\t\"block border-b border-border px-3 py-2 text-sm text-foreground outline-none last:border-b-0\",\n\t\t\t\t\"focus-visible:bg-foreground focus-visible:text-background\",\n\t\t\t\t\"data-[active]:bg-foreground data-[active]:text-background\",\n\t\t\t\t\"data-[disabled]:pointer-events-none data-[disabled]:text-foreground2\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction NavigationMenuIndicator({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Indicator>) {\n\treturn (\n\t\t<NavigationMenuPrimitive.Indicator\n\t\t\tdata-slot=\"navigation-menu-indicator\"\n\t\t\tclassName={cn(\n\t\t\t\t\"top-full z-[1] flex h-1.5 items-start justify-center overflow-hidden\",\n\t\t\t\t\"data-[state=visible]:animate-[termcn-fade_150ms_ease-out] data-[state=hidden]:animate-[termcn-fade-out_150ms_ease-out]\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t<div className=\"size-1.5 bg-primary\" />\n\t\t</NavigationMenuPrimitive.Indicator>\n\t);\n}\n\nfunction NavigationMenuViewport({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>) {\n\treturn (\n\t\t<div className=\"absolute left-0 top-full flex w-full justify-center md:w-auto\">\n\t\t\t<NavigationMenuPrimitive.Viewport\n\t\t\t\tdata-slot=\"navigation-menu-viewport\"\n\t\t\t\tclassName={cn(\n\t\t\t\t\t\"relative mt-2 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden border border-border bg-card text-foreground md:w-[var(--radix-navigation-menu-viewport-width)]\",\n\t\t\t\t\t\"data-[state=open]:animate-[termcn-fade_150ms_ease-out] data-[state=closed]:animate-[termcn-fade-out_150ms_ease-out]\",\n\t\t\t\t\tclassName,\n\t\t\t\t)}\n\t\t\t\t{...props}\n\t\t\t/>\n\t\t</div>\n\t);\n}\n\nfunction NavigationMenuSub({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Sub>) {\n\treturn (\n\t\t<NavigationMenuPrimitive.Sub\n\t\t\tdata-slot=\"navigation-menu-sub\"\n\t\t\tclassName={cn(\"flex flex-col gap-3\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport {\n\tNavigationMenu,\n\tNavigationMenuList,\n\tNavigationMenuItem,\n\tNavigationMenuContent,\n\tNavigationMenuTrigger,\n\tNavigationMenuLink,\n\tNavigationMenuIndicator,\n\tNavigationMenuViewport,\n\tNavigationMenuSub,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "css": {
+    "@keyframes termcn-fade": {
+      "from": {
+        "opacity": "0"
+      },
+      "to": {
+        "opacity": "1"
+      }
+    },
+    "@keyframes termcn-fade-out": {
+      "from": {
+        "opacity": "1"
+      },
+      "to": {
+        "opacity": "0"
+      }
+    }
+  },
+  "type": "registry:ui"
+}

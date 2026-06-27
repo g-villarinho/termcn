@@ -526,6 +526,56 @@
 			]
 		},
 		{
+			"name": "tabs",
+			"type": "registry:ui",
+			"title": "Tabs",
+			"description": "Vim/tmux-style tab bar built on Radix Tabs: border strip, active-state inversion, sharp edges and monospace content. No hover/radius/shadow.",
+			"dependencies": ["@radix-ui/react-tabs"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/tabs.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "navigation-menu",
+			"type": "registry:ui",
+			"title": "Navigation Menu",
+			"description": "Terminal-style structured header navigation built on Radix Navigation Menu: floating link panels, focus/open inversion, viewport fade only. No hover/radius/shadow/slide.",
+			"dependencies": ["@radix-ui/react-navigation-menu"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/navigation-menu.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "collapsible",
+			"type": "registry:ui",
+			"title": "Collapsible",
+			"description": "Terminal-style collapsible text container built on Radix Collapsible: ▸/▾ state glyph, sharp border, muted detail surface and fade-only content reveal.",
+			"dependencies": ["@radix-ui/react-collapsible"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/collapsible.tsx", "type": "registry:ui" }
 			"name": "slider",
 			"type": "registry:ui",
 			"title": "Slider",

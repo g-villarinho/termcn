@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "title": "Tabs",
+  "description": "Vim/tmux-style tab bar built on Radix Tabs: border strip, active-state inversion, sharp edges and monospace content. No hover/radius/shadow.",
+  "dependencies": [
+    "@radix-ui/react-tabs"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/tabs.tsx",
+      "content": "import * as React from \"react\";\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Tabs({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof TabsPrimitive.Root>) {\n\treturn (\n\t\t<TabsPrimitive.Root\n\t\t\tdata-slot=\"tabs\"\n\t\t\tclassName={cn(\"flex flex-col gap-3 font-mono\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction TabsList({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof TabsPrimitive.List>) {\n\treturn (\n\t\t<TabsPrimitive.List\n\t\t\tdata-slot=\"tabs-list\"\n\t\t\tclassName={cn(\n\t\t\t\t\"inline-flex w-fit items-center border-b border-border bg-background1 text-foreground1\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction TabsTrigger({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {\n\treturn (\n\t\t<TabsPrimitive.Trigger\n\t\t\tdata-slot=\"tabs-trigger\"\n\t\t\tclassName={cn(\n\t\t\t\t\"inline-flex min-w-0 items-center justify-center border-r border-border px-3 py-1 text-sm outline-none\",\n\t\t\t\t\"last:border-r-0\",\n\t\t\t\t\"data-[state=active]:bg-foreground data-[state=active]:text-background\",\n\t\t\t\t\"focus-visible:bg-foreground focus-visible:text-background\",\n\t\t\t\t\"disabled:pointer-events-none disabled:text-foreground2\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction TabsContent({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof TabsPrimitive.Content>) {\n\treturn (\n\t\t<TabsPrimitive.Content\n\t\t\tdata-slot=\"tabs-content\"\n\t\t\tclassName={cn(\n\t\t\t\t\"bg-background font-mono text-sm text-foreground outline-none\",\n\t\t\t\t\"focus-visible:ring-1 focus-visible:ring-ring\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

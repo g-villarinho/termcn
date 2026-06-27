@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "title": "Collapsible",
+  "description": "Terminal-style collapsible text container built on Radix Collapsible: ▸/▾ state glyph, sharp border, muted detail surface and fade-only content reveal.",
+  "dependencies": [
+    "@radix-ui/react-collapsible"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/collapsible.tsx",
+      "content": "import * as React from \"react\";\nimport * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Collapsible({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Root>) {\n\treturn (\n\t\t<CollapsiblePrimitive.Root\n\t\t\tdata-slot=\"collapsible\"\n\t\t\tclassName={cn(\n\t\t\t\t\"border border-border bg-background font-mono text-foreground\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction CollapsibleTrigger({\n\tclassName,\n\tchildren,\n\t...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Trigger>) {\n\treturn (\n\t\t<CollapsiblePrimitive.Trigger\n\t\t\tdata-slot=\"collapsible-trigger\"\n\t\t\tclassName={cn(\n\t\t\t\t\"group flex w-full items-center justify-between gap-3 px-3 py-2 text-left text-sm outline-none\",\n\t\t\t\t\"focus-visible:bg-foreground focus-visible:text-background\",\n\t\t\t\t\"data-[state=open]:border-b data-[state=open]:border-border data-[state=open]:bg-background1\",\n\t\t\t\t\"disabled:pointer-events-none disabled:text-foreground2\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t<span className=\"min-w-0 flex-1\">{children}</span>\n\t\t\t<span\n\t\t\t\taria-hidden=\"true\"\n\t\t\t\tclassName={cn(\n\t\t\t\t\t\"text-xs text-primary\",\n\t\t\t\t\t\"group-data-[state=open]:text-foreground\",\n\t\t\t\t)}\n\t\t\t>\n\t\t\t\t<span className=\"group-data-[state=open]:hidden\">▸</span>\n\t\t\t\t<span className=\"hidden group-data-[state=open]:inline\">▾</span>\n\t\t\t</span>\n\t\t</CollapsiblePrimitive.Trigger>\n\t);\n}\n\nfunction CollapsibleContent({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof CollapsiblePrimitive.Content>) {\n\treturn (\n\t\t<CollapsiblePrimitive.Content\n\t\t\tdata-slot=\"collapsible-content\"\n\t\t\tclassName={cn(\n\t\t\t\t\"bg-background1 px-3 py-2 text-sm text-foreground1\",\n\t\t\t\t\"data-[state=open]:animate-[termcn-fade_150ms_ease-out] data-[state=closed]:animate-[termcn-fade-out_150ms_ease-out]\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "css": {
+    "@keyframes termcn-fade": {
+      "from": {
+        "opacity": "0"
+      },
+      "to": {
+        "opacity": "1"
+      }
+    },
+    "@keyframes termcn-fade-out": {
+      "from": {
+        "opacity": "1"
+      },
+      "to": {
+        "opacity": "0"
+      }
+    }
+  },
+  "type": "registry:ui"
+}
