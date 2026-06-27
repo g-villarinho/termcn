@@ -12,15 +12,30 @@ const PREFIXES: Record<PM, string> = {
   bun: "bunx --bun",
 }
 
+const LS_KEY = "termcn:install-pm"
+
+function getSavedPM(): PM {
+  try {
+    const v = localStorage.getItem(LS_KEY)
+    if (v && (PACKAGE_MANAGERS as readonly string[]).includes(v)) return v as PM
+  } catch {}
+  return "pnpm"
+}
+
 interface InstallTabsProps {
   pkg: string
 }
 
 function InstallTabs({ pkg }: InstallTabsProps) {
-  const [active, setActive] = React.useState<PM>("pnpm")
+  const [active, setActive] = React.useState<PM>(getSavedPM)
   const [copied, setCopied] = React.useState(false)
 
   const command = `${PREFIXES[active]} shadcn@latest add ${pkg}`
+
+  function selectPM(pm: PM) {
+    setActive(pm)
+    try { localStorage.setItem(LS_KEY, pm) } catch {}
+  }
 
   function copy() {
     navigator.clipboard.writeText(command).then(() => {
@@ -38,7 +53,7 @@ function InstallTabs({ pkg }: InstallTabsProps) {
           <button
             key={pm}
             type="button"
-            onClick={() => setActive(pm)}
+            onClick={() => selectPM(pm)}
             className={cn(
               "px-4 py-2 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
               active === pm
