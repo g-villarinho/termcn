@@ -27,6 +27,15 @@ interface InstallTabsProps {
   className?: string
 }
 
+function CopyIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden>
+      <rect x="9" y="9" width="13" height="13" />
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+    </svg>
+  )
+}
+
 function InstallTabs({ pkg, className }: InstallTabsProps) {
   const [copied, setCopied] = React.useState(false)
   const [active, setActive] = React.useState<PM>(getSavedPM)
@@ -51,47 +60,53 @@ function InstallTabs({ pkg, className }: InstallTabsProps) {
       onValueChange={selectPM}
       className={cn("mb-6 border border-border font-mono text-sm", className)}
     >
-      {/* Tab bar: single row, no inner double-border */}
-      <div className="flex items-center border-b border-border bg-background1">
-        <TabsList className="border-b-0 bg-transparent gap-0 w-auto">
+      {/* Tab bar */}
+      <div className="flex items-stretch border-b border-border bg-background1">
+        <TabsList className="border-b-0 bg-transparent gap-0 flex-1">
           {PACKAGE_MANAGERS.map((pm) => (
             <TabsTrigger
               key={pm}
               value={pm}
-              className="text-xs px-4 py-2 border-r border-border last:border-r-0"
+              className="text-xs px-4 py-1.5 border-r border-border last:border-r-0"
             >
               {pm}
             </TabsTrigger>
           ))}
         </TabsList>
 
-        <div className="flex-1" />
-
+        {/* Copy button — fixed 32×32 so it never shifts layout */}
         <button
           type="button"
           onClick={copy}
           aria-label="Copy command"
           className={cn(
-            "px-3 py-2 text-foreground2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
-            copied && "text-success",
+            "w-8 flex items-center justify-center border-l border-border",
+            "text-foreground2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+            copied ? "text-success" : "text-foreground2",
           )}
         >
-          {copied ? (
-            <span className="text-xs">✓</span>
-          ) : (
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden>
-              <rect x="9" y="9" width="13" height="13" />
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-            </svg>
-          )}
+          {/* fixed wrapper ensures identical box size for both states */}
+          <span className="flex w-[13px] h-[13px] items-center justify-center leading-none">
+            {copied ? (
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden>
+                <polyline points="1,7 5,11 12,2" />
+              </svg>
+            ) : (
+              <CopyIcon />
+            )}
+          </span>
         </button>
       </div>
 
-      {/* Command content */}
+      {/* Command row — single line, flex-aligned for optical vertical centering */}
       {PACKAGE_MANAGERS.map((pm) => (
-        <TabsContent key={pm} value={pm} className="px-4 pt-1.5 pb-2 mt-0 bg-background">
-          <span className="text-ansi-green">{PREFIXES[pm]}</span>{" "}
-          <span className="text-foreground1">shadcn@latest add</span>{" "}
+        <TabsContent
+          key={pm}
+          value={pm}
+          className="flex items-center h-9 px-4 mt-0 bg-background leading-none"
+        >
+          <span className="text-ansi-green">{PREFIXES[pm]}</span>
+          <span className="text-foreground1">&nbsp;shadcn@latest add&nbsp;</span>
           <span className="text-primary">{pkg}</span>
         </TabsContent>
       ))}
