@@ -4,6 +4,7 @@ import { mdxComponents } from "@/components/docs/mdx-components";
 import {
 	Sidebar,
 	SidebarContent,
+	SidebarFooter,
 	SidebarGroup,
 	SidebarGroupLabel,
 	SidebarGroupContent,
@@ -27,7 +28,7 @@ function DocsLayout() {
 
 	return (
 		<MDXProvider components={mdxComponents}>
-			<SidebarProvider defaultOpen={true}>
+			<SidebarProvider defaultOpen={true} className="h-screen">
 				<Sidebar collapsible="none">
 					<SidebarHeader className="border-b-2 border-primary pb-4">
 						<Link
@@ -64,10 +65,13 @@ function DocsLayout() {
 							</SidebarGroupContent>
 						</SidebarGroup>
 					</SidebarContent>
+					<SidebarFooter />
 				</Sidebar>
 				<SidebarInset>
-					<main className="p-8 max-w-3xl">
-						<Outlet />
+					<main className="flex-1 flex flex-col items-center p-8">
+						<div className="w-full max-w-3xl">
+							<Outlet />
+						</div>
 					</main>
 				</SidebarInset>
 			</SidebarProvider>
