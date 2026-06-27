@@ -29,30 +29,35 @@ function DocsLayout() {
 		<MDXProvider components={mdxComponents}>
 			<SidebarProvider defaultOpen={true}>
 				<Sidebar collapsible="none">
-					<SidebarHeader>
-						<Link to="/" className="text-sm font-bold text-foreground">
+					<SidebarHeader className="border-b-2 border-primary pb-4">
+						<Link
+							to="/"
+							className="text-lg font-mono font-bold text-primary hover:text-primary focus-visible:outline-none"
+						>
 							termcn
 						</Link>
+						<div className="text-xs text-foreground1 font-mono mt-1">registry</div>
 					</SidebarHeader>
-					<SidebarContent>
+					<SidebarContent className="py-4">
 						<SidebarGroup>
-							<SidebarGroupLabel>Components</SidebarGroupLabel>
+							<SidebarGroupLabel className="text-xs text-primary uppercase tracking-widest mb-3 px-0">
+								▍ Components
+							</SidebarGroupLabel>
 							<SidebarGroupContent>
-								<SidebarMenu>
+								<SidebarMenu className="space-y-1">
 									{components.map((comp) => (
 										<SidebarMenuItem key={comp.slug}>
-											<SidebarMenuButton asChild>
-												<Link
-													to="/docs/$slug"
-													params={{ slug: comp.slug }}
-													activeProps={{
-														className:
-															"[&_button]:bg-foreground [&_button]:text-background [&_button]:border-foreground",
-													}}
-												>
-													{comp.name}
-												</Link>
-											</SidebarMenuButton>
+											<Link
+												to="/docs/$slug"
+												params={{ slug: comp.slug }}
+												className="block px-3 py-2 text-sm text-foreground1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+												activeProps={{
+													className:
+														"block px-3 py-2 text-sm text-background bg-foreground border-l-2 border-l-background font-bold",
+												}}
+											>
+												{comp.name}
+											</Link>
 										</SidebarMenuItem>
 									))}
 								</SidebarMenu>

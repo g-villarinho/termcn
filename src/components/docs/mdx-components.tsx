@@ -6,7 +6,7 @@ const mdxComponents = {
     <h1
       className={cn(
         "scroll-m-20 text-4xl font-mono font-bold text-foreground",
-        "mt-8 mb-4 border-b border-border pb-2",
+        "mt-8 mb-4 border-b-2 border-primary pb-3",
         className,
       )}
       {...props}
@@ -15,8 +15,9 @@ const mdxComponents = {
   h2: ({ className, ...props }: React.ComponentProps<"h2">) => (
     <h2
       className={cn(
-        "scroll-m-20 text-2xl font-mono font-bold text-foreground",
-        "mt-6 mb-3 border-b border-border pb-1",
+        "scroll-m-20 text-xl font-mono font-bold text-foreground",
+        "mt-8 mb-4 flex items-center gap-2",
+        "before:content-['▍'] before:text-primary before:text-lg",
         className,
       )}
       {...props}
@@ -25,8 +26,9 @@ const mdxComponents = {
   h3: ({ className, ...props }: React.ComponentProps<"h3">) => (
     <h3
       className={cn(
-        "scroll-m-20 text-lg font-mono font-bold text-foreground",
-        "mt-4 mb-2",
+        "scroll-m-20 text-base font-mono font-bold text-foreground",
+        "mt-5 mb-3 flex items-center gap-1.5",
+        "before:content-['▸'] before:text-primary before:text-sm",
         className,
       )}
       {...props}
@@ -103,8 +105,9 @@ const mdxComponents = {
   pre: ({ className, ...props }: React.ComponentProps<"pre">) => (
     <pre
       className={cn(
-        "mb-4 border border-border bg-background2 p-4 overflow-x-auto",
-        "text-sm font-mono leading-4",
+        "mb-4 border border-border bg-background2 overflow-x-auto",
+        "text-sm font-mono leading-5 p-4",
+        "border-l-4 border-l-primary",
         className,
       )}
       {...props}
@@ -113,7 +116,7 @@ const mdxComponents = {
   table: ({ className, ...props }: React.ComponentProps<"table">) => (
     <table
       className={cn(
-        "w-full text-sm font-mono mb-4 border border-border",
+        "w-full text-xs font-mono mb-4 border border-border",
         className,
       )}
       {...props}
@@ -122,7 +125,7 @@ const mdxComponents = {
   thead: ({ className, ...props }: React.ComponentProps<"thead">) => (
     <thead
       className={cn(
-        "border-b border-border bg-background2",
+        "border-b-2 border-border bg-background1",
         className,
       )}
       {...props}
@@ -131,7 +134,7 @@ const mdxComponents = {
   th: ({ className, ...props }: React.ComponentProps<"th">) => (
     <th
       className={cn(
-        "text-left px-3 py-2 text-foreground font-bold border-r border-border last:border-r-0",
+        "text-left px-4 py-2.5 text-foreground font-bold text-primary uppercase tracking-widest",
         className,
       )}
       {...props}
@@ -140,7 +143,7 @@ const mdxComponents = {
   td: ({ className, ...props }: React.ComponentProps<"td">) => (
     <td
       className={cn(
-        "px-3 py-2 text-foreground border-r border-border last:border-r-0",
+        "px-4 py-2 text-foreground border-t border-border",
         className,
       )}
       {...props}
