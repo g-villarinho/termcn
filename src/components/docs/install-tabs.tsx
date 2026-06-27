@@ -89,7 +89,7 @@ function InstallTabs({ pkg, className }: InstallTabsProps) {
 
       {/* Command content */}
       {PACKAGE_MANAGERS.map((pm) => (
-        <TabsContent key={pm} value={pm} className="px-4 py-3 mt-0 bg-background">
+        <TabsContent key={pm} value={pm} className="px-4 py-2 mt-0 bg-background">
           <span className="text-ansi-green">{PREFIXES[pm]}</span>{" "}
           <span className="text-foreground1">shadcn@latest add</span>{" "}
           <span className="text-primary">{pkg}</span>
