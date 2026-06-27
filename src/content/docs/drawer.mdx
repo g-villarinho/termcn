@@ -1,0 +1,249 @@
+---
+title: Drawer
+description: Terminal-style bottom drawer that slides up from the screen edge.
+---
+
+import {
+  Drawer,
+  DrawerTrigger,
+  DrawerPortal,
+  DrawerClose,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerDescription,
+} from "registry/ui/drawer"
+import { Button } from "registry/ui/button"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Drawer
+
+Terminal-style bottom drawer (sheet) built on [Vaul](https://vaul.emilkowal.ski/). Slides up from the bottom edge with a visual drag-handle bar, capped at `85svh`, with monospace typography and a `▍`-prefixed title.
+
+Unlike [Dialog](/docs/dialog), it anchors to the bottom of the viewport rather than centering. Uses a discrete 150ms slide-in-from-bottom animation.
+
+## Installation
+
+<InstallTabs pkg="@termcn/drawer" />
+
+## Usage
+
+```tsx
+import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+} from "@/components/ui/drawer"
+
+export default function DrawerDemo() {
+  return (
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button>Open</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Title</DrawerTitle>
+          <DrawerDescription>Description text.</DrawerDescription>
+        </DrawerHeader>
+      </DrawerContent>
+    </Drawer>
+  )
+}
+```
+
+## Examples
+
+### Basic
+
+<Preview>
+  <div className="bg-background flex justify-center p-4">
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button>Open drawer</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Session log</DrawerTitle>
+          <DrawerDescription>
+            Recent commands from the active shell.
+          </DrawerDescription>
+        </DrawerHeader>
+      </DrawerContent>
+    </Drawer>
+  </div>
+</Preview>
+
+```tsx
+<Drawer>
+  <DrawerTrigger asChild>
+    <Button>Open drawer</Button>
+  </DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Session log</DrawerTitle>
+      <DrawerDescription>
+        Recent commands from the active shell.
+      </DrawerDescription>
+    </DrawerHeader>
+  </DrawerContent>
+</Drawer>
+```
+
+### With body and footer
+
+<Preview>
+  <div className="bg-background flex justify-center p-4">
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button>Configure</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Configure daemon</DrawerTitle>
+          <DrawerDescription>
+            Settings apply on the next reload.
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="px-4 py-2 text-sm text-foreground1">
+          Listening on 127.0.0.1:7878 — idle.
+        </div>
+        <DrawerFooter>
+          <DrawerClose asChild>
+            <Button variant="ghost">Cancel</Button>
+          </DrawerClose>
+          <DrawerClose asChild>
+            <Button variant="primary">Apply</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  </div>
+</Preview>
+
+```tsx
+<Drawer>
+  <DrawerTrigger asChild>
+    <Button>Configure</Button>
+  </DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Configure daemon</DrawerTitle>
+      <DrawerDescription>
+        Settings apply on the next reload.
+      </DrawerDescription>
+    </DrawerHeader>
+    <div className="px-4 py-2 text-sm text-foreground1">
+      Listening on 127.0.0.1:7878 — idle.
+    </div>
+    <DrawerFooter>
+      <DrawerClose asChild>
+        <Button variant="ghost">Cancel</Button>
+      </DrawerClose>
+      <DrawerClose asChild>
+        <Button variant="primary">Apply</Button>
+      </DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
+```
+
+### Scrollable content
+
+The content area is capped at `85svh`; make long bodies scrollable with `overflow-y-auto`.
+
+<Preview>
+  <div className="bg-background flex justify-center p-4">
+    <Drawer>
+      <DrawerTrigger asChild>
+        <Button>View history</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle>Command history</DrawerTitle>
+          <DrawerDescription>Last 20 entries.</DrawerDescription>
+        </DrawerHeader>
+        <div className="max-h-64 overflow-y-auto px-4 pb-4 text-sm text-foreground1">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div key={i} className="border-b border-border py-1.5">
+              $ git commit -m "entry {i + 1}"
+            </div>
+          ))}
+        </div>
+      </DrawerContent>
+    </Drawer>
+  </div>
+</Preview>
+
+```tsx
+<DrawerContent>
+  <DrawerHeader>
+    <DrawerTitle>Command history</DrawerTitle>
+    <DrawerDescription>Last 20 entries.</DrawerDescription>
+  </DrawerHeader>
+  <div className="max-h-64 overflow-y-auto px-4 pb-4 text-sm text-foreground1">
+    {entries.map((entry) => (
+      <div key={entry.id} className="border-b border-border py-1.5">
+        {entry.command}
+      </div>
+    ))}
+  </div>
+</DrawerContent>
+```
+
+### Controlled
+
+Drive open state with `open` and `onOpenChange` on the `Drawer` root.
+
+```tsx
+const [open, setOpen] = React.useState(false)
+
+return (
+  <Drawer open={open} onOpenChange={setOpen}>
+    <DrawerTrigger asChild>
+      <Button>Open</Button>
+    </DrawerTrigger>
+    <DrawerContent>
+      <DrawerHeader>
+        <DrawerTitle>Confirm</DrawerTitle>
+        <DrawerDescription>Close from your own handler.</DrawerDescription>
+      </DrawerHeader>
+      <DrawerFooter>
+        <Button variant="primary" onClick={() => setOpen(false)}>
+          Done
+        </Button>
+      </DrawerFooter>
+    </DrawerContent>
+  </Drawer>
+)
+```
+
+## Props
+
+| Sub-component | Purpose | Key props |
+|------|---------|-----------|
+| `Drawer` | Root state provider | `open`, `defaultOpen`, `onOpenChange`, `shouldScaleBackground` (default `false`), `direction` |
+| `DrawerTrigger` | Element that opens the drawer | `asChild` |
+| `DrawerContent` | Bottom panel; renders overlay + drag-handle bar | `className` |
+| `DrawerOverlay` | Backdrop layer (auto-rendered by content) | `className` |
+| `DrawerHeader` | Centered title/description group | `className` |
+| `DrawerTitle` | Accessible title with `▍` prefix | `className` |
+| `DrawerDescription` | Muted description text | `className` |
+| `DrawerFooter` | Action row pinned to the bottom | `className` |
+| `DrawerClose` | Closes the drawer | `asChild` |
+| `DrawerPortal` | Portals content to `document.body` | — |
+
+All sub-components forward their standard [Vaul](https://vaul.emilkowal.ski/) props plus `className`.
+
+## Notes
+
+- Built on `vaul`. `DrawerContent` automatically renders `DrawerOverlay`, the portal, and the decorative drag-handle bar — you do not need to add them.
+- `shouldScaleBackground` defaults to `false` (no background scale effect), keeping the static TUI feel. The handle bar is visual only; the drawer is dismissed by dragging down, clicking the overlay, pressing `Esc`, or a `DrawerClose`.
+- Animation is a 150ms slide-in-from-bottom / slide-out-to-bottom (`termcn-slide-*`) — no scale, bounce, or spring.
+- Accessibility is handled by Vaul (focus trap, `Esc` to close, `aria-labelledby` / `aria-describedby`). Always include a `DrawerTitle`.
