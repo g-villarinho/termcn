@@ -1,0 +1,823 @@
+---
+title: Sidebar
+description: Terminal-style collapsible sidebar layout with navigation, groups, and mobile sheet overlay.
+---
+
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarTrigger,
+  SidebarInset,
+  SidebarHeader,
+  SidebarFooter,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarGroupAction,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarMenuAction,
+  SidebarMenuBadge,
+  SidebarSeparator,
+  SidebarInput,
+  SidebarRail,
+  useSidebar,
+} from "registry/ui/sidebar"
+import { Button } from "registry/ui/button"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Sidebar
+
+The flagship layout component. Terminal-style collapsible sidebar with navigation groups, responsive mobile overlay, and React Context state management.
+
+Desktop: fixed sidebar panel (18rem expanded, 3.5rem icon-only) with inset content area that responds to sidebar width. Mobile: Sheet-based overlay triggered by the same `SidebarTrigger`. Composed from Button, Input, and Sheet primitives.
+
+## Architecture
+
+`SidebarProvider` establishes a React Context that all sub-components read via the `useSidebar` hook. The context tracks expanded/collapsed state, mobile open state, and the `isMobile` flag (breakpoint at 768px).
+
+```
+SidebarProvider          ← context root, sets CSS vars
+  ├── Sidebar            ← the panel (desktop: fixed aside, mobile: Sheet)
+  │   ├── SidebarHeader  ← branding / search row
+  │   ├── SidebarContent ← scrollable body
+  │   │   └── SidebarGroup > SidebarMenu > SidebarMenuItem > SidebarMenuButton
+  │   └── SidebarFooter  ← user profile / actions
+  ├── SidebarRail        ← click-to-toggle border strip (optional)
+  └── SidebarInset       ← main content area (flex-1, adjusts to sidebar width)
+        └── SidebarTrigger  ← toggle button (can live anywhere inside Provider)
+```
+
+`SidebarTrigger` can be placed anywhere inside `SidebarProvider` — typically inside `SidebarInset`'s top bar.
+
+## Installation
+
+<InstallTabs pkg="@termcn/sidebar" />
+
+## Usage
+
+```tsx
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarTrigger,
+  SidebarInset,
+  SidebarHeader,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+} from "@/components/ui/sidebar"
+
+export default function AppLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <SidebarProvider>
+      <Sidebar>
+        <SidebarHeader>
+          <span className="font-mono text-sm text-foreground">~/project</span>
+        </SidebarHeader>
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton isActive>Dashboard</SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton>Settings</SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </SidebarContent>
+        <SidebarFooter>
+          <span className="font-mono text-xs text-foreground2">user@host</span>
+        </SidebarFooter>
+      </Sidebar>
+      <SidebarInset>
+        <header className="flex h-10 items-center gap-2 border-b border-border px-3">
+          <SidebarTrigger />
+          <span className="font-mono text-xs text-foreground1">Dashboard</span>
+        </header>
+        <main className="p-4">{children}</main>
+      </SidebarInset>
+    </SidebarProvider>
+  )
+}
+```
+
+## Examples
+
+### Basic Sidebar
+
+Full layout: `SidebarProvider` wrapping a `Sidebar` and a `SidebarInset`. The trigger inside the top bar toggles both desktop collapse and mobile sheet.
+
+<Preview>
+  <SidebarProvider className="min-h-[400px] border border-border">
+    <Sidebar collapsible="icon">
+      <SidebarHeader>
+        <span className="font-mono text-sm text-foreground px-2">~/termcn</span>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Files</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton isActive>
+                  <span>■</span>
+                  <span>index.tsx</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <span>■</span>
+                  <span>sidebar.tsx</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <span>■</span>
+                  <span>button.tsx</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarFooter>
+        <span className="font-mono text-xs text-foreground2">3 files</span>
+      </SidebarFooter>
+    </Sidebar>
+    <SidebarInset>
+      <header className="flex h-10 items-center gap-2 border-b border-border px-3">
+        <SidebarTrigger />
+        <span className="font-mono text-xs text-foreground1">index.tsx</span>
+      </header>
+      <div className="p-4 font-mono text-xs text-foreground2">
+        <p>— file content —</p>
+      </div>
+    </SidebarInset>
+  </SidebarProvider>
+</Preview>
+
+```tsx
+<SidebarProvider>
+  <Sidebar collapsible="icon">
+    <SidebarHeader>
+      <span className="font-mono text-sm text-foreground px-2">~/termcn</span>
+    </SidebarHeader>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Files</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton isActive>
+                <span>■</span>
+                <span>index.tsx</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <span>■</span>
+                <span>sidebar.tsx</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+    <SidebarFooter>
+      <span className="font-mono text-xs text-foreground2">3 files</span>
+    </SidebarFooter>
+  </Sidebar>
+  <SidebarInset>
+    <header className="flex h-10 items-center gap-2 border-b border-border px-3">
+      <SidebarTrigger />
+      <span className="font-mono text-xs text-foreground1">index.tsx</span>
+    </header>
+    <main className="p-4">{children}</main>
+  </SidebarInset>
+</SidebarProvider>
+```
+
+### Collapsible: `icon` mode
+
+`collapsible="icon"` shrinks the sidebar to 3.5rem showing only icons. Labels, badges, actions, and group labels are hidden. Menu buttons center-align.
+
+<Preview>
+  <SidebarProvider className="min-h-[400px] border border-border" defaultOpen={false}>
+    <Sidebar collapsible="icon">
+      <SidebarHeader>
+        <span className="font-mono text-xs text-foreground2 px-1">T</span>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Nav</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton isActive title="Dashboard">
+                  <span>⌂</span>
+                  <span>Dashboard</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton title="Settings">
+                  <span>⚙</span>
+                  <span>Settings</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton title="Files">
+                  <span>◫</span>
+                  <span>Files</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
+    <SidebarInset>
+      <header className="flex h-10 items-center gap-2 border-b border-border px-3">
+        <SidebarTrigger />
+        <span className="font-mono text-xs text-foreground1">collapsed — icons only</span>
+      </header>
+    </SidebarInset>
+  </SidebarProvider>
+</Preview>
+
+```tsx
+// Starts collapsed (icon-only). SidebarMenuButton title= used as accessible label.
+<SidebarProvider defaultOpen={false}>
+  <Sidebar collapsible="icon">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Nav</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton isActive title="Dashboard">
+                <span>⌂</span>
+                <span>Dashboard</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+  <SidebarInset>
+    <SidebarTrigger />
+  </SidebarInset>
+</SidebarProvider>
+```
+
+### Collapsible: `offcanvas` mode
+
+`collapsible="offcanvas"` slides the sidebar fully off-screen when collapsed. The content area expands to fill the full width.
+
+```tsx
+<SidebarProvider>
+  <Sidebar collapsible="offcanvas">
+    {/* ... */}
+  </Sidebar>
+  <SidebarInset>
+    <SidebarTrigger />
+    {/* content expands to full width when sidebar is off-screen */}
+  </SidebarInset>
+</SidebarProvider>
+```
+
+### Non-collapsible sidebar
+
+`collapsible="none"` renders a permanent `<aside>` with no toggle capability.
+
+```tsx
+<SidebarProvider>
+  <Sidebar collapsible="none">
+    {/* always visible, no trigger needed */}
+  </Sidebar>
+  <SidebarInset>{/* ... */}</SidebarInset>
+</SidebarProvider>
+```
+
+### Mobile Responsive
+
+On screens narrower than 768px, `Sidebar` automatically renders as a `Sheet` overlay. `SidebarTrigger` opens/closes the sheet. No additional code required — responsiveness is built in.
+
+```tsx
+// Same code works on desktop (collapsible panel) and mobile (Sheet overlay).
+<SidebarProvider>
+  <Sidebar collapsible="icon">
+    {/* ... */}
+  </Sidebar>
+  <SidebarInset>
+    {/* SidebarTrigger opens Sheet on mobile, toggles panel on desktop */}
+    <SidebarTrigger />
+  </SidebarInset>
+</SidebarProvider>
+```
+
+### Navigation with Active State
+
+`SidebarMenuButton` accepts `isActive` to render the selection-inversion pattern (foreground/background swap — Vim visual mode).
+
+<Preview>
+  <SidebarProvider className="min-h-[300px] border border-border">
+    <Sidebar collapsible="none">
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Pages</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton isActive>
+                  <span>▸</span>
+                  <span>Dashboard</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <span>▸</span>
+                  <span>Components</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <span>▸</span>
+                  <span>Settings</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton disabled>
+                  <span>▸</span>
+                  <span>Admin</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
+    <SidebarInset className="p-4">
+      <p className="font-mono text-xs text-foreground2">Active item uses bg-foreground text-background inversion.</p>
+    </SidebarInset>
+  </SidebarProvider>
+</Preview>
+
+```tsx
+<SidebarMenu>
+  <SidebarMenuItem>
+    <SidebarMenuButton isActive>
+      <span>▸</span>
+      <span>Dashboard</span>
+    </SidebarMenuButton>
+  </SidebarMenuItem>
+  <SidebarMenuItem>
+    <SidebarMenuButton>
+      <span>▸</span>
+      <span>Components</span>
+    </SidebarMenuButton>
+  </SidebarMenuItem>
+  <SidebarMenuItem>
+    <SidebarMenuButton disabled>
+      <span>▸</span>
+      <span>Admin</span>
+    </SidebarMenuButton>
+  </SidebarMenuItem>
+</SidebarMenu>
+```
+
+### `asChild` with Links
+
+Use `asChild` on `SidebarMenuButton` to render a router link or `<a>` tag.
+
+```tsx
+import { Link } from "@tanstack/react-router"
+
+<SidebarMenuItem>
+  <SidebarMenuButton asChild isActive>
+    <Link to="/dashboard">
+      <span>⌂</span>
+      <span>Dashboard</span>
+    </Link>
+  </SidebarMenuButton>
+</SidebarMenuItem>
+```
+
+### Sidebar Groups
+
+Use `SidebarGroup` to divide navigation into labeled sections. `SidebarGroupLabel` renders as muted-foreground uppercase text. Multiple groups stack inside `SidebarContent`.
+
+<Preview>
+  <SidebarProvider className="min-h-[360px] border border-border">
+    <Sidebar collapsible="none">
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton isActive>Dashboard</SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton>Projects</SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarSeparator />
+        <SidebarGroup>
+          <SidebarGroupLabel>Account</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton>Profile</SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton>Settings</SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
+    <SidebarInset className="p-4">
+      <p className="font-mono text-xs text-foreground2">Two groups separated by SidebarSeparator.</p>
+    </SidebarInset>
+  </SidebarProvider>
+</Preview>
+
+```tsx
+<SidebarContent>
+  <SidebarGroup>
+    <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+    <SidebarGroupContent>
+      <SidebarMenu>{/* items */}</SidebarMenu>
+    </SidebarGroupContent>
+  </SidebarGroup>
+  <SidebarSeparator />
+  <SidebarGroup>
+    <SidebarGroupLabel>Account</SidebarGroupLabel>
+    <SidebarGroupContent>
+      <SidebarMenu>{/* items */}</SidebarMenu>
+    </SidebarGroupContent>
+  </SidebarGroup>
+</SidebarContent>
+```
+
+### Sidebar Header
+
+`SidebarHeader` renders a top zone with a bottom border. Typically holds a logo, project name, or workspace switcher.
+
+<Preview>
+  <SidebarProvider className="min-h-[200px] border border-border">
+    <Sidebar collapsible="none">
+      <SidebarHeader>
+        <div className="flex items-center gap-2 px-1">
+          <span className="font-mono text-sm text-primary">❯</span>
+          <span className="font-mono text-sm text-foreground">termcn</span>
+          <span className="font-mono text-xs text-foreground2 ml-auto">v1.0</span>
+        </div>
+      </SidebarHeader>
+      <SidebarContent />
+    </Sidebar>
+    <SidebarInset />
+  </SidebarProvider>
+</Preview>
+
+```tsx
+<SidebarHeader>
+  <div className="flex items-center gap-2 px-1">
+    <span className="font-mono text-sm text-primary">❯</span>
+    <span className="font-mono text-sm text-foreground">termcn</span>
+    <span className="font-mono text-xs text-foreground2 ml-auto">v1.0</span>
+  </div>
+</SidebarHeader>
+```
+
+### Sidebar Footer
+
+`SidebarFooter` anchors to the bottom of the sidebar with a top border. Typically holds a user profile row or sign-out action.
+
+<Preview>
+  <SidebarProvider className="min-h-[200px] border border-border">
+    <Sidebar collapsible="none">
+      <SidebarContent />
+      <SidebarFooter>
+        <div className="flex items-center gap-2">
+          <span className="font-mono text-xs text-foreground">user</span>
+          <span className="font-mono text-xs text-foreground2">@host</span>
+          <Button variant="ghost" size="sm" className="ml-auto h-6 px-2 text-xs">
+            logout
+          </Button>
+        </div>
+      </SidebarFooter>
+    </Sidebar>
+    <SidebarInset />
+  </SidebarProvider>
+</Preview>
+
+```tsx
+<SidebarFooter>
+  <div className="flex items-center gap-2">
+    <span className="font-mono text-xs text-foreground">user</span>
+    <span className="font-mono text-xs text-foreground2">@host</span>
+    <Button variant="ghost" size="sm" className="ml-auto h-6 px-2 text-xs">
+      logout
+    </Button>
+  </div>
+</SidebarFooter>
+```
+
+### Sidebar with Badges
+
+`SidebarMenuBadge` renders an absolute-positioned numeric badge on the right side of a menu item. Hidden when sidebar is in icon-only mode.
+
+<Preview>
+  <SidebarProvider className="min-h-[280px] border border-border">
+    <Sidebar collapsible="none">
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Inbox</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <span>✉</span>
+                  <span>Messages</span>
+                  <SidebarMenuBadge>12</SidebarMenuBadge>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <span>◎</span>
+                  <span>Notifications</span>
+                  <SidebarMenuBadge>3</SidebarMenuBadge>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <span>★</span>
+                  <span>Starred</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
+    <SidebarInset className="p-4">
+      <p className="font-mono text-xs text-foreground2">Badges are hidden in icon-only mode.</p>
+    </SidebarInset>
+  </SidebarProvider>
+</Preview>
+
+```tsx
+<SidebarMenuItem>
+  <SidebarMenuButton>
+    <span>✉</span>
+    <span>Messages</span>
+    <SidebarMenuBadge>12</SidebarMenuBadge>
+  </SidebarMenuButton>
+</SidebarMenuItem>
+```
+
+### Sidebar with Actions
+
+`SidebarMenuAction` adds an icon button absolutely positioned at the top-right of a menu item. Hidden in icon-only mode. Use `showOnHover` to reveal only when the parent item is focused.
+
+<Preview>
+  <SidebarProvider className="min-h-[280px] border border-border">
+    <Sidebar collapsible="none">
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Projects</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <span>◫</span>
+                  <span>termcn</span>
+                </SidebarMenuButton>
+                <SidebarMenuAction aria-label="More options">⋯</SidebarMenuAction>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <span>◫</span>
+                  <span>dashboard</span>
+                </SidebarMenuButton>
+                <SidebarMenuAction aria-label="More options">⋯</SidebarMenuAction>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
+    <SidebarInset className="p-4">
+      <p className="font-mono text-xs text-foreground2">Action button appears at item right edge.</p>
+    </SidebarInset>
+  </SidebarProvider>
+</Preview>
+
+```tsx
+<SidebarMenuItem>
+  <SidebarMenuButton>
+    <span>◫</span>
+    <span>termcn</span>
+  </SidebarMenuButton>
+  <SidebarMenuAction aria-label="More options">⋯</SidebarMenuAction>
+</SidebarMenuItem>
+```
+
+### Group Action
+
+`SidebarGroupAction` positions a button at the top-right of the group header. Useful for "add item" or group-level actions.
+
+```tsx
+<SidebarGroup>
+  <SidebarGroupLabel>Projects</SidebarGroupLabel>
+  <SidebarGroupAction aria-label="Add project">+</SidebarGroupAction>
+  <SidebarGroupContent>
+    <SidebarMenu>{/* items */}</SidebarMenu>
+  </SidebarGroupContent>
+</SidebarGroup>
+```
+
+### Sidebar Input
+
+`SidebarInput` wraps `Input` with sidebar-appropriate sizing (`h-8`, `text-xs`, `bg-background2`). Place inside `SidebarHeader` for a file-tree search pattern.
+
+<Preview>
+  <SidebarProvider className="min-h-[200px] border border-border">
+    <Sidebar collapsible="none">
+      <SidebarHeader>
+        <SidebarInput placeholder="search files..." />
+      </SidebarHeader>
+      <SidebarContent />
+    </Sidebar>
+    <SidebarInset />
+  </SidebarProvider>
+</Preview>
+
+```tsx
+<SidebarHeader>
+  <SidebarInput placeholder="search files..." />
+</SidebarHeader>
+```
+
+### Sidebar Rail
+
+`SidebarRail` is a narrow clickable strip (`w-3`) on the outer edge of the sidebar that toggles collapse. Renders a `|` glyph centered. Focus-visible inverts to `bg-foreground text-background`.
+
+```tsx
+<Sidebar collapsible="icon">
+  <SidebarHeader>{/* ... */}</SidebarHeader>
+  <SidebarContent>{/* ... */}</SidebarContent>
+  <SidebarRail />
+</Sidebar>
+```
+
+### Right-side Sidebar
+
+`side="right"` flips the sidebar to the right edge with `border-l` instead of `border-r`.
+
+```tsx
+<SidebarProvider>
+  <SidebarInset>
+    <SidebarTrigger />
+    {/* main content */}
+  </SidebarInset>
+  <Sidebar side="right" collapsible="icon">
+    {/* ... */}
+  </Sidebar>
+</SidebarProvider>
+```
+
+### Controlled State
+
+Pass `open` and `onOpenChange` to `SidebarProvider` for controlled usage.
+
+```tsx
+const [open, setOpen] = React.useState(true)
+
+<SidebarProvider open={open} onOpenChange={setOpen}>
+  <Sidebar>{/* ... */}</Sidebar>
+  <SidebarInset>
+    <button onClick={() => setOpen(o => !o)}>Toggle</button>
+  </SidebarInset>
+</SidebarProvider>
+```
+
+### useSidebar Hook
+
+Access sidebar state from any component inside `SidebarProvider`.
+
+```tsx
+import { useSidebar } from "@/components/ui/sidebar"
+
+function StatusBar() {
+  const { state, isMobile, toggleSidebar } = useSidebar()
+
+  return (
+    <div className="font-mono text-xs text-foreground2">
+      sidebar: {state} {isMobile && "(mobile)"}
+    </div>
+  )
+}
+```
+
+## Sub-components
+
+| Component | Element | Role |
+|-----------|---------|------|
+| `SidebarProvider` | `div` | Context root. Sets CSS vars, wraps layout in flex. |
+| `Sidebar` | `aside` / `Sheet` | The panel. Desktop: fixed positioned aside. Mobile: Sheet overlay. |
+| `SidebarTrigger` | `Button` | Toggles sidebar. Renders `▸` / `▾` glyph. |
+| `SidebarInset` | `main` | Content area. `flex-1`, expands as sidebar collapses. |
+| `SidebarHeader` | `div` | Top zone with `border-b`. |
+| `SidebarFooter` | `div` | Bottom zone with `border-t`, `mt-auto`. |
+| `SidebarContent` | `div` | Scrollable body between header and footer. |
+| `SidebarGroup` | `section` | Logical grouping with `px-3` padding. |
+| `SidebarGroupLabel` | `div` | Muted label text for a group. Hidden in icon mode. |
+| `SidebarGroupAction` | `button` | Absolute-positioned action at group top-right. Hidden in icon mode. |
+| `SidebarGroupContent` | `div` | Container for a group's menu. |
+| `SidebarMenu` | `ul` | Ordered list of navigation items. |
+| `SidebarMenuItem` | `li` | Single nav item. Relative-positioned for badge/action placement. |
+| `SidebarMenuButton` | `button` | The interactive nav row. Supports `isActive`, `asChild`, `size`. |
+| `SidebarMenuAction` | `button` | Absolute-positioned item-level action. Hidden in icon mode. |
+| `SidebarMenuBadge` | `div` | Numeric badge at item right. Hidden in icon mode. |
+| `SidebarSeparator` | `div` | 1px horizontal rule. `mx-3`, `bg-border`. |
+| `SidebarInput` | `Input` | Search input sized for sidebar (`h-8 text-xs`). |
+| `SidebarRail` | `button` | Thin collapse-toggle strip on sidebar edge. |
+
+## useSidebar Hook
+
+Returns the sidebar context value. Throws if called outside `SidebarProvider`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `state` | `"expanded" \| "collapsed"` | Current desktop sidebar state |
+| `open` | `boolean` | `true` when sidebar is open (desktop) |
+| `setOpen` | `(open: boolean) => void` | Set sidebar open state |
+| `openMobile` | `boolean` | `true` when mobile Sheet is open |
+| `setOpenMobile` | `(open: boolean) => void` | Set mobile sheet open state |
+| `isMobile` | `boolean` | `true` when viewport < 768px |
+| `toggleSidebar` | `() => void` | Toggles desktop sidebar or mobile sheet depending on `isMobile` |
+
+## Props
+
+### SidebarProvider
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultOpen` | `boolean` | `true` | Initial open state (uncontrolled) |
+| `open` | `boolean` | — | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | — | Called when open state changes |
+| `className` | `string` | — | Applied to the wrapper `div` |
+| `style` | `CSSProperties` | — | Merged with CSS var declarations |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+### Sidebar
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `side` | `"left" \| "right"` | `"left"` | Which edge the sidebar appears on |
+| `collapsible` | `"icon" \| "offcanvas" \| "none"` | `"icon"` | Collapse behavior |
+| `className` | `string` | — | Additional classes |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+### SidebarMenuButton
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isActive` | `boolean` | `false` | Applies foreground/background inversion |
+| `asChild` | `boolean` | `false` | Render as child element via Radix Slot |
+| `variant` | `"default" \| "outline"` | `"default"` | Visual variant |
+| `size` | `"default" \| "sm" \| "lg"` | `"default"` | Height variant (`h-8`, `h-7`, `h-10`) |
+| `disabled` | `boolean` | `false` | Dims to `text-foreground2` |
+| `className` | `string` | — | Additional classes |
+| ...rest | `ComponentProps<"button">` | — | All standard `<button>` props |
+
+## Notes
+
+**CSS variables** — `SidebarProvider` sets `--sidebar-width: 18rem` and `--sidebar-width-icon: 3.5rem` inline on the wrapper div. Override via `style` prop or the `className` prop with CSS-in-JS if needed.
+
+**Mobile breakpoint** — `useIsMobile()` listens to `(max-width: 767px)` via `matchMedia`. At 768px and above, the panel renders. Below, the Sheet renders. The `SidebarTrigger` behaves accordingly — `toggleSidebar()` calls `setOpen` on desktop and `setOpenMobile` on mobile.
+
+**Icon mode** — when `collapsible="icon"` and sidebar is collapsed, these slots are hidden via CSS attribute selectors on the `aside`: `sidebar-group-label`, `sidebar-group-action`, `sidebar-menu-action`, `sidebar-menu-badge`. `sidebar-menu-button` gets `justify-center px-0`.
+
+**Context boundary** — all sub-components call `useSidebar()` internally. `useSidebar` throws if rendered outside a `SidebarProvider`. The hook is also exported for custom components that need to read or drive sidebar state.
+
+**Animation** — collapse uses `transition-[width] duration-150 ease-out` (icon mode) or `transition-[transform] duration-150 ease-out` (offcanvas mode). Both are ≤150ms per the terminal aesthetic constraint.
