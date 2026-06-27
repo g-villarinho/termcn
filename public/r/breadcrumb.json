@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "breadcrumb",
+  "title": "Breadcrumb",
+  "description": "Terminal-style breadcrumb with focus-first links, muted route separators and current-page highlight.",
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/breadcrumb.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { ChevronRight, MoreHorizontal } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Breadcrumb({\n\tclassName,\n\t...props\n}: React.ComponentProps<\"nav\">) {\n\treturn (\n\t\t<nav\n\t\t\taria-label=\"breadcrumb\"\n\t\t\tdata-slot=\"breadcrumb\"\n\t\t\tclassName={cn(\"font-mono text-sm text-foreground\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction BreadcrumbList({\n\tclassName,\n\t...props\n}: React.ComponentProps<\"ol\">) {\n\treturn (\n\t\t<ol\n\t\t\tdata-slot=\"breadcrumb-list\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex flex-wrap items-center gap-1.5 text-muted-foreground\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction BreadcrumbItem({\n\tclassName,\n\t...props\n}: React.ComponentProps<\"li\">) {\n\treturn (\n\t\t<li\n\t\t\tdata-slot=\"breadcrumb-item\"\n\t\t\tclassName={cn(\"inline-flex items-center gap-1.5\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction BreadcrumbLink({\n\tasChild,\n\tclassName,\n\t...props\n}: React.ComponentProps<\"a\"> & {\n\tasChild?: boolean;\n}) {\n\tconst Comp = asChild ? Slot : \"a\";\n\n\treturn (\n\t\t<Comp\n\t\t\tdata-slot=\"breadcrumb-link\"\n\t\t\tclassName={cn(\n\t\t\t\t\"inline-flex items-center border border-transparent px-1 py-0.5 text-foreground1 outline-none\",\n\t\t\t\t\"focus-visible:border-border focus-visible:bg-foreground focus-visible:text-background focus-visible:ring-1 focus-visible:ring-ring\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction BreadcrumbPage({\n\tclassName,\n\t...props\n}: React.ComponentProps<\"span\">) {\n\treturn (\n\t\t<span\n\t\t\trole=\"link\"\n\t\t\taria-current=\"page\"\n\t\t\taria-disabled=\"true\"\n\t\t\tdata-slot=\"breadcrumb-page\"\n\t\t\tclassName={cn(\n\t\t\t\t\"inline-flex items-center border border-border bg-background2 px-1 py-0.5 text-foreground\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction BreadcrumbSeparator({\n\tchildren,\n\tclassName,\n\t...props\n}: React.ComponentProps<\"li\">) {\n\treturn (\n\t\t<li\n\t\t\trole=\"presentation\"\n\t\t\taria-hidden=\"true\"\n\t\t\tdata-slot=\"breadcrumb-separator\"\n\t\t\tclassName={cn(\"text-foreground2 [&_svg]:size-3.5\", className)}\n\t\t\t{...props}\n\t\t>\n\t\t\t{children ?? <ChevronRight />}\n\t\t</li>\n\t);\n}\n\nfunction BreadcrumbEllipsis({\n\tclassName,\n\t...props\n}: React.ComponentProps<\"span\">) {\n\treturn (\n\t\t<span\n\t\t\trole=\"presentation\"\n\t\t\taria-hidden=\"true\"\n\t\t\tdata-slot=\"breadcrumb-ellipsis\"\n\t\t\tclassName={cn(\n\t\t\t\t\"inline-flex size-6 items-center justify-center border border-transparent text-foreground2\",\n\t\t\t\t\"[&_svg]:size-3.5\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t<MoreHorizontal />\n\t\t\t<span className=\"sr-only\">More</span>\n\t\t</span>\n\t);\n}\n\nexport {\n\tBreadcrumb,\n\tBreadcrumbList,\n\tBreadcrumbItem,\n\tBreadcrumbLink,\n\tBreadcrumbPage,\n\tBreadcrumbSeparator,\n\tBreadcrumbEllipsis,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

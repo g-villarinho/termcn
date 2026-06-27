@@ -23,6 +23,39 @@
 			]
 		},
 		{
+			"name": "breadcrumb",
+			"type": "registry:ui",
+			"title": "Breadcrumb",
+			"description": "Terminal-style breadcrumb with focus-first links, muted route separators and current-page highlight.",
+			"dependencies": ["@radix-ui/react-slot", "lucide-react"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/breadcrumb.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "pagination",
+			"type": "registry:ui",
+			"title": "Pagination",
+			"description": "Terminal-style pagination that reuses the Button visual language for numbered pages and previous/next controls.",
+			"dependencies": ["lucide-react"],
+			"registryDependencies": ["utils", "button"],
+			"files": [
+				{ "path": "registry/ui/pagination.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "avatar",
+			"type": "registry:ui",
+			"title": "Avatar",
+			"description": "Terminal-style avatar with sharp border, Catppuccin fallback surface and initials-first fallback state.",
+			"dependencies": ["@radix-ui/react-avatar", "class-variance-authority"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/avatar.tsx", "type": "registry:ui" }
+			]
+		},
+		{
 			"name": "input",
 			"type": "registry:ui",
 			"title": "Input",

@@ -23,6 +23,39 @@
 			]
 		},
 		{
+			"name": "breadcrumb",
+			"type": "registry:ui",
+			"title": "Breadcrumb",
+			"description": "Terminal-style breadcrumb with focus-first links, muted route separators and current-page highlight.",
+			"dependencies": ["@radix-ui/react-slot", "lucide-react"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/breadcrumb.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "pagination",
+			"type": "registry:ui",
+			"title": "Pagination",
+			"description": "Terminal-style pagination that reuses the Button visual language for numbered pages and previous/next controls.",
+			"dependencies": ["lucide-react"],
+			"registryDependencies": ["utils", "button"],
+			"files": [
+				{ "path": "registry/ui/pagination.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "avatar",
+			"type": "registry:ui",
+			"title": "Avatar",
+			"description": "Terminal-style avatar with sharp border, Catppuccin fallback surface and initials-first fallback state.",
+			"dependencies": ["@radix-ui/react-avatar", "class-variance-authority"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/avatar.tsx", "type": "registry:ui" }
+			]
+		},
+		{
 			"name": "input",
 			"type": "registry:ui",
 			"title": "Input",
@@ -179,6 +212,69 @@
 			"registryDependencies": ["utils"],
 			"files": [
 				{ "path": "registry/ui/sonner.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "dropdown-menu",
+			"type": "registry:ui",
+			"title": "Dropdown Menu",
+			"description": "Terminal-style dropdown menu: selection inversion, ✓/● indicators, ▸ submenu glyph, no hover/radius/shadow. Includes checkbox, radio, sub-menu, shortcut, separator.",
+			"dependencies": ["@radix-ui/react-dropdown-menu"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/dropdown-menu.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "context-menu",
+			"type": "registry:ui",
+			"title": "Context Menu",
+			"description": "Terminal-style right-click context menu: selection inversion, ✓/● indicators, ▸ submenu glyph, no hover/radius/shadow. Includes checkbox, radio, sub-menu, shortcut, separator.",
+			"dependencies": ["@radix-ui/react-context-menu"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/context-menu.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "menubar",
+			"type": "registry:ui",
+			"title": "Menubar",
+			"description": "Terminal-style application menubar: border-b strip, open-state inversion on triggers, ✓/● indicators, ▸ submenu glyph, no hover/radius/shadow. Includes checkbox, radio, sub-menu, shortcut, separator.",
+			"dependencies": ["@radix-ui/react-menubar"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/menubar.tsx", "type": "registry:ui" }
 			]
 		}
 	]
