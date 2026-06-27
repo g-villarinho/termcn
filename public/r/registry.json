@@ -108,6 +108,179 @@
 			]
 		},
 		{
+			"name": "sheet",
+			"type": "registry:ui",
+			"title": "Sheet",
+			"description": "Terminal-style side panel built on Radix Dialog: border-defined depth, global slide-in/slide-out keyframes, bracket close [x], no radius/shadow.",
+			"dependencies": ["@radix-ui/react-dialog"],
+			"registryDependencies": ["utils"],
+			"cssVars": {
+				"theme": {
+					"--termcn-slide-offset": "1rem"
+				}
+			},
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				},
+				"@keyframes termcn-slide-in-from-left": {
+					"from": {
+						"opacity": "0",
+						"transform": "translateX(calc(var(--termcn-slide-offset) * -1))"
+					},
+					"to": {
+						"opacity": "1",
+						"transform": "translateX(0)"
+					}
+				},
+				"@keyframes termcn-slide-out-to-left": {
+					"from": {
+						"opacity": "1",
+						"transform": "translateX(0)"
+					},
+					"to": {
+						"opacity": "0",
+						"transform": "translateX(calc(var(--termcn-slide-offset) * -1))"
+					}
+				},
+				"@keyframes termcn-slide-in-from-right": {
+					"from": {
+						"opacity": "0",
+						"transform": "translateX(var(--termcn-slide-offset))"
+					},
+					"to": {
+						"opacity": "1",
+						"transform": "translateX(0)"
+					}
+				},
+				"@keyframes termcn-slide-out-to-right": {
+					"from": {
+						"opacity": "1",
+						"transform": "translateX(0)"
+					},
+					"to": {
+						"opacity": "0",
+						"transform": "translateX(var(--termcn-slide-offset))"
+					}
+				},
+				"@keyframes termcn-slide-in-from-top": {
+					"from": {
+						"opacity": "0",
+						"transform": "translateY(calc(var(--termcn-slide-offset) * -1))"
+					},
+					"to": {
+						"opacity": "1",
+						"transform": "translateY(0)"
+					}
+				},
+				"@keyframes termcn-slide-out-to-top": {
+					"from": {
+						"opacity": "1",
+						"transform": "translateY(0)"
+					},
+					"to": {
+						"opacity": "0",
+						"transform": "translateY(calc(var(--termcn-slide-offset) * -1))"
+					}
+				},
+				"@keyframes termcn-slide-in-from-bottom": {
+					"from": {
+						"opacity": "0",
+						"transform": "translateY(var(--termcn-slide-offset))"
+					},
+					"to": {
+						"opacity": "1",
+						"transform": "translateY(0)"
+					}
+				},
+				"@keyframes termcn-slide-out-to-bottom": {
+					"from": {
+						"opacity": "1",
+						"transform": "translateY(0)"
+					},
+					"to": {
+						"opacity": "0",
+						"transform": "translateY(var(--termcn-slide-offset))"
+					}
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/sheet.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "drawer",
+			"type": "registry:ui",
+			"title": "Drawer",
+			"description": "Terminal-style bottom drawer built on Vaul: border-top structure, subtle slide from bottom, no radius/shadow, focus-first interactions.",
+			"dependencies": ["vaul"],
+			"registryDependencies": ["utils"],
+			"cssVars": {
+				"theme": {
+					"--termcn-slide-offset": "1rem"
+				}
+			},
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				},
+				"@keyframes termcn-slide-in-from-bottom": {
+					"from": {
+						"opacity": "0",
+						"transform": "translateY(var(--termcn-slide-offset))"
+					},
+					"to": {
+						"opacity": "1",
+						"transform": "translateY(0)"
+					}
+				},
+				"@keyframes termcn-slide-out-to-bottom": {
+					"from": {
+						"opacity": "1",
+						"transform": "translateY(0)"
+					},
+					"to": {
+						"opacity": "0",
+						"transform": "translateY(var(--termcn-slide-offset))"
+					}
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/drawer.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "sidebar",
+			"type": "registry:ui",
+			"title": "Sidebar",
+			"description": "Terminal-style responsive sidebar with desktop collapse modes and mobile fallback through Sheet. Includes provider, trigger, rail, groups and menu composition.",
+			"dependencies": [
+				"class-variance-authority",
+				"@radix-ui/react-slot"
+			],
+			"registryDependencies": ["utils", "button", "input", "sheet"],
+			"cssVars": {
+				"theme": {
+					"--sidebar-width": "18rem",
+					"--sidebar-width-icon": "3.5rem",
+					"--termcn-slide-offset": "1rem"
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/sidebar.tsx", "type": "registry:ui" }
+			]
+		},
+		{
 			"name": "alert",
 			"type": "registry:ui",
 			"title": "Alert",
@@ -127,6 +300,49 @@
 			"registryDependencies": ["utils", "button"],
 			"files": [
 				{ "path": "registry/ui/alert-dialog.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "badge",
+			"type": "registry:ui",
+			"title": "Badge",
+			"description": "Terminal-style status badge: outlined semantic variants with optional [square] or (paren) bracket conventions. No hover/radius/shadow.",
+			"dependencies": ["class-variance-authority", "@radix-ui/react-slot"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/badge.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "card",
+			"type": "registry:ui",
+			"title": "Card",
+			"description": "Terminal-style container with box-drawing border and background-level elevation. Composable header, title, description, content and footer. No radius/shadow.",
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/card.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "separator",
+			"type": "registry:ui",
+			"title": "Separator",
+			"description": "Box-drawing divider built on Radix Separator. Horizontal/vertical, 1px border-color rule. No radius/shadow.",
+			"dependencies": ["@radix-ui/react-separator"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/separator.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "accordion",
+			"type": "registry:ui",
+			"title": "Accordion",
+			"description": "Directory-tree style collapsible built on Radix Accordion: ▸/▾ glyph indicators, border-l indent guide, focus inversion. No chevron rotation, no height animation, no hover/radius/shadow.",
+			"dependencies": ["@radix-ui/react-accordion"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/accordion.tsx", "type": "registry:ui" }
 			]
 		},
 		{
@@ -275,6 +491,72 @@
 			},
 			"files": [
 				{ "path": "registry/ui/menubar.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "slider",
+			"type": "registry:ui",
+			"title": "Slider",
+			"description": "Terminal-style value slider: boxed track, primary active range, sharp thumb and focus-visible ring. Supports single or range values.",
+			"dependencies": ["@radix-ui/react-slider"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/slider.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "switch",
+			"type": "registry:ui",
+			"title": "Switch",
+			"description": "Sharp iOS-inspired on/off switch: primary checked state, boxed thumb, no hover/radius/shadow, keyboard-first focus-visible feedback.",
+			"dependencies": ["@radix-ui/react-switch"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/switch.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "toggle",
+			"type": "registry:ui",
+			"title": "Toggle",
+			"description": "Binary pressed-state control with terminal inversion and primary active state. Variants: default, outline. Sizes: sm, default, lg.",
+			"dependencies": ["@radix-ui/react-toggle", "class-variance-authority"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/toggle.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "toggle-group",
+			"type": "registry:ui",
+			"title": "Toggle Group",
+			"description": "Single or multiple selection group composed from Toggle primitives with shared size/variant styling and keyboard roving focus.",
+			"dependencies": ["@radix-ui/react-toggle-group", "class-variance-authority"],
+			"registryDependencies": ["utils", "toggle"],
+			"files": [
+				{ "path": "registry/ui/toggle-group.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "resizable",
+			"type": "registry:ui",
+			"title": "Resizable",
+			"description": "Terminal-style resizable panels built on react-resizable-panels: subtle divider lines, keyboard focus ring, optional ASCII grip handle. No hover/radius/shadow.",
+			"dependencies": ["react-resizable-panels"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/resizable.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "scroll-area",
+			"type": "registry:ui",
+			"title": "Scroll Area",
+			"description": "Terminal-style custom scroll area built on Radix Scroll Area: consistent cross-platform scrollbar, muted track, subtle border thumb. No hover/radius/shadow.",
+			"dependencies": ["@radix-ui/react-scroll-area"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/scroll-area.tsx", "type": "registry:ui" }
 			]
 		}
 	]
