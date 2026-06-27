@@ -1,0 +1,118 @@
+---
+title: Skeleton
+description: Terminal-style loading placeholder with pulse animation.
+---
+
+import { Skeleton } from "registry/ui/skeleton"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Skeleton
+
+Terminal-style loading placeholder that pulses to indicate pending content. Renders a bordered block with `animate-pulse` and a muted background level. Shape is fully controlled via `className`.
+
+## Installation
+
+<InstallTabs pkg="@termcn/skeleton" />
+
+## Usage
+
+```tsx
+import { Skeleton } from "@/components/ui/skeleton"
+
+export default function SkeletonDemo() {
+  return <Skeleton className="h-4 w-48" />
+}
+```
+
+## Examples
+
+### Basic block
+
+<Preview>
+  <Skeleton className="h-16 w-64" />
+</Preview>
+
+```tsx
+<Skeleton className="h-16 w-64" />
+```
+
+### Text lines
+
+Simulate loading text with narrow-height skeletons at varying widths.
+
+<Preview>
+  <div className="flex flex-col gap-2 w-64">
+    <Skeleton className="h-4 w-full" />
+    <Skeleton className="h-4 w-4/5" />
+    <Skeleton className="h-4 w-3/5" />
+  </div>
+</Preview>
+
+```tsx
+<div className="flex flex-col gap-2 w-64">
+  <Skeleton className="h-4 w-full" />
+  <Skeleton className="h-4 w-4/5" />
+  <Skeleton className="h-4 w-3/5" />
+</div>
+```
+
+### Card skeleton
+
+Combine skeletons to mock a card layout with a header and body lines.
+
+<Preview>
+  <div className="flex flex-col gap-3 w-72 border border-border p-4">
+    <div className="flex items-center gap-3">
+      <Skeleton className="h-10 w-10 shrink-0" />
+      <div className="flex flex-col gap-2 flex-1">
+        <Skeleton className="h-4 w-3/4" />
+        <Skeleton className="h-3 w-1/2" />
+      </div>
+    </div>
+    <Skeleton className="h-4 w-full" />
+    <Skeleton className="h-4 w-5/6" />
+    <Skeleton className="h-4 w-2/3" />
+  </div>
+</Preview>
+
+```tsx
+<div className="flex flex-col gap-3 w-72 border border-border p-4">
+  <div className="flex items-center gap-3">
+    <Skeleton className="h-10 w-10 shrink-0" />
+    <div className="flex flex-col gap-2 flex-1">
+      <Skeleton className="h-4 w-3/4" />
+      <Skeleton className="h-3 w-1/2" />
+    </div>
+  </div>
+  <Skeleton className="h-4 w-full" />
+  <Skeleton className="h-4 w-5/6" />
+  <Skeleton className="h-4 w-2/3" />
+</div>
+```
+
+### Square avatar placeholder
+
+Use equal height and width to mock an avatar or icon block.
+
+<Preview>
+  <Skeleton className="h-10 w-10" />
+</Preview>
+
+```tsx
+<Skeleton className="h-10 w-10" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Controls dimensions, additional styling |
+| ...rest | `ComponentProps<"div">` | — | All standard `<div>` props |
+
+## Notes
+
+- Skeleton has no intrinsic size — always pass `h-*` and `w-*` via `className`.
+- The border uses `border-border/40` (40% opacity) to keep placeholders visually lighter than real content.
+- Background is `bg-background2` (`--background2`, Catppuccin Surface 0) — one level above the main background.
+- `animate-pulse` is Tailwind's built-in opacity cycle; no custom keyframes are added.
