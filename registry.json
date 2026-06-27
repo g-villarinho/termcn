@@ -243,6 +243,50 @@
 			"files": [
 				{ "path": "registry/ui/menubar.tsx", "type": "registry:ui" }
 			]
+		},
+		{
+			"name": "slider",
+			"type": "registry:ui",
+			"title": "Slider",
+			"description": "Terminal-style value slider: boxed track, primary active range, sharp thumb and focus-visible ring. Supports single or range values.",
+			"dependencies": ["@radix-ui/react-slider"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/slider.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "switch",
+			"type": "registry:ui",
+			"title": "Switch",
+			"description": "Sharp iOS-inspired on/off switch: primary checked state, boxed thumb, no hover/radius/shadow, keyboard-first focus-visible feedback.",
+			"dependencies": ["@radix-ui/react-switch"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/switch.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "toggle",
+			"type": "registry:ui",
+			"title": "Toggle",
+			"description": "Binary pressed-state control with terminal inversion and primary active state. Variants: default, outline. Sizes: sm, default, lg.",
+			"dependencies": ["@radix-ui/react-toggle", "class-variance-authority"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/toggle.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "toggle-group",
+			"type": "registry:ui",
+			"title": "Toggle Group",
+			"description": "Single or multiple selection group composed from Toggle primitives with shared size/variant styling and keyboard roving focus.",
+			"dependencies": ["@radix-ui/react-toggle-group", "class-variance-authority"],
+			"registryDependencies": ["utils", "toggle"],
+			"files": [
+				{ "path": "registry/ui/toggle-group.tsx", "type": "registry:ui" }
+			]
 		}
 	]
 }
