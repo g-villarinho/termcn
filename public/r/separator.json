@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "title": "Separator",
+  "description": "Box-drawing divider built on Radix Separator. Horizontal/vertical, 1px border-color rule. No radius/shadow.",
+  "dependencies": [
+    "@radix-ui/react-separator"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/separator.tsx",
+      "content": "import * as React from \"react\";\nimport * as SeparatorPrimitive from \"@radix-ui/react-separator\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Separator({\n\tclassName,\n\torientation = \"horizontal\",\n\tdecorative = true,\n\t...props\n}: React.ComponentProps<typeof SeparatorPrimitive.Root>) {\n\treturn (\n\t\t<SeparatorPrimitive.Root\n\t\t\tdata-slot=\"separator\"\n\t\t\tdecorative={decorative}\n\t\t\torientation={orientation}\n\t\t\tclassName={cn(\n\t\t\t\t\"shrink-0 bg-border\",\n\t\t\t\t\"data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full\",\n\t\t\t\t\"data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Separator };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

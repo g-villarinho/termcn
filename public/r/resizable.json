@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "resizable",
+  "title": "Resizable",
+  "description": "Terminal-style resizable panels built on react-resizable-panels: subtle divider lines, keyboard focus ring, optional ASCII grip handle. No hover/radius/shadow.",
+  "dependencies": [
+    "react-resizable-panels"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/resizable.tsx",
+      "content": "import * as ResizablePrimitive from \"react-resizable-panels\";\nimport { cn } from \"@/lib/utils\";\n\nfunction ResizablePanelGroup({\n\tclassName,\n\t...props\n}: ResizablePrimitive.GroupProps) {\n\treturn (\n\t\t<ResizablePrimitive.Group\n\t\t\tdata-slot=\"resizable-panel-group\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex h-full w-full font-mono aria-[orientation=vertical]:flex-col\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction ResizablePanel({ ...props }: ResizablePrimitive.PanelProps) {\n\treturn <ResizablePrimitive.Panel data-slot=\"resizable-panel\" {...props} />;\n}\n\nfunction ResizableHandle({\n\twithHandle,\n\tclassName,\n\t...props\n}: ResizablePrimitive.SeparatorProps & {\n\twithHandle?: boolean;\n}) {\n\treturn (\n\t\t<ResizablePrimitive.Separator\n\t\t\tdata-slot=\"resizable-handle\"\n\t\t\tclassName={cn(\n\t\t\t\t\"relative flex w-px shrink-0 touch-none select-none items-center justify-center bg-border/70 outline-none after:absolute after:inset-y-0 after:left-1/2 after:w-4 after:-translate-x-1/2\",\n\t\t\t\t\"focus-visible:bg-foreground1 focus-visible:ring-1 focus-visible:ring-ring\",\n\t\t\t\t\"aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full aria-[orientation=horizontal]:after:inset-x-0 aria-[orientation=horizontal]:after:top-1/2 aria-[orientation=horizontal]:after:h-4 aria-[orientation=horizontal]:after:w-auto aria-[orientation=horizontal]:after:-translate-y-1/2 aria-[orientation=horizontal]:after:translate-x-0\",\n\t\t\t\t\"[&[aria-orientation=horizontal]>span]:rotate-90\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t{withHandle ? (\n\t\t\t\t<span\n\t\t\t\t\taria-hidden\n\t\t\t\t\tclassName=\"z-10 bg-background px-0.5 font-mono text-[10px] leading-none tracking-[-0.25em] text-foreground2\"\n\t\t\t\t>\n\t\t\t\t\t:::\n\t\t\t\t</span>\n\t\t\t) : null}\n\t\t</ResizablePrimitive.Separator>\n\t);\n}\n\nexport { ResizablePanelGroup, ResizablePanel, ResizableHandle };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

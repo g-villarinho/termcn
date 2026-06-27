@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slider",
+  "title": "Slider",
+  "description": "Terminal-style value slider: boxed track, primary active range, sharp thumb and focus-visible ring. Supports single or range values.",
+  "dependencies": [
+    "@radix-ui/react-slider"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/slider.tsx",
+      "content": "import * as React from \"react\";\nimport * as SliderPrimitive from \"@radix-ui/react-slider\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Slider({\n\tclassName,\n\tdefaultValue,\n\tvalue,\n\tmin = 0,\n\tmax = 100,\n\t...props\n}: React.ComponentProps<typeof SliderPrimitive.Root>) {\n\tconst values = Array.isArray(value)\n\t\t? value\n\t\t: Array.isArray(defaultValue)\n\t\t\t? defaultValue\n\t\t\t: [min];\n\n\treturn (\n\t\t<SliderPrimitive.Root\n\t\t\tdata-slot=\"slider\"\n\t\t\tdefaultValue={defaultValue}\n\t\t\tvalue={value}\n\t\t\tmin={min}\n\t\t\tmax={max}\n\t\t\tclassName={cn(\n\t\t\t\t\"relative flex w-full touch-none select-none items-center font-mono\",\n\t\t\t\t\"data-[orientation=vertical]:h-32 data-[orientation=vertical]:w-5 data-[orientation=vertical]:flex-col\",\n\t\t\t\t\"data-[disabled]:cursor-not-allowed data-[disabled]:opacity-100\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t<SliderPrimitive.Track\n\t\t\t\tdata-slot=\"slider-track\"\n\t\t\t\tclassName={cn(\n\t\t\t\t\t\"relative grow overflow-hidden border border-border bg-background1\",\n\t\t\t\t\t\"data-[orientation=horizontal]:h-3 data-[orientation=horizontal]:w-full\",\n\t\t\t\t\t\"data-[orientation=vertical]:h-full data-[orientation=vertical]:w-3\",\n\t\t\t\t)}\n\t\t\t>\n\t\t\t\t<SliderPrimitive.Range\n\t\t\t\t\tdata-slot=\"slider-range\"\n\t\t\t\t\tclassName={cn(\n\t\t\t\t\t\t\"absolute bg-primary\",\n\t\t\t\t\t\t\"data-[orientation=horizontal]:h-full\",\n\t\t\t\t\t\t\"data-[orientation=vertical]:w-full\",\n\t\t\t\t\t)}\n\t\t\t\t/>\n\t\t\t</SliderPrimitive.Track>\n\t\t\t{Array.from({ length: values.length }, (_, index) => (\n\t\t\t\t<SliderPrimitive.Thumb\n\t\t\t\t\tdata-slot=\"slider-thumb\"\n\t\t\t\t\tkey={index}\n\t\t\t\t\tclassName={cn(\n\t\t\t\t\t\t\"block size-5 border border-primary bg-background outline-none\",\n\t\t\t\t\t\t\"focus-visible:border-primary focus-visible:bg-primary focus-visible:ring-1 focus-visible:ring-ring\",\n\t\t\t\t\t\t\"disabled:pointer-events-none disabled:border-foreground2 disabled:bg-background2\",\n\t\t\t\t\t)}\n\t\t\t\t/>\n\t\t\t))}\n\t\t</SliderPrimitive.Root>\n\t);\n}\n\nexport { Slider };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-group",
+  "title": "Toggle Group",
+  "description": "Single or multiple selection group composed from Toggle primitives with shared size/variant styling and keyboard roving focus.",
+  "dependencies": [
+    "@radix-ui/react-toggle-group",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils",
+    "toggle"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/toggle-group.tsx",
+      "content": "import * as React from \"react\";\nimport * as ToggleGroupPrimitive from \"@radix-ui/react-toggle-group\";\nimport { type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\nimport { toggleVariants } from \"@/components/ui/toggle\";\n\ntype ToggleGroupVariantProps = VariantProps<typeof toggleVariants>;\n\nconst ToggleGroupContext = React.createContext<ToggleGroupVariantProps>({\n\tvariant: \"default\",\n\tsize: \"default\",\n});\n\nfunction ToggleGroup({\n\tclassName,\n\tvariant,\n\tsize,\n\tchildren,\n\t...props\n}: React.ComponentProps<typeof ToggleGroupPrimitive.Root> &\n\tToggleGroupVariantProps) {\n\treturn (\n\t\t<ToggleGroupPrimitive.Root\n\t\t\tdata-slot=\"toggle-group\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex w-fit items-center gap-1 font-mono\",\n\t\t\t\t\"data-[orientation=vertical]:w-full data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t<ToggleGroupContext.Provider value={{ variant, size }}>\n\t\t\t\t{children}\n\t\t\t</ToggleGroupContext.Provider>\n\t\t</ToggleGroupPrimitive.Root>\n\t);\n}\n\nfunction ToggleGroupItem({\n\tclassName,\n\tvariant,\n\tsize,\n\t...props\n}: React.ComponentProps<typeof ToggleGroupPrimitive.Item> &\n\tToggleGroupVariantProps) {\n\tconst context = React.useContext(ToggleGroupContext);\n\n\treturn (\n\t\t<ToggleGroupPrimitive.Item\n\t\t\tdata-slot=\"toggle-group-item\"\n\t\t\tclassName={cn(\n\t\t\t\ttoggleVariants({\n\t\t\t\t\tvariant: context.variant ?? variant,\n\t\t\t\t\tsize: context.size ?? size,\n\t\t\t\t}),\n\t\t\t\t\"shrink-0 disabled:pointer-events-none disabled:border-foreground2 disabled:bg-background1 disabled:text-foreground2\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { ToggleGroup, ToggleGroupItem };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

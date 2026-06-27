@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "title": "Switch",
+  "description": "Sharp iOS-inspired on/off switch: primary checked state, boxed thumb, no hover/radius/shadow, keyboard-first focus-visible feedback.",
+  "dependencies": [
+    "@radix-ui/react-switch"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/switch.tsx",
+      "content": "import * as React from \"react\";\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst switchVariants = cva(\n\t\"peer inline-flex shrink-0 items-center border font-mono outline-none\",\n\t{\n\t\tvariants: {\n\t\t\tsize: {\n\t\t\t\tdefault:\n\t\t\t\t\t\"h-6 w-11 p-0.5 focus-visible:ring-1 focus-visible:ring-ring\",\n\t\t\t\tsm: \"h-5 w-9 p-0.5 focus-visible:ring-1 focus-visible:ring-ring\",\n\t\t\t},\n\t\t},\n\t\tdefaultVariants: {\n\t\t\tsize: \"default\",\n\t\t},\n\t},\n);\n\nconst switchThumbVariants = cva(\n\t\"block border bg-foreground\",\n\t{\n\t\tvariants: {\n\t\t\tsize: {\n\t\t\t\tdefault:\n\t\t\t\t\t\"size-4 border-border data-[state=checked]:translate-x-5\",\n\t\t\t\tsm: \"size-3 border-border data-[state=checked]:translate-x-4\",\n\t\t\t},\n\t\t},\n\t\tdefaultVariants: {\n\t\t\tsize: \"default\",\n\t\t},\n\t},\n);\n\ninterface SwitchProps\n\textends React.ComponentProps<typeof SwitchPrimitive.Root>,\n\t\tVariantProps<typeof switchVariants> {}\n\nfunction Switch({ className, size, ...props }: SwitchProps) {\n\treturn (\n\t\t<SwitchPrimitive.Root\n\t\t\tdata-slot=\"switch\"\n\t\t\tclassName={cn(\n\t\t\t\tswitchVariants({ size }),\n\t\t\t\t\"bg-background2 text-foreground\",\n\t\t\t\t\"border-input focus-visible:border-primary\",\n\t\t\t\t\"data-[state=checked]:border-primary data-[state=checked]:bg-primary\",\n\t\t\t\t\"disabled:cursor-not-allowed disabled:border-foreground2 disabled:bg-background1\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t<SwitchPrimitive.Thumb\n\t\t\t\tdata-slot=\"switch-thumb\"\n\t\t\t\tclassName={cn(\n\t\t\t\t\tswitchThumbVariants({ size }),\n\t\t\t\t\t\"data-[state=checked]:border-primary-foreground data-[state=unchecked]:bg-foreground\",\n\t\t\t\t\t\"data-[state=checked]:bg-primary-foreground\",\n\t\t\t\t)}\n\t\t\t/>\n\t\t</SwitchPrimitive.Root>\n\t);\n}\n\nexport { Switch };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
