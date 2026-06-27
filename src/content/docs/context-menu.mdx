@@ -1,0 +1,304 @@
+---
+title: Context Menu
+description: Terminal-style right-click context menu with keyboard navigation, sub-menus, checkbox and radio items.
+---
+
+import {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuCheckboxItem,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuGroup,
+  ContextMenuSub,
+  ContextMenuSubTrigger,
+  ContextMenuSubContent,
+  ContextMenuPortal,
+} from "registry/ui/context-menu"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Context Menu
+
+Terminal-style right-click context menu. `ContextMenuTrigger` wraps any element and listens for right-click (or long-press on touch); content appears at the cursor position with a 150ms fade.
+
+Same item types as Dropdown Menu — checkbox items (`✓`), radio groups (`●`), sub-menus, shortcuts, labels, separators, and inset items. All navigation is keyboard-driven via Radix.
+
+## Installation
+
+<InstallTabs pkg="@termcn/context-menu" />
+
+## Usage
+
+```tsx
+import {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+} from "@/components/ui/context-menu"
+
+export default function Demo() {
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger>
+        <div className="border border-border p-8 text-sm text-muted-foreground">
+          Right-click here
+        </div>
+      </ContextMenuTrigger>
+      <ContextMenuContent>
+        <ContextMenuItem>Item</ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuItem>Another item</ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
+  )
+}
+```
+
+## Examples
+
+### Basic
+
+<Preview>
+  <ContextMenu>
+    <ContextMenuTrigger>
+      <div className="border border-border p-8 text-sm text-muted-foreground text-center select-none">
+        Right-click here
+      </div>
+    </ContextMenuTrigger>
+    <ContextMenuContent>
+      <ContextMenuItem>Open</ContextMenuItem>
+      <ContextMenuItem>Rename</ContextMenuItem>
+      <ContextMenuSeparator />
+      <ContextMenuItem>Delete</ContextMenuItem>
+    </ContextMenuContent>
+  </ContextMenu>
+</Preview>
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger>
+    <div className="border border-border p-8 text-sm text-muted-foreground text-center">
+      Right-click here
+    </div>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Open</ContextMenuItem>
+    <ContextMenuItem>Rename</ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem>Delete</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+### With Shortcuts
+
+<Preview>
+  <ContextMenu>
+    <ContextMenuTrigger>
+      <div className="border border-border p-8 text-sm text-muted-foreground text-center select-none">
+        Right-click for editor actions
+      </div>
+    </ContextMenuTrigger>
+    <ContextMenuContent>
+      <ContextMenuItem>
+        Cut
+        <ContextMenuShortcut>⌘X</ContextMenuShortcut>
+      </ContextMenuItem>
+      <ContextMenuItem>
+        Copy
+        <ContextMenuShortcut>⌘C</ContextMenuShortcut>
+      </ContextMenuItem>
+      <ContextMenuItem>
+        Paste
+        <ContextMenuShortcut>⌘V</ContextMenuShortcut>
+      </ContextMenuItem>
+      <ContextMenuSeparator />
+      <ContextMenuItem>
+        Select All
+        <ContextMenuShortcut>⌘A</ContextMenuShortcut>
+      </ContextMenuItem>
+    </ContextMenuContent>
+  </ContextMenu>
+</Preview>
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger>
+    <div className="border border-border p-8 text-sm text-muted-foreground">
+      Right-click for editor actions
+    </div>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>
+      Cut
+      <ContextMenuShortcut>⌘X</ContextMenuShortcut>
+    </ContextMenuItem>
+    <ContextMenuItem>
+      Copy
+      <ContextMenuShortcut>⌘C</ContextMenuShortcut>
+    </ContextMenuItem>
+    <ContextMenuItem>
+      Paste
+      <ContextMenuShortcut>⌘V</ContextMenuShortcut>
+    </ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem>
+      Select All
+      <ContextMenuShortcut>⌘A</ContextMenuShortcut>
+    </ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+### Checkbox Items
+
+<Preview>
+  <ContextMenu>
+    <ContextMenuTrigger>
+      <div className="border border-border p-8 text-sm text-muted-foreground text-center select-none">
+        Right-click to toggle view options
+      </div>
+    </ContextMenuTrigger>
+    <ContextMenuContent>
+      <ContextMenuLabel>View</ContextMenuLabel>
+      <ContextMenuSeparator />
+      <ContextMenuCheckboxItem checked>Line numbers</ContextMenuCheckboxItem>
+      <ContextMenuCheckboxItem>Minimap</ContextMenuCheckboxItem>
+      <ContextMenuCheckboxItem checked>Word wrap</ContextMenuCheckboxItem>
+    </ContextMenuContent>
+  </ContextMenu>
+</Preview>
+
+```tsx
+const [lineNumbers, setLineNumbers] = React.useState(true)
+const [minimap, setMinimap] = React.useState(false)
+const [wordWrap, setWordWrap] = React.useState(true)
+
+<ContextMenu>
+  <ContextMenuTrigger>
+    <div className="border border-border p-8 text-sm text-muted-foreground">
+      Right-click to toggle view options
+    </div>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuLabel>View</ContextMenuLabel>
+    <ContextMenuSeparator />
+    <ContextMenuCheckboxItem
+      checked={lineNumbers}
+      onCheckedChange={setLineNumbers}
+    >
+      Line numbers
+    </ContextMenuCheckboxItem>
+    <ContextMenuCheckboxItem
+      checked={minimap}
+      onCheckedChange={setMinimap}
+    >
+      Minimap
+    </ContextMenuCheckboxItem>
+    <ContextMenuCheckboxItem
+      checked={wordWrap}
+      onCheckedChange={setWordWrap}
+    >
+      Word wrap
+    </ContextMenuCheckboxItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+### Sub-menu
+
+<Preview>
+  <ContextMenu>
+    <ContextMenuTrigger>
+      <div className="border border-border p-8 text-sm text-muted-foreground text-center select-none">
+        Right-click a file
+      </div>
+    </ContextMenuTrigger>
+    <ContextMenuContent>
+      <ContextMenuItem>Open</ContextMenuItem>
+      <ContextMenuSub>
+        <ContextMenuSubTrigger>Open with…</ContextMenuSubTrigger>
+        <ContextMenuSubContent>
+          <ContextMenuItem>Neovim</ContextMenuItem>
+          <ContextMenuItem>VS Code</ContextMenuItem>
+          <ContextMenuItem>Helix</ContextMenuItem>
+        </ContextMenuSubContent>
+      </ContextMenuSub>
+      <ContextMenuSeparator />
+      <ContextMenuItem>
+        Copy path
+        <ContextMenuShortcut>⌥⌘C</ContextMenuShortcut>
+      </ContextMenuItem>
+      <ContextMenuSeparator />
+      <ContextMenuItem>
+        Move to trash
+        <ContextMenuShortcut>⌘⌫</ContextMenuShortcut>
+      </ContextMenuItem>
+    </ContextMenuContent>
+  </ContextMenu>
+</Preview>
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger>
+    <div className="border border-border p-8 text-sm text-muted-foreground">
+      Right-click a file
+    </div>
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Open</ContextMenuItem>
+    <ContextMenuSub>
+      <ContextMenuSubTrigger>Open with…</ContextMenuSubTrigger>
+      <ContextMenuSubContent>
+        <ContextMenuItem>Neovim</ContextMenuItem>
+        <ContextMenuItem>VS Code</ContextMenuItem>
+        <ContextMenuItem>Helix</ContextMenuItem>
+      </ContextMenuSubContent>
+    </ContextMenuSub>
+    <ContextMenuSeparator />
+    <ContextMenuItem>
+      Copy path
+      <ContextMenuShortcut>⌥⌘C</ContextMenuShortcut>
+    </ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem>
+      Move to trash
+      <ContextMenuShortcut>⌘⌫</ContextMenuShortcut>
+    </ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+## Props
+
+| Sub-component | Purpose | Key props |
+|---|---|---|
+| `ContextMenu` | Root state provider | `onOpenChange`, `modal` |
+| `ContextMenuTrigger` | Listens for right-click; wraps any element | `asChild`, `disabled` |
+| `ContextMenuPortal` | Renders content in a portal | `container` |
+| `ContextMenuContent` | Floating menu panel at cursor position | `alignOffset`, `className` |
+| `ContextMenuItem` | Clickable menu item | `inset`, `disabled`, `onSelect`, `className` |
+| `ContextMenuCheckboxItem` | Item with `✓` indicator | `checked`, `onCheckedChange`, `disabled`, `className` |
+| `ContextMenuRadioGroup` | Radio group container | `value`, `onValueChange` |
+| `ContextMenuRadioItem` | Item with `●` indicator | `value`, `disabled`, `className` |
+| `ContextMenuLabel` | Non-interactive section label | `inset`, `className` |
+| `ContextMenuSeparator` | Horizontal rule between sections | `className` |
+| `ContextMenuShortcut` | Right-aligned shortcut hint | `className` |
+| `ContextMenuGroup` | Groups items for accessibility | — |
+| `ContextMenuSub` | Sub-menu root | `open`, `onOpenChange`, `defaultOpen` |
+| `ContextMenuSubTrigger` | Item that opens a sub-menu | `inset`, `className` |
+| `ContextMenuSubContent` | Sub-menu floating panel | `className` |
+
+## Notes
+
+Built on [Radix UI Context Menu](https://www.radix-ui.com/primitives/docs/components/context-menu). The key difference from `DropdownMenu` is that `ContextMenuTrigger` wraps an arbitrary element and listens for `contextmenu` events (right-click / long-press) rather than a button click. Content is positioned at the cursor rather than relative to the trigger bounds.
+
+All keyboard navigation (arrow keys, Enter, Escape) is handled by Radix. Items highlight via `data-[highlighted]:bg-foreground data-[highlighted]:text-background`. No `hover:` variants are used. Content fades in via `termcn-fade` (≤150ms).

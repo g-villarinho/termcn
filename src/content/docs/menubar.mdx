@@ -1,0 +1,410 @@
+---
+title: Menubar
+description: Terminal-style horizontal menubar with dropdown menus — keyboard navigation, sub-menus, checkbox and radio items.
+---
+
+import {
+  Menubar,
+  MenubarMenu,
+  MenubarTrigger,
+  MenubarContent,
+  MenubarItem,
+  MenubarCheckboxItem,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarLabel,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarGroup,
+  MenubarSub,
+  MenubarSubTrigger,
+  MenubarSubContent,
+  MenubarPortal,
+} from "registry/ui/menubar"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Menubar
+
+Terminal-style desktop menubar — a horizontal bar with dropdown menus, styled with a bottom border. `Menubar` is the bar container, `MenubarMenu` wraps each dropdown, `MenubarTrigger` is the clickable bar item.
+
+Triggers highlight via foreground inversion when open (`data-[state=open]`) or focused (`focus-visible:`). Dropdown items follow the same pattern as Dropdown Menu — keyboard navigation only, no hover.
+
+## Installation
+
+<InstallTabs pkg="@termcn/menubar" />
+
+## Usage
+
+```tsx
+import {
+  Menubar,
+  MenubarMenu,
+  MenubarTrigger,
+  MenubarContent,
+  MenubarItem,
+  MenubarSeparator,
+  MenubarShortcut,
+} from "@/components/ui/menubar"
+
+export default function Demo() {
+  return (
+    <Menubar>
+      <MenubarMenu>
+        <MenubarTrigger>File</MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem>
+            New file
+            <MenubarShortcut>⌘N</MenubarShortcut>
+          </MenubarItem>
+          <MenubarSeparator />
+          <MenubarItem>Quit</MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+    </Menubar>
+  )
+}
+```
+
+## Examples
+
+### Basic Menubar
+
+<Preview>
+  <Menubar>
+    <MenubarMenu>
+      <MenubarTrigger>File</MenubarTrigger>
+      <MenubarContent>
+        <MenubarItem>
+          New file
+          <MenubarShortcut>⌘N</MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem>
+          Open…
+          <MenubarShortcut>⌘O</MenubarShortcut>
+        </MenubarItem>
+        <MenubarSeparator />
+        <MenubarItem>
+          Save
+          <MenubarShortcut>⌘S</MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem disabled>
+          Revert
+        </MenubarItem>
+        <MenubarSeparator />
+        <MenubarItem>
+          Quit
+          <MenubarShortcut>⌘Q</MenubarShortcut>
+        </MenubarItem>
+      </MenubarContent>
+    </MenubarMenu>
+    <MenubarMenu>
+      <MenubarTrigger>Edit</MenubarTrigger>
+      <MenubarContent>
+        <MenubarItem>
+          Undo
+          <MenubarShortcut>⌘Z</MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem>
+          Redo
+          <MenubarShortcut>⇧⌘Z</MenubarShortcut>
+        </MenubarItem>
+        <MenubarSeparator />
+        <MenubarItem>
+          Cut
+          <MenubarShortcut>⌘X</MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem>
+          Copy
+          <MenubarShortcut>⌘C</MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem>
+          Paste
+          <MenubarShortcut>⌘V</MenubarShortcut>
+        </MenubarItem>
+      </MenubarContent>
+    </MenubarMenu>
+    <MenubarMenu>
+      <MenubarTrigger>View</MenubarTrigger>
+      <MenubarContent>
+        <MenubarItem>
+          Command Palette
+          <MenubarShortcut>⇧⌘P</MenubarShortcut>
+        </MenubarItem>
+        <MenubarSeparator />
+        <MenubarItem>
+          Zoom in
+          <MenubarShortcut>⌘+</MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem>
+          Zoom out
+          <MenubarShortcut>⌘-</MenubarShortcut>
+        </MenubarItem>
+        <MenubarItem>
+          Reset zoom
+          <MenubarShortcut>⌘0</MenubarShortcut>
+        </MenubarItem>
+      </MenubarContent>
+    </MenubarMenu>
+  </Menubar>
+</Preview>
+
+```tsx
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>File</MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>
+        New file
+        <MenubarShortcut>⌘N</MenubarShortcut>
+      </MenubarItem>
+      <MenubarItem>
+        Open…
+        <MenubarShortcut>⌘O</MenubarShortcut>
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>
+        Save
+        <MenubarShortcut>⌘S</MenubarShortcut>
+      </MenubarItem>
+      <MenubarItem disabled>Revert</MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>
+        Quit
+        <MenubarShortcut>⌘Q</MenubarShortcut>
+      </MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+  <MenubarMenu>
+    <MenubarTrigger>Edit</MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>
+        Undo
+        <MenubarShortcut>⌘Z</MenubarShortcut>
+      </MenubarItem>
+      <MenubarItem>
+        Redo
+        <MenubarShortcut>⇧⌘Z</MenubarShortcut>
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>
+        Cut
+        <MenubarShortcut>⌘X</MenubarShortcut>
+      </MenubarItem>
+      <MenubarItem>
+        Copy
+        <MenubarShortcut>⌘C</MenubarShortcut>
+      </MenubarItem>
+      <MenubarItem>
+        Paste
+        <MenubarShortcut>⌘V</MenubarShortcut>
+      </MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+  <MenubarMenu>
+    <MenubarTrigger>View</MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>
+        Command Palette
+        <MenubarShortcut>⇧⌘P</MenubarShortcut>
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem>
+        Zoom in
+        <MenubarShortcut>⌘+</MenubarShortcut>
+      </MenubarItem>
+      <MenubarItem>
+        Zoom out
+        <MenubarShortcut>⌘-</MenubarShortcut>
+      </MenubarItem>
+      <MenubarItem>
+        Reset zoom
+        <MenubarShortcut>⌘0</MenubarShortcut>
+      </MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```
+
+### Nested Sub-menus
+
+<Preview>
+  <Menubar>
+    <MenubarMenu>
+      <MenubarTrigger>Terminal</MenubarTrigger>
+      <MenubarContent>
+        <MenubarItem>New terminal</MenubarItem>
+        <MenubarSub>
+          <MenubarSubTrigger>Split terminal</MenubarSubTrigger>
+          <MenubarSubContent>
+            <MenubarItem>Split right</MenubarItem>
+            <MenubarItem>Split down</MenubarItem>
+            <MenubarSeparator />
+            <MenubarSub>
+              <MenubarSubTrigger>Shell</MenubarSubTrigger>
+              <MenubarSubContent>
+                <MenubarItem>bash</MenubarItem>
+                <MenubarItem>zsh</MenubarItem>
+                <MenubarItem>fish</MenubarItem>
+              </MenubarSubContent>
+            </MenubarSub>
+          </MenubarSubContent>
+        </MenubarSub>
+        <MenubarSeparator />
+        <MenubarItem>
+          Kill terminal
+          <MenubarShortcut>⌘⌫</MenubarShortcut>
+        </MenubarItem>
+      </MenubarContent>
+    </MenubarMenu>
+  </Menubar>
+</Preview>
+
+```tsx
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>Terminal</MenubarTrigger>
+    <MenubarContent>
+      <MenubarItem>New terminal</MenubarItem>
+      <MenubarSub>
+        <MenubarSubTrigger>Split terminal</MenubarSubTrigger>
+        <MenubarSubContent>
+          <MenubarItem>Split right</MenubarItem>
+          <MenubarItem>Split down</MenubarItem>
+          <MenubarSeparator />
+          <MenubarSub>
+            <MenubarSubTrigger>Shell</MenubarSubTrigger>
+            <MenubarSubContent>
+              <MenubarItem>bash</MenubarItem>
+              <MenubarItem>zsh</MenubarItem>
+              <MenubarItem>fish</MenubarItem>
+            </MenubarSubContent>
+          </MenubarSub>
+        </MenubarSubContent>
+      </MenubarSub>
+      <MenubarSeparator />
+      <MenubarItem>
+        Kill terminal
+        <MenubarShortcut>⌘⌫</MenubarShortcut>
+      </MenubarItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```
+
+### Radio Items
+
+<Preview>
+  <Menubar>
+    <MenubarMenu>
+      <MenubarTrigger>Appearance</MenubarTrigger>
+      <MenubarContent>
+        <MenubarLabel>Font size</MenubarLabel>
+        <MenubarSeparator />
+        <MenubarRadioGroup value="14">
+          <MenubarRadioItem value="12">12px</MenubarRadioItem>
+          <MenubarRadioItem value="14">14px</MenubarRadioItem>
+          <MenubarRadioItem value="16">16px</MenubarRadioItem>
+          <MenubarRadioItem value="18">18px</MenubarRadioItem>
+        </MenubarRadioGroup>
+      </MenubarContent>
+    </MenubarMenu>
+  </Menubar>
+</Preview>
+
+```tsx
+const [fontSize, setFontSize] = React.useState("14")
+
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>Appearance</MenubarTrigger>
+    <MenubarContent>
+      <MenubarLabel>Font size</MenubarLabel>
+      <MenubarSeparator />
+      <MenubarRadioGroup value={fontSize} onValueChange={setFontSize}>
+        <MenubarRadioItem value="12">12px</MenubarRadioItem>
+        <MenubarRadioItem value="14">14px</MenubarRadioItem>
+        <MenubarRadioItem value="16">16px</MenubarRadioItem>
+        <MenubarRadioItem value="18">18px</MenubarRadioItem>
+      </MenubarRadioGroup>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```
+
+### Checkbox Items
+
+<Preview>
+  <Menubar>
+    <MenubarMenu>
+      <MenubarTrigger>View</MenubarTrigger>
+      <MenubarContent>
+        <MenubarLabel>Panels</MenubarLabel>
+        <MenubarSeparator />
+        <MenubarCheckboxItem checked>Explorer</MenubarCheckboxItem>
+        <MenubarCheckboxItem checked>Source control</MenubarCheckboxItem>
+        <MenubarCheckboxItem>Extensions</MenubarCheckboxItem>
+        <MenubarSeparator />
+        <MenubarCheckboxItem checked>Status bar</MenubarCheckboxItem>
+        <MenubarCheckboxItem>Minimap</MenubarCheckboxItem>
+      </MenubarContent>
+    </MenubarMenu>
+  </Menubar>
+</Preview>
+
+```tsx
+<Menubar>
+  <MenubarMenu>
+    <MenubarTrigger>View</MenubarTrigger>
+    <MenubarContent>
+      <MenubarLabel>Panels</MenubarLabel>
+      <MenubarSeparator />
+      <MenubarCheckboxItem checked={explorer} onCheckedChange={setExplorer}>
+        Explorer
+      </MenubarCheckboxItem>
+      <MenubarCheckboxItem checked={sourceControl} onCheckedChange={setSourceControl}>
+        Source control
+      </MenubarCheckboxItem>
+      <MenubarCheckboxItem checked={extensions} onCheckedChange={setExtensions}>
+        Extensions
+      </MenubarCheckboxItem>
+      <MenubarSeparator />
+      <MenubarCheckboxItem checked={statusBar} onCheckedChange={setStatusBar}>
+        Status bar
+      </MenubarCheckboxItem>
+      <MenubarCheckboxItem checked={minimap} onCheckedChange={setMinimap}>
+        Minimap
+      </MenubarCheckboxItem>
+    </MenubarContent>
+  </MenubarMenu>
+</Menubar>
+```
+
+## Props
+
+| Sub-component | Purpose | Key props |
+|---|---|---|
+| `Menubar` | Horizontal bar container | `className` |
+| `MenubarMenu` | Wraps each trigger+content pair | — |
+| `MenubarTrigger` | Clickable bar item | `className` |
+| `MenubarPortal` | Renders content in a portal | `container` |
+| `MenubarContent` | Dropdown panel for a menu | `align` (default: `"start"`), `alignOffset` (default: `-4`), `sideOffset` (default: `0`), `className` |
+| `MenubarItem` | Clickable menu item | `inset`, `disabled`, `onSelect`, `className` |
+| `MenubarCheckboxItem` | Item with `✓` indicator | `checked`, `onCheckedChange`, `disabled`, `className` |
+| `MenubarRadioGroup` | Radio group container | `value`, `onValueChange` |
+| `MenubarRadioItem` | Item with `●` indicator | `value`, `disabled`, `className` |
+| `MenubarLabel` | Non-interactive section label | `inset`, `className` |
+| `MenubarSeparator` | Horizontal rule between sections | `className` |
+| `MenubarShortcut` | Right-aligned shortcut hint | `className` |
+| `MenubarGroup` | Groups items for accessibility | — |
+| `MenubarSub` | Sub-menu root | `open`, `onOpenChange`, `defaultOpen` |
+| `MenubarSubTrigger` | Item that opens a sub-menu | `inset`, `className` |
+| `MenubarSubContent` | Sub-menu floating panel | `className` |
+
+## Notes
+
+Built on [Radix UI Menubar](https://www.radix-ui.com/primitives/docs/components/menubar). The key structural difference from Dropdown Menu is the two-level root: `Menubar` (the horizontal bar) contains multiple `MenubarMenu` elements, each with its own `MenubarTrigger` and `MenubarContent`.
+
+`MenubarTrigger` uses both `data-[state=open]:` and `focus-visible:` for inversion — the open state keeps the trigger highlighted while its dropdown is showing. Arrow keys move between bar items when a menu is open.
+
+Items highlight via `data-[highlighted]:bg-foreground data-[highlighted]:text-background`. No `hover:` variants. Content fades in/out via `termcn-fade` / `termcn-fade-out` (≤150ms).
