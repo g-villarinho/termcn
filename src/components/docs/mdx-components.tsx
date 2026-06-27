@@ -120,6 +120,7 @@ const mdxComponents = {
     <table
       className={cn(
         "w-full text-xs font-mono mb-4 border border-border",
+        "border-collapse [counter-reset:row-number]",
         className,
       )}
       {...props}
@@ -128,7 +129,7 @@ const mdxComponents = {
   thead: ({ className, ...props }: React.ComponentProps<"thead">) => (
     <thead
       className={cn(
-        "border-b-2 border-border bg-background1",
+        "border-b-2 border-primary bg-background1",
         className,
       )}
       {...props}
@@ -137,7 +138,9 @@ const mdxComponents = {
   th: ({ className, ...props }: React.ComponentProps<"th">) => (
     <th
       className={cn(
-        "text-left px-4 py-2.5 text-foreground font-bold text-primary uppercase tracking-widest",
+        "text-left px-4 py-3 text-foreground font-bold",
+        "text-xs uppercase tracking-widest",
+        "first:pl-10",
         className,
       )}
       {...props}
@@ -146,7 +149,10 @@ const mdxComponents = {
   td: ({ className, ...props }: React.ComponentProps<"td">) => (
     <td
       className={cn(
-        "px-4 py-2 text-foreground border-t border-border",
+        "px-4 py-3 text-foreground border-b border-border/50",
+        "first:before:content-[counter(row-number)] first:before:[counter-increment:row-number]",
+        "first:before:text-primary first:before:mr-3 first:before:text-xs first:before:font-mono",
+        "first:pl-2",
         className,
       )}
       {...props}
