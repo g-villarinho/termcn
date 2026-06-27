@@ -95,6 +95,69 @@
 			"files": [
 				{ "path": "registry/ui/alert-dialog.tsx", "type": "registry:ui" }
 			]
+		},
+		{
+			"name": "dropdown-menu",
+			"type": "registry:ui",
+			"title": "Dropdown Menu",
+			"description": "Terminal-style dropdown menu: selection inversion, ✓/● indicators, ▸ submenu glyph, no hover/radius/shadow. Includes checkbox, radio, sub-menu, shortcut, separator.",
+			"dependencies": ["@radix-ui/react-dropdown-menu"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/dropdown-menu.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "context-menu",
+			"type": "registry:ui",
+			"title": "Context Menu",
+			"description": "Terminal-style right-click context menu: selection inversion, ✓/● indicators, ▸ submenu glyph, no hover/radius/shadow. Includes checkbox, radio, sub-menu, shortcut, separator.",
+			"dependencies": ["@radix-ui/react-context-menu"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/context-menu.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "menubar",
+			"type": "registry:ui",
+			"title": "Menubar",
+			"description": "Terminal-style application menubar: border-b strip, open-state inversion on triggers, ✓/● indicators, ▸ submenu glyph, no hover/radius/shadow. Includes checkbox, radio, sub-menu, shortcut, separator.",
+			"dependencies": ["@radix-ui/react-menubar"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/menubar.tsx", "type": "registry:ui" }
+			]
 		}
 	]
 }
