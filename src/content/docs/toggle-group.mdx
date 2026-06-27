@@ -1,0 +1,175 @@
+---
+title: Toggle Group
+description: Terminal-style group of toggle buttons with shared variant and size context.
+---
+
+import { ToggleGroup, ToggleGroupItem } from "registry/ui/toggle-group"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Toggle Group
+
+Terminal-style toggle button group built on Radix ToggleGroup. Items inherit `variant` and `size` from the group via context. Supports horizontal (default) and vertical orientation, and both single and multiple selection modes.
+
+## Installation
+
+<InstallTabs pkg="@termcn/toggle-group" />
+
+## Usage
+
+```tsx
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+
+export default function ToggleGroupDemo() {
+  return (
+    <ToggleGroup type="multiple">
+      <ToggleGroupItem value="a">A</ToggleGroupItem>
+      <ToggleGroupItem value="b">B</ToggleGroupItem>
+      <ToggleGroupItem value="c">C</ToggleGroupItem>
+    </ToggleGroup>
+  )
+}
+```
+
+## Examples
+
+### Horizontal (multiple)
+
+Default orientation. Multiple items can be active simultaneously.
+
+<Preview>
+  <ToggleGroup type="multiple" defaultValue={["bold"]}>
+    <ToggleGroupItem value="bold">bold</ToggleGroupItem>
+    <ToggleGroupItem value="italic">italic</ToggleGroupItem>
+    <ToggleGroupItem value="underline">underline</ToggleGroupItem>
+  </ToggleGroup>
+</Preview>
+
+```tsx
+<ToggleGroup type="multiple" defaultValue={["bold"]}>
+  <ToggleGroupItem value="bold">bold</ToggleGroupItem>
+  <ToggleGroupItem value="italic">italic</ToggleGroupItem>
+  <ToggleGroupItem value="underline">underline</ToggleGroupItem>
+</ToggleGroup>
+```
+
+### Vertical (single)
+
+Single selection — only one item active at a time.
+
+<Preview>
+  <ToggleGroup type="single" orientation="vertical" defaultValue="normal" className="w-32">
+    <ToggleGroupItem value="normal">normal</ToggleGroupItem>
+    <ToggleGroupItem value="insert">insert</ToggleGroupItem>
+    <ToggleGroupItem value="visual">visual</ToggleGroupItem>
+  </ToggleGroup>
+</Preview>
+
+```tsx
+<ToggleGroup type="single" orientation="vertical" defaultValue="normal">
+  <ToggleGroupItem value="normal">normal</ToggleGroupItem>
+  <ToggleGroupItem value="insert">insert</ToggleGroupItem>
+  <ToggleGroupItem value="visual">visual</ToggleGroupItem>
+</ToggleGroup>
+```
+
+### Outline variant
+
+Foreground inversion on active items.
+
+<Preview>
+  <ToggleGroup type="single" variant="outline" defaultValue="left">
+    <ToggleGroupItem value="left">left</ToggleGroupItem>
+    <ToggleGroupItem value="center">center</ToggleGroupItem>
+    <ToggleGroupItem value="right">right</ToggleGroupItem>
+  </ToggleGroup>
+</Preview>
+
+```tsx
+<ToggleGroup type="single" variant="outline" defaultValue="left">
+  <ToggleGroupItem value="left">left</ToggleGroupItem>
+  <ToggleGroupItem value="center">center</ToggleGroupItem>
+  <ToggleGroupItem value="right">right</ToggleGroupItem>
+</ToggleGroup>
+```
+
+### Sizes
+
+<Preview>
+  <div className="flex flex-col gap-4 items-start">
+    <ToggleGroup type="multiple" size="sm">
+      <ToggleGroupItem value="a">sm</ToggleGroupItem>
+      <ToggleGroupItem value="b">sm</ToggleGroupItem>
+    </ToggleGroup>
+    <ToggleGroup type="multiple" size="default">
+      <ToggleGroupItem value="a">default</ToggleGroupItem>
+      <ToggleGroupItem value="b">default</ToggleGroupItem>
+    </ToggleGroup>
+    <ToggleGroup type="multiple" size="lg">
+      <ToggleGroupItem value="a">lg</ToggleGroupItem>
+      <ToggleGroupItem value="b">lg</ToggleGroupItem>
+    </ToggleGroup>
+  </div>
+</Preview>
+
+```tsx
+<ToggleGroup type="multiple" size="sm">
+  <ToggleGroupItem value="a">sm</ToggleGroupItem>
+  <ToggleGroupItem value="b">sm</ToggleGroupItem>
+</ToggleGroup>
+
+<ToggleGroup type="multiple" size="default">
+  <ToggleGroupItem value="a">default</ToggleGroupItem>
+  <ToggleGroupItem value="b">default</ToggleGroupItem>
+</ToggleGroup>
+
+<ToggleGroup type="multiple" size="lg">
+  <ToggleGroupItem value="a">lg</ToggleGroupItem>
+  <ToggleGroupItem value="b">lg</ToggleGroupItem>
+</ToggleGroup>
+```
+
+### Disabled items
+
+Individual items can be disabled while the group remains interactive.
+
+<Preview>
+  <ToggleGroup type="multiple" defaultValue={["a"]}>
+    <ToggleGroupItem value="a">active</ToggleGroupItem>
+    <ToggleGroupItem value="b" disabled>disabled</ToggleGroupItem>
+    <ToggleGroupItem value="c">normal</ToggleGroupItem>
+  </ToggleGroup>
+</Preview>
+
+```tsx
+<ToggleGroup type="multiple" defaultValue={["a"]}>
+  <ToggleGroupItem value="a">active</ToggleGroupItem>
+  <ToggleGroupItem value="b" disabled>disabled</ToggleGroupItem>
+  <ToggleGroupItem value="c">normal</ToggleGroupItem>
+</ToggleGroup>
+```
+
+## Props
+
+### ToggleGroup
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `single` \| `multiple` | — | **Required.** Selection mode |
+| `variant` | `default` \| `outline` | `default` | Visual style propagated to all items via context |
+| `size` | `default` \| `sm` \| `lg` | `default` | Size propagated to all items via context |
+| `value` | `string` \| `string[]` | — | Controlled active value(s) |
+| `defaultValue` | `string` \| `string[]` | — | Initial active value(s) (uncontrolled) |
+| `onValueChange` | `(value: string \| string[]) => void` | — | Callback when selection changes |
+| `orientation` | `horizontal` \| `vertical` | `horizontal` | Layout direction |
+| `className` | `string` | — | Additional Tailwind classes |
+
+### ToggleGroupItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | **Required.** Unique identifier for this item |
+| `variant` | `default` \| `outline` | inherited | Overrides group context variant |
+| `size` | `default` \| `sm` \| `lg` | inherited | Overrides group context size |
+| `disabled` | `boolean` | `false` | Disable this item |
+| `className` | `string` | — | Additional Tailwind classes |

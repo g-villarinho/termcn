@@ -1,0 +1,149 @@
+---
+title: Toggle
+description: Terminal-style two-state pressable button with focus-based interaction.
+---
+
+import { Toggle } from "registry/ui/toggle"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Toggle
+
+Terminal-style pressable button built on Radix Toggle. Two-state (on/off) with variant-driven pressed appearance. No hover, no radius, no shadow — interaction is communicated via focus and selection only.
+
+## Installation
+
+<InstallTabs pkg="@termcn/toggle" />
+
+## Usage
+
+```tsx
+import { Toggle } from "@/components/ui/toggle"
+
+export default function ToggleDemo() {
+  return <Toggle>bold</Toggle>
+}
+```
+
+## Examples
+
+### Default variant
+
+Primary color fill when pressed.
+
+<Preview>
+  <div className="flex gap-4 flex-wrap justify-center">
+    <Toggle>off</Toggle>
+    <Toggle defaultPressed>on</Toggle>
+  </div>
+</Preview>
+
+```tsx
+<Toggle>off</Toggle>
+<Toggle defaultPressed>on</Toggle>
+```
+
+### Outline variant
+
+Foreground inversion when pressed.
+
+<Preview>
+  <div className="flex gap-4 flex-wrap justify-center">
+    <Toggle variant="outline">off</Toggle>
+    <Toggle variant="outline" defaultPressed>on</Toggle>
+  </div>
+</Preview>
+
+```tsx
+<Toggle variant="outline">off</Toggle>
+<Toggle variant="outline" defaultPressed>on</Toggle>
+```
+
+### Sizes
+
+<Preview>
+  <div className="flex gap-4 flex-wrap justify-center items-center">
+    <Toggle size="sm">sm</Toggle>
+    <Toggle size="default">default</Toggle>
+    <Toggle size="lg">lg</Toggle>
+  </div>
+</Preview>
+
+```tsx
+<Toggle size="sm">sm</Toggle>
+<Toggle size="default">default</Toggle>
+<Toggle size="lg">lg</Toggle>
+```
+
+### With icon
+
+<Preview>
+  <div className="flex gap-4 flex-wrap justify-center">
+    <Toggle defaultPressed aria-label="Bold">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/></svg>
+      bold
+    </Toggle>
+    <Toggle aria-label="Italic">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg>
+      italic
+    </Toggle>
+  </div>
+</Preview>
+
+```tsx
+<Toggle defaultPressed aria-label="Bold">
+  <BoldIcon />
+  bold
+</Toggle>
+<Toggle aria-label="Italic">
+  <ItalicIcon />
+  italic
+</Toggle>
+```
+
+### Disabled
+
+<Preview>
+  <div className="flex gap-4 flex-wrap justify-center">
+    <Toggle disabled>disabled off</Toggle>
+    <Toggle disabled defaultPressed>disabled on</Toggle>
+  </div>
+</Preview>
+
+```tsx
+<Toggle disabled>disabled off</Toggle>
+<Toggle disabled defaultPressed>disabled on</Toggle>
+```
+
+### Pressed by default
+
+<Preview>
+  <Toggle defaultPressed>pressed</Toggle>
+</Preview>
+
+```tsx
+<Toggle defaultPressed>pressed</Toggle>
+```
+
+### Controlled
+
+```tsx
+const [pressed, setPressed] = React.useState(false)
+
+<Toggle pressed={pressed} onPressedChange={setPressed}>
+  {pressed ? "on" : "off"}
+</Toggle>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `default` \| `outline` | `default` | Visual style; `default` fills primary on press, `outline` inverts foreground |
+| `size` | `default` \| `sm` \| `lg` | `default` | Toggle height and padding |
+| `pressed` | `boolean` | — | Controlled pressed state |
+| `defaultPressed` | `boolean` | `false` | Initial pressed state (uncontrolled) |
+| `onPressedChange` | `(pressed: boolean) => void` | — | Callback when pressed state changes |
+| `disabled` | `boolean` | `false` | Disable the toggle |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<typeof TogglePrimitive.Root>` | — | All Radix Toggle Root props |
