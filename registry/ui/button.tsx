@@ -4,57 +4,52 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-	"inline-flex items-center justify-center gap-2 whitespace-nowrap font-mono text-sm font-medium focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 cursor-pointer",
+	"inline-flex items-center justify-center gap-2 whitespace-nowrap select-none font-mono outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:text-foreground2 disabled:border-foreground2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
 	{
 		variants: {
 			variant: {
 				default:
-					"bg-foreground text-background active:bg-background active:text-foreground",
+					"border border-border bg-background text-foreground focus-visible:bg-foreground focus-visible:text-background focus-visible:border-foreground",
+				primary:
+					"border border-primary text-primary focus-visible:bg-primary focus-visible:text-primary-foreground",
 				destructive:
-					"bg-destructive text-destructive-foreground active:bg-background active:text-destructive",
-				outline:
-					"bg-background text-foreground border border-border active:bg-foreground active:text-background",
-				secondary:
-					"bg-secondary text-secondary-foreground active:bg-background active:text-secondary-foreground",
+					"border border-destructive text-destructive focus-visible:bg-destructive focus-visible:text-destructive-foreground",
 				ghost:
-					"active:bg-accent active:text-accent-foreground",
-				link: "text-foreground underline-offset-4 active:underline",
-				success:
-					"bg-success text-success-foreground active:bg-background active:text-success",
-				warning:
-					"bg-warning text-warning-foreground active:bg-background active:text-warning",
-				info: "bg-info text-info-foreground active:bg-background active:text-info",
+					"border border-transparent text-foreground1 focus-visible:bg-foreground focus-visible:text-background",
 			},
 			size: {
-				default: "h-9 px-4 py-2",
-				sm: "h-8 px-3 text-xs",
-				lg: "h-10 px-8",
-				icon: "h-9 w-9",
+				default: "px-3 py-1 text-sm",
+				sm: "px-2 py-0.5 text-xs",
+				icon: "size-7",
+			},
+			bracket: {
+				true: "before:content-['['] after:content-[']'] before:mr-1.5 after:ml-1.5",
+				false: "",
 			},
 		},
-		defaultVariants: {
-			variant: "default",
-			size: "default",
-		},
+		defaultVariants: { variant: "default", size: "default", bracket: true },
 	},
 );
+
+interface ButtonProps
+	extends React.ComponentProps<"button">,
+		VariantProps<typeof buttonVariants> {
+	asChild?: boolean;
+}
 
 function Button({
 	className,
 	variant,
 	size,
+	bracket,
 	asChild = false,
 	...props
-}: React.ComponentProps<"button"> &
-	VariantProps<typeof buttonVariants> & {
-		asChild?: boolean;
-	}) {
+}: ButtonProps) {
 	const Comp = asChild ? Slot : "button";
-
 	return (
 		<Comp
 			data-slot="button"
-			className={cn(buttonVariants({ variant, size, className }))}
+			className={cn(buttonVariants({ variant, size, bracket }), className)}
 			{...props}
 		/>
 	);
