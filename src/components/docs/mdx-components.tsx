@@ -18,6 +18,7 @@ const mdxComponents = {
         "scroll-m-20 text-xl font-mono font-bold text-foreground",
         "mt-8 mb-4 flex items-center gap-2",
         "before:content-['▍'] before:text-primary before:text-lg",
+        "[&_a]:no-underline [&_a]:text-foreground [&_a]:focus-visible:ring-1 [&_a]:focus-visible:ring-ring",
         className,
       )}
       {...props}
@@ -29,6 +30,7 @@ const mdxComponents = {
         "scroll-m-20 text-base font-mono font-bold text-foreground",
         "mt-5 mb-3 flex items-center gap-1.5",
         "before:content-['▸'] before:text-primary before:text-sm",
+        "[&_a]:no-underline [&_a]:text-foreground [&_a]:focus-visible:ring-1 [&_a]:focus-visible:ring-ring",
         className,
       )}
       {...props}
