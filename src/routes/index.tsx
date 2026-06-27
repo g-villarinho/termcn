@@ -20,14 +20,16 @@ function IndexPage() {
           <h2 className="text-xl font-bold mb-4">Components</h2>
           <nav className="space-y-2">
             <Link
-              to="/docs/button"
+              to="/docs/$slug"
+              params={{ slug: "button" }}
               className="text-primary underline focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none"
             >
               → Button
             </Link>
             <br />
             <Link
-              to="/docs/input"
+              to="/docs/$slug"
+              params={{ slug: "input" }}
               className="text-primary underline focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none"
             >
               → Input
