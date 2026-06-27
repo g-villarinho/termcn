@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button",
+  "title": "Button",
+  "description": "Terminal-style outlined button: bracket convention, focus inversion, no hover/radius/shadow. Variants: default, primary, destructive, ghost.",
+  "dependencies": [
+    "class-variance-authority",
+    "@radix-ui/react-slot"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/button.tsx",
+      "content": "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst buttonVariants = cva(\n\t\"inline-flex items-center justify-center gap-2 whitespace-nowrap select-none font-mono outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:text-foreground2 disabled:border-foreground2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n\t{\n\t\tvariants: {\n\t\t\tvariant: {\n\t\t\t\tdefault:\n\t\t\t\t\t\"border border-border bg-background text-foreground focus-visible:bg-foreground focus-visible:text-background focus-visible:border-foreground\",\n\t\t\t\tprimary:\n\t\t\t\t\t\"border border-primary text-primary focus-visible:bg-primary focus-visible:text-primary-foreground\",\n\t\t\t\tdestructive:\n\t\t\t\t\t\"border border-destructive text-destructive focus-visible:bg-destructive focus-visible:text-destructive-foreground\",\n\t\t\t\tghost:\n\t\t\t\t\t\"border border-transparent text-foreground1 focus-visible:bg-foreground focus-visible:text-background\",\n\t\t\t},\n\t\t\tsize: {\n\t\t\t\tdefault: \"px-3 py-1 text-sm\",\n\t\t\t\tsm: \"px-2 py-0.5 text-xs\",\n\t\t\t\ticon: \"size-7\",\n\t\t\t},\n\t\t\tbracket: {\n\t\t\t\ttrue: \"before:content-['['] after:content-[']'] before:mr-1.5 after:ml-1.5\",\n\t\t\t\tfalse: \"\",\n\t\t\t},\n\t\t},\n\t\tdefaultVariants: { variant: \"default\", size: \"default\", bracket: true },\n\t},\n);\n\ninterface ButtonProps\n\textends React.ComponentProps<\"button\">,\n\t\tVariantProps<typeof buttonVariants> {\n\tasChild?: boolean;\n}\n\nfunction Button({\n\tclassName,\n\tvariant,\n\tsize,\n\tbracket,\n\tasChild = false,\n\t...props\n}: ButtonProps) {\n\tconst Comp = asChild ? Slot : \"button\";\n\treturn (\n\t\t<Comp\n\t\t\tdata-slot=\"button\"\n\t\t\tclassName={cn(buttonVariants({ variant, size, bracket }), className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Button, buttonVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

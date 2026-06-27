@@ -1,0 +1,18 @@
+{
+	"$schema": "https://ui.shadcn.com/schema/registry.json",
+	"name": "termcn",
+	"homepage": "https://termcn.com",
+	"items": [
+		{
+			"name": "button",
+			"type": "registry:ui",
+			"title": "Button",
+			"description": "Terminal-style outlined button: bracket convention, focus inversion, no hover/radius/shadow. Variants: default, primary, destructive, ghost.",
+			"dependencies": ["class-variance-authority", "@radix-ui/react-slot"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/button.tsx", "type": "registry:ui" }
+			]
+		}
+	]
+}
