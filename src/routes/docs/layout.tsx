@@ -1,21 +1,20 @@
 import { MDXProvider } from "@mdx-js/react";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import { mdxComponents } from "@/components/docs/mdx-components";
-import { Header } from "@/components/docs/header";
 import {
 	Sidebar,
 	SidebarContent,
 	SidebarFooter,
 	SidebarGroup,
-	SidebarGroupLabel,
 	SidebarGroupContent,
+	SidebarGroupLabel,
 	SidebarHeader,
 	SidebarInset,
 	SidebarMenu,
 	SidebarMenuItem,
-	SidebarMenuButton,
 	SidebarProvider,
 } from "registry/ui/sidebar";
+import { Header } from "@/components/docs/header";
+import { mdxComponents } from "@/components/docs/mdx-components";
 
 export const Route = createFileRoute("/docs")({
 	component: DocsLayout,
@@ -38,9 +37,11 @@ function DocsLayout() {
 						>
 							termcn
 						</Link>
-						<div className="text-xs text-foreground1 font-mono mt-1">registry</div>
+						<div className="text-xs text-foreground1 font-mono mt-1">
+							registry
+						</div>
 					</SidebarHeader>
-					<SidebarContent className="py-4">
+					<SidebarContent className="py-4 overflow-y-auto">
 						<SidebarGroup>
 							<SidebarGroupLabel className="text-xs text-primary uppercase tracking-widest mb-3 px-0">
 								▍ Components
@@ -68,9 +69,9 @@ function DocsLayout() {
 					</SidebarContent>
 					<SidebarFooter />
 				</Sidebar>
-				<SidebarInset className="flex flex-col">
-					<Header />
-					<main className="flex-1 flex flex-col items-center p-8">
+				<SidebarInset className="flex flex-col overflow-hidden">
+					<Header className="sticky top-0 z-10" />
+					<main className="flex-1 overflow-y-auto flex flex-col items-center p-8">
 						<div className="w-full max-w-3xl">
 							<Outlet />
 						</div>
