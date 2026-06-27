@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dialog",
+  "title": "Dialog",
+  "description": "Terminal-style modal dialog: box border, background-level elevation (no shadow), bracket close [x], discrete opacity fade only. No radius/hover/scale.",
+  "dependencies": [
+    "@radix-ui/react-dialog"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/dialog.tsx",
+      "content": "import * as React from \"react\";\nimport * as DialogPrimitive from \"@radix-ui/react-dialog\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Dialog({\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Root>) {\n\treturn <DialogPrimitive.Root data-slot=\"dialog\" {...props} />;\n}\n\nfunction DialogTrigger({\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Trigger>) {\n\treturn <DialogPrimitive.Trigger data-slot=\"dialog-trigger\" {...props} />;\n}\n\nfunction DialogPortal({\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Portal>) {\n\treturn <DialogPrimitive.Portal data-slot=\"dialog-portal\" {...props} />;\n}\n\nfunction DialogClose({\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Close>) {\n\treturn <DialogPrimitive.Close data-slot=\"dialog-close\" {...props} />;\n}\n\nfunction DialogOverlay({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {\n\treturn (\n\t\t<DialogPrimitive.Overlay\n\t\t\tdata-slot=\"dialog-overlay\"\n\t\t\tclassName={cn(\n\t\t\t\t\"fixed inset-0 z-50 bg-background/80\",\n\t\t\t\t\"data-[state=open]:animate-[termcn-fade_150ms_ease-out] data-[state=closed]:animate-[termcn-fade-out_150ms_ease-out]\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction DialogContent({\n\tclassName,\n\tchildren,\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Content>) {\n\treturn (\n\t\t<DialogPortal>\n\t\t\t<DialogOverlay />\n\t\t\t<DialogPrimitive.Content\n\t\t\t\tdata-slot=\"dialog-content\"\n\t\t\t\tclassName={cn(\n\t\t\t\t\t\"fixed top-1/2 left-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 border border-border bg-card p-6 font-mono text-foreground\",\n\t\t\t\t\t\"data-[state=open]:animate-[termcn-fade_150ms_ease-out] data-[state=closed]:animate-[termcn-fade-out_150ms_ease-out]\",\n\t\t\t\t\tclassName,\n\t\t\t\t)}\n\t\t\t\t{...props}\n\t\t\t>\n\t\t\t\t{children}\n\t\t\t\t<DialogPrimitive.Close\n\t\t\t\t\tdata-slot=\"dialog-close\"\n\t\t\t\t\tclassName=\"absolute top-4 right-4 select-none font-mono text-sm text-foreground1 outline-none before:content-['['] after:content-[']'] focus-visible:bg-foreground focus-visible:text-background disabled:cursor-not-allowed disabled:text-foreground2\"\n\t\t\t\t>\n\t\t\t\t\tx<span className=\"sr-only\">Close</span>\n\t\t\t\t</DialogPrimitive.Close>\n\t\t\t</DialogPrimitive.Content>\n\t\t</DialogPortal>\n\t);\n}\n\nfunction DialogHeader({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"dialog-header\"\n\t\t\tclassName={cn(\"flex flex-col gap-1.5\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction DialogFooter({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"dialog-footer\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction DialogTitle({\n\tclassName,\n\tchildren,\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Title>) {\n\treturn (\n\t\t<DialogPrimitive.Title\n\t\t\tdata-slot=\"dialog-title\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex items-center gap-2 font-mono text-sm font-medium text-foreground before:text-primary before:content-['▍']\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t{children}\n\t\t</DialogPrimitive.Title>\n\t);\n}\n\nfunction DialogDescription({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Description>) {\n\treturn (\n\t\t<DialogPrimitive.Description\n\t\t\tdata-slot=\"dialog-description\"\n\t\t\tclassName={cn(\"pl-4 font-mono text-sm text-foreground1\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport {\n\tDialog,\n\tDialogTrigger,\n\tDialogPortal,\n\tDialogClose,\n\tDialogOverlay,\n\tDialogContent,\n\tDialogHeader,\n\tDialogFooter,\n\tDialogTitle,\n\tDialogDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "css": {
+    "@keyframes termcn-fade": {
+      "from": {
+        "opacity": "0"
+      },
+      "to": {
+        "opacity": "1"
+      }
+    },
+    "@keyframes termcn-fade-out": {
+      "from": {
+        "opacity": "1"
+      },
+      "to": {
+        "opacity": "0"
+      }
+    }
+  },
+  "type": "registry:ui"
+}

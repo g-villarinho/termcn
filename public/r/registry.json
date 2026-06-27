@@ -4,6 +4,14 @@
 	"homepage": "https://termcn.com",
 	"items": [
 		{
+			"name": "utils",
+			"type": "registry:lib",
+			"dependencies": ["clsx", "tailwind-merge"],
+			"files": [
+				{ "path": "registry/lib/utils.ts", "type": "registry:lib" }
+			]
+		},
+		{
 			"name": "button",
 			"type": "registry:ui",
 			"title": "Button",
@@ -12,6 +20,58 @@
 			"registryDependencies": ["utils"],
 			"files": [
 				{ "path": "registry/ui/button.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "input",
+			"type": "registry:ui",
+			"title": "Input",
+			"description": "Terminal-style text input: solid border, focus ring inversion, no hover/radius/shadow.",
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/input.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "textarea",
+			"type": "registry:ui",
+			"title": "Textarea",
+			"description": "Terminal-style multiline input matching the Input aesthetic.",
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/textarea.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "input-group",
+			"type": "registry:ui",
+			"title": "Input Group",
+			"description": "Composable input group with addons, buttons and text. Terminal aesthetic.",
+			"dependencies": ["class-variance-authority"],
+			"registryDependencies": ["utils", "input"],
+			"files": [
+				{ "path": "registry/ui/input-group.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "dialog",
+			"type": "registry:ui",
+			"title": "Dialog",
+			"description": "Terminal-style modal dialog: box border, background-level elevation (no shadow), bracket close [x], discrete opacity fade only. No radius/hover/scale.",
+			"dependencies": ["@radix-ui/react-dialog"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/dialog.tsx", "type": "registry:ui" }
 			]
 		},
 		{
