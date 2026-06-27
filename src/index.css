@@ -238,3 +238,21 @@ code {
 		background: var(--foreground1);
 	}
 }
+
+@keyframes termcn-fade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes termcn-fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
