@@ -75,6 +75,179 @@
 			]
 		},
 		{
+			"name": "sheet",
+			"type": "registry:ui",
+			"title": "Sheet",
+			"description": "Terminal-style side panel built on Radix Dialog: border-defined depth, global slide-in/slide-out keyframes, bracket close [x], no radius/shadow.",
+			"dependencies": ["@radix-ui/react-dialog"],
+			"registryDependencies": ["utils"],
+			"cssVars": {
+				"theme": {
+					"--termcn-slide-offset": "1rem"
+				}
+			},
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				},
+				"@keyframes termcn-slide-in-from-left": {
+					"from": {
+						"opacity": "0",
+						"transform": "translateX(calc(var(--termcn-slide-offset) * -1))"
+					},
+					"to": {
+						"opacity": "1",
+						"transform": "translateX(0)"
+					}
+				},
+				"@keyframes termcn-slide-out-to-left": {
+					"from": {
+						"opacity": "1",
+						"transform": "translateX(0)"
+					},
+					"to": {
+						"opacity": "0",
+						"transform": "translateX(calc(var(--termcn-slide-offset) * -1))"
+					}
+				},
+				"@keyframes termcn-slide-in-from-right": {
+					"from": {
+						"opacity": "0",
+						"transform": "translateX(var(--termcn-slide-offset))"
+					},
+					"to": {
+						"opacity": "1",
+						"transform": "translateX(0)"
+					}
+				},
+				"@keyframes termcn-slide-out-to-right": {
+					"from": {
+						"opacity": "1",
+						"transform": "translateX(0)"
+					},
+					"to": {
+						"opacity": "0",
+						"transform": "translateX(var(--termcn-slide-offset))"
+					}
+				},
+				"@keyframes termcn-slide-in-from-top": {
+					"from": {
+						"opacity": "0",
+						"transform": "translateY(calc(var(--termcn-slide-offset) * -1))"
+					},
+					"to": {
+						"opacity": "1",
+						"transform": "translateY(0)"
+					}
+				},
+				"@keyframes termcn-slide-out-to-top": {
+					"from": {
+						"opacity": "1",
+						"transform": "translateY(0)"
+					},
+					"to": {
+						"opacity": "0",
+						"transform": "translateY(calc(var(--termcn-slide-offset) * -1))"
+					}
+				},
+				"@keyframes termcn-slide-in-from-bottom": {
+					"from": {
+						"opacity": "0",
+						"transform": "translateY(var(--termcn-slide-offset))"
+					},
+					"to": {
+						"opacity": "1",
+						"transform": "translateY(0)"
+					}
+				},
+				"@keyframes termcn-slide-out-to-bottom": {
+					"from": {
+						"opacity": "1",
+						"transform": "translateY(0)"
+					},
+					"to": {
+						"opacity": "0",
+						"transform": "translateY(var(--termcn-slide-offset))"
+					}
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/sheet.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "drawer",
+			"type": "registry:ui",
+			"title": "Drawer",
+			"description": "Terminal-style bottom drawer built on Vaul: border-top structure, subtle slide from bottom, no radius/shadow, focus-first interactions.",
+			"dependencies": ["vaul"],
+			"registryDependencies": ["utils"],
+			"cssVars": {
+				"theme": {
+					"--termcn-slide-offset": "1rem"
+				}
+			},
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				},
+				"@keyframes termcn-slide-in-from-bottom": {
+					"from": {
+						"opacity": "0",
+						"transform": "translateY(var(--termcn-slide-offset))"
+					},
+					"to": {
+						"opacity": "1",
+						"transform": "translateY(0)"
+					}
+				},
+				"@keyframes termcn-slide-out-to-bottom": {
+					"from": {
+						"opacity": "1",
+						"transform": "translateY(0)"
+					},
+					"to": {
+						"opacity": "0",
+						"transform": "translateY(var(--termcn-slide-offset))"
+					}
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/drawer.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "sidebar",
+			"type": "registry:ui",
+			"title": "Sidebar",
+			"description": "Terminal-style responsive sidebar with desktop collapse modes and mobile fallback through Sheet. Includes provider, trigger, rail, groups and menu composition.",
+			"dependencies": [
+				"class-variance-authority",
+				"@radix-ui/react-slot"
+			],
+			"registryDependencies": ["utils", "button", "input", "sheet"],
+			"cssVars": {
+				"theme": {
+					"--sidebar-width": "18rem",
+					"--sidebar-width-icon": "3.5rem",
+					"--termcn-slide-offset": "1rem"
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/sidebar.tsx", "type": "registry:ui" }
+			]
+		},
+		{
 			"name": "alert",
 			"type": "registry:ui",
 			"title": "Alert",

@@ -1,0 +1,123 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sheet",
+  "title": "Sheet",
+  "description": "Terminal-style side panel built on Radix Dialog: border-defined depth, global slide-in/slide-out keyframes, bracket close [x], no radius/shadow.",
+  "dependencies": [
+    "@radix-ui/react-dialog"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/sheet.tsx",
+      "content": "import * as React from \"react\";\nimport * as DialogPrimitive from \"@radix-ui/react-dialog\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Sheet({\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Root>) {\n\treturn <DialogPrimitive.Root data-slot=\"sheet\" {...props} />;\n}\n\nfunction SheetTrigger({\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Trigger>) {\n\treturn <DialogPrimitive.Trigger data-slot=\"sheet-trigger\" {...props} />;\n}\n\nfunction SheetClose({\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Close>) {\n\treturn <DialogPrimitive.Close data-slot=\"sheet-close\" {...props} />;\n}\n\nfunction SheetPortal({\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Portal>) {\n\treturn <DialogPrimitive.Portal data-slot=\"sheet-portal\" {...props} />;\n}\n\nfunction SheetOverlay({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {\n\treturn (\n\t\t<DialogPrimitive.Overlay\n\t\t\tdata-slot=\"sheet-overlay\"\n\t\t\tclassName={cn(\n\t\t\t\t\"fixed inset-0 z-50 bg-background/80\",\n\t\t\t\t\"data-[state=open]:animate-[termcn-fade_150ms_ease-out] data-[state=closed]:animate-[termcn-fade-out_150ms_ease-out]\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nconst sheetSideClasses = {\n\ttop: \"inset-x-0 top-0 border-b data-[state=open]:animate-[termcn-slide-in-from-top_150ms_ease-out] data-[state=closed]:animate-[termcn-slide-out-to-top_150ms_ease-out]\",\n\tright:\n\t\t\"inset-y-0 right-0 h-full w-full max-w-[min(24rem,100vw)] border-l data-[state=open]:animate-[termcn-slide-in-from-right_150ms_ease-out] data-[state=closed]:animate-[termcn-slide-out-to-right_150ms_ease-out]\",\n\tbottom:\n\t\t\"inset-x-0 bottom-0 border-t data-[state=open]:animate-[termcn-slide-in-from-bottom_150ms_ease-out] data-[state=closed]:animate-[termcn-slide-out-to-bottom_150ms_ease-out]\",\n\tleft: \"inset-y-0 left-0 h-full w-full max-w-[min(24rem,100vw)] border-r data-[state=open]:animate-[termcn-slide-in-from-left_150ms_ease-out] data-[state=closed]:animate-[termcn-slide-out-to-left_150ms_ease-out]\",\n} as const;\n\nfunction SheetContent({\n\tclassName,\n\tchildren,\n\tside = \"right\",\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Content> & {\n\tside?: keyof typeof sheetSideClasses;\n}) {\n\treturn (\n\t\t<SheetPortal>\n\t\t\t<SheetOverlay />\n\t\t\t<DialogPrimitive.Content\n\t\t\t\tdata-slot=\"sheet-content\"\n\t\t\t\tclassName={cn(\n\t\t\t\t\t\"fixed z-50 flex flex-col gap-4 bg-card p-4 font-mono text-foreground outline-none\",\n\t\t\t\t\tsheetSideClasses[side],\n\t\t\t\t\tclassName,\n\t\t\t\t)}\n\t\t\t\t{...props}\n\t\t\t>\n\t\t\t\t{children}\n\t\t\t\t<DialogPrimitive.Close\n\t\t\t\t\tdata-slot=\"sheet-close\"\n\t\t\t\t\tclassName=\"absolute top-4 right-4 select-none font-mono text-sm text-foreground1 outline-none before:content-['['] after:content-[']'] focus-visible:bg-foreground focus-visible:text-background disabled:cursor-not-allowed disabled:text-foreground2\"\n\t\t\t\t>\n\t\t\t\t\tx<span className=\"sr-only\">Close</span>\n\t\t\t\t</DialogPrimitive.Close>\n\t\t\t</DialogPrimitive.Content>\n\t\t</SheetPortal>\n\t);\n}\n\nfunction SheetHeader({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"sheet-header\"\n\t\t\tclassName={cn(\"flex flex-col gap-1.5 pr-8\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction SheetFooter({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"sheet-footer\"\n\t\t\tclassName={cn(\n\t\t\t\t\"mt-auto flex flex-col-reverse gap-2 sm:flex-row sm:justify-end\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction SheetTitle({\n\tclassName,\n\tchildren,\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Title>) {\n\treturn (\n\t\t<DialogPrimitive.Title\n\t\t\tdata-slot=\"sheet-title\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex items-center gap-2 font-mono text-sm font-medium text-foreground before:text-primary before:content-['▍']\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t{children}\n\t\t</DialogPrimitive.Title>\n\t);\n}\n\nfunction SheetDescription({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof DialogPrimitive.Description>) {\n\treturn (\n\t\t<DialogPrimitive.Description\n\t\t\tdata-slot=\"sheet-description\"\n\t\t\tclassName={cn(\"pl-4 font-mono text-sm text-foreground1\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport {\n\tSheet,\n\tSheetTrigger,\n\tSheetClose,\n\tSheetPortal,\n\tSheetOverlay,\n\tSheetContent,\n\tSheetHeader,\n\tSheetFooter,\n\tSheetTitle,\n\tSheetDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {
+      "--termcn-slide-offset": "1rem"
+    }
+  },
+  "css": {
+    "@keyframes termcn-fade": {
+      "from": {
+        "opacity": "0"
+      },
+      "to": {
+        "opacity": "1"
+      }
+    },
+    "@keyframes termcn-fade-out": {
+      "from": {
+        "opacity": "1"
+      },
+      "to": {
+        "opacity": "0"
+      }
+    },
+    "@keyframes termcn-slide-in-from-left": {
+      "from": {
+        "opacity": "0",
+        "transform": "translateX(calc(var(--termcn-slide-offset) * -1))"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "translateX(0)"
+      }
+    },
+    "@keyframes termcn-slide-out-to-left": {
+      "from": {
+        "opacity": "1",
+        "transform": "translateX(0)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "translateX(calc(var(--termcn-slide-offset) * -1))"
+      }
+    },
+    "@keyframes termcn-slide-in-from-right": {
+      "from": {
+        "opacity": "0",
+        "transform": "translateX(var(--termcn-slide-offset))"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "translateX(0)"
+      }
+    },
+    "@keyframes termcn-slide-out-to-right": {
+      "from": {
+        "opacity": "1",
+        "transform": "translateX(0)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "translateX(var(--termcn-slide-offset))"
+      }
+    },
+    "@keyframes termcn-slide-in-from-top": {
+      "from": {
+        "opacity": "0",
+        "transform": "translateY(calc(var(--termcn-slide-offset) * -1))"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "translateY(0)"
+      }
+    },
+    "@keyframes termcn-slide-out-to-top": {
+      "from": {
+        "opacity": "1",
+        "transform": "translateY(0)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "translateY(calc(var(--termcn-slide-offset) * -1))"
+      }
+    },
+    "@keyframes termcn-slide-in-from-bottom": {
+      "from": {
+        "opacity": "0",
+        "transform": "translateY(var(--termcn-slide-offset))"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "translateY(0)"
+      }
+    },
+    "@keyframes termcn-slide-out-to-bottom": {
+      "from": {
+        "opacity": "1",
+        "transform": "translateY(0)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "translateY(var(--termcn-slide-offset))"
+      }
+    }
+  },
+  "type": "registry:ui"
+}
