@@ -1,0 +1,174 @@
+---
+title: Avatar
+description: Terminal-style user avatar with image loading, fallback initials, and 3 size variants.
+---
+
+import { Avatar, AvatarImage, AvatarFallback } from "registry/ui/avatar"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Avatar
+
+Terminal-style user avatar built on Radix Avatar. Handles image loading with an automatic fallback to centered initials on a secondary background. Three sizes (sm, default, lg). Sharp edges, monospace font, border on all sides.
+
+## Installation
+
+<InstallTabs pkg="@termcn/avatar" />
+
+## Usage
+
+```tsx
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+
+export default function AvatarDemo() {
+  return (
+    <Avatar>
+      <AvatarImage src="https://github.com/gbvillarinho.png" alt="Gabriel Villarinho" />
+      <AvatarFallback>GV</AvatarFallback>
+    </Avatar>
+  )
+}
+```
+
+## Examples
+
+### With Image
+
+`AvatarImage` renders when the image loads successfully. `AvatarFallback` is shown while loading or if the image fails.
+
+<Preview>
+  <Avatar>
+    <AvatarImage src="https://github.com/gbvillarinho.png" alt="Gabriel Villarinho" />
+    <AvatarFallback>GV</AvatarFallback>
+  </Avatar>
+</Preview>
+
+```tsx
+<Avatar>
+  <AvatarImage src="https://github.com/gbvillarinho.png" alt="Gabriel Villarinho" />
+  <AvatarFallback>GV</AvatarFallback>
+</Avatar>
+```
+
+### Fallback Only
+
+When no `src` is provided or the image fails to load, the fallback renders immediately.
+
+<Preview>
+  <div className="flex gap-4">
+    <Avatar>
+      <AvatarFallback>GV</AvatarFallback>
+    </Avatar>
+    <Avatar>
+      <AvatarFallback>AB</AvatarFallback>
+    </Avatar>
+    <Avatar>
+      <AvatarFallback>TC</AvatarFallback>
+    </Avatar>
+  </div>
+</Preview>
+
+```tsx
+<Avatar>
+  <AvatarFallback>GV</AvatarFallback>
+</Avatar>
+```
+
+### Size Variants
+
+<Preview>
+  <div className="flex gap-4 items-center">
+    <Avatar size="sm">
+      <AvatarFallback>SM</AvatarFallback>
+    </Avatar>
+    <Avatar size="default">
+      <AvatarFallback>MD</AvatarFallback>
+    </Avatar>
+    <Avatar size="lg">
+      <AvatarFallback>LG</AvatarFallback>
+    </Avatar>
+  </div>
+</Preview>
+
+```tsx
+<Avatar size="sm">
+  <AvatarFallback>SM</AvatarFallback>
+</Avatar>
+
+<Avatar size="default">
+  <AvatarFallback>MD</AvatarFallback>
+</Avatar>
+
+<Avatar size="lg">
+  <AvatarFallback>LG</AvatarFallback>
+</Avatar>
+```
+
+### With Image and All Sizes
+
+<Preview>
+  <div className="flex gap-4 items-center">
+    <Avatar size="sm">
+      <AvatarImage src="https://github.com/gbvillarinho.png" alt="GV" />
+      <AvatarFallback>GV</AvatarFallback>
+    </Avatar>
+    <Avatar size="default">
+      <AvatarImage src="https://github.com/gbvillarinho.png" alt="GV" />
+      <AvatarFallback>GV</AvatarFallback>
+    </Avatar>
+    <Avatar size="lg">
+      <AvatarImage src="https://github.com/gbvillarinho.png" alt="GV" />
+      <AvatarFallback>GV</AvatarFallback>
+    </Avatar>
+  </div>
+</Preview>
+
+```tsx
+<Avatar size="sm">
+  <AvatarImage src="https://github.com/gbvillarinho.png" alt="GV" />
+  <AvatarFallback>GV</AvatarFallback>
+</Avatar>
+
+<Avatar size="default">
+  <AvatarImage src="https://github.com/gbvillarinho.png" alt="GV" />
+  <AvatarFallback>GV</AvatarFallback>
+</Avatar>
+
+<Avatar size="lg">
+  <AvatarImage src="https://github.com/gbvillarinho.png" alt="GV" />
+  <AvatarFallback>GV</AvatarFallback>
+</Avatar>
+```
+
+## Props
+
+### Avatar
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `sm` \| `default` \| `lg` | `default` | Controls width, height, and font size (`8/10/12` rem units) |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | Radix `AvatarRoot` props | — | All Radix Avatar.Root props |
+
+### AvatarImage
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | — | Image URL |
+| `alt` | `string` | — | Alt text for the image (required for accessibility) |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | Radix `AvatarImage` props | — | All Radix Avatar.Image props |
+
+### AvatarFallback
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | — | Content shown when image is absent or fails (typically 1-2 initials) |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | Radix `AvatarFallback` props | — | All Radix Avatar.Fallback props |
+
+## Notes
+
+- Radix Avatar handles the loading state automatically — `AvatarFallback` is shown during image load and on error, with no extra state management needed.
+- `"use client"` is required at the top of the source file because Radix Avatar uses browser APIs for image load detection.
+- Always provide `alt` text on `AvatarImage` for screen reader accessibility.
