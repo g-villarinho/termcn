@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle",
+  "title": "Toggle",
+  "description": "Binary pressed-state control with terminal inversion and primary active state. Variants: default, outline. Sizes: sm, default, lg.",
+  "dependencies": [
+    "@radix-ui/react-toggle",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/toggle.tsx",
+      "content": "import * as React from \"react\";\nimport * as TogglePrimitive from \"@radix-ui/react-toggle\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst toggleVariants = cva(\n\t\"inline-flex items-center justify-center gap-2 whitespace-nowrap border font-mono outline-none select-none\",\n\t{\n\t\tvariants: {\n\t\t\tvariant: {\n\t\t\t\tdefault:\n\t\t\t\t\t\"border-border bg-background text-foreground focus-visible:border-primary focus-visible:ring-1 focus-visible:ring-ring data-[state=on]:border-primary data-[state=on]:bg-primary data-[state=on]:text-primary-foreground\",\n\t\t\t\toutline:\n\t\t\t\t\t\"border-border bg-background2 text-foreground1 focus-visible:border-foreground focus-visible:ring-1 focus-visible:ring-ring data-[state=on]:border-foreground data-[state=on]:bg-foreground data-[state=on]:text-background\",\n\t\t\t},\n\t\t\tsize: {\n\t\t\t\tdefault: \"h-9 px-3 text-sm\",\n\t\t\t\tsm: \"h-7 px-2 text-xs\",\n\t\t\t\tlg: \"h-10 px-4 text-sm\",\n\t\t\t},\n\t\t},\n\t\tdefaultVariants: {\n\t\t\tvariant: \"default\",\n\t\t\tsize: \"default\",\n\t\t},\n\t},\n);\n\ninterface ToggleProps\n\textends React.ComponentProps<typeof TogglePrimitive.Root>,\n\t\tVariantProps<typeof toggleVariants> {}\n\nfunction Toggle({ className, variant, size, ...props }: ToggleProps) {\n\treturn (\n\t\t<TogglePrimitive.Root\n\t\t\tdata-slot=\"toggle\"\n\t\t\tclassName={cn(\n\t\t\t\ttoggleVariants({ variant, size }),\n\t\t\t\t\"disabled:pointer-events-none disabled:border-foreground2 disabled:bg-background1 disabled:text-foreground2\",\n\t\t\t\t\"[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Toggle, toggleVariants };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
