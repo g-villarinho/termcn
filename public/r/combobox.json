@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "combobox",
+  "title": "Combobox",
+  "description": "Searchable picker composed from Popover + Command + Button. Floating container, fuzzy filter, Vim-style selection inversion, ✓ for selected.",
+  "registryDependencies": [
+    "utils",
+    "popover",
+    "command",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/combobox.tsx",
+      "content": "import * as React from \"react\";\nimport { Button } from \"@/components/ui/button\";\nimport {\n\tCommand,\n\tCommandEmpty,\n\tCommandGroup,\n\tCommandInput,\n\tCommandItem,\n\tCommandList,\n} from \"@/components/ui/command\";\nimport {\n\tPopover,\n\tPopoverContent,\n\tPopoverTrigger,\n} from \"@/components/ui/popover\";\nimport { cn } from \"@/lib/utils\";\n\ninterface ComboboxOption {\n\tvalue: string;\n\tlabel: string;\n\tdisabled?: boolean;\n}\n\ninterface ComboboxProps {\n\toptions: ComboboxOption[];\n\tvalue?: string;\n\tonValueChange?: (value: string) => void;\n\tplaceholder?: string;\n\tsearchPlaceholder?: string;\n\temptyText?: string;\n\tclassName?: string;\n\tdisabled?: boolean;\n}\n\n/**\n * fzf-style combobox: a searchable picker built on Popover + Command.\n * The Popover provides the floating container; Command provides the\n * keyboard-navigable, fuzzy-filtered list with selection inversion.\n */\nfunction Combobox({\n\toptions,\n\tvalue,\n\tonValueChange,\n\tplaceholder = \"select option...\",\n\tsearchPlaceholder = \"search...\",\n\temptyText = \"-- no results --\",\n\tclassName,\n\tdisabled,\n}: ComboboxProps) {\n\tconst [open, setOpen] = React.useState(false);\n\tconst selected = options.find((option) => option.value === value);\n\n\treturn (\n\t\t<Popover open={open} onOpenChange={setOpen}>\n\t\t\t<PopoverTrigger asChild>\n\t\t\t\t<Button\n\t\t\t\t\ttype=\"button\"\n\t\t\t\t\tvariant=\"default\"\n\t\t\t\t\tbracket={false}\n\t\t\t\t\tdisabled={disabled}\n\t\t\t\t\taria-expanded={open}\n\t\t\t\t\tclassName={cn(\"w-64 justify-between gap-2\", className)}\n\t\t\t\t>\n\t\t\t\t\t<span\n\t\t\t\t\t\tclassName={cn(\n\t\t\t\t\t\t\t\"truncate\",\n\t\t\t\t\t\t\t!selected && \"text-foreground2\",\n\t\t\t\t\t\t)}\n\t\t\t\t\t>\n\t\t\t\t\t\t{selected ? selected.label : placeholder}\n\t\t\t\t\t</span>\n\t\t\t\t\t<span aria-hidden className=\"select-none text-foreground2\">\n\t\t\t\t\t\t▾\n\t\t\t\t\t</span>\n\t\t\t\t</Button>\n\t\t\t</PopoverTrigger>\n\t\t\t<PopoverContent\n\t\t\t\talign=\"start\"\n\t\t\t\tclassName=\"w-64 p-0\"\n\t\t\t>\n\t\t\t\t<Command>\n\t\t\t\t\t<CommandInput placeholder={searchPlaceholder} />\n\t\t\t\t\t<CommandList>\n\t\t\t\t\t\t<CommandEmpty>{emptyText}</CommandEmpty>\n\t\t\t\t\t\t<CommandGroup>\n\t\t\t\t\t\t\t{options.map((option) => {\n\t\t\t\t\t\t\t\tconst isSelected = option.value === value;\n\t\t\t\t\t\t\t\treturn (\n\t\t\t\t\t\t\t\t\t<CommandItem\n\t\t\t\t\t\t\t\t\t\tkey={option.value}\n\t\t\t\t\t\t\t\t\t\tvalue={option.label}\n\t\t\t\t\t\t\t\t\t\tdisabled={option.disabled}\n\t\t\t\t\t\t\t\t\t\tonSelect={() => {\n\t\t\t\t\t\t\t\t\t\t\tonValueChange?.(\n\t\t\t\t\t\t\t\t\t\t\t\toption.value === value\n\t\t\t\t\t\t\t\t\t\t\t\t\t? \"\"\n\t\t\t\t\t\t\t\t\t\t\t\t\t: option.value,\n\t\t\t\t\t\t\t\t\t\t\t);\n\t\t\t\t\t\t\t\t\t\t\tsetOpen(false);\n\t\t\t\t\t\t\t\t\t\t}}\n\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\t<span\n\t\t\t\t\t\t\t\t\t\t\taria-hidden\n\t\t\t\t\t\t\t\t\t\t\tclassName={cn(\n\t\t\t\t\t\t\t\t\t\t\t\t\"w-4 select-none text-primary\",\n\t\t\t\t\t\t\t\t\t\t\t\t!isSelected && \"opacity-0\",\n\t\t\t\t\t\t\t\t\t\t\t)}\n\t\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\t\t✓\n\t\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t\t<span className=\"truncate\">\n\t\t\t\t\t\t\t\t\t\t\t{option.label}\n\t\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t\t</CommandItem>\n\t\t\t\t\t\t\t\t);\n\t\t\t\t\t\t\t})}\n\t\t\t\t\t\t</CommandGroup>\n\t\t\t\t\t</CommandList>\n\t\t\t\t</Command>\n\t\t\t</PopoverContent>\n\t\t</Popover>\n\t);\n}\n\nexport { Combobox };\nexport type { ComboboxOption, ComboboxProps };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

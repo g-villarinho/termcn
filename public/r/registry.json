@@ -95,6 +95,58 @@
 			"files": [
 				{ "path": "registry/ui/alert-dialog.tsx", "type": "registry:ui" }
 			]
+		},
+		{
+			"name": "popover",
+			"type": "registry:ui",
+			"title": "Popover",
+			"description": "Terminal-style floating container built on Radix Popover: box border, elevated --popover background level (no shadow), discrete opacity fade. Base for Select and Combobox.",
+			"dependencies": ["@radix-ui/react-popover"],
+			"registryDependencies": ["utils"],
+			"css": {
+				"@keyframes termcn-fade": {
+					"from": { "opacity": "0" },
+					"to": { "opacity": "1" }
+				},
+				"@keyframes termcn-fade-out": {
+					"from": { "opacity": "1" },
+					"to": { "opacity": "0" }
+				}
+			},
+			"files": [
+				{ "path": "registry/ui/popover.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "command",
+			"type": "registry:ui",
+			"title": "Command",
+			"description": "fzf/Telescope-style command menu built on cmdk: '>' prompt glyph, keyboard navigation, selection inversion, no hover/radius/shadow.",
+			"dependencies": ["cmdk"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/command.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "combobox",
+			"type": "registry:ui",
+			"title": "Combobox",
+			"description": "Searchable picker composed from Popover + Command + Button. Floating container, fuzzy filter, Vim-style selection inversion, ✓ for selected.",
+			"registryDependencies": ["utils", "popover", "command", "button"],
+			"files": [
+				{ "path": "registry/ui/combobox.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "select",
+			"type": "registry:ui",
+			"title": "Select",
+			"description": "Menu-picker select built on Popover + Command (no search input). Reuses the floating container, arrow-key navigation and inversion. Trigger uses ▾ glyph.",
+			"registryDependencies": ["utils", "popover", "command", "button"],
+			"files": [
+				{ "path": "registry/ui/select.tsx", "type": "registry:ui" }
+			]
 		}
 	]
 }
