@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "title": "Progress",
+  "description": "Terminal-style linear progress bar: bordered track, Catppuccin fill, sharp corners, restrained 150ms fill updates.",
+  "dependencies": [
+    "@radix-ui/react-progress"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/progress.tsx",
+      "content": "import * as React from \"react\";\nimport * as ProgressPrimitive from \"@radix-ui/react-progress\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Progress({\n\tclassName,\n\tvalue,\n\tmax = 100,\n\t...props\n}: React.ComponentProps<typeof ProgressPrimitive.Root>) {\n\tconst safeMax = max > 0 ? max : 100;\n\tconst safeValue =\n\t\ttypeof value === \"number\" ? Math.min(Math.max(value, 0), safeMax) : 0;\n\tconst percentage = (safeValue / safeMax) * 100;\n\n\treturn (\n\t\t<ProgressPrimitive.Root\n\t\t\tdata-slot=\"progress\"\n\t\t\tclassName={cn(\n\t\t\t\t\"relative h-2 w-full overflow-hidden border border-border bg-background1\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\tvalue={value}\n\t\t\tmax={max}\n\t\t\t{...props}\n\t\t>\n\t\t\t<ProgressPrimitive.Indicator\n\t\t\t\tdata-slot=\"progress-indicator\"\n\t\t\t\tclassName=\"h-full bg-primary transition-transform duration-150 ease-out motion-reduce:transition-none\"\n\t\t\t\tstyle={{ transform: `translateX(-${100 - percentage}%)` }}\n\t\t\t/>\n\t\t</ProgressPrimitive.Root>\n\t);\n}\n\nexport { Progress };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
