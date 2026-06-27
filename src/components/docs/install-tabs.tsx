@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "registry/ui/tabs"
-import { Button } from "registry/ui/button"
 import { cn } from "@/lib/utils"
 
 const PACKAGE_MANAGERS = ["pnpm", "npm", "yarn", "bun"] as const
@@ -8,9 +7,9 @@ type PM = (typeof PACKAGE_MANAGERS)[number]
 
 const PREFIXES: Record<PM, string> = {
   pnpm: "pnpm dlx",
-  npm: "npx",
+  npm:  "npx",
   yarn: "yarn dlx",
-  bun: "bunx --bun",
+  bun:  "bunx --bun",
 }
 
 const LS_KEY = "termcn:install-pm"
@@ -29,10 +28,11 @@ interface InstallTabsProps {
 }
 
 function InstallTabs({ pkg, className }: InstallTabsProps) {
-  const [active, setActive] = React.useState<PM>(getSavedPM)
   const [copied, setCopied] = React.useState(false)
+  const [active, setActive] = React.useState<PM>(getSavedPM)
 
-  function selectPM(pm: PM) {
+  function selectPM(v: string) {
+    const pm = v as PM
     setActive(pm)
     try { localStorage.setItem(LS_KEY, pm) } catch {}
   }
@@ -48,38 +48,48 @@ function InstallTabs({ pkg, className }: InstallTabsProps) {
   return (
     <Tabs
       value={active}
-      onValueChange={(v) => selectPM(v as PM)}
-      className={cn("mb-6", className)}
+      onValueChange={selectPM}
+      className={cn("mb-6 border border-border font-mono text-sm", className)}
     >
-      <div className="flex items-center justify-between border border-b-0 border-border bg-background1 px-1">
-        <TabsList className="border-b-0 bg-transparent">
+      {/* Tab bar: single row, no inner double-border */}
+      <div className="flex items-center border-b border-border bg-background1">
+        <TabsList className="border-b-0 bg-transparent gap-0 w-auto">
           {PACKAGE_MANAGERS.map((pm) => (
-            <TabsTrigger key={pm} value={pm} className="text-xs py-2">
+            <TabsTrigger
+              key={pm}
+              value={pm}
+              className="text-xs px-4 py-2 border-r border-border last:border-r-0"
+            >
               {pm}
             </TabsTrigger>
           ))}
         </TabsList>
-        <Button
-          variant="ghost"
-          size="icon"
-          bracket={false}
+
+        <div className="flex-1" />
+
+        <button
+          type="button"
           onClick={copy}
           aria-label="Copy command"
-          className="h-7 w-7 text-foreground2"
+          className={cn(
+            "px-3 py-2 text-foreground2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+            copied && "text-success",
+          )}
         >
           {copied ? (
-            <span className="text-success text-xs">✓</span>
+            <span className="text-xs">✓</span>
           ) : (
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden>
               <rect x="9" y="9" width="13" height="13" />
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
             </svg>
           )}
-        </Button>
+        </button>
       </div>
 
+      {/* Command content */}
       {PACKAGE_MANAGERS.map((pm) => (
-        <TabsContent key={pm} value={pm} className="border border-border px-4 py-3 mt-0 text-sm">
+        <TabsContent key={pm} value={pm} className="px-4 py-3 mt-0 bg-background">
           <span className="text-ansi-green">{PREFIXES[pm]}</span>{" "}
           <span className="text-foreground1">shadcn@latest add</span>{" "}
           <span className="text-primary">{pkg}</span>
