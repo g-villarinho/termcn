@@ -1,0 +1,255 @@
+---
+title: Pagination
+description: Terminal-style page navigation with active-page inversion and chevron prev/next.
+---
+
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext, PaginationEllipsis } from "registry/ui/pagination"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Pagination
+
+Terminal-style page navigation. Composes `Button` internally — `PaginationLink` renders `Button asChild` with the ghost variant. Active page uses foreground inversion. ChevronLeft/Right for previous/next. Ellipsis for overflow.
+
+Follows TUI aesthetic: interaction via focus only, monospace typography, sharp edges, depth via background levels.
+
+## Installation
+
+<InstallTabs pkg="@termcn/pagination" />
+
+## Usage
+
+```tsx
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationEllipsis,
+} from "@/components/ui/pagination"
+
+export default function PaginationDemo() {
+  return (
+    <Pagination>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious href="#" />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#" isActive>1</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#">2</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationNext href="#" />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+  )
+}
+```
+
+## Examples
+
+### Basic 5-page pagination
+
+<Preview>
+  <Pagination>
+    <PaginationContent>
+      <PaginationItem>
+        <PaginationPrevious href="#" />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#" isActive>1</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#">2</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#">3</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#">4</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#">5</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationNext href="#" />
+      </PaginationItem>
+    </PaginationContent>
+  </Pagination>
+</Preview>
+
+```tsx
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#" isActive>1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">2</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">3</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">4</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">5</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+```
+
+### Prev/Next only
+
+Minimal pagination with no numbered links.
+
+<Preview>
+  <Pagination>
+    <PaginationContent>
+      <PaginationItem>
+        <PaginationPrevious href="#" />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationNext href="#" />
+      </PaginationItem>
+    </PaginationContent>
+  </Pagination>
+</Preview>
+
+```tsx
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+```
+
+### With ellipsis
+
+Use `PaginationEllipsis` to represent omitted page ranges.
+
+<Preview>
+  <Pagination>
+    <PaginationContent>
+      <PaginationItem>
+        <PaginationPrevious href="#" />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#">1</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationEllipsis />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#" isActive>5</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationEllipsis />
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#">10</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationNext href="#" />
+      </PaginationItem>
+    </PaginationContent>
+  </Pagination>
+</Preview>
+
+```tsx
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#" isActive>5</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">10</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>
+```
+
+### Active page state
+
+Set `isActive` on the current page link to apply foreground inversion.
+
+<Preview>
+  <Pagination>
+    <PaginationContent>
+      <PaginationItem>
+        <PaginationLink href="#">1</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#" isActive>2</PaginationLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PaginationLink href="#">3</PaginationLink>
+      </PaginationItem>
+    </PaginationContent>
+  </Pagination>
+</Preview>
+
+```tsx
+<PaginationLink href="#" isActive>2</PaginationLink>
+```
+
+## Props
+
+| Sub-component | Props | Description |
+|---------------|-------|-------------|
+| `Pagination` | `className`, `...ComponentProps<"nav">` | Root `<nav role="navigation" aria-label="pagination">` |
+| `PaginationContent` | `className`, `...ComponentProps<"ul">` | Flex `<ul>` container |
+| `PaginationItem` | `className`, `...ComponentProps<"li">` | `<li>` wrapper |
+| `PaginationLink` | `isActive`, `size`, `className`, `...ComponentProps<"a">` | Ghost `Button asChild`; active state inverts foreground |
+| `PaginationPrevious` | `className`, `...ComponentProps<typeof PaginationLink>` | Extends `PaginationLink` with ChevronLeft + "Prev" label |
+| `PaginationNext` | `className`, `...ComponentProps<typeof PaginationLink>` | Extends `PaginationLink` with "Next" label + ChevronRight |
+| `PaginationEllipsis` | `className`, `...ComponentProps<"span">` | `MoreHorizontal` icon representing omitted pages |
+
+### PaginationLink props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `isActive` | `boolean` | `false` | Marks the current page; applies `bg-foreground text-background` |
+| `size` | `"default"` \| `"sm"` \| `"icon"` | `"sm"` | Button size passed to the underlying `Button` |
+| `href` | `string` | — | Anchor href |
+| `className` | `string` | — | Additional Tailwind classes |
+
+## Notes
+
+- `PaginationLink` renders a `Button` with `asChild` wrapping an `<a>` — the active state is driven by `data-active` attribute, not CSS `:active`.
+- `PaginationPrevious` and `PaginationNext` default to `size="default"` so they are wider than numbered links.
+- `PaginationEllipsis` is `aria-hidden="true"` — place a `<span className="sr-only">` inside if you need screen reader context.
+- No hover states — use `focus-visible:` for keyboard navigation feedback.

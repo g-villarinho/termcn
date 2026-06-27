@@ -1,0 +1,196 @@
+---
+title: Tabs
+description: Terminal-style tabbed interface with active-tab inversion and right-border separators.
+---
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "registry/ui/tabs"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Tabs
+
+Terminal-style tabbed interface built on Radix Tabs. Horizontal tab bar with bottom border. Active tab gets foreground inversion (`bg-foreground text-background`). Tab triggers have right-border separators. Content area below.
+
+Follows TUI aesthetic: interaction via focus only, monospace typography, sharp edges, depth via background levels.
+
+## Installation
+
+<InstallTabs pkg="@termcn/tabs" />
+
+## Usage
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+
+export default function TabsDemo() {
+  return (
+    <Tabs defaultValue="one">
+      <TabsList>
+        <TabsTrigger value="one">One</TabsTrigger>
+        <TabsTrigger value="two">Two</TabsTrigger>
+      </TabsList>
+      <TabsContent value="one">Content for one.</TabsContent>
+      <TabsContent value="two">Content for two.</TabsContent>
+    </Tabs>
+  )
+}
+```
+
+## Examples
+
+### Basic 3-tab interface
+
+<Preview>
+  <Tabs defaultValue="preview">
+    <TabsList>
+      <TabsTrigger value="preview">Preview</TabsTrigger>
+      <TabsTrigger value="code">Code</TabsTrigger>
+      <TabsTrigger value="docs">Docs</TabsTrigger>
+    </TabsList>
+    <TabsContent value="preview">
+      Rendered component preview.
+    </TabsContent>
+    <TabsContent value="code">
+      Source code snippet.
+    </TabsContent>
+    <TabsContent value="docs">
+      Component documentation.
+    </TabsContent>
+  </Tabs>
+</Preview>
+
+```tsx
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code</TabsTrigger>
+    <TabsTrigger value="docs">Docs</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    Rendered component preview.
+  </TabsContent>
+  <TabsContent value="code">
+    Source code snippet.
+  </TabsContent>
+  <TabsContent value="docs">
+    Component documentation.
+  </TabsContent>
+</Tabs>
+```
+
+### With disabled trigger
+
+Set `disabled` on a `TabsTrigger` to prevent selection. Disabled triggers render in `--foreground2` (dim text).
+
+<Preview>
+  <Tabs defaultValue="active">
+    <TabsList>
+      <TabsTrigger value="active">Active</TabsTrigger>
+      <TabsTrigger value="disabled" disabled>Disabled</TabsTrigger>
+      <TabsTrigger value="other">Other</TabsTrigger>
+    </TabsList>
+    <TabsContent value="active">Active tab content.</TabsContent>
+    <TabsContent value="other">Other tab content.</TabsContent>
+  </Tabs>
+</Preview>
+
+```tsx
+<Tabs defaultValue="active">
+  <TabsList>
+    <TabsTrigger value="active">Active</TabsTrigger>
+    <TabsTrigger value="disabled" disabled>Disabled</TabsTrigger>
+    <TabsTrigger value="other">Other</TabsTrigger>
+  </TabsList>
+  <TabsContent value="active">Active tab content.</TabsContent>
+  <TabsContent value="other">Other tab content.</TabsContent>
+</Tabs>
+```
+
+### With icon in trigger
+
+Add an icon inline inside `TabsTrigger`. Icons inherit the trigger's current color.
+
+<Preview>
+  <Tabs defaultValue="files">
+    <TabsList>
+      <TabsTrigger value="files">
+        <span>📄</span>
+        <span>Files</span>
+      </TabsTrigger>
+      <TabsTrigger value="settings">
+        <span>⚙</span>
+        <span>Settings</span>
+      </TabsTrigger>
+    </TabsList>
+    <TabsContent value="files">File browser content.</TabsContent>
+    <TabsContent value="settings">Settings content.</TabsContent>
+  </Tabs>
+</Preview>
+
+```tsx
+<Tabs defaultValue="files">
+  <TabsList>
+    <TabsTrigger value="files">
+      <FileIcon className="size-3.5" />
+      <span>Files</span>
+    </TabsTrigger>
+    <TabsTrigger value="settings">
+      <SettingsIcon className="size-3.5" />
+      <span>Settings</span>
+    </TabsTrigger>
+  </TabsList>
+  <TabsContent value="files">File browser content.</TabsContent>
+  <TabsContent value="settings">Settings content.</TabsContent>
+</Tabs>
+```
+
+### Controlled
+
+Control the active tab programmatically with `value` and `onValueChange`.
+
+```tsx
+const [tab, setTab] = React.useState("one")
+
+<Tabs value={tab} onValueChange={setTab}>
+  <TabsList>
+    <TabsTrigger value="one">One</TabsTrigger>
+    <TabsTrigger value="two">Two</TabsTrigger>
+  </TabsList>
+  <TabsContent value="one">One</TabsContent>
+  <TabsContent value="two">Two</TabsContent>
+</Tabs>
+```
+
+## Props
+
+| Sub-component | Props | Description |
+|---------------|-------|-------------|
+| `Tabs` | `defaultValue`, `value`, `onValueChange`, `className`, `...RadixTabsRoot` | Root container; wraps Radix `Tabs.Root` |
+| `TabsList` | `className`, `...RadixTabsList` | Horizontal tab bar with bottom border |
+| `TabsTrigger` | `value` (required), `disabled`, `className`, `...RadixTabsTrigger` | Individual tab button; active state inverts foreground |
+| `TabsContent` | `value` (required), `className`, `...RadixTabsContent` | Panel shown when matching trigger is active |
+
+### Tabs props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultValue` | `string` | — | Initially selected tab (uncontrolled) |
+| `value` | `string` | — | Controlled active tab value |
+| `onValueChange` | `(value: string) => void` | — | Callback when active tab changes |
+| `className` | `string` | — | Additional Tailwind classes |
+
+### TabsTrigger props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | **Required.** Matches a `TabsContent` value |
+| `disabled` | `boolean` | `false` | Prevents selection; renders in dim foreground |
+| `className` | `string` | — | Additional Tailwind classes |
+
+## Notes
+
+- Active trigger state uses `data-[state=active]` — Radix sets this attribute automatically.
+- `TabsTrigger` uses `focus-visible:` inversion matching the active state — keyboard navigation is visually consistent.
+- The last `TabsTrigger` in the list has `last:border-r-0` to avoid a double-border at the list edge.
+- `TabsContent` has `focus-visible:ring-1` for cases where the panel itself receives focus.
+- Keyboard navigation follows Radix defaults: arrow keys move between triggers, `Home`/`End` jump to first/last.

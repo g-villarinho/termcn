@@ -1,0 +1,243 @@
+---
+title: Breadcrumb
+description: Terminal-style breadcrumb navigation trail with focus-inversion and chevron separators.
+---
+
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis } from "registry/ui/breadcrumb"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Breadcrumb
+
+Terminal-style breadcrumb navigation trail. Composite structure: `nav > ol > li` items. Links use focus-visible inversion. Current page has solid border background. ChevronRight icon as default separator.
+
+Follows TUI aesthetic: interaction via focus only, monospace typography, sharp edges, depth via background levels.
+
+## Installation
+
+<InstallTabs pkg="@termcn/breadcrumb" />
+
+## Usage
+
+```tsx
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
+} from "@/components/ui/breadcrumb"
+
+export default function BreadcrumbDemo() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>Current</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  )
+}
+```
+
+## Examples
+
+### Simple 3-level breadcrumb
+
+<Preview>
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/docs/components">Components</BreadcrumbLink>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+</Preview>
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/docs/components">Components</BreadcrumbLink>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+### With current page
+
+`BreadcrumbPage` marks the current location with `aria-current="page"` and solid border background.
+
+<Preview>
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+</Preview>
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+### With ellipsis
+
+Use `BreadcrumbEllipsis` to collapse overflow in long trails.
+
+<Preview>
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbEllipsis />
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/docs/components">Components</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+</Preview>
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbEllipsis />
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/docs/components">Components</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+### With asChild links
+
+Use `asChild` on `BreadcrumbLink` to render a framework router link (e.g. Next.js `Link`).
+
+```tsx
+import Link from "next/link"
+
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink asChild>
+        <Link href="/">Home</Link>
+      </BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Current</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>
+```
+
+### Custom separator
+
+Pass any element as children to `BreadcrumbSeparator` to replace the default chevron.
+
+<Preview>
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator>/</BreadcrumbSeparator>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator>/</BreadcrumbSeparator>
+      <BreadcrumbItem>
+        <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+</Preview>
+
+```tsx
+<BreadcrumbSeparator>/</BreadcrumbSeparator>
+```
+
+## Props
+
+| Sub-component | Props | Description |
+|---------------|-------|-------------|
+| `Breadcrumb` | `className`, `...ComponentProps<"nav">` | Root `<nav aria-label="breadcrumb">` |
+| `BreadcrumbList` | `className`, `...ComponentProps<"ol">` | Flex `<ol>` container |
+| `BreadcrumbItem` | `className`, `...ComponentProps<"li">` | Inline-flex `<li>` wrapper |
+| `BreadcrumbLink` | `asChild`, `className`, `...ComponentProps<"a">` | Anchor with focus-inversion; `asChild` delegates to Radix Slot |
+| `BreadcrumbPage` | `className`, `...ComponentProps<"span">` | Current page marker (`aria-current="page"`, non-interactive) |
+| `BreadcrumbSeparator` | `children`, `className`, `...ComponentProps<"li">` | Separator `<li>`; defaults to `ChevronRight` icon |
+| `BreadcrumbEllipsis` | `className`, `...ComponentProps<"span">` | Collapsed overflow indicator (`MoreHorizontal` icon) |
+
+## Notes
+
+- `BreadcrumbLink` uses `focus-visible:` inversion (bg-foreground / text-background) — no hover state.
+- `BreadcrumbPage` renders as `<span role="link" aria-disabled="true">` — visually distinct but not interactive.
+- `BreadcrumbSeparator` and `BreadcrumbEllipsis` are `aria-hidden="true"` to keep screen reader output clean.
+- Pass `asChild` to `BreadcrumbLink` when using a client-side router — the inner element receives all anchor props.
