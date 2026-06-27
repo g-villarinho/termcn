@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-area",
+  "title": "Scroll Area",
+  "description": "Terminal-style custom scroll area built on Radix Scroll Area: consistent cross-platform scrollbar, muted track, subtle border thumb. No hover/radius/shadow.",
+  "dependencies": [
+    "@radix-ui/react-scroll-area"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/scroll-area.tsx",
+      "content": "import * as React from \"react\";\nimport * as ScrollAreaPrimitive from \"@radix-ui/react-scroll-area\";\nimport { cn } from \"@/lib/utils\";\n\nfunction ScrollArea({\n\tclassName,\n\tchildren,\n\t...props\n}: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) {\n\treturn (\n\t\t<ScrollAreaPrimitive.Root\n\t\t\tdata-slot=\"scroll-area\"\n\t\t\tclassName={cn(\"relative overflow-hidden font-mono\", className)}\n\t\t\t{...props}\n\t\t>\n\t\t\t<ScrollAreaPrimitive.Viewport\n\t\t\t\tdata-slot=\"scroll-area-viewport\"\n\t\t\t\tclassName=\"size-full outline-none focus-visible:ring-1 focus-visible:ring-ring\"\n\t\t\t>\n\t\t\t\t{children}\n\t\t\t</ScrollAreaPrimitive.Viewport>\n\t\t\t<ScrollBar />\n\t\t\t<ScrollAreaPrimitive.Corner\n\t\t\t\tdata-slot=\"scroll-area-corner\"\n\t\t\t\tclassName=\"bg-background1\"\n\t\t\t/>\n\t\t</ScrollAreaPrimitive.Root>\n\t);\n}\n\nfunction ScrollBar({\n\tclassName,\n\torientation = \"vertical\",\n\t...props\n}: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>) {\n\treturn (\n\t\t<ScrollAreaPrimitive.ScrollAreaScrollbar\n\t\t\tdata-slot=\"scroll-area-scrollbar\"\n\t\t\torientation={orientation}\n\t\t\tclassName={cn(\n\t\t\t\t\"flex touch-none select-none bg-background1 p-px\",\n\t\t\t\torientation === \"vertical\"\n\t\t\t\t\t? \"h-full w-2.5 border-l border-border/60\"\n\t\t\t\t\t: \"h-2.5 flex-col border-t border-border/60\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t<ScrollAreaPrimitive.ScrollAreaThumb\n\t\t\t\tdata-slot=\"scroll-area-thumb\"\n\t\t\t\tclassName=\"relative flex-1 bg-border/80 before:absolute before:inset-0 before:border before:border-border/80\"\n\t\t\t/>\n\t\t</ScrollAreaPrimitive.ScrollAreaScrollbar>\n\t);\n}\n\nexport { ScrollArea, ScrollBar };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
