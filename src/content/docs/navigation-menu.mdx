@@ -1,0 +1,267 @@
+---
+title: Navigation Menu
+description: Terminal-style horizontal navigation menu with dropdown panels, focus-inversion triggers, and fade animations.
+---
+
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuContent,
+  NavigationMenuTrigger,
+  NavigationMenuLink,
+  NavigationMenuIndicator,
+  NavigationMenuViewport,
+  NavigationMenuSub,
+} from "registry/ui/navigation-menu"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Navigation Menu
+
+Terminal-style horizontal navigation menu built on [Radix NavigationMenu](https://www.radix-ui.com/primitives/docs/components/navigation-menu). Trigger items show a `▾` chevron and invert on open/focus. Dropdown panels fade in at 150ms. Links inside panels use focus-visible inversion. An optional indicator and animated viewport are included.
+
+## Installation
+
+<InstallTabs pkg="@termcn/navigation-menu" />
+
+## Usage
+
+```tsx
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuContent,
+  NavigationMenuTrigger,
+  NavigationMenuLink,
+} from "@/components/ui/navigation-menu"
+
+export default function NavigationMenuDemo() {
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <NavigationMenuLink href="/products/one">Product One</NavigationMenuLink>
+            <NavigationMenuLink href="/products/two">Product Two</NavigationMenuLink>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink href="/docs">Docs</NavigationMenuLink>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+  )
+}
+```
+
+## Examples
+
+### Basic nav menu with dropdowns
+
+<Preview>
+  <NavigationMenu>
+    <NavigationMenuList>
+      <NavigationMenuItem>
+        <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <NavigationMenuLink href="#">Button</NavigationMenuLink>
+          <NavigationMenuLink href="#">Input</NavigationMenuLink>
+          <NavigationMenuLink href="#">Badge</NavigationMenuLink>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
+        <NavigationMenuTrigger>Docs</NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <NavigationMenuLink href="#">Getting started</NavigationMenuLink>
+          <NavigationMenuLink href="#">Installation</NavigationMenuLink>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+    </NavigationMenuList>
+  </NavigationMenu>
+</Preview>
+
+```tsx
+<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <NavigationMenuLink href="#">Button</NavigationMenuLink>
+        <NavigationMenuLink href="#">Input</NavigationMenuLink>
+        <NavigationMenuLink href="#">Badge</NavigationMenuLink>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Docs</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <NavigationMenuLink href="#">Getting started</NavigationMenuLink>
+        <NavigationMenuLink href="#">Installation</NavigationMenuLink>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+</NavigationMenu>
+```
+
+### Single-level links
+
+Use `NavigationMenuLink` directly inside `NavigationMenuItem` for top-level links with no dropdown.
+
+<Preview>
+  <NavigationMenu viewport={false}>
+    <NavigationMenuList>
+      <NavigationMenuItem>
+        <NavigationMenuLink href="#">Home</NavigationMenuLink>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
+        <NavigationMenuLink href="#">About</NavigationMenuLink>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
+        <NavigationMenuLink href="#" data-active>Registry</NavigationMenuLink>
+      </NavigationMenuItem>
+    </NavigationMenuList>
+  </NavigationMenu>
+</Preview>
+
+```tsx
+<NavigationMenu viewport={false}>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuLink href="#">Home</NavigationMenuLink>
+    </NavigationMenuItem>
+    <NavigationMenuItem>
+      <NavigationMenuLink href="#">About</NavigationMenuLink>
+    </NavigationMenuItem>
+    <NavigationMenuItem>
+      <NavigationMenuLink href="#" data-active>Registry</NavigationMenuLink>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+</NavigationMenu>
+```
+
+### Multi-column dropdown content
+
+Lay out `NavigationMenuContent` with a grid for multi-column dropdowns.
+
+<Preview>
+  <NavigationMenu>
+    <NavigationMenuList>
+      <NavigationMenuItem>
+        <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <div className="grid grid-cols-2 w-64">
+            <div>
+              <NavigationMenuLink href="#">Button</NavigationMenuLink>
+              <NavigationMenuLink href="#">Badge</NavigationMenuLink>
+              <NavigationMenuLink href="#">Input</NavigationMenuLink>
+            </div>
+            <div>
+              <NavigationMenuLink href="#">Dialog</NavigationMenuLink>
+              <NavigationMenuLink href="#">Tabs</NavigationMenuLink>
+              <NavigationMenuLink href="#">Command</NavigationMenuLink>
+            </div>
+          </div>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+    </NavigationMenuList>
+  </NavigationMenu>
+</Preview>
+
+```tsx
+<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <div className="grid grid-cols-2 w-64">
+          <div>
+            <NavigationMenuLink href="#">Button</NavigationMenuLink>
+            <NavigationMenuLink href="#">Badge</NavigationMenuLink>
+          </div>
+          <div>
+            <NavigationMenuLink href="#">Dialog</NavigationMenuLink>
+            <NavigationMenuLink href="#">Tabs</NavigationMenuLink>
+          </div>
+        </div>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+</NavigationMenu>
+```
+
+### With indicator
+
+`NavigationMenuIndicator` renders a small `--primary` square below the active trigger pointing at the open dropdown.
+
+```tsx
+<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <NavigationMenuLink href="#">Item</NavigationMenuLink>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+    <NavigationMenuIndicator />
+  </NavigationMenuList>
+  <NavigationMenuViewport />
+</NavigationMenu>
+```
+
+### Sub-menus
+
+Use `NavigationMenuSub` to build a nested trigger/content pair inside a dropdown panel.
+
+```tsx
+<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuSub>
+        <NavigationMenuTrigger>More</NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <NavigationMenuLink href="#">Option A</NavigationMenuLink>
+          <NavigationMenuLink href="#">Option B</NavigationMenuLink>
+        </NavigationMenuContent>
+      </NavigationMenuSub>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+</NavigationMenu>
+```
+
+## Props
+
+| Sub-component | Props | Description |
+|---------------|-------|-------------|
+| `NavigationMenu` | `viewport`, `className`, `...RadixRoot` | Root; renders `NavigationMenuViewport` unless `viewport={false}` |
+| `NavigationMenuList` | `className`, `...RadixList` | Horizontal bar with bottom border |
+| `NavigationMenuItem` | `...RadixItem` | Wrapper for a single menu item |
+| `NavigationMenuTrigger` | `className`, `...RadixTrigger` | Button with `▾` chevron; inverts on open and focus |
+| `NavigationMenuContent` | `className`, `...RadixContent` | Dropdown panel; fades in/out at 150ms |
+| `NavigationMenuLink` | `active`, `onSelect`, `className`, `...RadixLink` | Link inside a panel; inverts on `data-[active]` and `focus-visible:` |
+| `NavigationMenuIndicator` | `className`, `...RadixIndicator` | Small `--primary` dot below the active trigger |
+| `NavigationMenuViewport` | `className`, `...RadixViewport` | Animated container that wraps all open `Content` panels |
+| `NavigationMenuSub` | `className`, `...RadixSub` | Nested sub-menu root |
+
+### NavigationMenu props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `viewport` | `boolean` | `true` | Render the animated `NavigationMenuViewport`; set `false` for inline dropdowns |
+| `className` | `string` | — | Additional Tailwind classes |
+
+### NavigationMenuLink props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `active` | `boolean` | — | Marks link as current; applies foreground inversion via `data-[active]` |
+| `onSelect` | `(event: Event) => void` | — | Fired when the link is activated |
+
+## Notes
+
+- Built on [Radix NavigationMenu](https://www.radix-ui.com/primitives/docs/components/navigation-menu) — keyboard navigation (arrow keys, `Escape`, `Tab`) is handled by the primitive.
+- Trigger inversion is driven by `data-[state=open]` — no hover Tailwind variant is used.
+- Content animations use the `termcn-fade` / `termcn-fade-out` keyframes (defined in `src/index.css`) at 150ms `ease-out`.
+- `NavigationMenuViewport` is automatically rendered inside `NavigationMenu` when `viewport={true}` (default). Pass `viewport={false}` to skip it and let content position inline.
+- `NavigationMenuList` has a bottom border (`border-b border-border`) that aligns visually with `TabsList` for consistent horizontal nav bars.
