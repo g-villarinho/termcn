@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sonner",
+  "title": "Sonner",
+  "description": "Terminal-style toaster wrapping the Sonner library: monospace, box border, no radius/shadow, semantic success/error/warning/info colors.",
+  "dependencies": [
+    "sonner"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/sonner.tsx",
+      "content": "import type * as React from \"react\";\nimport { Toaster as Sonner, type ToasterProps } from \"sonner\";\n\nfunction Toaster({ ...props }: ToasterProps) {\n\treturn (\n\t\t<Sonner\n\t\t\tdata-slot=\"sonner\"\n\t\t\ttheme=\"dark\"\n\t\t\tclassName=\"toaster group font-mono\"\n\t\t\ttoastOptions={{\n\t\t\t\tclassNames: {\n\t\t\t\t\ttoast:\n\t\t\t\t\t\t\"group toast group-[.toaster]:border group-[.toaster]:border-border group-[.toaster]:bg-card group-[.toaster]:font-mono group-[.toaster]:text-foreground group-[.toaster]:rounded-none group-[.toaster]:shadow-none\",\n\t\t\t\t\ttitle: \"group-[.toast]:font-medium group-[.toast]:text-foreground\",\n\t\t\t\t\tdescription: \"group-[.toast]:text-foreground1\",\n\t\t\t\t\tactionButton:\n\t\t\t\t\t\t\"group-[.toast]:border group-[.toast]:border-border group-[.toast]:bg-transparent group-[.toast]:text-foreground group-[.toast]:rounded-none\",\n\t\t\t\t\tcancelButton:\n\t\t\t\t\t\t\"group-[.toast]:border group-[.toast]:border-border group-[.toast]:bg-transparent group-[.toast]:text-foreground1 group-[.toast]:rounded-none\",\n\t\t\t\t\ticon: \"group-[.toast]:text-primary\",\n\t\t\t\t\tsuccess: \"group-[.toast]:text-success group-[.toast]:border-success\",\n\t\t\t\t\terror:\n\t\t\t\t\t\t\"group-[.toast]:text-destructive group-[.toast]:border-destructive\",\n\t\t\t\t\twarning: \"group-[.toast]:text-warning group-[.toast]:border-warning\",\n\t\t\t\t\tinfo: \"group-[.toast]:text-info group-[.toast]:border-info\",\n\t\t\t\t},\n\t\t\t}}\n\t\t\tstyle={\n\t\t\t\t{\n\t\t\t\t\t\"--normal-bg\": \"var(--card)\",\n\t\t\t\t\t\"--normal-text\": \"var(--foreground)\",\n\t\t\t\t\t\"--normal-border\": \"var(--border)\",\n\t\t\t\t\t\"--border-radius\": \"0px\",\n\t\t\t\t} as React.CSSProperties\n\t\t\t}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Toaster };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
