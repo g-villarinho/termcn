@@ -1,0 +1,245 @@
+---
+title: Dialog
+description: Terminal-style modal dialog with backdrop overlay and bracket close button.
+---
+
+import {
+  Dialog,
+  DialogTrigger,
+  DialogPortal,
+  DialogClose,
+  DialogOverlay,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "registry/ui/dialog"
+import { Button } from "registry/ui/button"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Dialog
+
+Terminal-style modal dialog built on Radix Dialog. Centered overlay (`max-w-lg`) with a translucent backdrop, monospace typography, and a bracket-style `[x]` close button in the top-right corner.
+
+Follows TUI aesthetic: title prefixed with `▍`, sharp edges, no shadow, and a discrete 150ms opacity fade on open/close. Interaction via focus only.
+
+## Installation
+
+<InstallTabs pkg="@termcn/dialog" />
+
+## Usage
+
+```tsx
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog"
+
+export default function DialogDemo() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Title</DialogTitle>
+          <DialogDescription>Description text.</DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  )
+}
+```
+
+## Examples
+
+### Basic
+
+<Preview>
+  <div className="bg-background flex justify-center p-4">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open dialog</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Connection</DialogTitle>
+          <DialogDescription>
+            Establish a new SSH session to the remote host.
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  </div>
+</Preview>
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Open dialog</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Connection</DialogTitle>
+      <DialogDescription>
+        Establish a new SSH session to the remote host.
+      </DialogDescription>
+    </DialogHeader>
+  </DialogContent>
+</Dialog>
+```
+
+### With body and footer
+
+<Preview>
+  <div className="bg-background flex justify-center p-4">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Edit config</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit config</DialogTitle>
+          <DialogDescription>
+            Changes are written to ~/.config/termcn/config.toml.
+          </DialogDescription>
+        </DialogHeader>
+        <p className="pl-4 text-sm text-foreground1">
+          The daemon reloads automatically on save.
+        </p>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="ghost">Cancel</Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button variant="primary">Save</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  </div>
+</Preview>
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Edit config</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Edit config</DialogTitle>
+      <DialogDescription>
+        Changes are written to ~/.config/termcn/config.toml.
+      </DialogDescription>
+    </DialogHeader>
+    <p className="pl-4 text-sm text-foreground1">
+      The daemon reloads automatically on save.
+    </p>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="ghost">Cancel</Button>
+      </DialogClose>
+      <DialogClose asChild>
+        <Button variant="primary">Save</Button>
+      </DialogClose>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+### Header only
+
+<Preview>
+  <div className="bg-background flex justify-center p-4">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="ghost">About</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>termcn v1.0.0</DialogTitle>
+          <DialogDescription>
+            A shadcn/ui registry with a terminal aesthetic.
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  </div>
+</Preview>
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button variant="ghost">About</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>termcn v1.0.0</DialogTitle>
+      <DialogDescription>
+        A shadcn/ui registry with a terminal aesthetic.
+      </DialogDescription>
+    </DialogHeader>
+  </DialogContent>
+</Dialog>
+```
+
+### Controlled
+
+Drive open state yourself with `open` and `onOpenChange` on the `Dialog` root — useful for non-dismissable flows where you decide when the dialog may close.
+
+```tsx
+const [open, setOpen] = React.useState(false)
+
+return (
+  <Dialog open={open} onOpenChange={setOpen}>
+    <DialogTrigger asChild>
+      <Button>Open</Button>
+    </DialogTrigger>
+    <DialogContent
+      onInteractOutside={(e) => e.preventDefault()}
+      onEscapeKeyDown={(e) => e.preventDefault()}
+    >
+      <DialogHeader>
+        <DialogTitle>Confirm before leaving</DialogTitle>
+        <DialogDescription>Outside clicks are ignored.</DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <Button variant="primary" onClick={() => setOpen(false)}>
+          Done
+        </Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+)
+```
+
+## Props
+
+| Sub-component | Purpose | Key props |
+|------|---------|-----------|
+| `Dialog` | Root state provider | `open`, `defaultOpen`, `onOpenChange`, `modal` |
+| `DialogTrigger` | Element that opens the dialog | `asChild` |
+| `DialogContent` | Centered panel; renders overlay + `[x]` close | `className`, `onInteractOutside`, `onEscapeKeyDown` |
+| `DialogOverlay` | Backdrop layer (auto-rendered by content) | `className` |
+| `DialogHeader` | Vertical title/description group | `className` |
+| `DialogTitle` | Accessible title with `▍` prefix | `className` |
+| `DialogDescription` | Muted description text | `className` |
+| `DialogFooter` | Action row (right-aligned on `sm`+) | `className` |
+| `DialogClose` | Closes the dialog | `asChild` |
+| `DialogPortal` | Portals content to `document.body` | — |
+
+All sub-components forward their standard [Radix Dialog](https://www.radix-ui.com/primitives/docs/components/dialog) props plus `className`.
+
+## Notes
+
+- Built on `@radix-ui/react-dialog`. `DialogContent` automatically renders `DialogOverlay`, the portal, and the bracket `[x]` close button — you do not need to add them manually.
+- Animation is a single 150ms opacity fade (`termcn-fade` / `termcn-fade-out`) on both overlay and content — no scale, slide, or spring.
+- Accessibility is handled by Radix: focus is trapped while open, `Esc` closes, the trigger is restored focus on close, and `DialogTitle` / `DialogDescription` are wired to `aria-labelledby` / `aria-describedby`. Always include a `DialogTitle` (use the `sr-only` class to hide it visually if needed).
+- The close button uses `focus-visible:` inversion (`bg-foreground text-background`) rather than hover.

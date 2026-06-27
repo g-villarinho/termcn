@@ -1,0 +1,235 @@
+---
+title: Alert Dialog
+description: Terminal-style confirmation dialog that requires an explicit action.
+---
+
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogPortal,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from "registry/ui/alert-dialog"
+import { Button } from "registry/ui/button"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Alert Dialog
+
+Terminal-style confirmation dialog built on Radix Alert Dialog. Unlike [Dialog](/docs/dialog), it interrupts the user and demands an explicit choice: there is no `[x]` close button and clicking outside does **not** dismiss it.
+
+Dedicated `AlertDialogAction` (primary button) and `AlertDialogCancel` (ghost button) replace the generic close control. Uses `role="alertdialog"` and a 150ms opacity fade.
+
+## Installation
+
+<InstallTabs pkg="@termcn/alert-dialog" />
+
+## Usage
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from "@/components/ui/alert-dialog"
+
+export default function AlertDialogDemo() {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button>Delete</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+}
+```
+
+## Examples
+
+### Basic confirmation
+
+<Preview>
+  <div className="bg-background flex justify-center p-4">
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button>Delete branch</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete feat/docs?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This permanently removes the branch and its unmerged commits.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Delete</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  </div>
+</Preview>
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button>Delete branch</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Delete feat/docs?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This permanently removes the branch and its unmerged commits.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Delete</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+### Destructive action
+
+Style the action as a destructive button by passing button classes through `className`.
+
+<Preview>
+  <div className="bg-background flex justify-center p-4">
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="destructive">Drop database</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Drop production database?</AlertDialogTitle>
+          <AlertDialogDescription>
+            All tables and rows will be erased. This cannot be reversed.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction className="border-destructive bg-destructive/10 text-destructive">
+            Drop
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  </div>
+</Preview>
+
+```tsx
+<AlertDialogAction className="border-destructive bg-destructive/10 text-destructive">
+  Drop
+</AlertDialogAction>
+```
+
+### Single action
+
+When there is nothing to cancel, omit `AlertDialogCancel` and acknowledge with a single action.
+
+<Preview>
+  <div className="bg-background flex justify-center p-4">
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="ghost">Show notice</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Session expired</AlertDialogTitle>
+          <AlertDialogDescription>
+            Your token is no longer valid. Re-authenticate to continue.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogAction>Acknowledge</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  </div>
+</Preview>
+
+```tsx
+<AlertDialogFooter>
+  <AlertDialogAction>Acknowledge</AlertDialogAction>
+</AlertDialogFooter>
+```
+
+### Custom labels
+
+`AlertDialogAction` and `AlertDialogCancel` take any children, so labels can match the operation.
+
+<Preview>
+  <div className="bg-background flex justify-center p-4">
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button>Discard changes</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Discard unsaved edits?</AlertDialogTitle>
+          <AlertDialogDescription>
+            You have 3 modified files in the working tree.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Keep editing</AlertDialogCancel>
+          <AlertDialogAction>Discard all</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  </div>
+</Preview>
+
+```tsx
+<AlertDialogCancel>Keep editing</AlertDialogCancel>
+<AlertDialogAction>Discard all</AlertDialogAction>
+```
+
+## Props
+
+| Sub-component | Purpose | Key props |
+|------|---------|-----------|
+| `AlertDialog` | Root state provider | `open`, `defaultOpen`, `onOpenChange` |
+| `AlertDialogTrigger` | Element that opens the dialog | `asChild` |
+| `AlertDialogContent` | Centered panel; `role="alertdialog"`, outside-click prevented | `className` |
+| `AlertDialogOverlay` | Backdrop layer (auto-rendered by content) | `className` |
+| `AlertDialogHeader` | Vertical title/description group | `className` |
+| `AlertDialogTitle` | Accessible title | `className` |
+| `AlertDialogDescription` | Muted description text | `className` |
+| `AlertDialogFooter` | Action row (right-aligned on `sm`+) | `className` |
+| `AlertDialogAction` | Confirm button (primary `buttonVariants`); closes on click | `className`, `onClick` |
+| `AlertDialogCancel` | Dismiss button (ghost `buttonVariants`); closes on click | `className`, `onClick` |
+
+All sub-components forward their standard [Radix Alert Dialog](https://www.radix-ui.com/primitives/docs/components/alert-dialog) props plus `className`.
+
+## Notes
+
+- Built on `@radix-ui/react-dialog` with alert semantics. `AlertDialogContent` sets `role="alertdialog"` and calls `onPointerDownOutside={(e) => e.preventDefault()}`, so clicking the backdrop will not close it — the user must choose Action or Cancel.
+- There is no `[x]` close button (the key difference from [Dialog](/docs/dialog)). `AlertDialogAction` and `AlertDialogCancel` both wrap Radix `Close` and inherit `buttonVariants` (`primary` and `ghost` respectively).
+- Animation is a single 150ms opacity fade — no scale, slide, or spring.
+- Accessibility: focus is trapped while open, focus moves to the Cancel button by default, `Esc` closes, and title/description are linked via `aria-labelledby` / `aria-describedby`.
