@@ -95,6 +95,49 @@
 			"files": [
 				{ "path": "registry/ui/alert-dialog.tsx", "type": "registry:ui" }
 			]
+		},
+		{
+			"name": "badge",
+			"type": "registry:ui",
+			"title": "Badge",
+			"description": "Terminal-style status badge: outlined semantic variants with optional [square] or (paren) bracket conventions. No hover/radius/shadow.",
+			"dependencies": ["class-variance-authority", "@radix-ui/react-slot"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/badge.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "card",
+			"type": "registry:ui",
+			"title": "Card",
+			"description": "Terminal-style container with box-drawing border and background-level elevation. Composable header, title, description, content and footer. No radius/shadow.",
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/card.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "separator",
+			"type": "registry:ui",
+			"title": "Separator",
+			"description": "Box-drawing divider built on Radix Separator. Horizontal/vertical, 1px border-color rule. No radius/shadow.",
+			"dependencies": ["@radix-ui/react-separator"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/separator.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "accordion",
+			"type": "registry:ui",
+			"title": "Accordion",
+			"description": "Directory-tree style collapsible built on Radix Accordion: ▸/▾ glyph indicators, border-l indent guide, focus inversion. No chevron rotation, no height animation, no hover/radius/shadow.",
+			"dependencies": ["@radix-ui/react-accordion"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/accordion.tsx", "type": "registry:ui" }
+			]
 		}
 	]
 }
