@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aspect-ratio",
+  "title": "Aspect Ratio",
+  "description": "Sharp-corner media container that preserves image and video proportions with terminal-style border and background levels.",
+  "dependencies": [
+    "@radix-ui/react-aspect-ratio"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/aspect-ratio.tsx",
+      "content": "import * as React from \"react\";\nimport * as AspectRatioPrimitive from \"@radix-ui/react-aspect-ratio\";\nimport { cn } from \"@/lib/utils\";\n\nfunction AspectRatio({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof AspectRatioPrimitive.Root>) {\n\treturn (\n\t\t<AspectRatioPrimitive.Root\n\t\t\tdata-slot=\"aspect-ratio\"\n\t\t\tclassName={cn(\"overflow-hidden border border-border bg-background1\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { AspectRatio };\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

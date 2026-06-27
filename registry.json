@@ -97,6 +97,38 @@
 			]
 		},
 		{
+			"name": "progress",
+			"type": "registry:ui",
+			"title": "Progress",
+			"description": "Terminal-style linear progress bar: bordered track, Catppuccin fill, sharp corners, restrained 150ms fill updates.",
+			"dependencies": ["@radix-ui/react-progress"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/progress.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "skeleton",
+			"type": "registry:ui",
+			"title": "Skeleton",
+			"description": "Passive loading placeholder using Tailwind animate-pulse with terminal background levels and sharp edges.",
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/skeleton.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "aspect-ratio",
+			"type": "registry:ui",
+			"title": "Aspect Ratio",
+			"description": "Sharp-corner media container that preserves image and video proportions with terminal-style border and background levels.",
+			"dependencies": ["@radix-ui/react-aspect-ratio"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/aspect-ratio.tsx", "type": "registry:ui" }
+			]
+		},
+		{
 			"name": "popover",
 			"type": "registry:ui",
 			"title": "Popover",
