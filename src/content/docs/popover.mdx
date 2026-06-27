@@ -1,0 +1,249 @@
+---
+title: Popover
+description: Terminal-style floating popover with fade animation and position control.
+---
+
+import { Popover, PopoverTrigger, PopoverContent, PopoverAnchor } from "registry/ui/popover"
+import { Button } from "registry/ui/button"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Popover
+
+Terminal-style floating popover with fade animation, position control, and no shadow/radius. Content floats at 4px offset with border and elevated background level.
+
+Built on Radix Popover. 72px max-width, depth via `--popover` background and border only. Auto-positioning via Radix collision detection.
+
+## Installation
+
+<InstallTabs pkg="@termcn/popover" />
+
+## Usage
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
+import { Button } from "@/components/ui/button"
+
+export default function PopoverDemo() {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button>Open Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>Popover content goes here.</PopoverContent>
+    </Popover>
+  )
+}
+```
+
+## Examples
+
+### Basic Popover
+
+<Preview>
+  <div className="flex justify-center gap-4 flex-wrap">
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button>Open</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <p className="text-popover-foreground text-sm">This is a terminal-style popover.</p>
+      </PopoverContent>
+    </Popover>
+  </div>
+</Preview>
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button>Open</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <p>This is a terminal-style popover.</p>
+  </PopoverContent>
+</Popover>
+```
+
+### With Form Content
+
+<Preview>
+  <div className="flex justify-center gap-4">
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button>Subscribe</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div className="space-y-3">
+          <div>
+            <label className="block text-popover-foreground text-xs mb-1">Email</label>
+            <input 
+              type="email" 
+              placeholder="user@example.com"
+              className="w-full px-2 py-1 border border-border bg-background text-foreground font-mono text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            />
+          </div>
+          <Button variant="primary" size="sm" className="w-full">
+            Subscribe
+          </Button>
+        </div>
+      </PopoverContent>
+    </Popover>
+  </div>
+</Preview>
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button>Subscribe</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <div className="space-y-3">
+      <div>
+        <label className="block text-xs mb-1">Email</label>
+        <input type="email" placeholder="user@example.com" />
+      </div>
+      <Button variant="primary" size="sm" className="w-full">
+        Subscribe
+      </Button>
+    </div>
+  </PopoverContent>
+</Popover>
+```
+
+### Align Center (Default)
+
+<Preview>
+  <div className="flex justify-center">
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button>Center</Button>
+      </PopoverTrigger>
+      <PopoverContent align="center">
+        <p className="text-popover-foreground text-sm">Aligned to center (default).</p>
+      </PopoverContent>
+    </Popover>
+  </div>
+</Preview>
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button>Center</Button>
+  </PopoverTrigger>
+  <PopoverContent align="center">
+    <p>Aligned to center.</p>
+  </PopoverContent>
+</Popover>
+```
+
+### Align Start
+
+<Preview>
+  <div className="flex justify-center">
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button>Start</Button>
+      </PopoverTrigger>
+      <PopoverContent align="start">
+        <p className="text-popover-foreground text-sm">Aligned to start edge.</p>
+      </PopoverContent>
+    </Popover>
+  </div>
+</Preview>
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button>Start</Button>
+  </PopoverTrigger>
+  <PopoverContent align="start">
+    <p>Aligned to start edge.</p>
+  </PopoverContent>
+</Popover>
+```
+
+### Align End
+
+<Preview>
+  <div className="flex justify-center">
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button>End</Button>
+      </PopoverTrigger>
+      <PopoverContent align="end">
+        <p className="text-popover-foreground text-sm">Aligned to end edge.</p>
+      </PopoverContent>
+    </Popover>
+  </div>
+</Preview>
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button>End</Button>
+  </PopoverTrigger>
+  <PopoverContent align="end">
+    <p>Aligned to end edge.</p>
+  </PopoverContent>
+</Popover>
+```
+
+### With Anchor
+
+Use `PopoverAnchor` to position popover relative to a different element (not the trigger).
+
+<Preview>
+  <div className="flex justify-center gap-6 items-start">
+    <Button>Anchor point</Button>
+    <Popover>
+      <PopoverAnchor asChild>
+        <div className="text-foreground1 text-xs">
+          ▼ Positions relative to this
+        </div>
+      </PopoverAnchor>
+      <PopoverTrigger asChild>
+        <Button variant="ghost">Show</Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <p className="text-popover-foreground text-sm">Anchored to a different element.</p>
+      </PopoverContent>
+    </Popover>
+  </div>
+</Preview>
+
+```tsx
+<Popover>
+  <PopoverAnchor asChild>
+    <div>Reference element</div>
+  </PopoverAnchor>
+  <PopoverTrigger asChild>
+    <Button>Show</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <p>Popover positioned relative to anchor.</p>
+  </PopoverContent>
+</Popover>
+```
+
+## Props
+
+| Component | Prop | Type | Default | Description |
+|-----------|------|------|---------|-------------|
+| `Popover` | — | Radix Root | — | Popover root container |
+| `PopoverTrigger` | — | Radix Trigger | — | Button/element that opens popover |
+| `PopoverAnchor` | — | Radix Anchor | — | Optional: position reference (defaults to trigger) |
+| `PopoverContent` | `align` | `center` \| `start` \| `end` | `center` | Horizontal alignment relative to trigger |
+| `PopoverContent` | `sideOffset` | `number` | `4` | Distance in px from trigger/anchor |
+| `PopoverContent` | `className` | `string` | — | Additional Tailwind classes |
+| `PopoverContent` | ...rest | Radix Content props | — | All standard Radix Content props |
+
+## Notes
+
+- Built on **Radix Popover** — provides positioning, collision detection, and focus management
+- **Animations**: Fade-in (150ms ease-out) and fade-out on close
+- **Collision detection**: Auto-repositions if popover would extend off-screen
+- **Keyboard**: <kbd>Esc</kbd> closes popover; <kbd>Tab</kbd> traps focus within
+- **Trigger click**: Clicking trigger again toggles popover (open/close)
+- **Outside click**: Clicking outside popover closes it
+- **Focus management**: Focus returns to trigger when closed
+- **Background**: Uses `--popover` CSS variable (elevated level, darker than card)
