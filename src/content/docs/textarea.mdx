@@ -1,0 +1,90 @@
+---
+title: Textarea
+description: Terminal-style multiline text input.
+---
+
+import { Textarea } from "registry/ui/textarea"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Textarea
+
+Terminal-style multiline text input with auto-sizing content, sharp edges, and focus-only interaction.
+
+Follows TUI aesthetic: no hover states, monospace typography, muted background depth, destructive ring on invalid.
+
+## Installation
+
+<InstallTabs pkg="@termcn/textarea" />
+
+## Usage
+
+```tsx
+import { Textarea } from "@/components/ui/textarea"
+
+export default function TextareaDemo() {
+  return <Textarea placeholder="Type here..." />
+}
+```
+
+## Examples
+
+### Basic
+
+<Preview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <Textarea />
+  </div>
+</Preview>
+
+```tsx
+<Textarea />
+```
+
+### Placeholder
+
+<Preview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <Textarea placeholder="Enter your message..." />
+  </div>
+</Preview>
+
+```tsx
+<Textarea placeholder="Enter your message..." />
+```
+
+### Disabled
+
+<Preview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <Textarea placeholder="Disabled textarea" disabled />
+  </div>
+</Preview>
+
+```tsx
+<Textarea placeholder="Disabled textarea" disabled />
+```
+
+### Error state
+
+Use `aria-invalid="true"` to signal a validation error. The border and focus ring switch to `--destructive`.
+
+<Preview>
+  <div className="flex flex-col gap-4 w-full max-w-sm">
+    <Textarea placeholder="Invalid input" aria-invalid="true" />
+  </div>
+</Preview>
+
+```tsx
+<Textarea placeholder="Invalid input" aria-invalid="true" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placeholder` | `string` | — | Placeholder text |
+| `disabled` | `boolean` | `false` | Disable the textarea |
+| `aria-invalid` | `"true"` \| `"false"` | — | Mark field as invalid (switches to destructive ring) |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"textarea">` | — | All standard `<textarea>` props |

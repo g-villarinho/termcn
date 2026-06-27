@@ -1,0 +1,101 @@
+---
+title: Switch
+description: Terminal-style toggle switch built on Radix UI.
+---
+
+import { Switch } from "registry/ui/switch"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Switch
+
+Terminal-style toggle switch built on Radix UI Switch primitive. Sharp edges, no hover, primary color on checked state.
+
+Follows TUI aesthetic: interaction via focus only, thumb translates discretely on toggle, depth via background levels.
+
+## Installation
+
+<InstallTabs pkg="@termcn/switch" />
+
+## Usage
+
+```tsx
+import { Switch } from "@/components/ui/switch"
+
+export default function SwitchDemo() {
+  return <Switch />
+}
+```
+
+## Examples
+
+### Default
+
+<Preview>
+  <div className="flex gap-4 flex-wrap justify-center items-center">
+    <Switch />
+  </div>
+</Preview>
+
+```tsx
+<Switch />
+```
+
+### Checked
+
+<Preview>
+  <div className="flex gap-4 flex-wrap justify-center items-center">
+    <Switch defaultChecked />
+  </div>
+</Preview>
+
+```tsx
+<Switch defaultChecked />
+```
+
+### Sizes
+
+<Preview>
+  <div className="flex gap-4 flex-wrap justify-center items-center">
+    <Switch size="default" />
+    <Switch size="sm" />
+  </div>
+</Preview>
+
+```tsx
+<Switch size="default" />
+<Switch size="sm" />
+```
+
+### Disabled
+
+<Preview>
+  <div className="flex gap-4 flex-wrap justify-center items-center">
+    <Switch disabled />
+    <Switch disabled defaultChecked />
+  </div>
+</Preview>
+
+```tsx
+<Switch disabled />
+<Switch disabled defaultChecked />
+```
+
+## Notes
+
+- Built on `@radix-ui/react-switch` — fully accessible with keyboard and screen readers.
+- The thumb translates via `data-[state=checked]:translate-x-5` (default) or `data-[state=checked]:translate-x-4` (sm) — no CSS transitions, discrete step only.
+- When checked, the track switches to `border-primary bg-primary` and the thumb to `bg-primary-foreground`.
+- Disabled state uses `border-foreground2 bg-background1` to match terminal dim text convention.
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `size` | `"default"` \| `"sm"` | `"default"` | Switch and thumb size |
+| `checked` | `boolean` | — | Controlled checked state |
+| `defaultChecked` | `boolean` | `false` | Uncontrolled initial checked state |
+| `onCheckedChange` | `(checked: boolean) => void` | — | Callback fired on state change |
+| `disabled` | `boolean` | `false` | Disable the switch |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<typeof SwitchPrimitive.Root>` | — | All Radix Switch.Root props |
