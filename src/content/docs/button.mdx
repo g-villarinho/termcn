@@ -1,0 +1,118 @@
+---
+title: Button
+description: Terminal-style button with focus-inversion and bracket rendering.
+---
+
+import { Button, buttonVariants } from "registry/ui/button"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Button
+
+Terminal-style outlined button with bracket convention, focus state inversion, and no hover/radius/shadow.
+
+Follows TUI aesthetic: interaction via focus only, monospace typography, sharp edges, depth via background levels.
+
+## Installation
+
+<InstallTabs pkg="@termcn/button" />
+
+## Usage
+
+```tsx
+import { Button } from "@/components/ui/button"
+
+export default function ButtonDemo() {
+  return <Button>Click me</Button>
+}
+```
+
+## Examples
+
+### Variants
+
+<Preview>
+  <div className="flex gap-4 flex-wrap justify-center">
+    <Button variant="default">default</Button>
+    <Button variant="primary">primary</Button>
+    <Button variant="destructive">destructive</Button>
+    <Button variant="ghost">ghost</Button>
+  </div>
+</Preview>
+
+```tsx
+<Button variant="default">default</Button>
+<Button variant="primary">primary</Button>
+<Button variant="destructive">destructive</Button>
+<Button variant="ghost">ghost</Button>
+```
+
+### Sizes
+
+<Preview>
+  <div className="flex gap-4 flex-wrap justify-center items-center">
+    <Button size="sm">small</Button>
+    <Button size="default">default</Button>
+    <Button size="icon">🎨</Button>
+  </div>
+</Preview>
+
+```tsx
+<Button size="sm">small</Button>
+<Button size="default">default</Button>
+<Button size="icon">🎨</Button>
+```
+
+### Bracket
+
+Toggle bracket rendering with the `bracket` prop (default: `true`).
+
+<Preview>
+  <div className="flex gap-4 flex-wrap justify-center">
+    <Button bracket={true}>with bracket</Button>
+    <Button bracket={false}>no bracket</Button>
+  </div>
+</Preview>
+
+```tsx
+<Button bracket={true}>with bracket</Button>
+<Button bracket={false}>no bracket</Button>
+```
+
+### Disabled
+
+<Preview>
+  <Button disabled>disabled</Button>
+</Preview>
+
+```tsx
+<Button disabled>disabled</Button>
+```
+
+### As Child
+
+Use the `asChild` prop to render as a child element (e.g., a link).
+
+<Preview>
+  <Button asChild>
+    <a href="/">Link to home</a>
+  </Button>
+</Preview>
+
+```tsx
+<Button asChild>
+  <a href="/">Link to home</a>
+</Button>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `default` \| `primary` \| `destructive` \| `ghost` | `default` | Button color scheme |
+| `size` | `default` \| `sm` \| `icon` | `default` | Button size |
+| `bracket` | `boolean` | `true` | Render `[label]` style brackets |
+| `asChild` | `boolean` | `false` | Render as child element (Radix Slot) |
+| `disabled` | `boolean` | `false` | Disable button |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"button">` | — | All standard `<button>` props |
