@@ -8,7 +8,7 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-// import rehypeShiki from '@shikijs/rehype' // TODO: npm install @shikijs/rehype -D, then uncomment
+import rehypeShiki from '@shikijs/rehype'
 
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import { fileURLToPath, URL } from 'node:url'
@@ -34,7 +34,7 @@ export default defineConfig({
         rehypePlugins: [
           rehypeSlug,
           [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-          // [rehypeShiki, { theme: 'catppuccin-mocha' }], // TODO: uncomment after npm install @shikijs/rehype -D
+          [rehypeShiki, { theme: 'catppuccin-mocha' }],
         ],
         providerImportSource: '@mdx-js/react',
       }),
