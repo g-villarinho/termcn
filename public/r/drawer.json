@@ -1,0 +1,63 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "drawer",
+  "title": "Drawer",
+  "description": "Terminal-style bottom drawer built on Vaul: border-top structure, subtle slide from bottom, no radius/shadow, focus-first interactions.",
+  "dependencies": [
+    "vaul"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/drawer.tsx",
+      "content": "import * as React from \"react\";\nimport { Drawer as DrawerPrimitive } from \"vaul\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Drawer({\n\tshouldScaleBackground = false,\n\t...props\n}: React.ComponentProps<typeof DrawerPrimitive.Root>) {\n\treturn (\n\t\t<DrawerPrimitive.Root\n\t\t\tdata-slot=\"drawer\"\n\t\t\tshouldScaleBackground={shouldScaleBackground}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction DrawerTrigger({\n\t...props\n}: React.ComponentProps<typeof DrawerPrimitive.Trigger>) {\n\treturn <DrawerPrimitive.Trigger data-slot=\"drawer-trigger\" {...props} />;\n}\n\nfunction DrawerPortal({\n\t...props\n}: React.ComponentProps<typeof DrawerPrimitive.Portal>) {\n\treturn <DrawerPrimitive.Portal data-slot=\"drawer-portal\" {...props} />;\n}\n\nfunction DrawerClose({\n\t...props\n}: React.ComponentProps<typeof DrawerPrimitive.Close>) {\n\treturn <DrawerPrimitive.Close data-slot=\"drawer-close\" {...props} />;\n}\n\nfunction DrawerOverlay({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof DrawerPrimitive.Overlay>) {\n\treturn (\n\t\t<DrawerPrimitive.Overlay\n\t\t\tdata-slot=\"drawer-overlay\"\n\t\t\tclassName={cn(\n\t\t\t\t\"fixed inset-0 z-50 bg-background/80\",\n\t\t\t\t\"data-[state=open]:animate-[termcn-fade_150ms_ease-out] data-[state=closed]:animate-[termcn-fade-out_150ms_ease-out]\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction DrawerContent({\n\tclassName,\n\tchildren,\n\t...props\n}: React.ComponentProps<typeof DrawerPrimitive.Content>) {\n\treturn (\n\t\t<DrawerPortal>\n\t\t\t<DrawerOverlay />\n\t\t\t<DrawerPrimitive.Content\n\t\t\t\tdata-slot=\"drawer-content\"\n\t\t\t\tclassName={cn(\n\t\t\t\t\t\"group/drawer-content fixed inset-x-0 bottom-0 z-50 mt-24 flex max-h-[85svh] flex-col border-t border-border bg-card font-mono text-foreground outline-none\",\n\t\t\t\t\t\"data-[state=open]:animate-[termcn-slide-in-from-bottom_150ms_ease-out] data-[state=closed]:animate-[termcn-slide-out-to-bottom_150ms_ease-out]\",\n\t\t\t\t\tclassName,\n\t\t\t\t)}\n\t\t\t\t{...props}\n\t\t\t>\n\t\t\t\t<div\n\t\t\t\t\taria-hidden\n\t\t\t\t\tclassName=\"mx-auto mt-3 h-px w-16 bg-border\"\n\t\t\t\t/>\n\t\t\t\t{children}\n\t\t\t</DrawerPrimitive.Content>\n\t\t</DrawerPortal>\n\t);\n}\n\nfunction DrawerHeader({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"drawer-header\"\n\t\t\tclassName={cn(\"flex flex-col gap-1.5 px-4 pt-4 text-center\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction DrawerFooter({ className, ...props }: React.ComponentProps<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tdata-slot=\"drawer-footer\"\n\t\t\tclassName={cn(\n\t\t\t\t\"mt-auto flex flex-col-reverse gap-2 px-4 pb-4 sm:flex-row sm:justify-end\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nfunction DrawerTitle({\n\tclassName,\n\tchildren,\n\t...props\n}: React.ComponentProps<typeof DrawerPrimitive.Title>) {\n\treturn (\n\t\t<DrawerPrimitive.Title\n\t\t\tdata-slot=\"drawer-title\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex items-center justify-center gap-2 font-mono text-sm font-medium text-foreground before:text-primary before:content-['▍']\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t>\n\t\t\t{children}\n\t\t</DrawerPrimitive.Title>\n\t);\n}\n\nfunction DrawerDescription({\n\tclassName,\n\t...props\n}: React.ComponentProps<typeof DrawerPrimitive.Description>) {\n\treturn (\n\t\t<DrawerPrimitive.Description\n\t\t\tdata-slot=\"drawer-description\"\n\t\t\tclassName={cn(\"font-mono text-sm text-foreground1\", className)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport {\n\tDrawer,\n\tDrawerPortal,\n\tDrawerOverlay,\n\tDrawerTrigger,\n\tDrawerClose,\n\tDrawerContent,\n\tDrawerHeader,\n\tDrawerFooter,\n\tDrawerTitle,\n\tDrawerDescription,\n};\n",
+      "type": "registry:ui"
+    }
+  ],
+  "cssVars": {
+    "theme": {
+      "--termcn-slide-offset": "1rem"
+    }
+  },
+  "css": {
+    "@keyframes termcn-fade": {
+      "from": {
+        "opacity": "0"
+      },
+      "to": {
+        "opacity": "1"
+      }
+    },
+    "@keyframes termcn-fade-out": {
+      "from": {
+        "opacity": "1"
+      },
+      "to": {
+        "opacity": "0"
+      }
+    },
+    "@keyframes termcn-slide-in-from-bottom": {
+      "from": {
+        "opacity": "0",
+        "transform": "translateY(var(--termcn-slide-offset))"
+      },
+      "to": {
+        "opacity": "1",
+        "transform": "translateY(0)"
+      }
+    },
+    "@keyframes termcn-slide-out-to-bottom": {
+      "from": {
+        "opacity": "1",
+        "transform": "translateY(0)"
+      },
+      "to": {
+        "opacity": "0",
+        "transform": "translateY(var(--termcn-slide-offset))"
+      }
+    }
+  },
+  "type": "registry:ui"
+}
