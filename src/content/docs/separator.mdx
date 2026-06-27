@@ -1,0 +1,108 @@
+---
+title: Separator
+description: Terminal-style visual divider. Horizontal or vertical, 1px, Radix-based.
+---
+
+import { Separator } from "registry/ui/separator"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Separator
+
+Terminal-style 1px visual divider, horizontal or vertical. Built on Radix UI Separator for correct ARIA semantics. Uses `bg-border` for a sharp, low-contrast line that follows the TUI depth convention.
+
+## Installation
+
+<InstallTabs pkg="@termcn/separator" />
+
+## Usage
+
+```tsx
+import { Separator } from "@/components/ui/separator"
+
+export default function SeparatorDemo() {
+  return <Separator />
+}
+```
+
+## Examples
+
+### Horizontal
+
+The default orientation. Spans full width of its container.
+
+<Preview>
+  <div className="w-64 flex flex-col gap-3">
+    <span className="text-sm text-muted-foreground font-mono">above</span>
+    <Separator />
+    <span className="text-sm text-muted-foreground font-mono">below</span>
+  </div>
+</Preview>
+
+```tsx
+<div className="flex flex-col gap-3">
+  <span>above</span>
+  <Separator />
+  <span>below</span>
+</div>
+```
+
+### Vertical
+
+Set `orientation="vertical"` and place inside a flex row. The separator fills the full height of the row.
+
+<Preview>
+  <div className="flex h-8 items-center gap-3">
+    <span className="text-sm text-muted-foreground font-mono">left</span>
+    <Separator orientation="vertical" />
+    <span className="text-sm text-muted-foreground font-mono">right</span>
+  </div>
+</Preview>
+
+```tsx
+<div className="flex h-8 items-center gap-3">
+  <span>left</span>
+  <Separator orientation="vertical" />
+  <span>right</span>
+</div>
+```
+
+### Decorative vs non-decorative
+
+Use `decorative={false}` when the separator conveys a meaningful structural boundary (e.g., separating navigation sections). Radix will then render it with `role="separator"` and correct `aria-orientation`.
+
+<Preview>
+  <div className="w-64 flex flex-col gap-3">
+    <nav className="flex flex-col gap-1">
+      <span className="text-sm text-foreground font-mono">Files</span>
+      <span className="text-sm text-foreground font-mono">Search</span>
+    </nav>
+    <Separator decorative={false} />
+    <nav className="flex flex-col gap-1">
+      <span className="text-sm text-foreground font-mono">Settings</span>
+    </nav>
+  </div>
+</Preview>
+
+```tsx
+{/* Decorative — no semantic role */}
+<Separator decorative={true} />
+
+{/* Structural — renders role="separator" */}
+<Separator decorative={false} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `horizontal` \| `vertical` | `horizontal` | Direction of the divider line |
+| `decorative` | `boolean` | `true` | When `false`, renders `role="separator"` with `aria-orientation` |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<typeof Separator>` | — | All Radix UI Separator props |
+
+## Notes
+
+- Horizontal separator is `h-px w-full`; vertical is `h-full w-px`. Neither has a default margin — use gap utilities on the parent.
+- `bg-border` maps to `--border` (`#6c7086`, Catppuccin Overlay 0), matching the project border convention.
+- `decorative={true}` is the safe default for visual separators that don't represent a structural landmark in the document.

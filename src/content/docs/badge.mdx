@@ -1,0 +1,130 @@
+---
+title: Badge
+description: Terminal-style inline badge with semantic color variants and bracket styles.
+---
+
+import { Badge, badgeVariants } from "registry/ui/badge"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Badge
+
+Terminal-style inline label for status, category, or metadata annotation. Supports 8 semantic color variants, 3 bracket styles, and `asChild` for polymorphic rendering.
+
+Follows TUI aesthetic: sharp edges, focus-only interaction, monospace typography, Catppuccin Mocha tokens.
+
+## Installation
+
+<InstallTabs pkg="@termcn/badge" />
+
+## Usage
+
+```tsx
+import { Badge } from "@/components/ui/badge"
+
+export default function BadgeDemo() {
+  return <Badge>label</Badge>
+}
+```
+
+## Examples
+
+### Color variants
+
+<Preview>
+  <div className="flex gap-3 flex-wrap justify-center">
+    <Badge variant="default">default</Badge>
+    <Badge variant="primary">primary</Badge>
+    <Badge variant="success">success</Badge>
+    <Badge variant="warning">warning</Badge>
+    <Badge variant="destructive">destructive</Badge>
+    <Badge variant="info">info</Badge>
+    <Badge variant="ghost">ghost</Badge>
+  </div>
+</Preview>
+
+```tsx
+<Badge variant="default">default</Badge>
+<Badge variant="primary">primary</Badge>
+<Badge variant="success">success</Badge>
+<Badge variant="warning">warning</Badge>
+<Badge variant="destructive">destructive</Badge>
+<Badge variant="info">info</Badge>
+<Badge variant="ghost">ghost</Badge>
+```
+
+### Bracket styles
+
+<Preview>
+  <div className="flex gap-3 flex-wrap justify-center">
+    <Badge bracket="square" variant="primary">feat</Badge>
+    <Badge bracket="paren" variant="warning">wip</Badge>
+    <Badge bracket="none" variant="success">stable</Badge>
+  </div>
+</Preview>
+
+```tsx
+<Badge bracket="square" variant="primary">feat</Badge>
+<Badge bracket="paren" variant="warning">wip</Badge>
+<Badge bracket="none" variant="success">stable</Badge>
+```
+
+### As Child
+
+Use `asChild` to render the badge as a different element, such as a link.
+
+<Preview>
+  <Badge asChild variant="primary">
+    <a href="/">v1.0.0</a>
+  </Badge>
+</Preview>
+
+```tsx
+<Badge asChild variant="primary">
+  <a href="/">v1.0.0</a>
+</Badge>
+```
+
+### With icon
+
+Icons are automatically sized to `12px` (`size-3`) when nested inside a badge.
+
+<Preview>
+  <div className="flex gap-3 flex-wrap justify-center">
+    <Badge variant="success">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+      passing
+    </Badge>
+    <Badge variant="destructive">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+      failed
+    </Badge>
+  </div>
+</Preview>
+
+```tsx
+<Badge variant="success">
+  <CheckIcon />
+  passing
+</Badge>
+<Badge variant="destructive">
+  <XIcon />
+  failed
+</Badge>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `default` \| `primary` \| `secondary` \| `success` \| `warning` \| `destructive` \| `info` \| `ghost` | `default` | Color scheme using Catppuccin Mocha tokens |
+| `bracket` | `square` \| `paren` \| `none` | `none` | Wraps label with `[…]`, `(…)`, or no brackets |
+| `asChild` | `boolean` | `false` | Render as child element via Radix Slot |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"span">` | — | All standard `<span>` props |
+
+## Notes
+
+- The `square` bracket style renders `[label]` via CSS `before`/`after` pseudo-elements — bracket characters are not in the DOM.
+- `asChild` delegates rendering to the immediate child element; the child must accept a `className` prop.
+- SVG icons nested directly inside `<Badge>` are auto-sized to `size-3` (12px) via the `[&_svg]:size-3` selector.
