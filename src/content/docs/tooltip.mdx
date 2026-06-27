@@ -1,0 +1,253 @@
+---
+title: Tooltip
+description: Terminal-style hover/keyboard tooltip with prompt prefix and zero delay.
+---
+
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "registry/ui/tooltip"
+import { Button } from "registry/ui/button"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Tooltip
+
+Terminal-style hover tooltip with prompt prefix (`> `), fade animation, and instant show (0ms delay by default).
+
+Built on Radix Tooltip. Compact (px-2 py-1, text-xs), keyboard accessible. Wrap app in `TooltipProvider` once at root, then use `Tooltip` + `TooltipTrigger` + `TooltipContent` for each instance. No shadow/radius, depth via border and card background.
+
+## Installation
+
+<InstallTabs pkg="@termcn/tooltip" />
+
+## Usage
+
+First, wrap your app in `TooltipProvider`:
+
+```tsx
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { App } from "./App"
+
+export default function Root() {
+  return (
+    <TooltipProvider>
+      <App />
+    </TooltipProvider>
+  )
+}
+```
+
+Then use tooltips within:
+
+```tsx
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
+import { Button } from "@/components/ui/button"
+
+export default function TooltipDemo() {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button>Hover me</Button>
+      </TooltipTrigger>
+      <TooltipContent>This is a helpful tooltip.</TooltipContent>
+    </Tooltip>
+  )
+}
+```
+
+## Examples
+
+### Basic Tooltip
+
+<Preview>
+  <TooltipProvider>
+    <div className="flex justify-center gap-4">
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button>Save</Button>
+        </TooltipTrigger>
+        <TooltipContent>Save changes (Ctrl+S)</TooltipContent>
+      </Tooltip>
+    </div>
+  </TooltipProvider>
+</Preview>
+
+```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button>Save</Button>
+    </TooltipTrigger>
+    <TooltipContent>Save changes (Ctrl+S)</TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+### Tooltip with Longer Text
+
+<Preview>
+  <TooltipProvider>
+    <div className="flex justify-center gap-4">
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="ghost">Help</Button>
+        </TooltipTrigger>
+        <TooltipContent className="w-40">
+          This action will delete all selected items permanently. This cannot be undone.
+        </TooltipContent>
+      </Tooltip>
+    </div>
+  </TooltipProvider>
+</Preview>
+
+```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="ghost">Help</Button>
+    </TooltipTrigger>
+    <TooltipContent className="w-40">
+      This action will delete all selected items permanently. This cannot be undone.
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+### Tooltip on Icon Button
+
+<Preview>
+  <TooltipProvider>
+    <div className="flex justify-center gap-4">
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button size="icon">⚙</Button>
+        </TooltipTrigger>
+        <TooltipContent>Settings</TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button size="icon">🔍</Button>
+        </TooltipTrigger>
+        <TooltipContent>Search</TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button size="icon">ℹ</Button>
+        </TooltipTrigger>
+        <TooltipContent>Information</TooltipContent>
+      </Tooltip>
+    </div>
+  </TooltipProvider>
+</Preview>
+
+```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button size="icon">⚙</Button>
+    </TooltipTrigger>
+    <TooltipContent>Settings</TooltipContent>
+  </Tooltip>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button size="icon">🔍</Button>
+    </TooltipTrigger>
+    <TooltipContent>Search</TooltipContent>
+  </Tooltip>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button size="icon">ℹ</Button>
+    </TooltipTrigger>
+    <TooltipContent>Information</TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+### Tooltip with Custom Delay
+
+To add a delay before showing the tooltip, wrap in `TooltipProvider` with `delayDuration`:
+
+<Preview>
+  <TooltipProvider delayDuration={500}>
+    <div className="flex justify-center gap-4">
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="ghost">500ms delay</Button>
+        </TooltipTrigger>
+        <TooltipContent>Appears after 500 milliseconds</TooltipContent>
+      </Tooltip>
+    </div>
+  </TooltipProvider>
+</Preview>
+
+```tsx
+<TooltipProvider delayDuration={500}>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="ghost">500ms delay</Button>
+    </TooltipTrigger>
+    <TooltipContent>Appears after 500 milliseconds</TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+### Tooltip with Custom Side Offset
+
+<Preview>
+  <TooltipProvider>
+    <div className="flex justify-center gap-4">
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button>Default offset</Button>
+        </TooltipTrigger>
+        <TooltipContent sideOffset={4}>Shows 4px away</TooltipContent>
+      </Tooltip>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button>Large offset</Button>
+        </TooltipTrigger>
+        <TooltipContent sideOffset={12}>Shows 12px away</TooltipContent>
+      </Tooltip>
+    </div>
+  </TooltipProvider>
+</Preview>
+
+```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button>Default offset</Button>
+    </TooltipTrigger>
+    <TooltipContent sideOffset={4}>Shows 4px away</TooltipContent>
+  </Tooltip>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button>Large offset</Button>
+    </TooltipTrigger>
+    <TooltipContent sideOffset={12}>Shows 12px away</TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+## Props
+
+| Component | Prop | Type | Default | Description |
+|-----------|------|------|---------|-------------|
+| `TooltipProvider` | `delayDuration` | `number` | `0` | Milliseconds before showing tooltip (0 = instant) |
+| `TooltipProvider` | `skipDelayDuration` | `number` | `300` | Milliseconds to skip delay between tooltips |
+| `TooltipProvider` | ...rest | Radix Provider props | — | All standard Radix Provider props |
+| `Tooltip` | — | Radix Root | — | Tooltip root (wraps a provider internally) |
+| `TooltipTrigger` | — | Radix Trigger | — | Element that shows tooltip on hover/focus |
+| `TooltipContent` | `sideOffset` | `number` | `4` | Distance in px from trigger |
+| `TooltipContent` | `className` | `string` | — | Additional Tailwind classes |
+| `TooltipContent` | ...rest | Radix Content props | — | All standard Radix Content props |
+
+## Notes
+
+- Built on **Radix Tooltip** — provides positioning, collision detection, focus management
+- **Prompt prefix**: All tooltips render with `> ` prefix (terminal prompt style)
+- **Animations**: Fade-in (150ms ease-out) on open, fade-out on close
+- **Default delay**: 0ms (instant show), configurable per `TooltipProvider`
+- **Skip delay**: 300ms pause between moving from one tooltip to another (to prevent flashing)
+- **Keyboard accessible**: Show on hover, focus, and keyboard navigation
+- **Trigger click**: Click does not toggle tooltip (only hover/focus)
+- **Auto-positioning**: Radix collision detection ensures tooltip stays visible on screen
+- **Provider scope**: One `TooltipProvider` at app root; nested providers override delay settings

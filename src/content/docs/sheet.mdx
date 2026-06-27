@@ -1,0 +1,292 @@
+---
+title: Sheet
+description: Terminal-style slide-out panel with bracket close and side variants.
+---
+
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription, SheetClose } from "registry/ui/sheet"
+import { Button } from "registry/ui/button"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Sheet
+
+Terminal-style slide-out panel from any edge (top, right, bottom, left) with fade overlay, smooth animations, and bracket-style close button.
+
+Built on Radix Dialog with slide transitions. Right side default, max-width 24rem. No hover/radius/shadow, depth via border and background levels.
+
+## Installation
+
+<InstallTabs pkg="@termcn/sheet" />
+
+## Usage
+
+```tsx
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
+
+export default function SheetDemo() {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button>Open Sheet</Button>
+      </SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Settings</SheetTitle>
+        </SheetHeader>
+        <p>Sheet content goes here.</p>
+      </SheetContent>
+    </Sheet>
+  )
+}
+```
+
+## Examples
+
+### Right Side (Default)
+
+<Preview>
+  <Sheet>
+    <SheetTrigger asChild>
+      <Button>Open Right</Button>
+    </SheetTrigger>
+    <SheetContent side="right">
+      <SheetHeader>
+        <SheetTitle>Right Panel</SheetTitle>
+      </SheetHeader>
+      <p className="text-foreground1">Content slides in from the right edge (default).</p>
+    </SheetContent>
+  </Sheet>
+</Preview>
+
+```tsx
+<Sheet>
+  <SheetTrigger asChild>
+    <Button>Open Right</Button>
+  </SheetTrigger>
+  <SheetContent side="right">
+    <SheetHeader>
+      <SheetTitle>Right Panel</SheetTitle>
+    </SheetHeader>
+    <p>Content slides in from the right edge.</p>
+  </SheetContent>
+</Sheet>
+```
+
+### Left Side
+
+<Preview>
+  <Sheet>
+    <SheetTrigger asChild>
+      <Button>Open Left</Button>
+    </SheetTrigger>
+    <SheetContent side="left">
+      <SheetHeader>
+        <SheetTitle>Navigation</SheetTitle>
+      </SheetHeader>
+      <p className="text-foreground1">Content slides in from the left edge.</p>
+    </SheetContent>
+  </Sheet>
+</Preview>
+
+```tsx
+<Sheet>
+  <SheetTrigger asChild>
+    <Button>Open Left</Button>
+  </SheetTrigger>
+  <SheetContent side="left">
+    <SheetHeader>
+      <SheetTitle>Navigation</SheetTitle>
+    </SheetHeader>
+    <p>Content slides in from the left edge.</p>
+  </SheetContent>
+</Sheet>
+```
+
+### Top Side
+
+<Preview>
+  <Sheet>
+    <SheetTrigger asChild>
+      <Button>Open Top</Button>
+    </SheetTrigger>
+    <SheetContent side="top">
+      <SheetHeader>
+        <SheetTitle>Notification</SheetTitle>
+      </SheetHeader>
+      <p className="text-foreground1">Content slides in from the top edge.</p>
+    </SheetContent>
+  </Sheet>
+</Preview>
+
+```tsx
+<Sheet>
+  <SheetTrigger asChild>
+    <Button>Open Top</Button>
+  </SheetTrigger>
+  <SheetContent side="top">
+    <SheetHeader>
+      <SheetTitle>Notification</SheetTitle>
+    </SheetHeader>
+    <p>Content slides in from the top edge.</p>
+  </SheetContent>
+</Sheet>
+```
+
+### Bottom Side
+
+<Preview>
+  <Sheet>
+    <SheetTrigger asChild>
+      <Button>Open Bottom</Button>
+    </SheetTrigger>
+    <SheetContent side="bottom">
+      <SheetHeader>
+        <SheetTitle>Quick Actions</SheetTitle>
+      </SheetHeader>
+      <p className="text-foreground1">Content slides in from the bottom edge.</p>
+    </SheetContent>
+  </Sheet>
+</Preview>
+
+```tsx
+<Sheet>
+  <SheetTrigger asChild>
+    <Button>Open Bottom</Button>
+  </SheetTrigger>
+  <SheetContent side="bottom">
+    <SheetHeader>
+      <SheetTitle>Quick Actions</SheetTitle>
+    </SheetHeader>
+    <p>Content slides in from the bottom edge.</p>
+  </SheetContent>
+</Sheet>
+```
+
+### With Header, Body, and Footer
+
+<Preview>
+  <Sheet>
+    <SheetTrigger asChild>
+      <Button>Open Form</Button>
+    </SheetTrigger>
+    <SheetContent>
+      <SheetHeader>
+        <SheetTitle>Edit Profile</SheetTitle>
+        <SheetDescription>Make changes to your profile. Click save when done.</SheetDescription>
+      </SheetHeader>
+      <div className="space-y-4 py-4">
+        <div className="space-y-2">
+          <label className="text-foreground text-sm">Name</label>
+          <input 
+            type="text" 
+            placeholder="John Doe"
+            className="w-full px-3 py-2 border border-border bg-background text-foreground font-mono text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          />
+        </div>
+        <div className="space-y-2">
+          <label className="text-foreground text-sm">Email</label>
+          <input 
+            type="email" 
+            placeholder="john@example.com"
+            className="w-full px-3 py-2 border border-border bg-background text-foreground font-mono text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          />
+        </div>
+      </div>
+      <SheetFooter>
+        <Button variant="ghost">Cancel</Button>
+        <Button variant="primary">Save</Button>
+      </SheetFooter>
+    </SheetContent>
+  </Sheet>
+</Preview>
+
+```tsx
+<Sheet>
+  <SheetTrigger asChild>
+    <Button>Open Form</Button>
+  </SheetTrigger>
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle>Edit Profile</SheetTitle>
+      <SheetDescription>Make changes to your profile. Click save when done.</SheetDescription>
+    </SheetHeader>
+    <div className="space-y-4 py-4">
+      <div className="space-y-2">
+        <label className="text-foreground text-sm">Name</label>
+        <input type="text" placeholder="John Doe" />
+      </div>
+      <div className="space-y-2">
+        <label className="text-foreground text-sm">Email</label>
+        <input type="email" placeholder="john@example.com" />
+      </div>
+    </div>
+    <SheetFooter>
+      <Button variant="ghost">Cancel</Button>
+      <Button variant="primary">Save</Button>
+    </SheetFooter>
+  </SheetContent>
+</Sheet>
+```
+
+### With Scrollable Content
+
+<Preview>
+  <Sheet>
+    <SheetTrigger asChild>
+      <Button>Scrollable</Button>
+    </SheetTrigger>
+    <SheetContent className="overflow-y-auto">
+      <SheetHeader>
+        <SheetTitle>Long Content</SheetTitle>
+      </SheetHeader>
+      <div className="space-y-2 text-foreground1 text-sm">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+        <p>Nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit.</p>
+        <p>In voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+      </div>
+    </SheetContent>
+  </Sheet>
+</Preview>
+
+```tsx
+<Sheet>
+  <SheetTrigger asChild>
+    <Button>Scrollable</Button>
+  </SheetTrigger>
+  <SheetContent className="overflow-y-auto">
+    <SheetHeader>
+      <SheetTitle>Long Content</SheetTitle>
+    </SheetHeader>
+    <div className="space-y-2 text-sm">
+      <p>Content that may exceed viewport height...</p>
+    </div>
+  </SheetContent>
+</Sheet>
+```
+
+## Props
+
+| Component | Prop | Type | Default | Description |
+|-----------|------|------|---------|-------------|
+| `Sheet` | — | Radix Root | — | Dialog root container |
+| `SheetTrigger` | — | Radix Trigger | — | Button/element that opens sheet |
+| `SheetContent` | `side` | `top` \| `right` \| `bottom` \| `left` | `right` | Which edge the sheet slides from |
+| `SheetContent` | `className` | `string` | — | Additional Tailwind classes |
+| `SheetContent` | ...rest | Radix Content props | — | All standard Radix Content props |
+| `SheetHeader` | `className` | `string` | — | Wrapper for title/description |
+| `SheetFooter` | `className` | `string` | — | Sticky footer (flex reverse) |
+| `SheetTitle` | `className` | `string` | — | Renders with `▍` prefix |
+| `SheetDescription` | `className` | `string` | — | Secondary text (muted foreground) |
+| `SheetClose` | — | Radix Close | — | Manual close button |
+
+## Notes
+
+- Built on **Radix Dialog** — same accessibility properties as Dialog but with slide animations
+- **Animations**: Fade overlay (150ms ease-out) + slide-in/out from selected edge (150ms ease-out)
+- **Close button**: Bracket-style `[x]` in top-right corner, auto-rendered in `SheetContent`
+- **Focus management**: Dialog handles focus trap and restore automatically
+- **Keyboard**: <kbd>Esc</kbd> closes sheet; focus returns to trigger
+- **Overlay**: Semi-transparent dark overlay (`bg-background/80`) dismisses sheet on click (unless `interaction-outside` disabled)
