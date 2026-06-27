@@ -1,0 +1,268 @@
+---
+title: Command
+description: Terminal-style command palette with fzf-style prompt, fuzzy search, and keyboard navigation.
+---
+
+import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+  CommandSeparator,
+} from "registry/ui/command"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Command
+
+Terminal-style command palette built on [cmdk](https://cmdk.paco.me). Features an fzf-style `> ` prompt in the input, Vim visual-mode selection inversion on items, keyboard navigation, groups with headings, separators, and right-aligned shortcuts.
+
+## Installation
+
+<InstallTabs pkg="@termcn/command" />
+
+## Usage
+
+```tsx
+import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+  CommandSeparator,
+} from "@/components/ui/command"
+
+export default function CommandDemo() {
+  return (
+    <Command>
+      <CommandInput placeholder="Type a command..." />
+      <CommandList>
+        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandGroup heading="Actions">
+          <CommandItem>New file</CommandItem>
+          <CommandItem>Open file</CommandItem>
+        </CommandGroup>
+      </CommandList>
+    </Command>
+  )
+}
+```
+
+## Examples
+
+### Basic command palette
+
+<Preview>
+  <Command className="border border-border w-72">
+    <CommandInput placeholder="Type a command..." />
+    <CommandList>
+      <CommandEmpty>No results found.</CommandEmpty>
+      <CommandGroup heading="Actions">
+        <CommandItem>New file</CommandItem>
+        <CommandItem>Open file</CommandItem>
+        <CommandItem>Save file</CommandItem>
+      </CommandGroup>
+    </CommandList>
+  </Command>
+</Preview>
+
+```tsx
+<Command className="border border-border w-72">
+  <CommandInput placeholder="Type a command..." />
+  <CommandList>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandGroup heading="Actions">
+      <CommandItem>New file</CommandItem>
+      <CommandItem>Open file</CommandItem>
+      <CommandItem>Save file</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>
+```
+
+### With groups
+
+Separate related items into labelled groups. `CommandSeparator` adds a horizontal divider between groups.
+
+<Preview>
+  <Command className="border border-border w-72">
+    <CommandInput placeholder="Search..." />
+    <CommandList>
+      <CommandEmpty>No results found.</CommandEmpty>
+      <CommandGroup heading="Files">
+        <CommandItem>index.tsx</CommandItem>
+        <CommandItem>layout.tsx</CommandItem>
+      </CommandGroup>
+      <CommandSeparator />
+      <CommandGroup heading="Settings">
+        <CommandItem>Preferences</CommandItem>
+        <CommandItem>Keybindings</CommandItem>
+      </CommandGroup>
+    </CommandList>
+  </Command>
+</Preview>
+
+```tsx
+<Command className="border border-border w-72">
+  <CommandInput placeholder="Search..." />
+  <CommandList>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandGroup heading="Files">
+      <CommandItem>index.tsx</CommandItem>
+      <CommandItem>layout.tsx</CommandItem>
+    </CommandGroup>
+    <CommandSeparator />
+    <CommandGroup heading="Settings">
+      <CommandItem>Preferences</CommandItem>
+      <CommandItem>Keybindings</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>
+```
+
+### Empty state
+
+`CommandEmpty` is shown automatically by cmdk when the search query yields no matches.
+
+<Preview>
+  <Command className="border border-border w-72">
+    <CommandInput placeholder="Search..." defaultValue="xyzzy" />
+    <CommandList>
+      <CommandEmpty>No results found.</CommandEmpty>
+      <CommandGroup heading="Actions">
+        <CommandItem>New file</CommandItem>
+      </CommandGroup>
+    </CommandList>
+  </Command>
+</Preview>
+
+```tsx
+<CommandEmpty>No results found.</CommandEmpty>
+```
+
+### With shortcuts
+
+`CommandShortcut` renders a right-aligned key hint inside a `CommandItem`.
+
+<Preview>
+  <Command className="border border-border w-72">
+    <CommandInput placeholder="Search..." />
+    <CommandList>
+      <CommandEmpty>No results found.</CommandEmpty>
+      <CommandGroup heading="Actions">
+        <CommandItem>
+          New file
+          <CommandShortcut>⌘N</CommandShortcut>
+        </CommandItem>
+        <CommandItem>
+          Open file
+          <CommandShortcut>⌘O</CommandShortcut>
+        </CommandItem>
+        <CommandItem>
+          Save
+          <CommandShortcut>⌘S</CommandShortcut>
+        </CommandItem>
+      </CommandGroup>
+    </CommandList>
+  </Command>
+</Preview>
+
+```tsx
+<CommandItem>
+  New file
+  <CommandShortcut>⌘N</CommandShortcut>
+</CommandItem>
+```
+
+### With disabled items
+
+Set `disabled` on `CommandItem` to prevent selection. Disabled items render in dim foreground and are skipped by keyboard navigation.
+
+<Preview>
+  <Command className="border border-border w-72">
+    <CommandInput placeholder="Search..." />
+    <CommandList>
+      <CommandEmpty>No results found.</CommandEmpty>
+      <CommandGroup heading="Actions">
+        <CommandItem>New file</CommandItem>
+        <CommandItem disabled>Delete (unavailable)</CommandItem>
+        <CommandItem>Rename</CommandItem>
+      </CommandGroup>
+    </CommandList>
+  </Command>
+</Preview>
+
+```tsx
+<CommandItem disabled>Delete (unavailable)</CommandItem>
+```
+
+### With onSelect
+
+Pass `onSelect` to `CommandItem` to handle selection. Triggered on click or `Enter`.
+
+```tsx
+<CommandItem onSelect={() => console.log("selected")}>
+  Run command
+</CommandItem>
+```
+
+### Standalone list (no input)
+
+Omit `CommandInput` for a static selectable list without search.
+
+<Preview>
+  <Command className="border border-border w-72">
+    <CommandList>
+      <CommandGroup heading="Recent">
+        <CommandItem>src/index.tsx</CommandItem>
+        <CommandItem>src/routes/docs/layout.tsx</CommandItem>
+        <CommandItem>registry/ui/button.tsx</CommandItem>
+      </CommandGroup>
+    </CommandList>
+  </Command>
+</Preview>
+
+```tsx
+<Command className="border border-border w-72">
+  <CommandList>
+    <CommandGroup heading="Recent">
+      <CommandItem>src/index.tsx</CommandItem>
+      <CommandItem>src/routes/docs/layout.tsx</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>
+```
+
+## Props
+
+| Sub-component | Props | Description |
+|---------------|-------|-------------|
+| `Command` | `className`, `...cmdk.CommandProps` | Root wrapper (cmdk `Command`) |
+| `CommandInput` | `placeholder`, `className`, `...cmdk.InputProps` | Search input with fzf-style `> ` prompt |
+| `CommandList` | `className`, `...cmdk.ListProps` | Scrollable results container (`max-h-72`) |
+| `CommandEmpty` | `className`, `...cmdk.EmptyProps` | Shown when search returns no matches |
+| `CommandGroup` | `heading`, `className`, `...cmdk.GroupProps` | Labelled item group; heading styled as dim uppercase |
+| `CommandItem` | `value`, `disabled`, `onSelect`, `className`, `...cmdk.ItemProps` | Selectable item with foreground inversion on selection |
+| `CommandShortcut` | `className`, `...ComponentProps<"span">` | Right-aligned keyboard shortcut hint |
+| `CommandSeparator` | `className`, `...cmdk.SeparatorProps` | 1px horizontal divider (`bg-border`) |
+
+### CommandItem props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | Used for fuzzy filtering; defaults to text content |
+| `disabled` | `boolean` | `false` | Prevents selection; renders in `--foreground2` |
+| `onSelect` | `(value: string) => void` | — | Called on click or `Enter` |
+
+## Notes
+
+- Built on [cmdk](https://cmdk.paco.me) — fuzzy filtering is handled automatically based on `value` or text content.
+- Selection inversion (`bg-foreground text-background`) is driven by `data-[selected=true]` set by cmdk during keyboard navigation and mouse hover — no hover Tailwind variant is used.
+- Compose `Command` inside a `Dialog` or `Popover` to build a full command palette overlay (see the `combobox` docs).
+- `CommandShortcut` uses `ml-auto` to push the key hint to the right edge of the item.

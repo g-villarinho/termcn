@@ -1,0 +1,239 @@
+---
+title: Resizable
+description: Terminal-style resizable panel layout with drag handles and optional gripper indicator.
+---
+
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from "registry/ui/resizable"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Resizable
+
+Terminal-style resizable panel layout built on [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels). The handle renders as a 1px border line with an invisible touch area. Pass `withHandle` to show a `:::` gripper. Focus-visible ring on the handle for keyboard resizing.
+
+## Installation
+
+<InstallTabs pkg="@termcn/resizable" />
+
+## Usage
+
+```tsx
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from "@/components/ui/resizable"
+
+export default function ResizableDemo() {
+  return (
+    <ResizablePanelGroup direction="horizontal">
+      <ResizablePanel defaultSize={50}>Left</ResizablePanel>
+      <ResizableHandle />
+      <ResizablePanel defaultSize={50}>Right</ResizablePanel>
+    </ResizablePanelGroup>
+  )
+}
+```
+
+## Examples
+
+### Horizontal two-panel layout
+
+<Preview>
+  <ResizablePanelGroup direction="horizontal" className="h-40 border border-border w-full">
+    <ResizablePanel defaultSize={50}>
+      <div className="flex h-full items-center justify-center p-4 font-mono text-sm text-foreground1">
+        Left panel
+      </div>
+    </ResizablePanel>
+    <ResizableHandle />
+    <ResizablePanel defaultSize={50}>
+      <div className="flex h-full items-center justify-center p-4 font-mono text-sm text-foreground1">
+        Right panel
+      </div>
+    </ResizablePanel>
+  </ResizablePanelGroup>
+</Preview>
+
+```tsx
+<ResizablePanelGroup direction="horizontal" className="h-40 border border-border">
+  <ResizablePanel defaultSize={50}>
+    Left panel
+  </ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel defaultSize={50}>
+    Right panel
+  </ResizablePanel>
+</ResizablePanelGroup>
+```
+
+### Vertical two-panel layout
+
+<Preview>
+  <ResizablePanelGroup direction="vertical" className="h-48 border border-border w-full">
+    <ResizablePanel defaultSize={50}>
+      <div className="flex h-full items-center justify-center p-4 font-mono text-sm text-foreground1">
+        Top panel
+      </div>
+    </ResizablePanel>
+    <ResizableHandle />
+    <ResizablePanel defaultSize={50}>
+      <div className="flex h-full items-center justify-center p-4 font-mono text-sm text-foreground1">
+        Bottom panel
+      </div>
+    </ResizablePanel>
+  </ResizablePanelGroup>
+</Preview>
+
+```tsx
+<ResizablePanelGroup direction="vertical" className="h-48 border border-border">
+  <ResizablePanel defaultSize={50}>Top panel</ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel defaultSize={50}>Bottom panel</ResizablePanel>
+</ResizablePanelGroup>
+```
+
+### Three-panel layout
+
+<Preview>
+  <ResizablePanelGroup direction="horizontal" className="h-40 border border-border w-full">
+    <ResizablePanel defaultSize={25}>
+      <div className="flex h-full items-center justify-center p-2 font-mono text-sm text-foreground1">
+        Sidebar
+      </div>
+    </ResizablePanel>
+    <ResizableHandle />
+    <ResizablePanel defaultSize={50}>
+      <div className="flex h-full items-center justify-center p-2 font-mono text-sm text-foreground1">
+        Main
+      </div>
+    </ResizablePanel>
+    <ResizableHandle />
+    <ResizablePanel defaultSize={25}>
+      <div className="flex h-full items-center justify-center p-2 font-mono text-sm text-foreground1">
+        Details
+      </div>
+    </ResizablePanel>
+  </ResizablePanelGroup>
+</Preview>
+
+```tsx
+<ResizablePanelGroup direction="horizontal" className="h-40 border border-border">
+  <ResizablePanel defaultSize={25}>Sidebar</ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel defaultSize={50}>Main</ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel defaultSize={25}>Details</ResizablePanel>
+</ResizablePanelGroup>
+```
+
+### Handle with gripper
+
+Pass `withHandle` to show a `:::` gripper on the drag handle.
+
+<Preview>
+  <ResizablePanelGroup direction="horizontal" className="h-40 border border-border w-full">
+    <ResizablePanel defaultSize={40}>
+      <div className="flex h-full items-center justify-center p-4 font-mono text-sm text-foreground1">
+        Left
+      </div>
+    </ResizablePanel>
+    <ResizableHandle withHandle />
+    <ResizablePanel defaultSize={60}>
+      <div className="flex h-full items-center justify-center p-4 font-mono text-sm text-foreground1">
+        Right
+      </div>
+    </ResizablePanel>
+  </ResizablePanelGroup>
+</Preview>
+
+```tsx
+<ResizableHandle withHandle />
+```
+
+### Nested resizable panels
+
+Nest a `ResizablePanelGroup` inside a panel for split-pane layouts.
+
+<Preview>
+  <ResizablePanelGroup direction="horizontal" className="h-48 border border-border w-full">
+    <ResizablePanel defaultSize={30}>
+      <div className="flex h-full items-center justify-center p-4 font-mono text-sm text-foreground1">
+        Sidebar
+      </div>
+    </ResizablePanel>
+    <ResizableHandle withHandle />
+    <ResizablePanel defaultSize={70}>
+      <ResizablePanelGroup direction="vertical">
+        <ResizablePanel defaultSize={60}>
+          <div className="flex h-full items-center justify-center p-4 font-mono text-sm text-foreground1">
+            Editor
+          </div>
+        </ResizablePanel>
+        <ResizableHandle />
+        <ResizablePanel defaultSize={40}>
+          <div className="flex h-full items-center justify-center p-4 font-mono text-sm text-foreground1">
+            Terminal
+          </div>
+        </ResizablePanel>
+      </ResizablePanelGroup>
+    </ResizablePanel>
+  </ResizablePanelGroup>
+</Preview>
+
+```tsx
+<ResizablePanelGroup direction="horizontal" className="h-48 border border-border">
+  <ResizablePanel defaultSize={30}>Sidebar</ResizablePanel>
+  <ResizableHandle withHandle />
+  <ResizablePanel defaultSize={70}>
+    <ResizablePanelGroup direction="vertical">
+      <ResizablePanel defaultSize={60}>Editor</ResizablePanel>
+      <ResizableHandle />
+      <ResizablePanel defaultSize={40}>Terminal</ResizablePanel>
+    </ResizablePanelGroup>
+  </ResizablePanel>
+</ResizablePanelGroup>
+```
+
+## Props
+
+| Sub-component | Props | Description |
+|---------------|-------|-------------|
+| `ResizablePanelGroup` | `direction`, `className`, `...GroupProps` | Root flex container; sets axis |
+| `ResizablePanel` | `defaultSize`, `minSize`, `maxSize`, `className`, `...PanelProps` | Individual panel |
+| `ResizableHandle` | `withHandle`, `className`, `...SeparatorProps` | Drag handle; optional `:::` gripper |
+
+### ResizablePanelGroup props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `direction` | `"horizontal"` \| `"vertical"` | — | **Required.** Panel layout axis |
+| `className` | `string` | — | Additional Tailwind classes |
+
+### ResizablePanel props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `defaultSize` | `number` | — | Initial size as percentage of group |
+| `minSize` | `number` | — | Minimum size percentage |
+| `maxSize` | `number` | — | Maximum size percentage |
+| `className` | `string` | — | Additional Tailwind classes |
+
+### ResizableHandle props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `withHandle` | `boolean` | `false` | Show `:::` gripper on the handle |
+| `className` | `string` | — | Additional Tailwind classes |
+
+## Notes
+
+- Built on [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels) — drag, touch, and keyboard resizing are handled by the library.
+- The handle has an invisible `after:` pseudo-element with a wider touch area (`w-4`) to improve drag ergonomics without changing the visual border width.
+- Keyboard resizing: focus the handle and use arrow keys. `focus-visible:ring-1` makes the focused handle visible.
+- `ResizablePanelGroup` needs an explicit height when used with `direction="vertical"` — add `className="h-48"` or a parent that constrains height.
+- `defaultSize` values across sibling panels should sum to 100.
