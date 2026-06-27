@@ -1,0 +1,110 @@
+---
+title: Input
+description: Terminal-style text input with focus ring and validation states.
+---
+
+import { Input } from "registry/ui/input"
+import { Preview } from "@/components/docs/preview"
+
+# Input
+
+Terminal-style text input field with focus ring, no radius, and semantic error states via `aria-invalid`.
+
+Follows TUI aesthetic: sharp edges, monospace font, focus-based interaction, minimal visual noise.
+
+## Installation
+
+```bash
+npx shadcn@latest add @termcn/input
+```
+
+## Usage
+
+```tsx
+import { Input } from "@/components/ui/input"
+
+export default function InputDemo() {
+  return <Input placeholder="Enter text..." />
+}
+```
+
+## Examples
+
+### Basic
+
+<Preview>
+  <Input placeholder="Enter text..." defaultValue="" />
+</Preview>
+
+```tsx
+<Input placeholder="Enter text..." />
+```
+
+### With Placeholder
+
+<Preview>
+  <Input placeholder="username@example.com" type="email" />
+</Preview>
+
+```tsx
+<Input placeholder="username@example.com" type="email" />
+```
+
+### Password
+
+<Preview>
+  <Input type="password" placeholder="••••••••" />
+</Preview>
+
+```tsx
+<Input type="password" placeholder="••••••••" />
+```
+
+### Disabled
+
+<Preview>
+  <Input disabled placeholder="Cannot edit" />
+</Preview>
+
+```tsx
+<Input disabled placeholder="Cannot edit" />
+```
+
+### Error State
+
+Use `aria-invalid` to mark an input as invalid. Bor becomes destructive red.
+
+<Preview>
+  <Input aria-invalid="true" placeholder="Error: invalid input" />
+</Preview>
+
+```tsx
+<Input aria-invalid="true" placeholder="Error: invalid input" />
+```
+
+### File Input
+
+<Preview>
+  <Input type="file" />
+</Preview>
+
+```tsx
+<Input type="file" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `string` | `text` | HTML input type (text, email, password, file, etc.) |
+| `placeholder` | `string` | — | Placeholder text |
+| `disabled` | `boolean` | `false` | Disable input |
+| `aria-invalid` | `boolean` \| `"true"` \| `"false"` | — | Mark input as invalid (shows destructive border/focus) |
+| `className` | `string` | — | Additional Tailwind classes |
+| ...rest | `ComponentProps<"input">` | — | All standard `<input>` props |
+
+## Notes
+
+- Uses `aria-invalid` for semantic error states, not a separate `error` prop.
+- File input text is styled with `file:` pseudo-element selectors.
+- Focus ring appears on `focus-visible` (not `focus`), matching keyboard-first design.
