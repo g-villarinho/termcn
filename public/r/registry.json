@@ -13,6 +13,28 @@
 			"files": [
 				{ "path": "registry/ui/button.tsx", "type": "registry:ui" }
 			]
+		},
+		{
+			"name": "alert",
+			"type": "registry:ui",
+			"title": "Alert",
+			"description": "Terminal-style callout: box-drawing border, semantic variants, optional lucide icon. Variants: default, info, success, warning, destructive.",
+			"dependencies": ["class-variance-authority"],
+			"registryDependencies": ["utils"],
+			"files": [
+				{ "path": "registry/ui/alert.tsx", "type": "registry:ui" }
+			]
+		},
+		{
+			"name": "alert-dialog",
+			"type": "registry:ui",
+			"title": "Alert Dialog",
+			"description": "Terminal-style confirmation modal built on Radix Dialog: box-drawing border, discrete opacity fade, no hover/radius/shadow. Reuses button variants for actions.",
+			"dependencies": ["@radix-ui/react-dialog"],
+			"registryDependencies": ["utils", "button"],
+			"files": [
+				{ "path": "registry/ui/alert-dialog.tsx", "type": "registry:ui" }
+			]
 		}
 	]
 }
