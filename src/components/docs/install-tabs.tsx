@@ -1,5 +1,6 @@
-"use client"
 import * as React from "react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "registry/ui/tabs"
+import { Button } from "registry/ui/button"
 import { cn } from "@/lib/utils"
 
 const PACKAGE_MANAGERS = ["pnpm", "npm", "yarn", "bun"] as const
@@ -24,13 +25,12 @@ function getSavedPM(): PM {
 
 interface InstallTabsProps {
   pkg: string
+  className?: string
 }
 
-function InstallTabs({ pkg }: InstallTabsProps) {
+function InstallTabs({ pkg, className }: InstallTabsProps) {
   const [active, setActive] = React.useState<PM>(getSavedPM)
   const [copied, setCopied] = React.useState(false)
-
-  const command = `${PREFIXES[active]} shadcn@latest add ${pkg}`
 
   function selectPM(pm: PM) {
     setActive(pm)
@@ -38,57 +38,54 @@ function InstallTabs({ pkg }: InstallTabsProps) {
   }
 
   function copy() {
-    navigator.clipboard.writeText(command).then(() => {
+    const cmd = `${PREFIXES[active]} shadcn@latest add ${pkg}`
+    navigator.clipboard.writeText(cmd).then(() => {
       setCopied(true)
       setTimeout(() => setCopied(false), 1500)
     })
   }
 
   return (
-    <div className="border border-border mb-6 font-mono text-sm">
-      {/* Tab bar */}
-      <div className="flex items-center border-b border-border bg-background1">
-        <span className="px-3 py-2 text-foreground2 text-xs select-none">›_</span>
-        {PACKAGE_MANAGERS.map((pm) => (
-          <button
-            key={pm}
-            type="button"
-            onClick={() => selectPM(pm)}
-            className={cn(
-              "px-4 py-2 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
-              active === pm
-                ? "text-background bg-foreground font-bold"
-                : "text-foreground1",
-            )}
-          >
-            {pm}
-          </button>
-        ))}
-        <div className="flex-1" />
-        <button
-          type="button"
+    <Tabs
+      value={active}
+      onValueChange={(v) => selectPM(v as PM)}
+      className={cn("mb-6", className)}
+    >
+      <div className="flex items-center justify-between border border-b-0 border-border bg-background1 px-1">
+        <TabsList className="border-b-0 bg-transparent">
+          {PACKAGE_MANAGERS.map((pm) => (
+            <TabsTrigger key={pm} value={pm} className="text-xs py-2">
+              {pm}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        <Button
+          variant="ghost"
+          size="icon"
+          bracket={false}
           onClick={copy}
-          className="px-3 py-2 text-foreground2 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-          title="Copy to clipboard"
           aria-label="Copy command"
+          className="h-7 w-7 text-foreground2"
         >
           {copied ? (
-            <span className="text-success">✓</span>
+            <span className="text-success text-xs">✓</span>
           ) : (
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden>
               <rect x="9" y="9" width="13" height="13" />
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
             </svg>
           )}
-        </button>
+        </Button>
       </div>
-      {/* Command */}
-      <div className="px-4 py-3 bg-background text-foreground">
-        <span className="text-ansi-green">{PREFIXES[active]}</span>{" "}
-        <span className="text-foreground1">shadcn@latest add</span>{" "}
-        <span className="text-primary">{pkg}</span>
-      </div>
-    </div>
+
+      {PACKAGE_MANAGERS.map((pm) => (
+        <TabsContent key={pm} value={pm} className="border border-border px-4 py-3 mt-0 text-sm">
+          <span className="text-ansi-green">{PREFIXES[pm]}</span>{" "}
+          <span className="text-foreground1">shadcn@latest add</span>{" "}
+          <span className="text-primary">{pkg}</span>
+        </TabsContent>
+      ))}
+    </Tabs>
   )
 }
 
