@@ -1,0 +1,240 @@
+---
+title: Select
+description: Terminal-style menu-picker select with arrow-key navigation and Vim-style selection inversion.
+---
+
+import { Select } from "registry/ui/select"
+import type { SelectOption } from "registry/ui/select"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Select
+
+Terminal-style menu-picker select (tmux choose-tree / ranger style). Opens a floating popover with a Command list — no search input. Navigate with arrow keys; selected item shows a ✓ indicator with Vim-style background inversion.
+
+Built on Popover + Command + Button.
+
+## Installation
+
+<InstallTabs pkg="@termcn/select" />
+
+## Usage
+
+```tsx
+import { Select } from "@/components/ui/select"
+import type { SelectOption } from "@/components/ui/select"
+
+const options: SelectOption[] = [
+  { value: "neovim", label: "Neovim" },
+  { value: "vim", label: "Vim" },
+  { value: "emacs", label: "Emacs" },
+]
+
+export default function SelectDemo() {
+  const [value, setValue] = React.useState("")
+
+  return (
+    <Select
+      options={options}
+      value={value}
+      onValueChange={setValue}
+    />
+  )
+}
+```
+
+## Examples
+
+### Basic
+
+<Preview>
+  {(() => {
+    const [value, setValue] = React.useState("")
+    const options = [
+      { value: "neovim", label: "Neovim" },
+      { value: "vim", label: "Vim" },
+      { value: "emacs", label: "Emacs" },
+      { value: "helix", label: "Helix" },
+    ]
+    return (
+      <Select options={options} value={value} onValueChange={setValue} />
+    )
+  })()}
+</Preview>
+
+```tsx
+const options: SelectOption[] = [
+  { value: "neovim", label: "Neovim" },
+  { value: "vim", label: "Vim" },
+  { value: "emacs", label: "Emacs" },
+  { value: "helix", label: "Helix" },
+]
+
+<Select options={options} value={value} onValueChange={setValue} />
+```
+
+### Placeholder
+
+<Preview>
+  {(() => {
+    const [value, setValue] = React.useState("")
+    const options = [
+      { value: "tmux", label: "tmux" },
+      { value: "zellij", label: "Zellij" },
+      { value: "screen", label: "GNU Screen" },
+    ]
+    return (
+      <Select
+        options={options}
+        value={value}
+        onValueChange={setValue}
+        placeholder="choose multiplexer..."
+      />
+    )
+  })()}
+</Preview>
+
+```tsx
+const options: SelectOption[] = [
+  { value: "tmux", label: "tmux" },
+  { value: "zellij", label: "Zellij" },
+  { value: "screen", label: "GNU Screen" },
+]
+
+<Select
+  options={options}
+  value={value}
+  onValueChange={setValue}
+  placeholder="choose multiplexer..."
+/>
+```
+
+### Default Value
+
+<Preview>
+  {(() => {
+    const [value, setValue] = React.useState("fish")
+    const options = [
+      { value: "fish", label: "fish" },
+      { value: "zsh", label: "zsh" },
+      { value: "bash", label: "bash" },
+      { value: "nushell", label: "nushell" },
+    ]
+    return (
+      <Select options={options} value={value} onValueChange={setValue} />
+    )
+  })()}
+</Preview>
+
+```tsx
+const options: SelectOption[] = [
+  { value: "fish", label: "fish" },
+  { value: "zsh", label: "zsh" },
+  { value: "bash", label: "bash" },
+  { value: "nushell", label: "nushell" },
+]
+
+const [value, setValue] = React.useState("fish")
+
+<Select options={options} value={value} onValueChange={setValue} />
+```
+
+### Disabled Option
+
+<Preview>
+  {(() => {
+    const [value, setValue] = React.useState("")
+    const options = [
+      { value: "lua", label: "Lua" },
+      { value: "python", label: "Python" },
+      { value: "javascript", label: "JavaScript", disabled: true },
+      { value: "rust", label: "Rust" },
+    ]
+    return (
+      <Select options={options} value={value} onValueChange={setValue} />
+    )
+  })()}
+</Preview>
+
+```tsx
+const options: SelectOption[] = [
+  { value: "lua", label: "Lua" },
+  { value: "python", label: "Python" },
+  { value: "javascript", label: "JavaScript", disabled: true },
+  { value: "rust", label: "Rust" },
+]
+
+<Select options={options} value={value} onValueChange={setValue} />
+```
+
+### Disabled Component
+
+<Preview>
+  {(() => {
+    const options = [
+      { value: "a", label: "Option A" },
+      { value: "b", label: "Option B" },
+    ]
+    return (
+      <Select options={options} value="" onValueChange={() => {}} disabled />
+    )
+  })()}
+</Preview>
+
+```tsx
+<Select options={options} value={value} onValueChange={setValue} disabled />
+```
+
+### Empty State
+
+<Preview>
+  {(() => {
+    const [value, setValue] = React.useState("")
+    return (
+      <Select
+        options={[]}
+        value={value}
+        onValueChange={setValue}
+        emptyText="-- no options --"
+      />
+    )
+  })()}
+</Preview>
+
+```tsx
+<Select
+  options={[]}
+  value={value}
+  onValueChange={setValue}
+  emptyText="-- no options --"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `options` | `SelectOption[]` | — | Array of selectable items |
+| `value` | `string` | — | Controlled selected value |
+| `onValueChange` | `(value: string) => void` | — | Called when selection changes |
+| `placeholder` | `string` | `"select..."` | Text shown when no value selected |
+| `emptyText` | `string` | `"-- empty --"` | Text shown when options array is empty |
+| `disabled` | `boolean` | `false` | Disable the entire select |
+| `className` | `string` | — | Additional classes on the trigger button |
+
+### SelectOption type
+
+```ts
+interface SelectOption {
+  value: string
+  label: string
+  disabled?: boolean
+}
+```
+
+## Notes
+
+- Composes **Popover** (floating container) + **Command** (keyboard list) + **Button** (trigger).
+- No search input — use [Combobox](/docs/combobox) when filter-as-you-type is needed.
+- Arrow-key navigation and selection via `Enter` are handled by cmdk's `Command` primitive.
+- Selected item is highlighted with a `✓` indicator; active item uses Vim-style foreground/background inversion.

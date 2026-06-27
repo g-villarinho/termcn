@@ -1,0 +1,279 @@
+---
+title: Combobox
+description: Terminal-style fzf-inspired searchable picker with fuzzy filter-as-you-type and arrow-key navigation.
+---
+
+import { Combobox } from "registry/ui/combobox"
+import type { ComboboxOption } from "registry/ui/combobox"
+import { Preview } from "@/components/docs/preview"
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Combobox
+
+Terminal-style fzf-inspired searchable picker. Opens a floating popover with a `> ` search prompt and a keyboard-navigable Command list. Filter-as-you-type via cmdk fuzzy matching. Selected item shows a ✓ indicator with Vim-style background inversion.
+
+Built on Popover + Command + Button.
+
+## Installation
+
+<InstallTabs pkg="@termcn/combobox" />
+
+## Usage
+
+```tsx
+import { Combobox } from "@/components/ui/combobox"
+import type { ComboboxOption } from "@/components/ui/combobox"
+
+const options: ComboboxOption[] = [
+  { value: "neovim", label: "Neovim" },
+  { value: "vim", label: "Vim" },
+  { value: "emacs", label: "Emacs" },
+]
+
+export default function ComboboxDemo() {
+  const [value, setValue] = React.useState("")
+
+  return (
+    <Combobox
+      options={options}
+      value={value}
+      onValueChange={setValue}
+    />
+  )
+}
+```
+
+## Examples
+
+### Basic
+
+<Preview>
+  {(() => {
+    const [value, setValue] = React.useState("")
+    const options = [
+      { value: "neovim", label: "Neovim" },
+      { value: "vim", label: "Vim" },
+      { value: "emacs", label: "Emacs" },
+      { value: "helix", label: "Helix" },
+      { value: "kakoune", label: "Kakoune" },
+    ]
+    return (
+      <Combobox options={options} value={value} onValueChange={setValue} />
+    )
+  })()}
+</Preview>
+
+```tsx
+const options: ComboboxOption[] = [
+  { value: "neovim", label: "Neovim" },
+  { value: "vim", label: "Vim" },
+  { value: "emacs", label: "Emacs" },
+  { value: "helix", label: "Helix" },
+  { value: "kakoune", label: "Kakoune" },
+]
+
+<Combobox options={options} value={value} onValueChange={setValue} />
+```
+
+### With Search
+
+The search input uses `> ` prompt styling. Typing filters the list via cmdk fuzzy matching.
+
+<Preview>
+  {(() => {
+    const [value, setValue] = React.useState("")
+    const options = [
+      { value: "lua", label: "Lua" },
+      { value: "python", label: "Python" },
+      { value: "rust", label: "Rust" },
+      { value: "go", label: "Go" },
+      { value: "typescript", label: "TypeScript" },
+      { value: "zig", label: "Zig" },
+    ]
+    return (
+      <Combobox
+        options={options}
+        value={value}
+        onValueChange={setValue}
+        searchPlaceholder="filter languages..."
+      />
+    )
+  })()}
+</Preview>
+
+```tsx
+const options: ComboboxOption[] = [
+  { value: "lua", label: "Lua" },
+  { value: "python", label: "Python" },
+  { value: "rust", label: "Rust" },
+  { value: "go", label: "Go" },
+  { value: "typescript", label: "TypeScript" },
+  { value: "zig", label: "Zig" },
+]
+
+<Combobox
+  options={options}
+  value={value}
+  onValueChange={setValue}
+  searchPlaceholder="filter languages..."
+/>
+```
+
+### Placeholder
+
+<Preview>
+  {(() => {
+    const [value, setValue] = React.useState("")
+    const options = [
+      { value: "tmux", label: "tmux" },
+      { value: "zellij", label: "Zellij" },
+      { value: "screen", label: "GNU Screen" },
+    ]
+    return (
+      <Combobox
+        options={options}
+        value={value}
+        onValueChange={setValue}
+        placeholder="choose multiplexer..."
+      />
+    )
+  })()}
+</Preview>
+
+```tsx
+<Combobox
+  options={options}
+  value={value}
+  onValueChange={setValue}
+  placeholder="choose multiplexer..."
+/>
+```
+
+### Default Value
+
+<Preview>
+  {(() => {
+    const [value, setValue] = React.useState("fish")
+    const options = [
+      { value: "fish", label: "fish" },
+      { value: "zsh", label: "zsh" },
+      { value: "bash", label: "bash" },
+      { value: "nushell", label: "nushell" },
+    ]
+    return (
+      <Combobox options={options} value={value} onValueChange={setValue} />
+    )
+  })()}
+</Preview>
+
+```tsx
+const [value, setValue] = React.useState("fish")
+
+<Combobox options={options} value={value} onValueChange={setValue} />
+```
+
+### Disabled Option
+
+<Preview>
+  {(() => {
+    const [value, setValue] = React.useState("")
+    const options = [
+      { value: "nvim", label: "nvim" },
+      { value: "vim", label: "vim" },
+      { value: "nano", label: "nano", disabled: true },
+      { value: "helix", label: "helix" },
+    ]
+    return (
+      <Combobox options={options} value={value} onValueChange={setValue} />
+    )
+  })()}
+</Preview>
+
+```tsx
+const options: ComboboxOption[] = [
+  { value: "nvim", label: "nvim" },
+  { value: "vim", label: "vim" },
+  { value: "nano", label: "nano", disabled: true },
+  { value: "helix", label: "helix" },
+]
+
+<Combobox options={options} value={value} onValueChange={setValue} />
+```
+
+### Disabled Component
+
+<Preview>
+  {(() => {
+    const options = [
+      { value: "a", label: "Option A" },
+      { value: "b", label: "Option B" },
+    ]
+    return (
+      <Combobox options={options} value="" onValueChange={() => {}} disabled />
+    )
+  })()}
+</Preview>
+
+```tsx
+<Combobox options={options} value={value} onValueChange={setValue} disabled />
+```
+
+### Empty State (No Results)
+
+The `emptyText` prop controls what is shown when the search query matches nothing.
+
+<Preview>
+  {(() => {
+    const [value, setValue] = React.useState("")
+    return (
+      <Combobox
+        options={[]}
+        value={value}
+        onValueChange={setValue}
+        emptyText="-- no results --"
+        searchPlaceholder="search..."
+      />
+    )
+  })()}
+</Preview>
+
+```tsx
+<Combobox
+  options={[]}
+  value={value}
+  onValueChange={setValue}
+  emptyText="-- no results --"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `options` | `ComboboxOption[]` | — | Array of selectable items |
+| `value` | `string` | — | Controlled selected value |
+| `onValueChange` | `(value: string) => void` | — | Called when selection changes |
+| `placeholder` | `string` | `"select option..."` | Text shown when no value selected |
+| `searchPlaceholder` | `string` | `"search..."` | Placeholder inside the search input |
+| `emptyText` | `string` | `"-- no results --"` | Text shown when search yields no matches |
+| `disabled` | `boolean` | `false` | Disable the entire combobox |
+| `className` | `string` | — | Additional classes on the trigger button |
+
+### ComboboxOption type
+
+```ts
+interface ComboboxOption {
+  value: string
+  label: string
+  disabled?: boolean
+}
+```
+
+## Notes
+
+- Composes **Popover** (floating container) + **Command** (keyboard list with `CommandInput`) + **Button** (trigger).
+- Filtering is handled by cmdk's built-in fuzzy matching against `option.label`.
+- Selecting an already-selected item toggles it off (sets value to `""`).
+- For a picker without search, use [Select](/docs/select) instead.
+- Arrow-key navigation and `Enter` selection are provided by the cmdk `Command` primitive.
+- Selected item shows a `✓` indicator; active item uses Vim-style foreground/background inversion.
