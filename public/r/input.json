@@ -2,14 +2,16 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "input",
   "title": "Input",
-  "description": "Terminal-style text input: solid border, focus ring inversion, no hover/radius/shadow.",
+  "description": "Terminal-style text input: borderless filled surface, focus lightens with a ring, no hover/radius/shadow.",
   "registryDependencies": [
-    "utils"
+    "utils",
+    "theme-catppuccin-mocha",
+    "font-jetbrains-mono"
   ],
   "files": [
     {
       "path": "registry/ui/input.tsx",
-      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Input({ className, type, ...props }: React.ComponentProps<\"input\">) {\n\treturn (\n\t\t<input\n\t\t\ttype={type}\n\t\t\tdata-slot=\"input\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex h-9 w-full min-w-0 px-3 py-1 text-sm font-mono\",\n\t\t\t\t\"border border-input bg-background2 text-foreground\",\n\t\t\t\t\"placeholder:text-foreground2\",\n\t\t\t\t\"outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:border-foreground\",\n\t\t\t\t\"disabled:cursor-not-allowed disabled:text-foreground2 disabled:border-foreground2\",\n\t\t\t\t\"aria-invalid:border-destructive aria-invalid:focus-visible:ring-destructive\",\n\t\t\t\t\"file:border-0 file:bg-transparent file:text-sm file:font-mono file:text-foreground\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Input };\n",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Input({ className, type, ...props }: React.ComponentProps<\"input\">) {\n\treturn (\n\t\t<input\n\t\t\ttype={type}\n\t\t\tdata-slot=\"input\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex h-9 w-full min-w-0 px-3 py-1 text-sm font-mono\",\n\t\t\t\t\"bg-input text-foreground\",\n\t\t\t\t\"placeholder:text-foreground2\",\n\t\t\t\t\"outline-none focus-visible:bg-background3 focus-visible:ring-1 focus-visible:ring-ring\",\n\t\t\t\t\"disabled:cursor-not-allowed disabled:bg-muted disabled:text-foreground2\",\n\t\t\t\t\"aria-invalid:ring-1 aria-invalid:ring-destructive\",\n\t\t\t\t\"file:border-0 file:bg-transparent file:text-sm file:font-mono file:text-foreground\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Input };\n",
       "type": "registry:ui"
     }
   ],

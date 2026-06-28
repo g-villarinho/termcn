@@ -4,12 +4,14 @@
   "title": "Textarea",
   "description": "Terminal-style multiline input matching the Input aesthetic.",
   "registryDependencies": [
-    "utils"
+    "utils",
+    "theme-catppuccin-mocha",
+    "font-jetbrains-mono"
   ],
   "files": [
     {
       "path": "registry/ui/textarea.tsx",
-      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Textarea({ className, ...props }: React.ComponentProps<\"textarea\">) {\n\treturn (\n\t\t<textarea\n\t\t\tdata-slot=\"textarea\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex min-h-16 w-full px-3 py-2 text-sm font-mono\",\n\t\t\t\t\"border border-input bg-background2 text-foreground\",\n\t\t\t\t\"placeholder:text-foreground2\",\n\t\t\t\t\"outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:border-foreground\",\n\t\t\t\t\"disabled:cursor-not-allowed disabled:text-foreground2 disabled:border-foreground2\",\n\t\t\t\t\"aria-invalid:border-destructive aria-invalid:focus-visible:ring-destructive\",\n\t\t\t\t\"resize-none field-sizing-content\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Textarea };\n",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nfunction Textarea({ className, ...props }: React.ComponentProps<\"textarea\">) {\n\treturn (\n\t\t<textarea\n\t\t\tdata-slot=\"textarea\"\n\t\t\tclassName={cn(\n\t\t\t\t\"flex min-h-16 w-full px-3 py-2 text-sm font-mono\",\n\t\t\t\t\"bg-input text-foreground\",\n\t\t\t\t\"placeholder:text-foreground2\",\n\t\t\t\t\"outline-none focus-visible:bg-background3 focus-visible:ring-1 focus-visible:ring-ring\",\n\t\t\t\t\"disabled:cursor-not-allowed disabled:bg-muted disabled:text-foreground2\",\n\t\t\t\t\"aria-invalid:ring-1 aria-invalid:ring-destructive\",\n\t\t\t\t\"resize-none field-sizing-content\",\n\t\t\t\tclassName,\n\t\t\t)}\n\t\t\t{...props}\n\t\t/>\n\t);\n}\n\nexport { Textarea };\n",
       "type": "registry:ui"
     }
   ],

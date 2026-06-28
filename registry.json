@@ -8,18 +8,237 @@
 			"type": "registry:lib",
 			"dependencies": ["clsx", "tailwind-merge"],
 			"files": [
-				{ "path": "registry/lib/utils.ts", "type": "registry:lib" }
+				{
+					"path": "registry/lib/utils.ts",
+					"type": "registry:lib"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"name": "theme-catppuccin-mocha",
+			"type": "registry:theme",
+			"title": "Catppuccin Mocha (termcn)",
+			"description": "termcn base theme: Catppuccin Mocha tokens, background/foreground depth levels, full ANSI palette, 0 radius, no shadows, monospace typography mapping.",
+			"cssVars": {
+				"theme": {
+					"--color-background": "var(--background)",
+					"--color-foreground": "var(--foreground)",
+					"--color-card": "var(--card)",
+					"--color-card-foreground": "var(--card-foreground)",
+					"--color-popover": "var(--popover)",
+					"--color-popover-foreground": "var(--popover-foreground)",
+					"--color-primary": "var(--primary)",
+					"--color-primary-foreground": "var(--primary-foreground)",
+					"--color-secondary": "var(--secondary)",
+					"--color-secondary-foreground": "var(--secondary-foreground)",
+					"--color-muted": "var(--muted)",
+					"--color-muted-foreground": "var(--muted-foreground)",
+					"--color-accent": "var(--accent)",
+					"--color-accent-foreground": "var(--accent-foreground)",
+					"--color-destructive": "var(--destructive)",
+					"--color-destructive-foreground": "var(--destructive-foreground)",
+					"--color-success": "var(--success)",
+					"--color-success-foreground": "var(--success-foreground)",
+					"--color-warning": "var(--warning)",
+					"--color-warning-foreground": "var(--warning-foreground)",
+					"--color-info": "var(--info)",
+					"--color-info-foreground": "var(--info-foreground)",
+					"--color-border": "var(--border)",
+					"--color-input": "var(--input)",
+					"--color-ring": "var(--ring)",
+					"--color-background0": "var(--background0)",
+					"--color-background1": "var(--background1)",
+					"--color-background2": "var(--background2)",
+					"--color-background3": "var(--background3)",
+					"--color-foreground0": "var(--foreground0)",
+					"--color-foreground1": "var(--foreground1)",
+					"--color-foreground2": "var(--foreground2)",
+					"--color-ansi-black": "var(--ansi-black)",
+					"--color-ansi-red": "var(--ansi-red)",
+					"--color-ansi-green": "var(--ansi-green)",
+					"--color-ansi-yellow": "var(--ansi-yellow)",
+					"--color-ansi-blue": "var(--ansi-blue)",
+					"--color-ansi-magenta": "var(--ansi-magenta)",
+					"--color-ansi-cyan": "var(--ansi-cyan)",
+					"--color-ansi-white": "var(--ansi-white)",
+					"--color-ansi-bright-black": "var(--ansi-bright-black)",
+					"--color-ansi-bright-red": "var(--ansi-bright-red)",
+					"--color-ansi-bright-green": "var(--ansi-bright-green)",
+					"--color-ansi-bright-yellow": "var(--ansi-bright-yellow)",
+					"--color-ansi-bright-blue": "var(--ansi-bright-blue)",
+					"--color-ansi-bright-magenta": "var(--ansi-bright-magenta)",
+					"--color-ansi-bright-cyan": "var(--ansi-bright-cyan)",
+					"--color-ansi-bright-white": "var(--ansi-bright-white)",
+					"--font-sans": "var(--font-mono)",
+					"--font-mono": "var(--font-mono)",
+					"--font-serif": "var(--font-mono)",
+					"--radius-sm": "0px",
+					"--radius-md": "0px",
+					"--radius-lg": "0px",
+					"--radius-xl": "0px"
+				},
+				"light": {
+					"--background0": "#1e1e2e",
+					"--background1": "#181825",
+					"--background2": "#313244",
+					"--background3": "#45475a",
+					"--foreground0": "#cdd6f4",
+					"--foreground1": "#a6adc8",
+					"--foreground2": "#6c7086",
+					"--background": "var(--background0)",
+					"--foreground": "var(--foreground0)",
+					"--card": "var(--background1)",
+					"--card-foreground": "var(--foreground0)",
+					"--popover": "var(--background0)",
+					"--popover-foreground": "var(--foreground0)",
+					"--primary": "#89b4fa",
+					"--primary-foreground": "#1e1e2e",
+					"--secondary": "#b4befe",
+					"--secondary-foreground": "#1e1e2e",
+					"--muted": "var(--background2)",
+					"--muted-foreground": "var(--foreground1)",
+					"--accent": "#f38ba8",
+					"--accent-foreground": "#1e1e2e",
+					"--destructive": "#f38ba8",
+					"--destructive-foreground": "#1e1e2e",
+					"--success": "#a6e3a1",
+					"--success-foreground": "#1e1e2e",
+					"--warning": "#f9e2af",
+					"--warning-foreground": "#1e1e2e",
+					"--info": "#89dceb",
+					"--info-foreground": "#1e1e2e",
+					"--border": "var(--foreground2)",
+					"--input": "var(--background2)",
+					"--ring": "var(--foreground0)",
+					"--box-border-color": "var(--foreground2)",
+					"--table-border-color": "var(--foreground2)",
+					"--separator-color": "var(--foreground1)",
+					"--ansi-black": "#45475a",
+					"--ansi-red": "#f38ba8",
+					"--ansi-green": "#a6e3a1",
+					"--ansi-yellow": "#f9e2af",
+					"--ansi-blue": "#89b4fa",
+					"--ansi-magenta": "#f5c2e7",
+					"--ansi-cyan": "#94e2d5",
+					"--ansi-white": "#bac2de",
+					"--ansi-bright-black": "#585b70",
+					"--ansi-bright-red": "#eba0ac",
+					"--ansi-bright-green": "#a6e3a1",
+					"--ansi-bright-yellow": "#f9e2af",
+					"--ansi-bright-blue": "#b4befe",
+					"--ansi-bright-magenta": "#cba6f7",
+					"--ansi-bright-cyan": "#89dceb",
+					"--ansi-bright-white": "#cdd6f4",
+					"--font-mono": "\"JetBrains Mono\", \"Fira Code\", \"SF Mono\", \"Cascadia Code\", Consolas, monospace",
+					"--font-sans": "var(--font-mono)",
+					"--font-serif": "var(--font-mono)",
+					"--termcn-slide-offset": "1rem",
+					"--sidebar-width": "18rem",
+					"--sidebar-width-icon": "3.5rem",
+					"--radius": "0px",
+					"--shadow-2xs": "none",
+					"--shadow-xs": "none",
+					"--shadow-sm": "none",
+					"--shadow": "none",
+					"--shadow-md": "none",
+					"--shadow-lg": "none",
+					"--shadow-xl": "none",
+					"--shadow-2xl": "none"
+				},
+				"dark": {
+					"--background0": "#1e1e2e",
+					"--background1": "#181825",
+					"--background2": "#313244",
+					"--background3": "#45475a",
+					"--foreground0": "#cdd6f4",
+					"--foreground1": "#a6adc8",
+					"--foreground2": "#6c7086",
+					"--background": "var(--background0)",
+					"--foreground": "var(--foreground0)",
+					"--card": "var(--background1)",
+					"--card-foreground": "var(--foreground0)",
+					"--popover": "var(--background1)",
+					"--popover-foreground": "var(--foreground0)",
+					"--primary": "#89b4fa",
+					"--primary-foreground": "#1e1e2e",
+					"--secondary": "var(--background2)",
+					"--secondary-foreground": "var(--foreground0)",
+					"--muted": "var(--background2)",
+					"--muted-foreground": "var(--foreground1)",
+					"--accent": "var(--background2)",
+					"--accent-foreground": "var(--foreground0)",
+					"--destructive": "#f38ba8",
+					"--destructive-foreground": "#1e1e2e",
+					"--success": "#a6e3a1",
+					"--success-foreground": "#1e1e2e",
+					"--warning": "#f9e2af",
+					"--warning-foreground": "#1e1e2e",
+					"--info": "#89dceb",
+					"--info-foreground": "#1e1e2e",
+					"--border": "var(--foreground2)",
+					"--input": "var(--background2)",
+					"--ring": "var(--foreground0)",
+					"--box-border-color": "var(--foreground2)",
+					"--table-border-color": "var(--foreground2)",
+					"--separator-color": "var(--foreground1)",
+					"--ansi-black": "#45475a",
+					"--ansi-red": "#f38ba8",
+					"--ansi-green": "#a6e3a1",
+					"--ansi-yellow": "#f9e2af",
+					"--ansi-blue": "#89b4fa",
+					"--ansi-magenta": "#f5c2e7",
+					"--ansi-cyan": "#94e2d5",
+					"--ansi-white": "#bac2de",
+					"--ansi-bright-black": "#585b70",
+					"--ansi-bright-red": "#eba0ac",
+					"--ansi-bright-green": "#a6e3a1",
+					"--ansi-bright-yellow": "#f9e2af",
+					"--ansi-bright-blue": "#b4befe",
+					"--ansi-bright-magenta": "#cba6f7",
+					"--ansi-bright-cyan": "#89dceb",
+					"--ansi-bright-white": "#cdd6f4",
+					"--font-mono": "\"JetBrains Mono\", \"Fira Code\", \"SF Mono\", \"Cascadia Code\", Consolas, monospace",
+					"--font-sans": "var(--font-mono)",
+					"--font-serif": "var(--font-mono)",
+					"--termcn-slide-offset": "1rem",
+					"--sidebar-width": "18rem",
+					"--sidebar-width-icon": "3.5rem",
+					"--radius": "0px",
+					"--shadow-2xs": "none",
+					"--shadow-xs": "none",
+					"--shadow-sm": "none",
+					"--shadow": "none",
+					"--shadow-md": "none",
+					"--shadow-lg": "none",
+					"--shadow-xl": "none",
+					"--shadow-2xl": "none"
+				}
+			}
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"name": "font-jetbrains-mono",
+			"type": "registry:lib",
+			"title": "JetBrains Mono",
+			"description": "Imports JetBrains Mono Variable via @fontsource — framework-agnostic, works in Vite and Next.js.",
+			"dependencies": ["@fontsource-variable/jetbrains-mono"],
+			"files": [
+				{ "path": "registry/lib/jetbrains-mono.css", "type": "registry:lib", "target": "lib/jetbrains-mono.css" }
 			]
 		},
 		{
 			"name": "button",
 			"type": "registry:ui",
 			"title": "Button",
-			"description": "Terminal-style outlined button: bracket convention, focus inversion, no hover/radius/shadow. Variants: default, primary, destructive, ghost.",
+			"description": "Terminal-style button: filled by default, outline variant for borders, lighter on press, no hover/radius/shadow. Variants: default, primary, destructive, outline, ghost.",
 			"dependencies": ["class-variance-authority", "@radix-ui/react-slot"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/button.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/button.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -28,9 +247,12 @@
 			"title": "Breadcrumb",
 			"description": "Terminal-style breadcrumb with focus-first links, muted route separators and current-page highlight.",
 			"dependencies": ["@radix-ui/react-slot", "lucide-react"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/breadcrumb.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/breadcrumb.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -39,9 +261,12 @@
 			"title": "Pagination",
 			"description": "Terminal-style pagination that reuses the Button visual language for numbered pages and previous/next controls.",
 			"dependencies": ["lucide-react"],
-			"registryDependencies": ["utils", "button"],
+			"registryDependencies": ["utils", "button", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/pagination.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/pagination.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -50,19 +275,25 @@
 			"title": "Avatar",
 			"description": "Terminal-style avatar with sharp border, Catppuccin fallback surface and initials-first fallback state.",
 			"dependencies": ["@radix-ui/react-avatar", "class-variance-authority"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/avatar.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/avatar.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
 			"name": "input",
 			"type": "registry:ui",
 			"title": "Input",
-			"description": "Terminal-style text input: solid border, focus ring inversion, no hover/radius/shadow.",
-			"registryDependencies": ["utils"],
+			"description": "Terminal-style text input: borderless filled surface, focus lightens with a ring, no hover/radius/shadow.",
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/input.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/input.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -70,9 +301,12 @@
 			"type": "registry:ui",
 			"title": "Textarea",
 			"description": "Terminal-style multiline input matching the Input aesthetic.",
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/textarea.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/textarea.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -81,9 +315,12 @@
 			"title": "Input Group",
 			"description": "Composable input group with addons, buttons and text. Terminal aesthetic.",
 			"dependencies": ["class-variance-authority"],
-			"registryDependencies": ["utils", "input"],
+			"registryDependencies": ["utils", "input", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/input-group.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/input-group.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -92,19 +329,30 @@
 			"title": "Dialog",
 			"description": "Terminal-style modal dialog: box border, background-level elevation (no shadow), bracket close [x], discrete opacity fade only. No radius/hover/scale.",
 			"dependencies": ["@radix-ui/react-dialog"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"css": {
 				"@keyframes termcn-fade": {
-					"from": { "opacity": "0" },
-					"to": { "opacity": "1" }
+					"from": {
+						"opacity": "0"
+					},
+					"to": {
+						"opacity": "1"
+					}
 				},
 				"@keyframes termcn-fade-out": {
-					"from": { "opacity": "1" },
-					"to": { "opacity": "0" }
+					"from": {
+						"opacity": "1"
+					},
+					"to": {
+						"opacity": "0"
+					}
 				}
 			},
 			"files": [
-				{ "path": "registry/ui/dialog.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/dialog.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -113,7 +361,7 @@
 			"title": "Sheet",
 			"description": "Terminal-style side panel built on Radix Dialog: border-defined depth, global slide-in/slide-out keyframes, bracket close [x], no radius/shadow.",
 			"dependencies": ["@radix-ui/react-dialog"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"cssVars": {
 				"theme": {
 					"--termcn-slide-offset": "1rem"
@@ -121,12 +369,20 @@
 			},
 			"css": {
 				"@keyframes termcn-fade": {
-					"from": { "opacity": "0" },
-					"to": { "opacity": "1" }
+					"from": {
+						"opacity": "0"
+					},
+					"to": {
+						"opacity": "1"
+					}
 				},
 				"@keyframes termcn-fade-out": {
-					"from": { "opacity": "1" },
-					"to": { "opacity": "0" }
+					"from": {
+						"opacity": "1"
+					},
+					"to": {
+						"opacity": "0"
+					}
 				},
 				"@keyframes termcn-slide-in-from-left": {
 					"from": {
@@ -210,7 +466,10 @@
 				}
 			},
 			"files": [
-				{ "path": "registry/ui/sheet.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/sheet.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -219,7 +478,7 @@
 			"title": "Drawer",
 			"description": "Terminal-style bottom drawer built on Vaul: border-top structure, subtle slide from bottom, no radius/shadow, focus-first interactions.",
 			"dependencies": ["vaul"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"cssVars": {
 				"theme": {
 					"--termcn-slide-offset": "1rem"
@@ -227,12 +486,20 @@
 			},
 			"css": {
 				"@keyframes termcn-fade": {
-					"from": { "opacity": "0" },
-					"to": { "opacity": "1" }
+					"from": {
+						"opacity": "0"
+					},
+					"to": {
+						"opacity": "1"
+					}
 				},
 				"@keyframes termcn-fade-out": {
-					"from": { "opacity": "1" },
-					"to": { "opacity": "0" }
+					"from": {
+						"opacity": "1"
+					},
+					"to": {
+						"opacity": "0"
+					}
 				},
 				"@keyframes termcn-slide-in-from-bottom": {
 					"from": {
@@ -256,7 +523,10 @@
 				}
 			},
 			"files": [
-				{ "path": "registry/ui/drawer.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/drawer.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -264,11 +534,8 @@
 			"type": "registry:ui",
 			"title": "Sidebar",
 			"description": "Terminal-style responsive sidebar with desktop collapse modes and mobile fallback through Sheet. Includes provider, trigger, rail, groups and menu composition.",
-			"dependencies": [
-				"class-variance-authority",
-				"@radix-ui/react-slot"
-			],
-			"registryDependencies": ["utils", "button", "input", "sheet"],
+			"dependencies": ["class-variance-authority", "@radix-ui/react-slot"],
+			"registryDependencies": ["utils", "button", "input", "sheet", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"cssVars": {
 				"theme": {
 					"--sidebar-width": "18rem",
@@ -277,7 +544,10 @@
 				}
 			},
 			"files": [
-				{ "path": "registry/ui/sidebar.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/sidebar.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -286,9 +556,12 @@
 			"title": "Alert",
 			"description": "Terminal-style callout: box-drawing border, semantic variants, optional lucide icon. Variants: default, info, success, warning, destructive.",
 			"dependencies": ["class-variance-authority"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/alert.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/alert.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -297,9 +570,12 @@
 			"title": "Alert Dialog",
 			"description": "Terminal-style confirmation modal built on Radix Dialog: box-drawing border, discrete opacity fade, no hover/radius/shadow. Reuses button variants for actions.",
 			"dependencies": ["@radix-ui/react-dialog"],
-			"registryDependencies": ["utils", "button"],
+			"registryDependencies": ["utils", "button", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/alert-dialog.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/alert-dialog.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -308,9 +584,12 @@
 			"title": "Progress",
 			"description": "Terminal-style linear progress bar: bordered track, Catppuccin fill, sharp corners, restrained 150ms fill updates.",
 			"dependencies": ["@radix-ui/react-progress"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/progress.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/progress.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -318,9 +597,12 @@
 			"type": "registry:ui",
 			"title": "Skeleton",
 			"description": "Passive loading placeholder using Tailwind animate-pulse with terminal background levels and sharp edges.",
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/skeleton.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/skeleton.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -329,9 +611,12 @@
 			"title": "Aspect Ratio",
 			"description": "Sharp-corner media container that preserves image and video proportions with terminal-style border and background levels.",
 			"dependencies": ["@radix-ui/react-aspect-ratio"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/aspect-ratio.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/aspect-ratio.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -340,9 +625,12 @@
 			"title": "Badge",
 			"description": "Terminal-style status badge: outlined semantic variants with optional [square] or (paren) bracket conventions. No hover/radius/shadow.",
 			"dependencies": ["class-variance-authority", "@radix-ui/react-slot"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/badge.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/badge.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -350,9 +638,12 @@
 			"type": "registry:ui",
 			"title": "Card",
 			"description": "Terminal-style container with box-drawing border and background-level elevation. Composable header, title, description, content and footer. No radius/shadow.",
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/card.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/card.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -361,9 +652,12 @@
 			"title": "Separator",
 			"description": "Box-drawing divider built on Radix Separator. Horizontal/vertical, 1px border-color rule. No radius/shadow.",
 			"dependencies": ["@radix-ui/react-separator"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/separator.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/separator.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -372,9 +666,12 @@
 			"title": "Accordion",
 			"description": "Directory-tree style collapsible built on Radix Accordion: ▸/▾ glyph indicators, border-l indent guide, focus inversion. No chevron rotation, no height animation, no hover/radius/shadow.",
 			"dependencies": ["@radix-ui/react-accordion"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/accordion.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/accordion.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -383,19 +680,30 @@
 			"title": "Popover",
 			"description": "Terminal-style floating container built on Radix Popover: box border, elevated --popover background level (no shadow), discrete opacity fade. Base for Select and Combobox.",
 			"dependencies": ["@radix-ui/react-popover"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"css": {
 				"@keyframes termcn-fade": {
-					"from": { "opacity": "0" },
-					"to": { "opacity": "1" }
+					"from": {
+						"opacity": "0"
+					},
+					"to": {
+						"opacity": "1"
+					}
 				},
 				"@keyframes termcn-fade-out": {
-					"from": { "opacity": "1" },
-					"to": { "opacity": "0" }
+					"from": {
+						"opacity": "1"
+					},
+					"to": {
+						"opacity": "0"
+					}
 				}
 			},
 			"files": [
-				{ "path": "registry/ui/popover.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/popover.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -404,9 +712,12 @@
 			"title": "Command",
 			"description": "fzf/Telescope-style command menu built on cmdk: '>' prompt glyph, keyboard navigation, selection inversion, no hover/radius/shadow.",
 			"dependencies": ["cmdk"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/command.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/command.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -414,9 +725,12 @@
 			"type": "registry:ui",
 			"title": "Combobox",
 			"description": "Searchable picker composed from Popover + Command + Button. Floating container, fuzzy filter, Vim-style selection inversion, ✓ for selected.",
-			"registryDependencies": ["utils", "popover", "command", "button"],
+			"registryDependencies": ["utils", "popover", "command", "button", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/combobox.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/combobox.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -424,9 +738,12 @@
 			"type": "registry:ui",
 			"title": "Select",
 			"description": "Menu-picker select built on Popover + Command (no search input). Reuses the floating container, arrow-key navigation and inversion. Trigger uses ▾ glyph.",
-			"registryDependencies": ["utils", "popover", "command", "button"],
+			"registryDependencies": ["utils", "popover", "command", "button", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/select.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/select.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -435,9 +752,12 @@
 			"title": "Tooltip",
 			"description": "Terminal-style floating hint built on Radix Tooltip: box border, prompt-glyph prefix, discrete opacity fade. No radius/shadow/slide.",
 			"dependencies": ["@radix-ui/react-tooltip"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/tooltip.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/tooltip.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -446,9 +766,12 @@
 			"title": "Toast",
 			"description": "Terminal-style notification built on Radix Toast: box-drawing border, semantic variants, bracket close [x], discrete opacity fade. Variants: default, info, success, warning, destructive.",
 			"dependencies": ["@radix-ui/react-toast", "class-variance-authority"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/toast.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/toast.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -457,9 +780,12 @@
 			"title": "Sonner",
 			"description": "Terminal-style toaster wrapping the Sonner library: monospace, box border, no radius/shadow, semantic success/error/warning/info colors.",
 			"dependencies": ["sonner"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/sonner.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/sonner.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -468,19 +794,30 @@
 			"title": "Dropdown Menu",
 			"description": "Terminal-style dropdown menu: selection inversion, ✓/● indicators, ▸ submenu glyph, no hover/radius/shadow. Includes checkbox, radio, sub-menu, shortcut, separator.",
 			"dependencies": ["@radix-ui/react-dropdown-menu"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"css": {
 				"@keyframes termcn-fade": {
-					"from": { "opacity": "0" },
-					"to": { "opacity": "1" }
+					"from": {
+						"opacity": "0"
+					},
+					"to": {
+						"opacity": "1"
+					}
 				},
 				"@keyframes termcn-fade-out": {
-					"from": { "opacity": "1" },
-					"to": { "opacity": "0" }
+					"from": {
+						"opacity": "1"
+					},
+					"to": {
+						"opacity": "0"
+					}
 				}
 			},
 			"files": [
-				{ "path": "registry/ui/dropdown-menu.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/dropdown-menu.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -489,19 +826,30 @@
 			"title": "Context Menu",
 			"description": "Terminal-style right-click context menu: selection inversion, ✓/● indicators, ▸ submenu glyph, no hover/radius/shadow. Includes checkbox, radio, sub-menu, shortcut, separator.",
 			"dependencies": ["@radix-ui/react-context-menu"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"css": {
 				"@keyframes termcn-fade": {
-					"from": { "opacity": "0" },
-					"to": { "opacity": "1" }
+					"from": {
+						"opacity": "0"
+					},
+					"to": {
+						"opacity": "1"
+					}
 				},
 				"@keyframes termcn-fade-out": {
-					"from": { "opacity": "1" },
-					"to": { "opacity": "0" }
+					"from": {
+						"opacity": "1"
+					},
+					"to": {
+						"opacity": "0"
+					}
 				}
 			},
 			"files": [
-				{ "path": "registry/ui/context-menu.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/context-menu.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -510,19 +858,30 @@
 			"title": "Menubar",
 			"description": "Terminal-style application menubar: border-b strip, open-state inversion on triggers, ✓/● indicators, ▸ submenu glyph, no hover/radius/shadow. Includes checkbox, radio, sub-menu, shortcut, separator.",
 			"dependencies": ["@radix-ui/react-menubar"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"css": {
 				"@keyframes termcn-fade": {
-					"from": { "opacity": "0" },
-					"to": { "opacity": "1" }
+					"from": {
+						"opacity": "0"
+					},
+					"to": {
+						"opacity": "1"
+					}
 				},
 				"@keyframes termcn-fade-out": {
-					"from": { "opacity": "1" },
-					"to": { "opacity": "0" }
+					"from": {
+						"opacity": "1"
+					},
+					"to": {
+						"opacity": "0"
+					}
 				}
 			},
 			"files": [
-				{ "path": "registry/ui/menubar.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/menubar.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -531,9 +890,12 @@
 			"title": "Tabs",
 			"description": "Vim/tmux-style tab bar built on Radix Tabs: border strip, active-state inversion, sharp edges and monospace content. No hover/radius/shadow.",
 			"dependencies": ["@radix-ui/react-tabs"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/tabs.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/tabs.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -542,19 +904,30 @@
 			"title": "Navigation Menu",
 			"description": "Terminal-style structured header navigation built on Radix Navigation Menu: floating link panels, focus/open inversion, viewport fade only. No hover/radius/shadow/slide.",
 			"dependencies": ["@radix-ui/react-navigation-menu"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"css": {
 				"@keyframes termcn-fade": {
-					"from": { "opacity": "0" },
-					"to": { "opacity": "1" }
+					"from": {
+						"opacity": "0"
+					},
+					"to": {
+						"opacity": "1"
+					}
 				},
 				"@keyframes termcn-fade-out": {
-					"from": { "opacity": "1" },
-					"to": { "opacity": "0" }
+					"from": {
+						"opacity": "1"
+					},
+					"to": {
+						"opacity": "0"
+					}
 				}
 			},
 			"files": [
-				{ "path": "registry/ui/navigation-menu.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/navigation-menu.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -563,27 +936,44 @@
 			"title": "Collapsible",
 			"description": "Terminal-style collapsible text container built on Radix Collapsible: ▸/▾ state glyph, sharp border, muted detail surface and fade-only content reveal.",
 			"dependencies": ["@radix-ui/react-collapsible"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"css": {
 				"@keyframes termcn-fade": {
-					"from": { "opacity": "0" },
-					"to": { "opacity": "1" }
+					"from": {
+						"opacity": "0"
+					},
+					"to": {
+						"opacity": "1"
+					}
 				},
 				"@keyframes termcn-fade-out": {
-					"from": { "opacity": "1" },
-					"to": { "opacity": "0" }
+					"from": {
+						"opacity": "1"
+					},
+					"to": {
+						"opacity": "0"
+					}
 				}
 			},
 			"files": [
-				{ "path": "registry/ui/collapsible.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/collapsible.tsx",
+					"type": "registry:ui"
+				}
+			]
+		},
+		{
 			"name": "slider",
 			"type": "registry:ui",
 			"title": "Slider",
 			"description": "Terminal-style value slider: boxed track, primary active range, sharp thumb and focus-visible ring. Supports single or range values.",
 			"dependencies": ["@radix-ui/react-slider"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/slider.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/slider.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -592,9 +982,12 @@
 			"title": "Switch",
 			"description": "Sharp iOS-inspired on/off switch: primary checked state, boxed thumb, no hover/radius/shadow, keyboard-first focus-visible feedback.",
 			"dependencies": ["@radix-ui/react-switch"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/switch.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/switch.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -603,9 +996,12 @@
 			"title": "Toggle",
 			"description": "Binary pressed-state control with terminal inversion and primary active state. Variants: default, outline. Sizes: sm, default, lg.",
 			"dependencies": ["@radix-ui/react-toggle", "class-variance-authority"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/toggle.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/toggle.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -614,9 +1010,12 @@
 			"title": "Toggle Group",
 			"description": "Single or multiple selection group composed from Toggle primitives with shared size/variant styling and keyboard roving focus.",
 			"dependencies": ["@radix-ui/react-toggle-group", "class-variance-authority"],
-			"registryDependencies": ["utils", "toggle"],
+			"registryDependencies": ["utils", "toggle", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/toggle-group.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/toggle-group.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -625,9 +1024,12 @@
 			"title": "Resizable",
 			"description": "Terminal-style resizable panels built on react-resizable-panels: subtle divider lines, keyboard focus ring, optional ASCII grip handle. No hover/radius/shadow.",
 			"dependencies": ["react-resizable-panels"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/resizable.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/resizable.tsx",
+					"type": "registry:ui"
+				}
 			]
 		},
 		{
@@ -636,9 +1038,12 @@
 			"title": "Scroll Area",
 			"description": "Terminal-style custom scroll area built on Radix Scroll Area: consistent cross-platform scrollbar, muted track, subtle border thumb. No hover/radius/shadow.",
 			"dependencies": ["@radix-ui/react-scroll-area"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": ["utils", "theme-catppuccin-mocha", "font-jetbrains-mono"],
 			"files": [
-				{ "path": "registry/ui/scroll-area.tsx", "type": "registry:ui" }
+				{
+					"path": "registry/ui/scroll-area.tsx",
+					"type": "registry:ui"
+				}
 			]
 		}
 	]

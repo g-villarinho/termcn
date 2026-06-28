@@ -9,9 +9,8 @@ function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
 			role="group"
 			className={cn(
 				"relative flex items-center",
-				"border border-input bg-background2",
-				"focus-within:ring-1 focus-within:ring-ring focus-within:border-foreground",
-				"[&_[data-slot=input-group-control]:focus-visible]:ring-1 [&_[data-slot=input-group-control]:focus-visible]:ring-ring [&_[data-slot=input-group-control]:focus-visible]:border-foreground",
+				"bg-input",
+				"focus-within:ring-1 focus-within:ring-ring",
 				className,
 			)}
 			{...props}
@@ -26,8 +25,8 @@ const inputGroupAddonVariants = cva(
 			align: {
 				"inline-start": "order-first pl-3",
 				"inline-end": "order-last pr-3",
-				"block-start": "order-first w-full justify-center border-b border-input py-1 px-3",
-				"block-end": "order-last w-full justify-center border-t border-input py-1 px-3",
+				"block-start": "order-first w-full justify-center bg-background3 py-1 px-3",
+				"block-end": "order-last w-full justify-center bg-background3 py-1 px-3",
 			},
 		},
 		defaultVariants: { align: "inline-start" },
@@ -67,7 +66,7 @@ function InputGroupAddon({
 }
 
 const inputGroupButtonVariants = cva(
-	"inline-flex items-center justify-center gap-2 whitespace-nowrap select-none font-mono outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:text-foreground2 disabled:border-foreground2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+	"inline-flex items-center justify-center gap-2 whitespace-nowrap select-none font-mono outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:bg-muted disabled:text-foreground2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
 	{
 		variants: {
 			size: {
@@ -78,9 +77,9 @@ const inputGroupButtonVariants = cva(
 			},
 			variant: {
 				default:
-					"border border-border bg-background text-foreground focus-visible:bg-foreground focus-visible:text-background focus-visible:border-foreground",
+					"bg-background3 text-foreground active:brightness-110",
 				ghost:
-					"border border-transparent text-foreground1 focus-visible:bg-foreground focus-visible:text-background",
+					"bg-transparent text-foreground1 active:bg-background3 active:text-foreground",
 			},
 		},
 		defaultVariants: { size: "xs", variant: "ghost" },
@@ -132,7 +131,7 @@ function InputGroupInput({
 				"outline-none focus-visible:ring-0 border-0",
 				"disabled:cursor-not-allowed disabled:text-foreground2",
 				"aria-invalid:text-destructive",
-				"px-2",
+				"px-3",
 				className,
 			)}
 			{...props}
@@ -153,7 +152,7 @@ function InputGroupTextarea({
 				"outline-none focus-visible:ring-0 border-0",
 				"disabled:cursor-not-allowed disabled:text-foreground2",
 				"aria-invalid:text-destructive",
-				"resize-none field-sizing-content px-2 py-1",
+				"resize-none field-sizing-content px-3 py-2",
 				className,
 			)}
 			{...props}

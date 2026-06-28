@@ -11,7 +11,9 @@
     "utils",
     "button",
     "input",
-    "sheet"
+    "sheet",
+    "theme-catppuccin-mocha",
+    "font-jetbrains-mono"
   ],
   "files": [
     {

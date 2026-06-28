@@ -7,7 +7,9 @@
     "utils",
     "popover",
     "command",
-    "button"
+    "button",
+    "theme-catppuccin-mocha",
+    "font-jetbrains-mono"
   ],
   "files": [
     {

@@ -9,7 +9,9 @@
   ],
   "registryDependencies": [
     "utils",
-    "toggle"
+    "toggle",
+    "theme-catppuccin-mocha",
+    "font-jetbrains-mono"
   ],
   "files": [
     {

@@ -9,9 +9,9 @@ import { InstallTabs } from "@/components/docs/install-tabs"
 
 # Input
 
-Terminal-style text input field with focus ring, no radius, and semantic error states via `aria-invalid`.
+Terminal-style text input: borderless filled surface that lightens on focus with a ring, no radius, and semantic error states via `aria-invalid`.
 
-Follows TUI aesthetic: sharp edges, monospace font, focus-based interaction, minimal visual noise.
+Follows TUI aesthetic: no border, sharp edges, monospace font, focus-based interaction, minimal visual noise.
 
 ## Installation
 
@@ -98,7 +98,7 @@ Use `aria-invalid` to mark an input as invalid. Bor becomes destructive red.
 | `type` | `string` | `text` | HTML input type (text, email, password, file, etc.) |
 | `placeholder` | `string` | — | Placeholder text |
 | `disabled` | `boolean` | `false` | Disable input |
-| `aria-invalid` | `boolean` \| `"true"` \| `"false"` | — | Mark input as invalid (shows destructive border/focus) |
+| `aria-invalid` | `boolean` \| `"true"` \| `"false"` | — | Mark input as invalid (shows destructive focus ring) |
 | `className` | `string` | — | Additional Tailwind classes |
 | ...rest | `ComponentProps<"input">` | — | All standard `<input>` props |
 

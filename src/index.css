@@ -51,7 +51,7 @@ code {
 	--info: #89dceb; /* Sky */
 	--info-foreground: #1e1e2e;
 	--border: var(--foreground2);
-	--input: var(--foreground2);
+	--input: var(--background2);
 	--ring: var(--foreground0);
 
 	/* Box/Table/Separator */
@@ -134,7 +134,7 @@ code {
 	--accent: var(--background2);
 	--accent-foreground: var(--foreground0);
 	--border: var(--foreground2);
-	--input: var(--foreground2);
+	--input: var(--background2);
 	--ring: var(--foreground0);
 }
 

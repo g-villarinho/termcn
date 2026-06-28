@@ -4,7 +4,9 @@
   "title": "Card",
   "description": "Terminal-style container with box-drawing border and background-level elevation. Composable header, title, description, content and footer. No radius/shadow.",
   "registryDependencies": [
-    "utils"
+    "utils",
+    "theme-catppuccin-mocha",
+    "font-jetbrains-mono"
   ],
   "files": [
     {

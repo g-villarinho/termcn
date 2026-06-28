@@ -4,7 +4,9 @@
   "title": "Skeleton",
   "description": "Passive loading placeholder using Tailwind animate-pulse with terminal background levels and sharp edges.",
   "registryDependencies": [
-    "utils"
+    "utils",
+    "theme-catppuccin-mocha",
+    "font-jetbrains-mono"
   ],
   "files": [
     {

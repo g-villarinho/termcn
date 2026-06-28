@@ -7,7 +7,9 @@
     "cmdk"
   ],
   "registryDependencies": [
-    "utils"
+    "utils",
+    "theme-catppuccin-mocha",
+    "font-jetbrains-mono"
   ],
   "files": [
     {

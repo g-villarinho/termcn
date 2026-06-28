@@ -46,7 +46,7 @@ function Switch({ className, size, ...props }: SwitchProps) {
 			className={cn(
 				switchVariants({ size }),
 				"bg-background2 text-foreground",
-				"border-input focus-visible:border-primary",
+				"border-border focus-visible:border-primary",
 				"data-[state=checked]:border-primary data-[state=checked]:bg-primary",
 				"disabled:cursor-not-allowed disabled:border-foreground2 disabled:bg-background1",
 				className,

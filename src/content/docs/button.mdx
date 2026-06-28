@@ -1,6 +1,6 @@
 ---
 title: Button
-description: Terminal-style button with focus-inversion and bracket rendering.
+description: Terminal-style filled button with an outline variant, press-to-lighten feedback and optional brackets.
 ---
 
 import { Button, buttonVariants } from "registry/ui/button"
@@ -9,9 +9,9 @@ import { InstallTabs } from "@/components/docs/install-tabs"
 
 # Button
 
-Terminal-style outlined button with bracket convention, focus state inversion, and no hover/radius/shadow.
+Terminal-style button — filled by default, with an `outline` variant for borders — that lightens while pressed, with no hover/radius/shadow.
 
-Follows TUI aesthetic: interaction via focus only, monospace typography, sharp edges, depth via background levels.
+Follows TUI aesthetic: interaction via active (pressed) lightening and a focus ring — no hover — monospace typography, sharp edges, depth via background levels.
 
 ## Installation
 
@@ -36,6 +36,7 @@ export default function ButtonDemo() {
     <Button variant="default">default</Button>
     <Button variant="primary">primary</Button>
     <Button variant="destructive">destructive</Button>
+    <Button variant="outline">outline</Button>
     <Button variant="ghost">ghost</Button>
   </div>
 </Preview>
@@ -44,8 +45,11 @@ export default function ButtonDemo() {
 <Button variant="default">default</Button>
 <Button variant="primary">primary</Button>
 <Button variant="destructive">destructive</Button>
+<Button variant="outline">outline</Button>
 <Button variant="ghost">ghost</Button>
 ```
+
+Buttons are filled by default — `default` uses a muted surface, `primary` and `destructive` use their semantic color. Use `outline` for a bordered, transparent button and `ghost` for no chrome at all. While pressed (`:active`) a filled button lightens and a transparent one fills in — the feedback a TUI gives when you select a control. Keyboard focus shows a ring (`:focus-visible`). There is no hover state.
 
 ### Sizes
 
@@ -65,7 +69,7 @@ export default function ButtonDemo() {
 
 ### Bracket
 
-Toggle bracket rendering with the `bracket` prop (default: `true`).
+Toggle bracket rendering with the `bracket` prop (default: `false`).
 
 <Preview>
   <div className="flex gap-4 flex-wrap justify-center">
@@ -109,9 +113,9 @@ Use the `asChild` prop to render as a child element (e.g., a link).
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `default` \| `primary` \| `destructive` \| `ghost` | `default` | Button color scheme |
+| `variant` | `default` \| `primary` \| `destructive` \| `outline` \| `ghost` | `default` | Button color scheme |
 | `size` | `default` \| `sm` \| `icon` | `default` | Button size |
-| `bracket` | `boolean` | `true` | Render `[label]` style brackets |
+| `bracket` | `boolean` | `false` | Render `[label]` style brackets |
 | `asChild` | `boolean` | `false` | Render as child element (Radix Slot) |
 | `disabled` | `boolean` | `false` | Disable button |
 | `className` | `string` | — | Additional Tailwind classes |

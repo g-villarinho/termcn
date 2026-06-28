@@ -1,0 +1,75 @@
+---
+title: Installation
+description: Add termcn to any React project — Vite, Next.js, or any shadcn-compatible setup.
+---
+
+import { InstallTabs } from "@/components/docs/install-tabs"
+
+# Installation
+
+termcn is a [shadcn/ui](https://ui.shadcn.com) registry. Components are installed as editable source code, not locked npm packages.
+
+## 1. Set up shadcn
+
+If you haven't already, initialise shadcn in your project:
+
+```bash
+npx shadcn@latest init
+```
+
+## 2. Register the termcn namespace
+
+Add the registry URL to `components.json`:
+
+```json
+{
+  "registries": {
+    "@termcn": "https://termcn.com/r/{name}.json"
+  }
+}
+```
+
+## 3. Install the theme
+
+The theme injects all Catppuccin Mocha tokens, background/foreground depth levels, the full ANSI palette, 0 radius, and no shadows.
+
+```bash
+npx shadcn@latest add @termcn/theme-catppuccin-mocha
+```
+
+## 4. Install the font
+
+Install JetBrains Mono (framework-agnostic, via fontsource):
+
+```bash
+npx shadcn@latest add @termcn/font-jetbrains-mono
+```
+
+This installs `@fontsource-variable/jetbrains-mono` and drops a `lib/jetbrains-mono.css` file into your project. Import it in your CSS entry point:
+
+```css
+/* src/index.css or src/globals.css */
+@import "./lib/jetbrains-mono.css";
+```
+
+## 5. Add components
+
+```bash
+npx shadcn@latest add @termcn/button
+npx shadcn@latest add @termcn/input @termcn/textarea
+npx shadcn@latest add @termcn/badge @termcn/card
+```
+
+Theme and font are pulled in automatically as registry dependencies when you install any component — steps 3 and 4 are only needed if you want them without a component.
+
+## Manual install (without shadcn CLI)
+
+Copy any component's JSON directly:
+
+```bash
+# View
+npx shadcn@latest view https://termcn.com/r/button.json
+
+# Add from URL
+npx shadcn@latest add https://termcn.com/r/button.json
+```
