@@ -67,7 +67,7 @@ function DocsLayout() {
 		<MDXProvider components={mdxComponents}>
 			<SidebarProvider defaultOpen={true} className="h-screen">
 				<Sidebar collapsible="none">
-					<SidebarHeader className="border-b-2 border-primary pb-4">
+					<SidebarHeader>
 						<Link
 							to="/"
 							className="text-lg font-mono font-bold text-primary hover:text-primary focus-visible:outline-none"
@@ -93,7 +93,7 @@ function DocsLayout() {
 												className="block px-3 py-2 text-sm text-foreground1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
 												activeProps={{
 													className:
-														"block px-3 py-2 text-sm text-background bg-foreground border-l-2 border-l-background font-bold",
+														"block px-3 py-2 text-sm text-background bg-foreground font-bold",
 												}}
 											>
 												{comp.name}

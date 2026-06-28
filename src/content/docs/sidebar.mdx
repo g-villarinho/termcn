@@ -480,7 +480,7 @@ Use `SidebarGroup` to divide navigation into labeled sections. `SidebarGroupLabe
 
 ### Sidebar Header
 
-`SidebarHeader` renders a top zone with a bottom border. Typically holds a logo, project name, or workspace switcher.
+`SidebarHeader` renders a top zone. Typically holds a logo, project name, or workspace switcher.
 
 <Preview>
   <SidebarProvider className="min-h-[200px] border border-border">
@@ -510,7 +510,7 @@ Use `SidebarGroup` to divide navigation into labeled sections. `SidebarGroupLabe
 
 ### Sidebar Footer
 
-`SidebarFooter` anchors to the bottom of the sidebar with a top border. Typically holds a user profile row or sign-out action.
+`SidebarFooter` anchors to the bottom of the sidebar. Typically holds a user profile row or sign-out action.
 
 <Preview>
   <SidebarProvider className="min-h-[200px] border border-border">
@@ -747,8 +747,8 @@ function StatusBar() {
 | `Sidebar` | `aside` / `Sheet` | The panel. Desktop: fixed positioned aside. Mobile: Sheet overlay. |
 | `SidebarTrigger` | `Button` | Toggles sidebar. Renders `▸` / `▾` glyph. |
 | `SidebarInset` | `main` | Content area. `flex-1`, expands as sidebar collapses. |
-| `SidebarHeader` | `div` | Top zone with `border-b`. |
-| `SidebarFooter` | `div` | Bottom zone with `border-t`, `mt-auto`. |
+| `SidebarHeader` | `div` | Top zone. |
+| `SidebarFooter` | `div` | Bottom zone, `mt-auto`. |
 | `SidebarContent` | `div` | Scrollable body between header and footer. |
 | `SidebarGroup` | `section` | Logical grouping with `px-3` padding. |
 | `SidebarGroupLabel` | `div` | Muted label text for a group. Hidden in icon mode. |

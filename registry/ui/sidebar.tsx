@@ -304,7 +304,7 @@ function SidebarHeader({ className, ...props }: React.ComponentProps<"div">) {
 	return (
 		<div
 			data-slot="sidebar-header"
-			className={cn("flex flex-col gap-2 border-b border-border p-3", className)}
+			className={cn("flex flex-col gap-2 p-3", className)}
 			{...props}
 		/>
 	);
@@ -314,7 +314,7 @@ function SidebarFooter({ className, ...props }: React.ComponentProps<"div">) {
 	return (
 		<div
 			data-slot="sidebar-footer"
-			className={cn("mt-auto flex flex-col gap-2 border-t border-border p-3", className)}
+			className={cn("mt-auto flex flex-col gap-2 p-3", className)}
 			{...props}
 		/>
 	);
@@ -325,7 +325,7 @@ function SidebarSeparator({ className, ...props }: React.ComponentProps<"div">) 
 		<div
 			role="separator"
 			data-slot="sidebar-separator"
-			className={cn("mx-3 h-px bg-border", className)}
+			className={cn("h-px bg-border", className)}
 			{...props}
 		/>
 	);
@@ -384,7 +384,7 @@ function SidebarGroupAction({
 		<Comp
 			data-slot="sidebar-group-action"
 			className={cn(
-				"absolute top-0 right-3 flex size-7 items-center justify-center border border-transparent font-mono text-xs text-foreground2 outline-none focus-visible:bg-foreground focus-visible:text-background",
+				"absolute top-0 right-3 flex size-7 items-center justify-center font-mono text-xs text-foreground2 outline-none focus-visible:bg-foreground focus-visible:text-background",
 				className,
 			)}
 			{...props}
@@ -426,7 +426,7 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const sidebarMenuButtonVariants = cva(
-	"flex w-full items-center gap-2 overflow-hidden border border-transparent px-2 py-1 text-left font-mono text-sm text-foreground1 outline-none focus-visible:bg-foreground focus-visible:text-background focus-visible:border-foreground data-[active=true]:bg-foreground data-[active=true]:text-background data-[active=true]:border-foreground disabled:cursor-not-allowed disabled:text-foreground2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 [&_span:last-child]:truncate",
+	"flex w-full items-center gap-2 overflow-hidden px-2 py-1 text-left font-mono text-sm text-foreground1 outline-none focus-visible:bg-foreground focus-visible:text-background data-[active=true]:bg-foreground data-[active=true]:text-background disabled:cursor-not-allowed disabled:text-foreground2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 [&_span:last-child]:truncate",
 	{
 		variants: {
 			variant: {
@@ -480,7 +480,7 @@ function SidebarMenuAction({
 		<Comp
 			data-slot="sidebar-menu-action"
 			className={cn(
-				"absolute top-1 right-1 flex size-6 items-center justify-center border border-transparent font-mono text-xs text-foreground2 outline-none focus-visible:bg-foreground focus-visible:text-background",
+				"absolute top-1 right-1 flex size-6 items-center justify-center font-mono text-xs text-foreground2 outline-none focus-visible:bg-foreground focus-visible:text-background",
 				className,
 			)}
 			{...props}
